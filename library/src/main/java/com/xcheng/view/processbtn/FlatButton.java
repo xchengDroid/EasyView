@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.CallSuper;
+import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.widget.Button;
 
@@ -57,7 +58,7 @@ public class FlatButton extends Button {
     }
 
     protected Drawable getDrawable(int id) {
-        return getResources().getDrawable(id);
+        return ContextCompat.getDrawable(getContext(), id);
     }
 
     protected float getDimension(int id) {
@@ -65,7 +66,7 @@ public class FlatButton extends Button {
     }
 
     protected int getColor(int id) {
-        return getResources().getColor(id);
+        return ContextCompat.getColor(getContext(), id);
     }
 
     protected TypedArray getTypedArray(Context context, AttributeSet attributeSet, int[] attr) {
