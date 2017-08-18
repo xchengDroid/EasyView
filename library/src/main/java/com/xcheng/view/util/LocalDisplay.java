@@ -17,7 +17,6 @@ public class LocalDisplay {
     public static int SCREEN_HEIGHT_DP;
     private static boolean sInitialed;
 
-    @SuppressWarnings("SuspiciousNameCombination")
     public static void init(Context context) {
         if (sInitialed || context == null) {
             return;
@@ -33,7 +32,6 @@ public class LocalDisplay {
         SCREEN_HEIGHT_DP = (int) (SCREEN_HEIGHT_PIXELS / dm.density);
         SCREEN_DENSITY = dm.density;
     }
-
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
@@ -41,7 +39,6 @@ public class LocalDisplay {
         final float scale = SCREEN_DENSITY;
         return (int) (dp * scale + 0.5f);
     }
-
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      */
@@ -49,7 +46,6 @@ public class LocalDisplay {
         final float scale = SCREEN_DENSITY;
         return (int) (pxValue / scale + 0.5f);
     }
-
     /**
      * 单位转换
      */
