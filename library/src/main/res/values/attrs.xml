@@ -1,0 +1,23 @@
+<resources>
+    <declare-styleable name="ActionProcessButton">
+        <attr name="ev_pb_mode">
+            <enum name="progress" value="0" />
+            <enum name="endLess" value="1" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="ProcessButton">
+        <attr name="ev_pb_textProgress" format="string" />
+        <attr name="ev_pb_textComplete" format="string" />
+        <attr name="ev_pb_textError" format="string" />
+        <attr name="ev_pb_colorProgress" format="color" />
+        <attr name="ev_pb_colorComplete" format="color" />
+        <attr name="ev_pb_colorError" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="FlatButton">
+        <attr name="ev_pb_colorPressed" format="color" />
+        <attr name="ev_pb_colorNormal" format="color" />
+        <attr name="ev_pb_colorDisable" format="color" />
+        <attr name="ev_pb_cornerRadius" format="dimension" />
+    </declare-styleable>
+</resources>
