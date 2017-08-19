@@ -10,42 +10,88 @@ import android.view.WindowManager;
  */
 public class LocalDisplay {
 
-    public static int SCREEN_WIDTH_PIXELS;
-    public static int SCREEN_HEIGHT_PIXELS;
-    public static float SCREEN_DENSITY;
-    public static int SCREEN_WIDTH_DP;
-    public static int SCREEN_HEIGHT_DP;
-    private static boolean sInitialed;
+    private static int WIDTH_PIXEL;
+    private static int HEIGHT_PIXEL;
+    private static float DENSITY;
+    private static int WIDTH_DP;
+    private static int HEIGHT_DP;
+    //default false
+    private static boolean sInitialized;
 
     public static void init(Context context) {
-        if (sInitialed || context == null) {
+        if (sInitialized || context == null) {
             return;
         }
-        sInitialed = true;
+        sInitialized = true;
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(dm);
+        DENSITY = dm.density;
         boolean widthLessThanHeight = dm.widthPixels <= dm.heightPixels;
-        SCREEN_WIDTH_PIXELS = widthLessThanHeight ? dm.widthPixels : dm.heightPixels;
-        SCREEN_HEIGHT_PIXELS = widthLessThanHeight ? dm.heightPixels : dm.widthPixels;
-        SCREEN_WIDTH_DP = (int) (SCREEN_WIDTH_PIXELS / dm.density);
-        SCREEN_HEIGHT_DP = (int) (SCREEN_HEIGHT_PIXELS / dm.density);
-        SCREEN_DENSITY = dm.density;
+        WIDTH_PIXEL = widthLessThanHeight ? dm.widthPixels : dm.heightPixels;
+        HEIGHT_PIXEL = widthLessThanHeight ? dm.heightPixels : dm.widthPixels;
+        WIDTH_DP = (int) (WIDTH_PIXEL / DENSITY);
+        HEIGHT_DP = (int) (HEIGHT_PIXEL / DENSITY);
     }
+
+    /**
+     * 获取屏幕较窄的一边
+     *
+     * @return WIDTH_PIXEL
+     */
+    public static int widthPixel() {
+        checkInit();
+        return WIDTH_PIXEL;
+    }
+
+    /**
+     * 获取屏幕较宽的一边
+     *
+     * @return HEIGHT_PIXEL
+     */
+    public static int heightPixel() {
+        checkInit();
+        return HEIGHT_PIXEL;
+    }
+
+    public static int widthDp() {
+        checkInit();
+        return WIDTH_DP;
+    }
+
+    public static int heightDp() {
+        checkInit();
+        return HEIGHT_DP;
+    }
+
+    public static float density() {
+        checkInit();
+        return DENSITY;
+    }
+
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */
     public static int dp2px(float dp) {
-        final float scale = SCREEN_DENSITY;
+        checkInit();
+        final float scale = DENSITY;
         return (int) (dp * scale + 0.5f);
     }
+
     /**
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
      */
     public static int px2dp(float pxValue) {
-        final float scale = SCREEN_DENSITY;
+        checkInit();
+        final float scale = DENSITY;
         return (int) (pxValue / scale + 0.5f);
     }
+
+    private static void checkInit() {
+        if (!sInitialized)
+            throw new IllegalStateException("LocalDisplay has not init");
+    }
+
     /**
      * 单位转换
      */
