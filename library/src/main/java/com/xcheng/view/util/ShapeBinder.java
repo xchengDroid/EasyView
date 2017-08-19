@@ -25,10 +25,17 @@ import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static android.graphics.drawable.GradientDrawable.RING;
 
 /**
+ * 动态生成Shape工具类
  * Created by chengxin on 2017/3/13.
  */
 public class ShapeBinder {
+    /**
+     * 无效的颜色
+     */
     private static final int INVALID_COLOR = Integer.MIN_VALUE;
+    /**
+     * 无效的尺寸
+     */
     private static final int INVALID_SIZE = -1;
     private static final int CHECKED = android.R.attr.state_checked;
     private static final int FOCUSED = android.R.attr.state_focused;
@@ -144,14 +151,14 @@ public class ShapeBinder {
     }
 
     /**
-     * @param radius px
+     * @param radius with px
      */
     public ShapeBinder radius(float radius) {
         return radii(new float[]{radius, radius, radius, radius});
     }
 
     /**
-     * @param radii px, length==4
+     * @param radii with px, length==4
      */
     public ShapeBinder radii(@Size(value = 4) float[] radii) {
         float leftTop = radii[0];
@@ -197,6 +204,10 @@ public class ShapeBinder {
         return this;
     }
 
+    /**
+     * @param width  with px
+     * @param height with px
+     */
     public ShapeBinder size(@IntRange(from = 0) int width, @IntRange(from = 0) int height) {
         this.width = width;
         this.height = height;
