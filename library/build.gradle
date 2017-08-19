@@ -1,9 +1,14 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion 25
     buildToolsVersion "26.0.0"
-
+    android {
+        lintOptions {
+            abortOnError false
+        }
+    }
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 25
@@ -22,4 +27,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:25.3.1'
+}
+//添加
+publish {
+    //./gradlew clean build bintrayUpload -PbintrayUser=xcheng -PbintrayKey=4f8465004b752b103ea2e374ad6cb73ec38d8601 -PdryRun=false
+    repoName = 'xcDroid'
+    userOrg = 'xcheng'//bintray.com用户名
+    groupId = 'com.xcheng'//jcenter上的路径
+    artifactId = 'easyview'//项目名称
+    publishVersion = '1.0.0'//版本号
+    desc = '一个View组件库'//描述，不重要
+    website = 'https://github.com/xchengDroid/EasyView'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }

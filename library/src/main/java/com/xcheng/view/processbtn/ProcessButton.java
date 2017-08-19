@@ -43,8 +43,8 @@ public abstract class ProcessButton extends FlatButton {
 
     @CallSuper
     @Override
-    protected void initView(Context context, AttributeSet attrs) {
-        super.initView(context, attrs);
+    protected void init(Context context, AttributeSet attrs) {
+        super.init(context, attrs);
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ProcessButton);
 
         mLoadingText = attr.getString(R.styleable.ProcessButton_ev_pb_textProgress);

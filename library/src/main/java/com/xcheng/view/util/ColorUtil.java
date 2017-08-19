@@ -8,8 +8,8 @@ import android.support.annotation.ColorInt;
  * Created by cx on 17/8/18.
  */
 public class ColorUtil {
-    public static final int DISABLED_ALPHA_FILL = 136;
-    public static final float ACTIVE_OPACITY_FACTOR_FILL = 0.125f;
+    private static final int DISABLED_ALPHA_FILL = 136;
+    private static final float ACTIVE_OPACITY_FACTOR_FILL = 0.125f;
 
     /**
      * 将颜色转换为16位字符串

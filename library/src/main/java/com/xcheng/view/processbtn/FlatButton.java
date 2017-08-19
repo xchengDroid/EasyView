@@ -13,6 +13,7 @@ import android.widget.Button;
 
 import com.xcheng.view.R;
 import com.xcheng.view.util.ColorUtil;
+import com.xcheng.view.util.LocalDisplay;
 import com.xcheng.view.util.ShapeBinder;
 
 
@@ -25,25 +26,25 @@ public class FlatButton extends Button {
 
     public FlatButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initView(context, attrs);
+        init(context, attrs);
     }
 
     public FlatButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context, attrs);
+        init(context, attrs);
     }
 
     public FlatButton(Context context) {
         super(context);
-        initView(context, null);
+        init(context, null);
     }
 
     @CallSuper
-    protected void initView(Context context, AttributeSet attrs) {
+    protected void init(Context context, AttributeSet attrs) {
+        LocalDisplay.init(context);
         mNormalDrawable = new StateListDrawable();
         TypedArray attr = getTypedArray(context, attrs, R.styleable.FlatButton);
-        float defValue = dp2px(2);
-        cornerRadius = attr.getDimension(R.styleable.FlatButton_ev_pb_cornerRadius, defValue);
+        cornerRadius = attr.getDimension(R.styleable.FlatButton_ev_pb_cornerRadius, LocalDisplay.dp2px(2));
         int colorNormal = attr.getColor(R.styleable.FlatButton_ev_pb_colorNormal, getColor(R.color.ev_blue_normal));
         int colorPressed = attr.getColor(R.styleable.FlatButton_ev_pb_colorPressed, ColorUtil.pressed(colorNormal));
         int colorDisable = attr.getColor(R.styleable.FlatButton_ev_pb_colorDisable, ColorUtil.disabled(colorNormal));
@@ -108,21 +109,5 @@ public class FlatButton extends Button {
             setBackgroundDrawable(drawable);
         }
         setPadding(pL, pT, pR, pB);
-    }
-
-    /**
-     * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
-     */
-    public int dp2px(float dpValue) {
-        final float scale = getResources().getDisplayMetrics().density;
-        return (int) (dpValue * scale + 0.5f);
-    }
-
-    /**
-     * 根据手机的分辨率从 px(像素) 的单位 转成为 dp
-     */
-    public int px2dp(float pxValue) {
-        final float scale = getResources().getDisplayMetrics().density;
-        return (int) (pxValue / scale + 0.5f);
     }
 }

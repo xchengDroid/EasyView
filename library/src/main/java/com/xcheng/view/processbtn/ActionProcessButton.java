@@ -14,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
 
 import com.xcheng.view.R;
+import com.xcheng.view.util.LocalDisplay;
 
 
 public class ActionProcessButton extends ProcessButton {
@@ -44,8 +45,8 @@ public class ActionProcessButton extends ProcessButton {
     }
 
     @Override
-    protected void initView(Context context, AttributeSet attrs) {
-        super.initView(context, attrs);
+    protected void init(Context context, AttributeSet attrs) {
+        super.init(context, attrs);
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ActionProcessButton);
         int intMode = attr.getInteger(R.styleable.ActionProcessButton_ev_pb_mode, 0);
         attr.recycle();
@@ -119,7 +120,7 @@ public class ActionProcessButton extends ProcessButton {
 
     //默认进度条高度为3dp
     private void setupProgressBarBounds() {
-        double indicatorHeight = dp2px(3);
+        double indicatorHeight = LocalDisplay.dp2px(3);
         int bottom = (int) (getMeasuredHeight() - indicatorHeight);
         mProgressBar.setBounds(0, bottom, getMeasuredWidth(), getMeasuredHeight());
     }
