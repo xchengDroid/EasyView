@@ -32,11 +32,11 @@ public class ShapeBinder {
     /**
      * 无效的颜色
      */
-    private static final int INVALID_COLOR = Integer.MIN_VALUE;
+    public static final int INVALID_COLOR = Integer.MIN_VALUE;
     /**
      * 无效的尺寸
      */
-    private static final int INVALID_SIZE = -1;
+    public static final int INVALID_SIZE = -1;
     private static final int CHECKED = android.R.attr.state_checked;
     private static final int FOCUSED = android.R.attr.state_focused;
     private static final int PRESSED = android.R.attr.state_pressed;
@@ -85,7 +85,7 @@ public class ShapeBinder {
             drawable.setCornerRadii(radii);
         }
         drawable.setColor(color);
-        /**边框颜色做简单处理吧**/
+        //边框颜色做简单处理吧
         if (strokeColor != INVALID_COLOR && strokeWidth >= 0) {
             drawable.setStroke(strokeWidth, strokeColor);
         }
@@ -174,6 +174,9 @@ public class ShapeBinder {
         return this;
     }
 
+    /**
+     * 如果等于0 不渲染边框
+     */
     public ShapeBinder strokeWidth(@IntRange(from = 0) int strokeWidth) {
         this.strokeWidth = strokeWidth;
         return this;

@@ -15,9 +15,11 @@
     </declare-styleable>
 
     <declare-styleable name="FlatButton">
-        <attr name="ev_pb_colorPressed" format="color" />
         <attr name="ev_pb_colorNormal" format="color" />
+        <attr name="ev_pb_colorPressed" format="color" />
         <attr name="ev_pb_colorDisable" format="color" />
+        <attr name="ev_pb_colorStroke" format="color" />
+        <attr name="ev_pb_strokeWidth" format="dimension" />
         <attr name="ev_pb_cornerRadius" format="dimension" />
     </declare-styleable>
 </resources>
