@@ -18,7 +18,7 @@ public class LocalDisplay {
     //default false
     private static boolean sInitialized;
 
-    public static synchronized void init(Context context) {
+    public static void init(Context context) {
         if (sInitialized || context == null) {
             return;
         }
@@ -95,7 +95,7 @@ public class LocalDisplay {
     /**
      * 单位转换
      */
-    public static int applyDimension(int unit, float value, Context context) {
+    public static int convert(int unit, float value, Context context) {
         // TypedValue.COMPLEX_UNIT_SP
         return (int) TypedValue.applyDimension(unit, value, context.getResources()
                 .getDisplayMetrics());
