@@ -18,11 +18,10 @@ public class LocalDisplay {
     //default false
     private static boolean sInitialized;
 
-    public static void init(Context context) {
+    public static synchronized void init(Context context) {
         if (sInitialized || context == null) {
             return;
         }
-        sInitialized = true;
         DisplayMetrics dm = new DisplayMetrics();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         wm.getDefaultDisplay().getMetrics(dm);
@@ -32,6 +31,7 @@ public class LocalDisplay {
         HEIGHT_PIXEL = widthLessThanHeight ? dm.heightPixels : dm.widthPixels;
         WIDTH_DP = (int) (WIDTH_PIXEL / DENSITY);
         HEIGHT_DP = (int) (HEIGHT_PIXEL / DENSITY);
+        sInitialized = true;
     }
 
     /**
