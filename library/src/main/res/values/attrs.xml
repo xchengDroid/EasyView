@@ -4,6 +4,7 @@
             <enum name="progress" value="0" />
             <enum name="endLess" value="1" />
         </attr>
+        <attr name="ev_pb_indicatorHeight" format="dimension" />
     </declare-styleable>
     <declare-styleable name="ProcessButton">
         <attr name="ev_pb_textProgress" format="string" />

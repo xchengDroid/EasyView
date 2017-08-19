@@ -30,30 +30,27 @@ import static android.graphics.drawable.GradientDrawable.RING;
  */
 public class ShapeBinder {
     /**
-     * 无效的颜色
+     * 无效的值
      */
-    public static final int INVALID_COLOR = Integer.MIN_VALUE;
-    /**
-     * 无效的尺寸
-     */
-    public static final int INVALID_SIZE = -1;
+    public static final int INVALID_VALUE = Integer.MIN_VALUE;
+
     private static final int CHECKED = android.R.attr.state_checked;
     private static final int FOCUSED = android.R.attr.state_focused;
     private static final int PRESSED = android.R.attr.state_pressed;
     private static final int SELECTED = android.R.attr.state_selected;
     private static final int ENABLED = android.R.attr.state_enabled;
-    private int width = INVALID_SIZE;
-    private int height = INVALID_SIZE;
+    private int width = INVALID_VALUE;
+    private int height = INVALID_VALUE;
     private int shape = RECTANGLE;
     private float[] radii;
-    private int strokeColor = INVALID_COLOR;
-    private int strokeWidth = INVALID_SIZE;// if >= 0 use stroking.
-    private int normalColor = INVALID_COLOR;
-    private int pressedColor = INVALID_COLOR;
-    private int selectedColor = INVALID_COLOR;
-    private int disableColor = INVALID_COLOR;
-    private int checkedColor = INVALID_COLOR;
-    private int focusedColor = INVALID_COLOR;
+    private int strokeColor = INVALID_VALUE;
+    private int strokeWidth = INVALID_VALUE;
+    private int normalColor = INVALID_VALUE;
+    private int pressedColor = INVALID_VALUE;
+    private int selectedColor = INVALID_VALUE;
+    private int disableColor = INVALID_VALUE;
+    private int checkedColor = INVALID_VALUE;
+    private int focusedColor = INVALID_VALUE;
 
 
     private ShapeBinder(@ColorInt int normalColor) {
@@ -86,10 +83,10 @@ public class ShapeBinder {
         }
         drawable.setColor(color);
         //边框颜色做简单处理吧
-        if (strokeColor != INVALID_COLOR && strokeWidth >= 0) {
+        if (strokeColor != INVALID_VALUE && strokeWidth != INVALID_VALUE) {
             drawable.setStroke(strokeWidth, strokeColor);
         }
-        if (width >= 0 && height >= 0) {
+        if (width != INVALID_VALUE && height != INVALID_VALUE) {
             drawable.setSize(width, height);
         }
         return drawable;
@@ -124,23 +121,23 @@ public class ShapeBinder {
     public Drawable create(boolean hasState) {
         if (hasState) {
             StateListDrawable stateListDrawable = new StateListDrawable();
-            if (pressedColor != INVALID_COLOR) {
+            if (pressedColor != INVALID_VALUE) {
                 addDrawable(pressedColor, PRESSED, stateListDrawable);
             } else {
                 addDrawable(ColorUtil.pressed(normalColor), PRESSED, stateListDrawable);
             }
-            if (disableColor != INVALID_COLOR) {
+            if (disableColor != INVALID_VALUE) {
                 addDrawable(disableColor, -ENABLED, stateListDrawable);
             } else {
                 addDrawable(ColorUtil.disabled(normalColor), -ENABLED, stateListDrawable);
             }
-            if (selectedColor != INVALID_COLOR) {
+            if (selectedColor != INVALID_VALUE) {
                 addDrawable(selectedColor, SELECTED, stateListDrawable);
             }
-            if (checkedColor != INVALID_COLOR) {
+            if (checkedColor != INVALID_VALUE) {
                 addDrawable(checkedColor, CHECKED, stateListDrawable);
             }
-            if (focusedColor != INVALID_COLOR) {
+            if (focusedColor != INVALID_VALUE) {
                 addDrawable(focusedColor, FOCUSED, stateListDrawable);
             }
             addDrawable(normalColor, 0, stateListDrawable);
@@ -177,7 +174,7 @@ public class ShapeBinder {
     /**
      * 如果等于0 不渲染边框
      */
-    public ShapeBinder strokeWidth(@IntRange(from = 0) int strokeWidth) {
+    public ShapeBinder strokeWidth(int strokeWidth) {
         this.strokeWidth = strokeWidth;
         return this;
     }

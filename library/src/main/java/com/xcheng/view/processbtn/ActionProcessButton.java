@@ -22,7 +22,7 @@ public class ActionProcessButton extends ProcessButton {
     private ProgressBar mProgressBar;
 
     private Mode mMode;
-
+    private int indicatorHeight;
     private int mColor1;
     private int mColor2;
     private int mColor3;
@@ -48,8 +48,8 @@ public class ActionProcessButton extends ProcessButton {
     protected void init(Context context, AttributeSet attrs) {
         super.init(context, attrs);
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ActionProcessButton);
+        indicatorHeight = attr.getDimensionPixelSize(R.styleable.ActionProcessButton_ev_pb_indicatorHeight, LocalDisplay.dp2px(3));
         int intMode = attr.getInteger(R.styleable.ActionProcessButton_ev_pb_mode, 0);
-        attr.recycle();
         if (intMode == 0) {
             mMode = Mode.PROGRESS;
         } else {
@@ -59,6 +59,7 @@ public class ActionProcessButton extends ProcessButton {
         mColor2 = getColor(R.color.ev_holo_green_light);
         mColor3 = getColor(R.color.ev_holo_orange_light);
         mColor4 = getColor(R.color.ev_holo_red_light);
+        attr.recycle();
     }
 
     public void setMode(Mode mode) {
@@ -99,8 +100,7 @@ public class ActionProcessButton extends ProcessButton {
         float scale = (float) getProgress() / (float) getMaxProgress();
         float indicatorWidth = (float) getMeasuredWidth() * scale;
 
-        double indicatorHeightPercent = 0.05; // 5%
-        int bottom = (int) (getMeasuredHeight() - getMeasuredHeight() * indicatorHeightPercent);
+        int bottom = (getMeasuredHeight() - indicatorHeight);
 
         int xOff = (int) getCornerRadius();
         getProgressDrawable().setBounds(xOff, bottom, (int) indicatorWidth - xOff, getMeasuredHeight());
@@ -122,8 +122,7 @@ public class ActionProcessButton extends ProcessButton {
 
     //默认进度条高度为3dp
     private void setupProgressBarBounds() {
-        double indicatorHeight = LocalDisplay.dp2px(3);
-        int bottom = (int) (getMeasuredHeight() - indicatorHeight);
+        int bottom = getMeasuredHeight() - indicatorHeight;
         int xOff = (int) getCornerRadius();
         mProgressBar.setBounds(xOff, bottom, getMeasuredWidth() - xOff, getMeasuredHeight());
     }

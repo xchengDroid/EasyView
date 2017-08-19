@@ -49,19 +49,19 @@ public class FlatButton extends Button {
         int colorPressed = attr.getColor(R.styleable.FlatButton_ev_pb_colorPressed, ColorUtil.pressed(colorNormal));
         int colorDisable = attr.getColor(R.styleable.FlatButton_ev_pb_colorDisable, ColorUtil.disabled(colorNormal));
         //边框颜色
-        int colorStroke = attr.getColor(R.styleable.FlatButton_ev_pb_colorStroke, ShapeBinder.INVALID_COLOR);
+        int colorStroke = attr.getColor(R.styleable.FlatButton_ev_pb_colorStroke, ShapeBinder.INVALID_VALUE);
         //边框宽度
-        int strokeWidth = attr.getDimensionPixelSize(R.styleable.FlatButton_ev_pb_strokeWidth, ShapeBinder.INVALID_SIZE);
+        int strokeWidth = attr.getDimensionPixelSize(R.styleable.FlatButton_ev_pb_strokeWidth, ShapeBinder.INVALID_VALUE);
         final ShapeBinder shapeBinder = ShapeBinder.with(colorNormal)
                 .pressed(colorPressed)
                 .disable(colorDisable)
                 .radius(cornerRadius);
         //如果设置了边框颜色
-        if (colorStroke != ShapeBinder.INVALID_COLOR) {
+        if (colorStroke != ShapeBinder.INVALID_VALUE) {
             shapeBinder.stroke(colorStroke);
         }
         //如果设置了边框宽度
-        if (strokeWidth != ShapeBinder.INVALID_SIZE) {
+        if (strokeWidth != ShapeBinder.INVALID_VALUE) {
             shapeBinder.strokeWidth(strokeWidth);
         }
         mNormalDrawable = (StateListDrawable) shapeBinder.create(true);
