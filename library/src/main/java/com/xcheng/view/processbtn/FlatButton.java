@@ -87,7 +87,7 @@ public class FlatButton extends Button {
         return context.obtainStyledAttributes(attributeSet, attr, 0, 0);
     }
 
-    public float getCornerRadius() {
+    public final float getCornerRadius() {
         return cornerRadius;
     }
 

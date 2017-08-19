@@ -101,7 +101,9 @@ public class ActionProcessButton extends ProcessButton {
 
         double indicatorHeightPercent = 0.05; // 5%
         int bottom = (int) (getMeasuredHeight() - getMeasuredHeight() * indicatorHeightPercent);
-        getProgressDrawable().setBounds(0, bottom, (int) indicatorWidth, getMeasuredHeight());
+
+        int xOff = (int) getCornerRadius();
+        getProgressDrawable().setBounds(xOff, bottom, (int) indicatorWidth - xOff, getMeasuredHeight());
         getProgressDrawable().draw(canvas);
     }
 
@@ -122,7 +124,8 @@ public class ActionProcessButton extends ProcessButton {
     private void setupProgressBarBounds() {
         double indicatorHeight = LocalDisplay.dp2px(3);
         int bottom = (int) (getMeasuredHeight() - indicatorHeight);
-        mProgressBar.setBounds(0, bottom, getMeasuredWidth(), getMeasuredHeight());
+        int xOff = (int) getCornerRadius();
+        mProgressBar.setBounds(xOff, bottom, getMeasuredWidth() - xOff, getMeasuredHeight());
     }
 
     private static class ProgressBar {
