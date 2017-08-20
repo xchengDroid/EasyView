@@ -16,16 +16,17 @@ import com.xcheng.view.util.ShapeBinder;
 
 
 public abstract class ProcessButton extends FlatButton {
-    private int mProgress;
 
-    private static final int MAX_PROGRESS = 100;
-    private static final int MIN_PROGRESS = 0;
+    public static final int MAX_PROGRESS = 100;
+    public static final int MIN_PROGRESS = 0;
+
+    private int mProgress;
 
     private GradientDrawable mProgressDrawable;
     private GradientDrawable mCompleteDrawable;
     private GradientDrawable mErrorDrawable;
 
-    private CharSequence mLoadingText;
+    private CharSequence mProgressText;
     private CharSequence mCompleteText;
     private CharSequence mErrorText;
 
@@ -47,13 +48,13 @@ public abstract class ProcessButton extends FlatButton {
         super.init(context, attrs);
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ProcessButton);
 
-        mLoadingText = attr.getString(R.styleable.ProcessButton_ev_pb_textProgress);
+        mProgressText = attr.getString(R.styleable.ProcessButton_ev_pb_textProgress);
         mCompleteText = attr.getString(R.styleable.ProcessButton_ev_pb_textComplete);
         mErrorText = attr.getString(R.styleable.ProcessButton_ev_pb_textError);
 
         mProgressDrawable = createGradient(attr, R.styleable.ProcessButton_ev_pb_colorProgress, getColor(R.color.ev_purple_progress));
-        mCompleteDrawable =createGradient(attr, R.styleable.ProcessButton_ev_pb_colorComplete, getColor(R.color.ev_green_complete));
-        mErrorDrawable =createGradient(attr, R.styleable.ProcessButton_ev_pb_colorError, getColor(R.color.ev_red_error));
+        mCompleteDrawable = createGradient(attr, R.styleable.ProcessButton_ev_pb_colorComplete, getColor(R.color.ev_green_complete));
+        mErrorDrawable = createGradient(attr, R.styleable.ProcessButton_ev_pb_colorError, getColor(R.color.ev_red_error));
         attr.recycle();
     }
 
@@ -74,9 +75,17 @@ public abstract class ProcessButton extends FlatButton {
         return gradientDrawable;
     }
 
+    /**
+     * 核心刷新方法
+     * progress < 0 调用 onErrorState 即失败,
+     * progress = 0 调用 onNormalState  默认状态,
+     * progress [1,99] 调用 onProgress  加载状态,
+     * progress >=100 调用 onCompleteState  加载成功
+     *
+     * @param progress 加载进度
+     */
     public void setProgress(int progress) {
         mProgress = progress;
-
         if (mProgress == MIN_PROGRESS) {
             onNormalState();
         } else if (mProgress >= MAX_PROGRESS) {
@@ -97,8 +106,8 @@ public abstract class ProcessButton extends FlatButton {
     }
 
     protected void onProgress() {
-        if (getLoadingText() != null) {
-            setText(getLoadingText());
+        if (getProgressText() != null) {
+            setText(getProgressText());
         }
         setBackgroundCompat(getNormalDrawable());
     }
@@ -123,7 +132,7 @@ public abstract class ProcessButton extends FlatButton {
         if (mProgress > MIN_PROGRESS && mProgress < MAX_PROGRESS) {
             drawProgress(canvas);
         }
-
+        //下面调用不会遮盖文字
         super.onDraw(canvas);
     }
 
@@ -131,14 +140,6 @@ public abstract class ProcessButton extends FlatButton {
 
     public int getProgress() {
         return mProgress;
-    }
-
-    public static int getMaxProgress() {
-        return MAX_PROGRESS;
-    }
-
-    public static int getMinProgress() {
-        return MIN_PROGRESS;
     }
 
     public GradientDrawable getProgressDrawable() {
@@ -149,8 +150,8 @@ public abstract class ProcessButton extends FlatButton {
         return mCompleteDrawable;
     }
 
-    public CharSequence getLoadingText() {
-        return mLoadingText;
+    public CharSequence getProgressText() {
+        return mProgressText;
     }
 
     public CharSequence getCompleteText() {
@@ -159,25 +160,27 @@ public abstract class ProcessButton extends FlatButton {
 
     public void setProgressDrawable(GradientDrawable progressDrawable) {
         mProgressDrawable = progressDrawable;
+        setProgress(mProgress);
     }
 
     public void setCompleteDrawable(GradientDrawable completeDrawable) {
         mCompleteDrawable = completeDrawable;
+        setProgress(mProgress);
     }
 
     public void setNormalText(CharSequence normalText) {
         super.setNormalText(normalText);
-        if (mProgress == MIN_PROGRESS) {
-            setText(normalText);
-        }
+        setProgress(mProgress);
     }
 
-    public void setLoadingText(CharSequence loadingText) {
-        mLoadingText = loadingText;
+    public void setProgressText(CharSequence progressText) {
+        mProgressText = progressText;
+        setProgress(mProgress);
     }
 
     public void setCompleteText(CharSequence completeText) {
         mCompleteText = completeText;
+        setProgress(mProgress);
     }
 
     public GradientDrawable getErrorDrawable() {
@@ -186,6 +189,7 @@ public abstract class ProcessButton extends FlatButton {
 
     public void setErrorDrawable(GradientDrawable errorDrawable) {
         mErrorDrawable = errorDrawable;
+        setProgress(mProgress);
     }
 
     public CharSequence getErrorText() {
@@ -194,6 +198,7 @@ public abstract class ProcessButton extends FlatButton {
 
     public void setErrorText(CharSequence errorText) {
         mErrorText = errorText;
+        setProgress(mProgress);
     }
 
     @Override

@@ -44,7 +44,7 @@ public class GenerateProcessButton extends ProcessButton {
 
     @Override
     public void drawProgress(Canvas canvas) {
-        float scale = (float) getProgress() / (float) getMaxProgress();
+        float scale = (float) getProgress() / (float) MAX_PROGRESS;
         float indicatorHeight = (float) getMeasuredHeight() * scale;
 
         getProgressDrawable().setBounds(0, 0, getMeasuredWidth(), (int) indicatorHeight);

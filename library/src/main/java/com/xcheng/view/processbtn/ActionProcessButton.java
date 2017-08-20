@@ -97,7 +97,7 @@ public class ActionProcessButton extends ProcessButton {
     }
 
     private void drawLineProgress(Canvas canvas) {
-        float scale = (float) getProgress() / (float) getMaxProgress();
+        float scale = (float) getProgress() / (float) MAX_PROGRESS;
         float indicatorWidth = (float) getMeasuredWidth() * scale;
 
         int bottom = (getMeasuredHeight() - indicatorHeight);
