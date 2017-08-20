@@ -23,7 +23,6 @@ import static android.graphics.drawable.GradientDrawable.LINE;
 import static android.graphics.drawable.GradientDrawable.OVAL;
 import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static android.graphics.drawable.GradientDrawable.RING;
-
 /**
  * 动态生成Shape工具类
  * Created by chengxin on 2017/3/13.
@@ -214,9 +213,14 @@ public class ShapeBinder {
         return this;
     }
 
+    /**
+     * 如果设置成private，会爆出
+     * Library source does not match the bytecode for class ShapeBinder,
+     * 且class 文件不会有此注解
+     */
     @IntDef({RECTANGLE, OVAL, LINE, RING})
     @Retention(RetentionPolicy.SOURCE)
-    private @interface Shape {
+    public @interface Shape {
     }
 
     public ShapeBinder shape(@Shape int shape) {
