@@ -29,6 +29,7 @@
 
         <com.xcheng.view.processbtn.ActionProcessButton
             android:id="@+id/btnSignIn"
+            app:ev_pb_indicatorHeight="6dp"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
@@ -46,6 +47,7 @@
         <com.xcheng.view.processbtn.ActionProcessButton
             android:id="@+id/btnSignIn2"
             android:layout_width="match_parent"
+            app:ev_pb_indicatorHeight="6dp"
             android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:text="progress"

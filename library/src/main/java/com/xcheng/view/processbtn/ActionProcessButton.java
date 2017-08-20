@@ -51,9 +51,9 @@ public class ActionProcessButton extends ProcessButton {
         indicatorHeight = attr.getDimensionPixelSize(R.styleable.ActionProcessButton_ev_pb_indicatorHeight, LocalDisplay.dp2px(3));
         int intMode = attr.getInteger(R.styleable.ActionProcessButton_ev_pb_mode, 0);
         if (intMode == 0) {
-            mMode = Mode.PROGRESS;
-        } else {
             mMode = Mode.ENDLESS;
+        } else {
+            mMode = Mode.PROGRESS;
         }
         mColor1 = getColor(R.color.ev_holo_blue_bright);
         mColor2 = getColor(R.color.ev_holo_green_light);

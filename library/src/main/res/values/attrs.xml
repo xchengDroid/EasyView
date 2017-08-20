@@ -1,8 +1,9 @@
 <resources>
     <declare-styleable name="ActionProcessButton">
         <attr name="ev_pb_mode">
-            <enum name="progress" value="0" />
-            <enum name="endLess" value="1" />
+            <!--google风格 一直加载-->
+            <enum name="endLess" value="0" />
+            <enum name="progress" value="1" />
         </attr>
         <attr name="ev_pb_indicatorHeight" format="dimension" />
     </declare-styleable>

@@ -24,8 +24,6 @@ public class SignInActivity extends Activity implements ProgressGenerator.OnComp
         final ProgressGenerator progressGenerator = new ProgressGenerator(this);
         final ActionProcessButton btnSignIn = (ActionProcessButton) findViewById(R.id.btnSignIn);
         final ActionProcessButton btnSignIn2 = (ActionProcessButton) findViewById(R.id.btnSignIn2);
-
-
         //btnSignIn.setMode(ActionProcessButton.Mode.ENDLESS);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
