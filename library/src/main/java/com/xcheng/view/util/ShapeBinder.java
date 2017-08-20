@@ -174,7 +174,7 @@ public class ShapeBinder {
     /**
      * 如果等于0 不渲染边框
      */
-    public ShapeBinder strokeWidth(int strokeWidth) {
+    public ShapeBinder strokeWidth(@IntRange(from = 0) int strokeWidth) {
         this.strokeWidth = strokeWidth;
         return this;
     }
