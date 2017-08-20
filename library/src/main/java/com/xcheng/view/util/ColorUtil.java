@@ -8,7 +8,7 @@ import android.support.annotation.ColorInt;
  * Created by cx on 17/8/18.
  */
 public class ColorUtil {
-    private static final int DISABLED_ALPHA_FILL = 136;
+    private static final int DISABLED_ALPHA_FILL = 186;//136
     private static final float ACTIVE_OPACITY_FACTOR_FILL = 0.125f;
 
     /**

@@ -54,6 +54,8 @@ public class FlatButton extends Button {
         int strokeWidth = attr.getDimensionPixelSize(R.styleable.FlatButton_ev_pb_strokeWidth, ShapeBinder.INVALID_VALUE);
         final ShapeBinder shapeBinder = ShapeBinder.with(colorNormal)
                 .pressed(colorPressed)
+                .focused(colorPressed)
+                .selected(colorPressed)
                 .disable(colorDisable)
                 .radius(cornerRadius);
         //如果设置了边框颜色
