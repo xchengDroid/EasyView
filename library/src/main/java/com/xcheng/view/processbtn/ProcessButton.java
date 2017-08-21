@@ -1,5 +1,6 @@
 package com.xcheng.view.processbtn;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -21,6 +22,16 @@ public abstract class ProcessButton extends FlatButton {
     public static final int MIN_PROGRESS = 0;
 
     private int mProgress;
+    private Dialog mTransparentDialog;
+    /**
+     * 按钮是否可用当处于Progress模式的时候
+     */
+    private boolean mDisableWhenProgress;
+
+    /**
+     * 是否遮罩当处于Progress模式的时候
+     */
+    private boolean mMaskWhenProgress;
 
     private GradientDrawable mProgressDrawable;
     private GradientDrawable mCompleteDrawable;
@@ -45,8 +56,11 @@ public abstract class ProcessButton extends FlatButton {
     @CallSuper
     @Override
     protected void init(Context context, AttributeSet attrs) {
+
         super.init(context, attrs);
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ProcessButton);
+        mDisableWhenProgress = attr.getBoolean(R.styleable.ProcessButton_ev_pb_disableWhenProgress, false);
+        mMaskWhenProgress = attr.getBoolean(R.styleable.ProcessButton_ev_pb_maskWhenProgress, false);
 
         mProgressText = attr.getString(R.styleable.ProcessButton_ev_pb_textProgress);
         mCompleteText = attr.getString(R.styleable.ProcessButton_ev_pb_textComplete);
@@ -95,7 +109,32 @@ public abstract class ProcessButton extends FlatButton {
         } else {
             onProgress();
         }
+        if (mMaskWhenProgress) {
+            ensureTransparentDialog();
+            if (inProgress()) {
+                mTransparentDialog.show();
+            } else {
+                mTransparentDialog.dismiss();
+            }
+        }
+        if (mDisableWhenProgress) {
+            setEnabled(!inProgress());
+        }
         invalidate();
+    }
+
+    private void ensureTransparentDialog() {
+        if (mTransparentDialog == null) {
+            mTransparentDialog = new Dialog(getContext(), R.style.ev_Translucent_NoTitle);
+            mTransparentDialog.setCancelable(false);
+        }
+    }
+
+    /**
+     * 是否是处于progress模式
+     */
+    private boolean inProgress() {
+        return mProgress > MIN_PROGRESS && mProgress < MAX_PROGRESS;
     }
 
     protected void onErrorState() {
@@ -128,8 +167,7 @@ public abstract class ProcessButton extends FlatButton {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // progress
-        if (mProgress > MIN_PROGRESS && mProgress < MAX_PROGRESS) {
+        if (inProgress()) {
             drawProgress(canvas);
         }
         //下面调用不会遮盖文字

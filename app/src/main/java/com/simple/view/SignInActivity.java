@@ -24,22 +24,18 @@ public class SignInActivity extends Activity implements ProgressGenerator.OnComp
         final ProgressGenerator progressGenerator = new ProgressGenerator(this);
         final ActionProcessButton btnSignIn = (ActionProcessButton) findViewById(R.id.btnSignIn);
         final ActionProcessButton btnSignIn2 = (ActionProcessButton) findViewById(R.id.btnSignIn2);
-        //btnSignIn.setMode(ActionProcessButton.Mode.ENDLESS);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressGenerator.start(btnSignIn);
-                btnSignIn.setEnabled(false);
                 editEmail.setEnabled(false);
                 editPassword.setEnabled(false);
             }
         });
-        // btnSignIn2.setMode(ActionProcessButton.Mode.PROGRESS);
         btnSignIn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressGenerator.start(btnSignIn2);
-                btnSignIn2.setEnabled(false);
                 editEmail.setEnabled(false);
                 editPassword.setEnabled(false);
             }

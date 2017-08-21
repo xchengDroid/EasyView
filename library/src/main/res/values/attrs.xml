@@ -14,6 +14,8 @@
         <attr name="ev_pb_colorProgress" format="color" />
         <attr name="ev_pb_colorComplete" format="color" />
         <attr name="ev_pb_colorError" format="color" />
+        <attr name="ev_pb_disableWhenProgress" format="boolean" />
+        <attr name="ev_pb_maskWhenProgress" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="FlatButton">

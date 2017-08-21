@@ -13,7 +13,7 @@ public class ProgressGenerator {
     }
 
     private OnCompleteListener mListener;
-    private int mProgress;
+
 
     public ProgressGenerator(OnCompleteListener listener) {
         mListener = listener;
@@ -22,9 +22,12 @@ public class ProgressGenerator {
     public void start(final ProcessButton button) {
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
+            private int mProgress;
             @Override
             public void run() {
-
+                if (mProgress==100){
+                    mProgress=0;
+                }
                 mProgress += 10;
                 button.setProgress(mProgress);
                 if (mProgress < 100) {
