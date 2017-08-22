@@ -17,11 +17,11 @@ import com.xcheng.view.util.ShapeBinder;
 
 
 public abstract class ProcessButton extends FlatButton {
-
-    public static final int MAX_PROGRESS = 100;
+    public static final int NORMAL = -1;
     public static final int MIN_PROGRESS = 0;
+    public static final int MAX_PROGRESS = 100;
 
-    private int mProgress;
+    private int mProgress = NORMAL;
     private Dialog mTransparentDialog;
     /**
      * 按钮是否可用当处于Progress模式的时候
@@ -56,7 +56,6 @@ public abstract class ProcessButton extends FlatButton {
     @CallSuper
     @Override
     protected void init(Context context, AttributeSet attrs) {
-
         super.init(context, attrs);
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ProcessButton);
         mDisableWhenProgress = attr.getBoolean(R.styleable.ProcessButton_ev_pb_disableWhenProgress, false);
@@ -90,22 +89,29 @@ public abstract class ProcessButton extends FlatButton {
     }
 
     /**
-     * 核心刷新方法
-     * progress < 0 调用 onErrorState 即失败,
-     * progress = 0 调用 onNormalState  默认状态,
-     * progress [1,99] 调用 onProgress  加载状态,
-     * progress >=100 调用 onCompleteState  加载成功
+     * 是否是处于progress模式
+     */
+    protected final boolean inProgress() {
+        return mProgress >= MIN_PROGRESS && mProgress <= MAX_PROGRESS;
+    }
+
+    /**
+     * 核心刷新方法,progress不通取值范围代表不通的状态
+     * progress =-1 调用 onNormalState  默认状态,
+     * progress <-1 调用 onErrorState  失败状态,
+     * progress [0,100] 调用 onProgress  加载状态,
+     * progress > 100 调用 onCompleteState  完成成功
      *
      * @param progress 加载进度
      */
     public void setProgress(int progress) {
         mProgress = progress;
-        if (mProgress == MIN_PROGRESS) {
+        if (mProgress == NORMAL) {
             onNormalState();
-        } else if (mProgress >= MAX_PROGRESS) {
-            onCompleteState();
-        } else if (mProgress < MIN_PROGRESS) {
+        } else if (mProgress < NORMAL) {
             onErrorState();
+        } else if (mProgress > MAX_PROGRESS) {
+            onCompleteState();
         } else {
             onProgress();
         }
@@ -123,6 +129,18 @@ public abstract class ProcessButton extends FlatButton {
         invalidate();
     }
 
+    public void normal() {
+        setProgress(NORMAL);
+    }
+
+    public void error() {
+        setProgress(NORMAL - 1);
+    }
+
+    public void complete() {
+        setProgress(MAX_PROGRESS + 1);
+    }
+
     private void ensureTransparentDialog() {
         if (mTransparentDialog == null) {
             mTransparentDialog = new Dialog(getContext(), R.style.ev_Translucent_NoTitle);
@@ -130,12 +148,6 @@ public abstract class ProcessButton extends FlatButton {
         }
     }
 
-    /**
-     * 是否是处于progress模式
-     */
-    private boolean inProgress() {
-        return mProgress > MIN_PROGRESS && mProgress < MAX_PROGRESS;
-    }
 
     protected void onErrorState() {
         if (getErrorText() != null) {

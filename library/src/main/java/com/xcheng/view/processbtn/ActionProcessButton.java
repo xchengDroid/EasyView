@@ -115,7 +115,7 @@ public class ActionProcessButton extends ProcessButton {
             mProgressBar.start();
         }
 
-        if (getProgress() > 0) {
+        if (inProgress()) {
             mProgressBar.draw(canvas);
         }
     }
