@@ -64,7 +64,7 @@ public class EasyView {
      * @param action the action to run on the UI thread
      */
     public static void runOnUiThreadDelayed(Runnable action, long delayMillis) {
-        if (isOnMainThread() || delayMillis > 0) {
+        if (!isOnMainThread() || delayMillis > 0) {
             HANDLER_UI.postDelayed(action, delayMillis);
         } else {
             action.run();
