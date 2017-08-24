@@ -19,7 +19,7 @@ public class LocalDisplay {
     private static boolean sInitialized;
 
     public static void init(Context context) {
-        if (sInitialized || context == null) {
+        if (sInitialized) {
             return;
         }
         DisplayMetrics dm = new DisplayMetrics();
