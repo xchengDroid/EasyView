@@ -11,7 +11,7 @@ import android.view.View;
 import com.xcheng.view.util.ToastLess;
 
 
-/**
+/**基础的Dialog
  * Created by cc on 2016/11/7.
  */
 public abstract class EasyDialog extends Dialog implements IEasyController {
