@@ -28,32 +28,7 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         switch (position) {
             case 0:
-                // startSignInActivity();
-
-                BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
-//                        .bottomTextColor(Color.YELLOW)
-//                        .optionTextColor(Color.RED)
-//                        .dividerColor(Color.GREEN)
-//                        .solidColor(Color.MAGENTA)
-//                        .textSize(30)
-//                        .optionHeight(200)
-//                        .radius(LocalDisplay.dp2px(10))
-//                        .bottomText("底部测试")
-                        .optionTexts(new String[]{"忘记密码","shuaige","美女啊"})
-                        .onSelectListener(new BottomOptionDialog.OnSelectListener() {
-                            @Override
-                            public void onBottomSelect(View view) {
-                                Log.e("print","底部点击");
-                            }
-
-                            @Override
-                            public void onOptionSelect(View view, int position) {
-                                Log.e("print","列表点击:"+position);
-                            }
-                        })
-                        .create();
-                dialog.show();
-                dialog.getActivity();
+                startSignInActivity();
                 break;
             case 1:
                 startMessageActivity();
@@ -63,6 +38,31 @@ public class MainActivity extends ListActivity {
                 break;
             case 3:
                 startStateSampleActivity();
+                break;
+            case 4:
+                BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
+//                        .bottomTextColor(Color.YELLOW)
+//                        .optionTextColor(Color.RED)
+//                        .dividerColor(Color.GREEN)
+//                        .solidColor(Color.MAGENTA)
+//                        .textSize(30)
+//                        .optionHeight(200)
+//                        .radius(LocalDisplay.dp2px(10))
+//                        .bottomText("底部测试")
+                        .optionTexts(new String[]{"登录", "注册", "忘记密码"})
+                        .onSelectListener(new BottomOptionDialog.OnSelectListener() {
+                            @Override
+                            public void onBottomSelect(View view) {
+                                Log.e("print", "底部点击");
+                            }
+
+                            @Override
+                            public void onOptionSelect(View view, int position) {
+                                Log.e("print", "列表点击:" + position);
+                            }
+                        })
+                        .create();
+                dialog.show();
                 break;
         }
     }
