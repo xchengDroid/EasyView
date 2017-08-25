@@ -2,7 +2,6 @@ package com.simple.view;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,15 +29,16 @@ public class MainActivity extends ListActivity {
         switch (position) {
             case 0:
                 // startSignInActivity();
+
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
-                        .bottomTextColor(Color.YELLOW)
-                        .optionTextColor(Color.RED)
-                        .dividerColor(Color.GREEN)
-                        .solidColor(Color.MAGENTA)
-                        .textSize(30)
-                        .optionHeight(200)
-                        .radius(LocalDisplay.dp2px(10))
-                        .bottomText("底部测试")
+//                        .bottomTextColor(Color.YELLOW)
+//                        .optionTextColor(Color.RED)
+//                        .dividerColor(Color.GREEN)
+//                        .solidColor(Color.MAGENTA)
+//                        .textSize(30)
+//                        .optionHeight(200)
+//                        .radius(LocalDisplay.dp2px(10))
+//                        .bottomText("底部测试")
                         .optionTexts(new String[]{"忘记密码","shuaige","美女啊"})
                         .onSelectListener(new BottomOptionDialog.OnSelectListener() {
                             @Override
@@ -51,8 +51,9 @@ public class MainActivity extends ListActivity {
                                 Log.e("print","列表点击:"+position);
                             }
                         })
-                        .build();
+                        .create();
                 dialog.show();
+                dialog.getActivity();
                 break;
             case 1:
                 startMessageActivity();

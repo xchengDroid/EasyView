@@ -13,7 +13,7 @@ import com.xcheng.view.util.LocalDisplay;
 public class EasyView {
     private static Context sAppContext;
 
-    public static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
+    private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
     //default false
     private static boolean sInitialized;
 

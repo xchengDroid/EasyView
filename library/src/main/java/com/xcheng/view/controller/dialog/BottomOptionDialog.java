@@ -80,8 +80,8 @@ public class BottomOptionDialog extends BottomDialog {
             this.bottomTextColor = ContextCompat.getColor(context, R.color.ev_text_grey);
             this.optionTextColor = ContextCompat.getColor(context, R.color.ev_light_blue);
             this.dividerColor = ContextCompat.getColor(context, R.color.ev_divider_color);
-            this.textSize = 16;
-            this.radius = LocalDisplay.dp2px(4);
+            this.textSize = 18;
+            this.radius = LocalDisplay.dp2px(8);
             this.optionHeight = LocalDisplay.dp2px(45);
         }
 
@@ -151,22 +151,18 @@ public class BottomOptionDialog extends BottomDialog {
             return this;
         }
 
-        public BottomOptionDialog build() {
+        public BottomOptionDialog create() {
             if (optionTexts == null) {
                 throw new IllegalStateException("optionTexts has not been init");
             }
             return new BottomOptionDialog(this);
         }
-    }
 
-    public interface OnSelectListener {
-        void onBottomSelect(View view);
-
-        /**
-         * @param view     对应的view
-         * @param position 设置在数组中的位置
-         */
-        void onOptionSelect(View view, int position);
+        public BottomOptionDialog show() {
+            BottomOptionDialog dialog = create();
+            dialog.show();
+            return dialog;
+        }
     }
 
     private class OptionAdapter extends RecyclerView.Adapter<OptionHolder> {
@@ -224,5 +220,15 @@ public class BottomOptionDialog extends BottomDialog {
         private OptionHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    public interface OnSelectListener {
+        void onBottomSelect(View view);
+
+        /**
+         * @param view     对应的view
+         * @param position 设置在数组中的位置
+         */
+        void onOptionSelect(View view, int position);
     }
 }
