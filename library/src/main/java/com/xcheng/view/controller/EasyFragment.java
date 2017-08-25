@@ -108,6 +108,7 @@ public abstract class EasyFragment extends Fragment implements IEasyController {
     public void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
+        //页面销毁的时候，防止外部引用Fragment，导致mRootView一直被引用,并且只支持FragmentPagerAdapter的页面缓存
         mRootView = null;
     }
 
