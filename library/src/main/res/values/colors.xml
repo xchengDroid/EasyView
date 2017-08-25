@@ -10,4 +10,10 @@
     <color name="ev_holo_green_light">#ff99cc00</color>
     <color name="ev_holo_orange_light">#ffffbb33</color>
     <color name="ev_holo_red_light">#ffff4444</color>
+
+    <color name="ev_text_black">#333333</color>
+    <color name="ev_text_grey">#78848d</color>
+    <color name="ev_text_hint">#c2c9cc</color>
+    <color name="ev_text_blue">#00ACF9</color>
+    <color name="ev_dialog_bg_color">#80000000</color>
 </resources>

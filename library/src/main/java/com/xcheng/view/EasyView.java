@@ -1,9 +1,11 @@
-package com.xcheng.view.util;
+package com.xcheng.view;
 
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.StringRes;
+
+import com.xcheng.view.util.LocalDisplay;
 
 /**
  * Created by chengxin on 2017/8/24.

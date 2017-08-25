@@ -6,4 +6,23 @@
         <item name="android:windowBackground">@android:color/transparent
         </item><!-- 设置window背景透明，也就是去边框 -->
     </style>
+
+    <style name="ev_dialog_commonStyle" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item> <!-- 无标题 -->
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+
+    <style name="ev_dialog_loadingStyle" parent="ev_dialog_commonStyle">
+        <item name="android:backgroundDimAmount">0.2</item>
+    </style>
+
+    <style name="ev_dialog_bottom_optionStyle" parent="ev_dialog_commonStyle">
+        <item name="android:windowAnimationStyle">@style/ev_dialog_bottom_animation</item>
+    </style>
+
+    <style name="ev_dialog_bottom_animation" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/ev_dialog_bottom_enter</item>
+        <item name="@android:windowExitAnimation">@anim/ev_dialog_bottom_exit</item>
+    </style>
 </resources>

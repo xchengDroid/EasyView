@@ -4,6 +4,8 @@ import android.support.annotation.StringRes;
 import android.support.annotation.UiThread;
 import android.widget.Toast;
 
+import com.xcheng.view.EasyView;
+
 /**
  * 简化Toast的工具类,支持子线程显示Toast
  */
