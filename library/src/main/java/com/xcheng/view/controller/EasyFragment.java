@@ -97,9 +97,18 @@ public abstract class EasyFragment extends Fragment implements IEasyController {
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (!isCacheRootView()) {
+            mRootView = null;
+        }
+    }
+
+    @Override
     public void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
+        mRootView = null;
     }
 
     public View findViewById(@IdRes int id) {
