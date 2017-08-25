@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.view.View;
 
@@ -29,7 +28,7 @@ public abstract class EasyDialog extends Dialog implements IEasyController {
         super(context);
     }
 
-    @NonNull
+
     public Activity getActivity() {
         Context context = getContext();
         if (context instanceof ContextWrapper) {
