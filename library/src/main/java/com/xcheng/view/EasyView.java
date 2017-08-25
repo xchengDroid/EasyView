@@ -8,6 +8,7 @@ import android.support.annotation.StringRes;
 import com.xcheng.view.util.LocalDisplay;
 
 /**
+ * Easy工具类，引用全局Context ,提供子线程刷新UI方法等
  * Created by chengxin on 2017/8/24.
  */
 public class EasyView {
