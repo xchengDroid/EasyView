@@ -55,7 +55,7 @@ public abstract class EasyDialog extends Dialog implements IEasyController {
 
     /**
      * 在dialog设置View之后执行才有效
-     ***/
+     */
     protected void initLocation() {
 
     }
