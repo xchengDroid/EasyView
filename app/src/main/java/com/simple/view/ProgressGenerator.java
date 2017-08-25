@@ -33,6 +33,7 @@ public class ProgressGenerator {
                 if (mProgress < 100) {
                     handler.postDelayed(this, generateDelay());
                 } else {
+                    button.complete();
                     mListener.onComplete();
                 }
             }
