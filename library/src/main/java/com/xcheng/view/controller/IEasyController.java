@@ -8,7 +8,7 @@ import android.view.View;
 /**
  * @author xincheng
  */
-public interface IBaseController extends View.OnClickListener {
+public interface IEasyController extends View.OnClickListener {
     /**
      * 获取布局Layout的id
      */

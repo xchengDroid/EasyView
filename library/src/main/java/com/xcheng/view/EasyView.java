@@ -10,7 +10,6 @@ import com.xcheng.view.util.LocalDisplay;
 /**
  * Created by chengxin on 2017/8/24.
  */
-
 public class EasyView {
     private static Context sAppContext;
 

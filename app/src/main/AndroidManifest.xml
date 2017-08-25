@@ -26,7 +26,7 @@
         <activity
             android:name=".SignInActivity"
             android:configChanges="orientation|screenSize|smallestScreenSize"
-            android:theme="@android:style/Theme.Holo.Light" />
+            />
 
         <activity
             android:name=".UploadActivity"

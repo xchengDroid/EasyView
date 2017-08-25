@@ -22,7 +22,7 @@ import com.xcheng.view.util.ToastLess;
  *
  * @author xincheng @date:2014-8-4
  */
-public abstract class EasyFragment extends Fragment implements IBaseController {
+public abstract class EasyFragment extends Fragment implements IEasyController {
     public static final String TAG = "EasyFragment";
     /**
      * 需要缓存的RootView;

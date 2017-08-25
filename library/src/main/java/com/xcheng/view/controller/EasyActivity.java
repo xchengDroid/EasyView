@@ -22,7 +22,7 @@ import java.io.Serializable;
  *
  * @author xincheng
  */
-public abstract class EasyActivity extends AppCompatActivity implements IBaseController {
+public abstract class EasyActivity extends AppCompatActivity implements IEasyController {
     public static final String TAG = "EasyActivity";
 
     private LoadingDialog mLoadingDialog;

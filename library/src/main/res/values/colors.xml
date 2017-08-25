@@ -16,4 +16,6 @@
     <color name="ev_text_hint">#c2c9cc</color>
     <color name="ev_text_blue">#00ACF9</color>
     <color name="ev_dialog_bg_color">#80000000</color>
+    <color name="ev_light_blue">#4d97ff</color>
+    <color name="ev_divider_color">#dae1e5</color>
 </resources>

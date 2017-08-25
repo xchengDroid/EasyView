@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--加载更多的id-->
-    <item name="ev_id_load_textView" type="id"/>
+    <item name="ev_id_load_textView" type="id" />
+    <item name="ev_id_optionDialog_bottom" type="id" />
+    <item name="ev_id_recyclerView" type="id" />
 </resources>
