@@ -31,7 +31,7 @@ public abstract class EasyActivity extends AppCompatActivity implements IEasyCon
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //兼容重写onCreate
-        if (getLayoutId() > 0) {
+        if (getLayoutId() != 0) {
             setContentView(getLayoutId());
             initData();
             initView(savedInstanceState);

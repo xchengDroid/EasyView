@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Size;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -34,14 +35,19 @@ public class BottomOptionDialog extends BottomDialog {
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         TextView bottomTextView = (TextView) findViewById(R.id.ev_id_optionDialog_bottom);
-        bottomTextView.setTextSize(builder.textSize);
-        bottomTextView.setTextColor(builder.bottomTextColor);
-        bottomTextView.setText(builder.bottomText);
-        ViewGroup.LayoutParams lp = bottomTextView.getLayoutParams();
-        lp.height = builder.optionHeight;
-        bottomTextView.setLayoutParams(lp);
-        ShapeBinder.with(builder.solidColor).radius(builder.radius).drawableStateTo(bottomTextView);
-        bottomTextView.setOnClickListener(this);
+        if (builder.bottomText != null) {
+            bottomTextView.setTextSize(builder.textSize);
+            bottomTextView.setTextColor(builder.bottomTextColor);
+            bottomTextView.setText(builder.bottomText);
+            ViewGroup.LayoutParams lp = bottomTextView.getLayoutParams();
+            lp.height = builder.optionHeight;
+            bottomTextView.setLayoutParams(lp);
+            ShapeBinder.with(builder.solidColor).radius(builder.radius).drawableStateTo(bottomTextView);
+            bottomTextView.setOnClickListener(this);
+        } else {
+            bottomTextView.setVisibility(View.GONE);
+        }
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ev_id_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new OptionDecoration(builder.dividerColor, 1));
@@ -117,11 +123,15 @@ public class BottomOptionDialog extends BottomDialog {
             return this;
         }
 
-        public Builder optionTexts(String[] optionTexts) {
+        public Builder optionTexts(@Size(min = 1) String[] optionTexts) {
             this.optionTexts = optionTexts;
             return this;
         }
 
+        /**
+         * @param bottomText if null, do not show bottomBtn
+         * @return Builder
+         */
         public Builder bottomText(String bottomText) {
             this.bottomText = bottomText;
             return this;
@@ -144,7 +154,7 @@ public class BottomOptionDialog extends BottomDialog {
 
         /**
          * @param textSize 单位为sp
-         * @return
+         * @return Builder
          */
         public Builder textSize(int textSize) {
             this.textSize = textSize;
