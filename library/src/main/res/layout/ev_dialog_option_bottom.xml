@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/ev_id_optionDialog_topTip"
+        android:id="@id/ev_id_optionDialog_topTip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center" />
@@ -14,8 +14,7 @@
     <View
         android:id="@id/ev_id_divider"
         android:layout_width="match_parent"
-        android:layout_height="1px"
-        android:background="@color/ev_divider_color" />
+        android:layout_height="1px" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@id/ev_id_recyclerView"

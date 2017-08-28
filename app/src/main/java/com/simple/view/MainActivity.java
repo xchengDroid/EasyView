@@ -45,6 +45,7 @@ public class MainActivity extends ListActivity {
                       //  .bottomText(null)
                         .tipText("请先登录或注册")
                         .tipTextColor(Color.RED)
+                        .dividerColor(Color.GREEN)
 //                        .bottomTextColor(Color.YELLOW)
 //                        .optionTextColor(Color.RED)
 //                        .dividerColor(Color.GREEN)

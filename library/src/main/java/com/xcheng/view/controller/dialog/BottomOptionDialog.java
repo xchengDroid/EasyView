@@ -36,6 +36,7 @@ public class BottomOptionDialog extends BottomDialog {
         super.initView(savedInstanceState);
 
         TextView topTipTextView = (TextView) findViewById(R.id.ev_id_optionDialog_topTip);
+        View divider = findViewById(R.id.ev_id_divider);
         if (builder.tipText != null) {
             //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
             if (topTipTextView == null) {
@@ -48,13 +49,16 @@ public class BottomOptionDialog extends BottomDialog {
             lp.height = builder.optionHeight;
             topTipTextView.setLayoutParams(lp);
             ShapeBinder.with(builder.solidColor).radii(new float[]{builder.radius, builder.radius, 0, 0}).drawableStateTo(topTipTextView);
-        } else {
-            View divider = findViewById(R.id.ev_id_divider);
+            //设置分割线的颜色
             if (divider != null) {
-                divider.setVisibility(View.GONE);
+                divider.setBackgroundColor(builder.dividerColor);
             }
+        } else {
             if (topTipTextView != null) {
                 topTipTextView.setVisibility(View.GONE);
+            }
+            if (divider != null) {
+                divider.setVisibility(View.GONE);
             }
         }
 
