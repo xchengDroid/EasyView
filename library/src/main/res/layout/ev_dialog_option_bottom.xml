@@ -5,10 +5,23 @@
     android:layout_margin="15dp"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@id/ev_id_optionDialog_topTip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" />
+
+    <View
+        android:id="@id/ev_id_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/ev_divider_color" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@id/ev_id_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <TextView
         android:id="@id/ev_id_optionDialog_bottom"

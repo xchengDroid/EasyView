@@ -2,6 +2,7 @@ package com.simple.view;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,9 @@ public class MainActivity extends ListActivity {
                 break;
             case 4:
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
+                      //  .bottomText(null)
+                        .tipText("请先登录或注册")
+                        .tipTextColor(Color.RED)
 //                        .bottomTextColor(Color.YELLOW)
 //                        .optionTextColor(Color.RED)
 //                        .dividerColor(Color.GREEN)
@@ -49,7 +53,7 @@ public class MainActivity extends ListActivity {
 //                        .optionHeight(200)
 //                        .radius(LocalDisplay.dp2px(10))
 //                        .bottomText("底部测试")
-                        .optionTexts(new String[]{"登录", "注册", "忘记密码"})
+                        .optionTexts(new String[]{"登录", "注册", "忘记密码",})
                         .onSelectListener(new BottomOptionDialog.OnSelectListener() {
                             @Override
                             public void onBottomSelect(View view) {

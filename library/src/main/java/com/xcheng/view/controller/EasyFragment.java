@@ -120,10 +120,7 @@ public abstract class EasyFragment extends Fragment implements IEasyController {
     @Override
     public View getView() {
         View view = super.getView();
-        if (view == null) {
-            view = mRootView;
-        }
-        return view;
+        return view != null ? view : mRootView;
     }
 
 

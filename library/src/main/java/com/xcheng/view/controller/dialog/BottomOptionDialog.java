@@ -34,8 +34,36 @@ public class BottomOptionDialog extends BottomDialog {
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+
+        TextView topTipTextView = (TextView) findViewById(R.id.ev_id_optionDialog_topTip);
+
+        if (builder.tipText != null) {
+            //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
+            if (topTipTextView == null) {
+                throw new IllegalStateException("layout res must have a TextView with id named ev_id_optionDialog_topTip");
+            }
+            topTipTextView.setTextSize(builder.tipTextSize);
+            topTipTextView.setTextColor(builder.tipTextColor);
+            topTipTextView.setText(builder.tipText);
+            ViewGroup.LayoutParams lp = topTipTextView.getLayoutParams();
+            lp.height = builder.optionHeight;
+            topTipTextView.setLayoutParams(lp);
+            ShapeBinder.with(builder.solidColor).radii(new float[]{builder.radius, builder.radius, 0, 0}).drawableStateTo(topTipTextView);
+        } else {
+            View divider = findViewById(R.id.ev_id_divider);
+            if (divider != null) {
+                divider.setVisibility(View.GONE);
+            }
+            if (topTipTextView != null) {
+                topTipTextView.setVisibility(View.GONE);
+            }
+        }
+
         TextView bottomTextView = (TextView) findViewById(R.id.ev_id_optionDialog_bottom);
         if (builder.bottomText != null) {
+            if (bottomTextView == null) {
+                throw new IllegalStateException("layout res must have a TextView with id named ev_id_optionDialog_bottom");
+            }
             bottomTextView.setTextSize(builder.textSize);
             bottomTextView.setTextColor(builder.bottomTextColor);
             bottomTextView.setText(builder.bottomText);
@@ -45,10 +73,14 @@ public class BottomOptionDialog extends BottomDialog {
             ShapeBinder.with(builder.solidColor).radius(builder.radius).drawableStateTo(bottomTextView);
             bottomTextView.setOnClickListener(this);
         } else {
-            bottomTextView.setVisibility(View.GONE);
+            if (bottomTextView != null) {
+                bottomTextView.setVisibility(View.GONE);
+            }
         }
-
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ev_id_recyclerView);
+        if (recyclerView == null) {
+            throw new IllegalStateException("layout res must have a RecyclerView with id named ev_id_recyclerView");
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new OptionDecoration(builder.dividerColor, 1));
         recyclerView.setAdapter(new OptionAdapter());
@@ -68,6 +100,9 @@ public class BottomOptionDialog extends BottomDialog {
         private Context context;
         private int layoutId;
         private String[] optionTexts;
+        private String tipText;
+        private int tipTextColor;
+        private int tipTextSize;
         private String bottomText;
         private OnSelectListener onSelectListener;
         private int solidColor;
@@ -81,6 +116,8 @@ public class BottomOptionDialog extends BottomDialog {
         public Builder(Context context) {
             this.context = context;
             this.layoutId = R.layout.ev_dialog_option_bottom;
+            this.tipTextSize = 14;
+            this.tipTextColor = ContextCompat.getColor(context, R.color.ev_text_grey);
             this.bottomText = "取消";
             this.solidColor = Color.WHITE;
             this.bottomTextColor = ContextCompat.getColor(context, R.color.ev_text_grey);
@@ -101,6 +138,21 @@ public class BottomOptionDialog extends BottomDialog {
         public Builder(Context context, @LayoutRes int layoutId) {
             this(context);
             this.layoutId = layoutId;
+        }
+
+        public Builder tipText(String tipText) {
+            this.tipText = tipText;
+            return this;
+        }
+
+        public Builder tipTextColor(@ColorInt int tipTextColor) {
+            this.tipTextColor = tipTextColor;
+            return this;
+        }
+
+        public Builder tipTextSize(int tipTextSize) {
+            this.tipTextSize = tipTextSize;
+            return this;
         }
 
         public Builder radius(int radius) {
@@ -192,14 +244,16 @@ public class BottomOptionDialog extends BottomDialog {
         @Override
         public void onBindViewHolder(final OptionHolder holder, final int position) {
             TextView optionText = (TextView) holder.itemView;
-
             int size = getItemCount();
             int radius = builder.radius;
+
+
+
             if (size == 1) {
                 ShapeBinder.with(builder.solidColor).radius(radius).drawableStateTo(optionText);
             } else {
                 if (position == 0) {
-                    ShapeBinder.with(builder.solidColor).radii(new float[]{radius, radius, 0, 0}).drawableStateTo(optionText);
+                    ShapeBinder.with(builder.solidColor).radii(new float[]{0, 0, 0, 0}).drawableStateTo(optionText);
                 } else if (position == size - 1) {
                     ShapeBinder.with(builder.solidColor).radii(new float[]{0, 0, radius, radius}).drawableStateTo(optionText);
                 } else {
