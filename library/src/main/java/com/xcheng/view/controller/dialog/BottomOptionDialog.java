@@ -36,7 +36,6 @@ public class BottomOptionDialog extends BottomDialog {
         super.initView(savedInstanceState);
 
         TextView topTipTextView = (TextView) findViewById(R.id.ev_id_optionDialog_topTip);
-
         if (builder.tipText != null) {
             //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
             if (topTipTextView == null) {
@@ -244,23 +243,8 @@ public class BottomOptionDialog extends BottomDialog {
         @Override
         public void onBindViewHolder(final OptionHolder holder, final int position) {
             TextView optionText = (TextView) holder.itemView;
-            int size = getItemCount();
-            int radius = builder.radius;
 
-
-
-            if (size == 1) {
-                ShapeBinder.with(builder.solidColor).radius(radius).drawableStateTo(optionText);
-            } else {
-                if (position == 0) {
-                    ShapeBinder.with(builder.solidColor).radii(new float[]{0, 0, 0, 0}).drawableStateTo(optionText);
-                } else if (position == size - 1) {
-                    ShapeBinder.with(builder.solidColor).radii(new float[]{0, 0, radius, radius}).drawableStateTo(optionText);
-                } else {
-                    ShapeBinder.with(builder.solidColor).radii(new float[]{0, 0, 0, 0}).drawableStateTo(optionText);
-                }
-            }
-
+            ShapeBinder.with(builder.solidColor).radii(getRadii(position)).drawableStateTo(optionText);
             optionText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -276,6 +260,28 @@ public class BottomOptionDialog extends BottomDialog {
         @Override
         public int getItemCount() {
             return builder.optionTexts.length;
+        }
+
+        private float[] getRadii(int position) {
+            int radius = builder.radius;
+            boolean hasTip = builder.tipText != null;
+            int count = getItemCount();
+            if (hasTip) {
+                boolean isLastItem = (position == count - 1);
+                return new float[]{0, 0, isLastItem ? radius : 0, isLastItem ? radius : 0};
+            } else {
+                if (count == 1) {
+                    return new float[]{radius, radius, radius, radius};
+                } else {
+                    if (position == 0) {
+                        return new float[]{radius, radius, 0, 0};
+                    } else if (position == count - 1) {
+                        return new float[]{0, 0, radius, radius};
+                    } else {
+                        return new float[]{0, 0, 0, 0};
+                    }
+                }
+            }
         }
     }
 

@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@id/ev_id_optionDialog_topTip"
+        android:id="@+id/ev_id_optionDialog_topTip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center" />

@@ -53,7 +53,7 @@ public class MainActivity extends ListActivity {
 //                        .optionHeight(200)
 //                        .radius(LocalDisplay.dp2px(10))
 //                        .bottomText("底部测试")
-                        .optionTexts(new String[]{"登录", "注册", "忘记密码",})
+                        .optionTexts(new String[]{"登录", "注册","忘记密码"})
                         .onSelectListener(new BottomOptionDialog.OnSelectListener() {
                             @Override
                             public void onBottomSelect(View view) {
