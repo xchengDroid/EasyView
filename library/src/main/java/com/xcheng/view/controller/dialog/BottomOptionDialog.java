@@ -133,14 +133,11 @@ public class BottomOptionDialog extends BottomDialog {
 
         /**
          * 自定义布局必须有一个RecyclerView其id为 ev_id_recyclerView，
-         * 底部有一个 TextView其id为 ev_id_recyclerView
-         *
-         * @param context  上下文
-         * @param layoutId 布局的id
+         * * @param layoutId 布局的id
          */
-        public Builder(Context context, @LayoutRes int layoutId) {
-            this(context);
+        public Builder layoutId(@LayoutRes int layoutId) {
             this.layoutId = layoutId;
+            return this;
         }
 
         public Builder tipText(String tipText) {
