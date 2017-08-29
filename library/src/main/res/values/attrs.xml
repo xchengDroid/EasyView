@@ -26,4 +26,55 @@
         <attr name="ev_pb_strokeWidth" format="dimension" />
         <attr name="ev_pb_cornerRadius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="DividerView" tools:ignore="ResourceName">
+        <attr name="ev_position">
+            <flag name="none" value="0x00" />
+            <flag name="top" value="0x1" />
+            <flag name="bottom" value="0x2" />
+        </attr>
+        <attr name="ev_topHeight" format="dimension" />
+        <attr name="ev_topColor" format="color" />
+        <attr name="ev_topToLeft" format="dimension" />
+        <attr name="ev_topToRight" format="dimension" />
+        <attr name="ev_bottomHeight" format="dimension" />
+        <attr name="ev_bottomColor" format="color" />
+        <attr name="ev_bottomToLeft" format="dimension" />
+        <attr name="ev_bottomToRight" format="dimension" />
+    </declare-styleable>
+    <!--end-->
+    <declare-styleable name="DividerContainer" tools:ignore="ResourceName">
+        <attr name="ev_position" />
+        <attr name="ev_topHeight" />
+        <attr name="ev_topColor" />
+        <attr name="ev_topToLeft" />
+        <attr name="ev_topToRight" />
+        <attr name="ev_bottomHeight" />
+        <attr name="ev_bottomColor" />
+        <attr name="ev_bottomToLeft" />
+        <attr name="ev_bottomToRight" />
+    </declare-styleable>
+    <!--end-->
+    <declare-styleable name="DividerLayout" tools:ignore="ResourceName">
+        <attr name="ev_position" />
+        <attr name="ev_topHeight" />
+        <attr name="ev_topColor" />
+        <attr name="ev_topToLeft" />
+        <attr name="ev_topToRight" />
+        <attr name="ev_bottomHeight" />
+        <attr name="ev_bottomColor" />
+        <attr name="ev_bottomToLeft" />
+        <attr name="ev_bottomToRight" />
+    </declare-styleable>
+    <declare-styleable name="DividerTextView" tools:ignore="ResourceName">
+        <attr name="ev_position" />
+        <attr name="ev_topHeight" />
+        <attr name="ev_topColor" />
+        <attr name="ev_topToLeft" />
+        <attr name="ev_topToRight" />
+        <attr name="ev_bottomHeight" />
+        <attr name="ev_bottomColor" />
+        <attr name="ev_bottomToLeft" />
+        <attr name="ev_bottomToRight" />
+    </declare-styleable>
 </resources>

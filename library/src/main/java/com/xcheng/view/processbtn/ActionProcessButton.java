@@ -49,7 +49,7 @@ public class ActionProcessButton extends ProcessButton {
         super.init(context, attrs);
         TypedArray attr = getTypedArray(context, attrs, R.styleable.ActionProcessButton);
         indicatorHeight = attr.getDimensionPixelSize(R.styleable.ActionProcessButton_ev_pb_indicatorHeight, LocalDisplay.dp2px(3));
-        int intMode = attr.getInteger(R.styleable.ActionProcessButton_ev_pb_mode, 0);
+        int intMode = attr.getInt(R.styleable.ActionProcessButton_ev_pb_mode, 0);
         if (intMode == 0) {
             mMode = Mode.ENDLESS;
         } else {
