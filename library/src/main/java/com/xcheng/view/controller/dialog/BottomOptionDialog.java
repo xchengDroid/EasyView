@@ -175,7 +175,7 @@ public class BottomOptionDialog extends BottomDialog {
             return this;
         }
 
-        public Builder optionTexts(@Size(min = 1) String[] optionTexts) {
+        public Builder optionTexts(@Size(min = 1) String... optionTexts) {
             this.optionTexts = optionTexts;
             return this;
         }

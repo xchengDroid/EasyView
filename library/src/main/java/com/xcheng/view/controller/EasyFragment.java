@@ -57,7 +57,7 @@ public abstract class EasyFragment extends Fragment implements IEasyController {
                 init(savedInstanceState);
             }
         } else {
-            mRootView = inflater.inflate(getLayoutId(), null);
+            mRootView = inflater.inflate(getLayoutId(), container, false);
             init(savedInstanceState);
         }
         return mRootView;
