@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.R;
+import com.xcheng.view.divider.DividerTextView;
 import com.xcheng.view.util.LocalDisplay;
 import com.xcheng.view.util.ShapeBinder;
 
@@ -36,7 +37,6 @@ public class BottomOptionDialog extends BottomDialog {
         super.initView(savedInstanceState);
 
         TextView topTipTextView = (TextView) findViewById(R.id.ev_id_optionDialog_topTip);
-        View divider = findViewById(R.id.ev_id_divider);
         if (builder.tipText != null) {
             //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
             if (topTipTextView == null) {
@@ -50,15 +50,13 @@ public class BottomOptionDialog extends BottomDialog {
             topTipTextView.setLayoutParams(lp);
             ShapeBinder.with(builder.solidColor).radii(new float[]{builder.radius, builder.radius, 0, 0}).drawableStateTo(topTipTextView);
             //设置分割线的颜色
-            if (divider != null) {
-                divider.setBackgroundColor(builder.dividerColor);
+            if (topTipTextView instanceof DividerTextView) {
+                DividerTextView dividerTextView = (DividerTextView) topTipTextView;
+                dividerTextView.setBottomColor(builder.dividerColor);
             }
         } else {
             if (topTipTextView != null) {
                 topTipTextView.setVisibility(View.GONE);
-            }
-            if (divider != null) {
-                divider.setVisibility(View.GONE);
             }
         }
 
