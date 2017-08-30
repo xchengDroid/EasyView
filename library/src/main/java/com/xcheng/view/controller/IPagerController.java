@@ -3,7 +3,7 @@ package com.xcheng.view.controller;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.xcheng.view.adapter.ViewPageInfo;
+import com.xcheng.view.adapter.TabInfo;
 
 import java.util.List;
 
@@ -21,14 +21,14 @@ public interface IPagerController {
     /**
      * 设置Tab页面加载的每个页面
      */
-    void getViewPageInfos(final List<ViewPageInfo> viewPageInfos);
+    void getTabInfos(final List<TabInfo> tabInfos);
 
     /**
      * @param position     当前Tab指针的位置
-     * @param viewPageInfo 对应Tab的信息
+     * @param tabInfo 对应Tab的信息
      * @return
      */
     @NonNull
-    View createTabView(int position, ViewPageInfo viewPageInfo);
+    View createTabView(int position, TabInfo tabInfo);
 
 }

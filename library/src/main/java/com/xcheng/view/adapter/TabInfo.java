@@ -3,7 +3,7 @@ package com.xcheng.view.adapter;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 
-public final class ViewPageInfo {
+public final class TabInfo {
     public CharSequence title;
     public int iconResId = 0;
     /**
@@ -15,7 +15,7 @@ public final class ViewPageInfo {
     public final Class<?> clazz;
     public final Bundle args;
 
-    public ViewPageInfo(String _tag, CharSequence _title, Class<?> _clazz, Bundle bundle) {
+    public TabInfo(String _tag, CharSequence _title, Class<?> _clazz, Bundle bundle) {
         tag = _tag;
         title = _title;
         clazz = _clazz;
@@ -24,21 +24,21 @@ public final class ViewPageInfo {
         args.putCharSequence("title", _title);
     }
 
-    public ViewPageInfo(String _tag, CharSequence _title, Class<?> _clazz) {
+    public TabInfo(String _tag, CharSequence _title, Class<?> _clazz) {
         this(_tag, _title, _clazz, null);
     }
 
-    public ViewPageInfo(String _tag, @DrawableRes int _iconResId, CharSequence _title, Class<?> _clazz) {
+    public TabInfo(String _tag, @DrawableRes int _iconResId, CharSequence _title, Class<?> _clazz) {
         this(_tag, _title, _clazz);
         iconResId = _iconResId;
     }
 
-    public ViewPageInfo(String _tag, CharSequence _title, Class<?> _clazz, @DrawableRes int _bgResId) {
+    public TabInfo(String _tag, CharSequence _title, Class<?> _clazz, @DrawableRes int _bgResId) {
         this(_tag, _title, _clazz);
         bgResId = _bgResId;
     }
 
-    public ViewPageInfo(String _tag, CharSequence _title, Class<?> _clazz, @DrawableRes int _bgResId, Bundle bundle) {
+    public TabInfo(String _tag, CharSequence _title, Class<?> _clazz, @DrawableRes int _bgResId, Bundle bundle) {
         this(_tag, _title, _clazz, bundle);
         bgResId = _bgResId;
     }

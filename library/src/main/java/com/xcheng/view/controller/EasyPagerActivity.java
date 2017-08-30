@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyFragmentPagerAdapter;
-import com.xcheng.view.adapter.ViewPageInfo;
+import com.xcheng.view.adapter.TabInfo;
 import com.xcheng.view.widget.PagerSlidingTabStrip;
 
 import java.util.ArrayList;
@@ -35,9 +35,9 @@ public abstract class EasyPagerActivity extends EasyActivity implements IPagerCo
         super.initView(savedInstanceState);
         mViewPager = (ViewPager) findViewById(R.id.ev_id_viewpager);
         mViewPager.setOffscreenPageLimit(getScreenPageLimit());
-        List<ViewPageInfo> viewPageInfos = new ArrayList<>();
-        getViewPageInfos(viewPageInfos);
-        mTabsAdapter = new EasyFragmentPagerAdapter(getSupportFragmentManager(), getContext(), viewPageInfos) {
+        List<TabInfo> tabInfos = new ArrayList<>();
+        getTabInfos(tabInfos);
+        mTabsAdapter = new EasyFragmentPagerAdapter(getSupportFragmentManager(), getContext(), tabInfos) {
             @NonNull
             @Override
             public View getTabView(int position) {

@@ -13,10 +13,10 @@ import java.util.List;
 
 public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.TabAdapter {
     private Context mContext;
-    private final List<ViewPageInfo> mTabInfos;
+    private final List<TabInfo> mTabInfos;
 
     public EasyFragmentPagerAdapter(FragmentManager fm, Context context,
-                                    List<ViewPageInfo> tabs) {
+                                    List<TabInfo> tabs) {
         super(fm);
         if (tabs == null) {
             throw new IllegalArgumentException(
@@ -27,11 +27,11 @@ public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter impl
     }
 
     public void addInfo(String title, String tag, Class<?> clazz) {
-        ViewPageInfo viewPageInfo = new ViewPageInfo(title, tag, clazz);
-        mTabInfos.add(viewPageInfo);
+        TabInfo tabInfo = new TabInfo(title, tag, clazz);
+        mTabInfos.add(tabInfo);
     }
 
-    public void setInfo(int index, ViewPageInfo info) {
+    public void setInfo(int index, TabInfo info) {
         mTabInfos.set(index, info);
     }
 
@@ -41,7 +41,7 @@ public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter impl
         return mTabInfos.size();
     }
 
-    public ViewPageInfo getViewPageInfo(int position) {
+    public TabInfo getViewPageInfo(int position) {
         return mTabInfos.get(position);
     }
 
@@ -53,7 +53,7 @@ public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter impl
 
     @Override
     public Fragment getItem(int position) {
-        ViewPageInfo info = mTabInfos.get(position);
+        TabInfo info = mTabInfos.get(position);
         return Fragment.instantiate(mContext, info.clazz.getName(), info.args);
     }
 
