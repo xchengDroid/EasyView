@@ -1,11 +1,11 @@
 package com.xcheng.view.controller;
 
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
-import android.support.annotation.CallSuper;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
@@ -13,18 +13,19 @@ import android.widget.TextView;
 import com.xcheng.view.R;
 
 /**
- * 通用的Toolbar 基类
+ * 通用的Toolbar 基类,
+ * Toolbar id为ev_id_toolBar，
+ * 标题TextView id为ev_id_titleView
  * Created by chengxin on 2017/5/2.
  */
-public abstract class TopBarSupportActivity extends EasyActivity {
+public abstract class TopBarSupportActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private TextView mTitleView;
 
-    @CallSuper
     @Override
-    public void initView(@Nullable Bundle savedInstanceState) {
+    public void setContentView(@LayoutRes int layoutResID) {
+        super.setContentView(layoutResID);
         initToolBar();
-        super.initView(savedInstanceState);
     }
 
     @SuppressWarnings("ConstantConditions")

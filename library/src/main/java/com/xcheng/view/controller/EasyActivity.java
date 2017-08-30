@@ -8,7 +8,6 @@ import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.xcheng.view.controller.dialog.LoadingDialog;
@@ -22,7 +21,7 @@ import java.io.Serializable;
  *
  * @author xincheng
  */
-public abstract class EasyActivity extends AppCompatActivity implements IEasyController {
+public abstract class EasyActivity extends TopBarSupportActivity implements IEasyController {
     public static final String TAG = "EasyActivity";
 
     private LoadingDialog mLoadingDialog;
