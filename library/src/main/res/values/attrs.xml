@@ -92,12 +92,7 @@
         <attr name="ev_pstsIndicatorHeight" format="dimension" />
         <attr name="ev_pstsUnderlineHeight" format="dimension" />
         <attr name="ev_pstsDividerPadding" format="dimension" />
-        <attr name="ev_pstsTabPaddingLeftRight" format="dimension" />
-        <attr name="ev_pstsTabPaddingTopBottom" format="dimension" />
         <attr name="ev_pstsScrollOffset" format="dimension" />
-        <attr name="ev_pstsTabBackground" format="reference" />
         <attr name="ev_pstsShouldExpand" format="boolean" />
-        <attr name="ev_pstsTextAllCaps" format="boolean" />
-        <attr name="ev_pstsTextIcon" format="boolean" />
     </declare-styleable>
 </resources>

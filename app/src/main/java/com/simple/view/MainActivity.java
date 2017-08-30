@@ -69,6 +69,9 @@ public class MainActivity extends ListActivity {
                         .create();
                 dialog.show();
                 break;
+            case 5:
+                startTabActivity();
+                break;
         }
     }
 
@@ -89,6 +92,10 @@ public class MainActivity extends ListActivity {
 
     private void startMessageActivity() {
         Intent intent = new Intent(this, MessageActivity.class);
+        startActivity(intent);
+    }
+    private void startTabActivity() {
+        Intent intent = new Intent(this, TabActivity.class);
         startActivity(intent);
     }
 }

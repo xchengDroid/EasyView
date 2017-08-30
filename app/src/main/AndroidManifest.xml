@@ -37,6 +37,9 @@
             android:name=".StateSampleActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light" />
+        <activity
+            android:name=".TabActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
