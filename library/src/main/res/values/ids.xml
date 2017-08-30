@@ -2,10 +2,14 @@
 <resources>
     <!--加载更多的id-->
     <item name="ev_id_titleView" type="id" />
-    <item name="ev_id_toolBar" type="id"/>
+    <item name="ev_id_toolBar" type="id" />
     <item name="ev_id_load_textView" type="id" />
     <item name="ev_id_optionDialog_bottom" type="id" />
     <item name="ev_id_optionDialog_topTip" type="id" />
     <item name="ev_id_divider" type="id" />
     <item name="ev_id_recyclerView" type="id" />
+
+    <item name="ev_id_viewpager" type="id" />
+    <item name="ev_id_tab_indicator" type="id" />
+
 </resources>
