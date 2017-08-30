@@ -18,4 +18,7 @@
     <color name="ev_dialog_bg_color">#80000000</color>
     <color name="ev_light_blue">#4d97ff</color>
     <color name="ev_divider_color">#dae1e5</color>
+
+    <!--PagerSlidingTabStrip-->
+    <color name="ev_bg_tab_pressed">#6633B5E5</color>
 </resources>

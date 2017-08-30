@@ -1,4 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <declare-styleable name="TopBarLayout" tools:ignore="ResourceName">
+        <attr name="ev_topBarLayout" format="reference" />
+        <!--居中标题-->
+        <attr name="ev_topBarTitle" format="string" />
+    </declare-styleable>
+
     <declare-styleable name="ActionProcessButton" tools:ignore="ResourceName">
         <attr name="ev_pb_mode">
             <!--google风格 一直加载-->
@@ -76,5 +83,21 @@
         <attr name="ev_bottomColor" />
         <attr name="ev_bottomToLeft" />
         <attr name="ev_bottomToRight" />
+    </declare-styleable>
+
+    <declare-styleable name="PagerSlidingTabStrip" tools:ignore="ResourceName">
+        <attr name="ev_pstsIndicatorColor" format="color" />
+        <attr name="ev_pstsUnderlineColor" format="color" />
+        <attr name="ev_pstsDividerColor" format="color" />
+        <attr name="ev_pstsIndicatorHeight" format="dimension" />
+        <attr name="ev_pstsUnderlineHeight" format="dimension" />
+        <attr name="ev_pstsDividerPadding" format="dimension" />
+        <attr name="ev_pstsTabPaddingLeftRight" format="dimension" />
+        <attr name="ev_pstsTabPaddingTopBottom" format="dimension" />
+        <attr name="ev_pstsScrollOffset" format="dimension" />
+        <attr name="ev_pstsTabBackground" format="reference" />
+        <attr name="ev_pstsShouldExpand" format="boolean" />
+        <attr name="ev_pstsTextAllCaps" format="boolean" />
+        <attr name="ev_pstsTextIcon" format="boolean" />
     </declare-styleable>
 </resources>
