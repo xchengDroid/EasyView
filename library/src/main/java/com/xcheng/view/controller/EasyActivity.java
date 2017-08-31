@@ -73,13 +73,11 @@ public abstract class EasyActivity extends TopBarSupportActivity implements IEas
      * @param <T>
      * @return
      */
-    @SuppressWarnings("unchecked")
     @CheckResult
     protected <T extends Serializable> T getSerializable(String bundleKey) {
         return getSerializable(getIntent(), bundleKey);
     }
 
-    @SuppressWarnings("unchecked")
     @CheckResult
     protected <T extends Serializable> T getSerializable(@NonNull Intent intent, String bundleKey) {
         return JumpUtil.getSerializable(intent, bundleKey);
