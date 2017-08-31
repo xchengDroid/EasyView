@@ -18,12 +18,11 @@ import java.util.List;
  * 约定大于配置，
  * 设置Viewpager 的id 为ev_id_viewpager，
  * 设置PagerSlidingTabStrip 的 id为ev_id_tab_indicator
+ *
  * @author chengxin @date:2017-8-30
  */
 public abstract class EasyPagerFragment extends EasyFragment implements IPagerController {
-    /**
-     * 设置统一的ID
-     */
+
     protected ViewPager mViewPager;
     protected EasyFragmentPagerAdapter mTabsAdapter;
     protected PagerSlidingTabStrip mIndicator;

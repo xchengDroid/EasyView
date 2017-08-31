@@ -22,9 +22,7 @@ import java.util.List;
  * @author chengxin @date:2017-8-30
  */
 public abstract class EasyPagerActivity extends EasyActivity implements IPagerController {
-    /**
-     * 设置统一的ID
-     */
+
     protected ViewPager mViewPager;
     protected EasyFragmentPagerAdapter mTabsAdapter;
     protected PagerSlidingTabStrip mIndicator;

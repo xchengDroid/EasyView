@@ -23,6 +23,7 @@ public interface IPagerController {
      */
     void getTabInfos(final List<TabInfo> tabInfos);
 
+
     /**
      * @param position     当前Tab指针的位置
      * @param tabInfo 对应Tab的信息
