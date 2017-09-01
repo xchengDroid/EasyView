@@ -21,4 +21,7 @@
 
     <!--PagerSlidingTabStrip-->
     <color name="ev_bg_tab_pressed">#6633B5E5</color>
+
+    <color name="ev_transparent">@android:color/transparent</color>
+
 </resources>
