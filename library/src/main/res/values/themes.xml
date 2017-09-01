@@ -16,11 +16,11 @@
         <item name="android:minHeight">@dimen/ev_toolbar_height</item>
         <item name="android:background">?colorPrimary</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="theme">@style/ev_toolbarMenu</item>
+        <item name="theme">@style/ev_ToolbarMenu</item>
         <item name="navigationContentDescription">Navigation</item>
     </style>
 
-    <style name="ev_toolbarMenu" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ev_ToolbarMenu" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionMenuTextColor">@color/ev_white</item>
         <item name="android:textSize">@dimen/ev_smallSize</item>
     </style>
