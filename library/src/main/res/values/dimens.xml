@@ -7,4 +7,6 @@
     <dimen name="ev_largerSize">20sp</dimen>
     <dimen name="ev_titleSize">18sp</dimen>
 
+    <dimen name="ev_toolbar_height">45dp</dimen>
+
 </resources>

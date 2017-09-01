@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="ev_colorPrimary">#3F51B5</color>
+    <color name="ev_colorPrimaryDark">#303F9F</color>
+    <color name="ev_colorAccent">#FF4081</color>
+
+    <color name="ev_bgColor">#F2F2F2</color>
+
     <color name="ev_blue_pressed">#ff0099cc</color>
     <color name="ev_blue_normal">#ff33b5e5</color>
     <color name="ev_green_complete">#ff99cc00</color>
@@ -22,6 +28,9 @@
     <!--PagerSlidingTabStrip-->
     <color name="ev_bg_tab_pressed">#6633B5E5</color>
 
-    <color name="ev_transparent">@android:color/transparent</color>
-
+    <color name="ev_transparent">#00000000</color>
+    <color name="ev_white">#ffffffff</color>
+    <color name="ev_black">#ff000000</color>
+    <color name="ev_green">#0BD38A</color>
+    <color name="ev_red_dark">#ffcc0000</color>
 </resources>
