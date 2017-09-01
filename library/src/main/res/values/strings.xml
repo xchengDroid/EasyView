@@ -1,4 +1,20 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name" tools:ignore="ResourceName">EasyView</string>
 
+    <string name="ev_sure">确定</string>
+    <string name="ev_submit">提交</string>
+    <string name="ev_exit">退出</string>
+    <string name="ev_skip">跳过</string>
+    <string name="ev_login">登录</string>
+    <string name="ev_account">账号</string>
+    <string name="ev_password">密码</string>
+    <string name="ev_no_account">没有账号?</string>
+    <string name="ev_to_register">去注册</string>
+    <string name="ev_forget_password">忘记密码?</string>
+    <string name="ev_next">下一步</string>
+    <string name="ev_register">注册</string>
+    <string name="ev_cancel">取消</string>
+    <string name="ev_reload">重新加载</string>
+    <string name="ev_call">呼叫</string>
+    <string name="ev_network_error">网络出错</string>
 </resources>
