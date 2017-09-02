@@ -15,7 +15,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.R;
+import com.xcheng.view.adapter.DividerDecoration;
 import com.xcheng.view.divider.DividerTextView;
+import com.xcheng.view.util.EasyPreconditions;
 import com.xcheng.view.util.LocalDisplay;
 import com.xcheng.view.util.ShapeBinder;
 
@@ -39,9 +41,8 @@ public class BottomOptionDialog extends BottomDialog {
         TextView topTipTextView = (TextView) findViewById(R.id.ev_id_optionDialog_topTip);
         if (builder.tipText != null) {
             //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
-            if (topTipTextView == null) {
-                throw new IllegalStateException("layout res must have a TextView with id named ev_id_optionDialog_topTip");
-            }
+            EasyPreconditions.checkState(topTipTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_topTip");
+
             topTipTextView.setTextSize(builder.tipTextSize);
             topTipTextView.setTextColor(builder.tipTextColor);
             topTipTextView.setText(builder.tipText);
@@ -62,9 +63,8 @@ public class BottomOptionDialog extends BottomDialog {
 
         TextView bottomTextView = (TextView) findViewById(R.id.ev_id_optionDialog_bottom);
         if (builder.bottomText != null) {
-            if (bottomTextView == null) {
-                throw new IllegalStateException("layout res must have a TextView with id named ev_id_optionDialog_bottom");
-            }
+            EasyPreconditions.checkState(bottomTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_bottom");
+
             bottomTextView.setTextSize(builder.textSize);
             bottomTextView.setTextColor(builder.bottomTextColor);
             bottomTextView.setText(builder.bottomText);
@@ -79,11 +79,9 @@ public class BottomOptionDialog extends BottomDialog {
             }
         }
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ev_id_recyclerView);
-        if (recyclerView == null) {
-            throw new IllegalStateException("layout res must have a RecyclerView with id named ev_id_recyclerView");
-        }
+        EasyPreconditions.checkState(recyclerView != null, "layout res must have a RecyclerView with id named ev_id_recyclerView");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new OptionDecoration(builder.dividerColor, 1));
+        recyclerView.addItemDecoration(new DividerDecoration(builder.dividerColor, 1));
         recyclerView.setAdapter(new OptionAdapter());
     }
 
@@ -212,9 +210,7 @@ public class BottomOptionDialog extends BottomDialog {
         }
 
         public BottomOptionDialog create() {
-            if (optionTexts == null) {
-                throw new IllegalStateException("optionTexts has not been init");
-            }
+            EasyPreconditions.checkState(optionTexts != null, "optionTexts has not been init");
             return new BottomOptionDialog(this);
         }
 
