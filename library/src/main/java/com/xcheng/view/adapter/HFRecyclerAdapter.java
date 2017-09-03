@@ -156,7 +156,7 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
      * @param view
      */
     private void prepareHeaderFooter(EasyHolder vh, View view) {
-        ViewGroup viewGroup = vh.getViewGroup();
+        ViewGroup viewGroup = vh.getRootView();
         if (viewGroup.getChildCount() == 1 && viewGroup.getChildAt(0) == view) {
             return;
         }
