@@ -38,6 +38,11 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
         this.mViews = new SparseArray<>();
     }
 
+    public EasyHolder(ViewGroup parent, int layoutId) {
+        this(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
+                false));
+    }
+
     public Context getContext() {
         return itemView.getContext();
     }
@@ -236,15 +241,5 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     public void toActivity(Class cls, Bundle bundle) {
         JumpUtil.toActivity((Activity) getContext(), cls, bundle);
-    }
-
-    public static EasyHolder createHolder(View itemView) {
-        return new EasyHolder(itemView);
-    }
-
-    public static EasyHolder createHolder(ViewGroup parent, int layoutId) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
-                false);
-        return createHolder(itemView);
     }
 }

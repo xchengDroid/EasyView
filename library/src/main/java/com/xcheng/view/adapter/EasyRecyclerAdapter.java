@@ -1,9 +1,12 @@
 package com.xcheng.view.adapter;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -134,12 +137,13 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     }
 
     /**
-     * @param position 在mData列表中的位置，注意如果有header或camera按钮等的话处理后调用
+     * @param position onBindViewHolder中的参数 position
      * @return T
      */
     public T getItem(int position) {
-        if (position >= 0 && position < mData.size()) {
-            return mData.get(position);
+        int positionOfData = getPositionOfData(position);
+        if (positionOfData >= 0 && positionOfData < mData.size()) {
+            return mData.get(positionOfData);
         }
         return null;
     }
@@ -164,5 +168,79 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
      */
     public final boolean isEmpty() {
         return mData == null || mData.size() == 0;
+    }
+
+    @Override
+    public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new EasyHolder(parent, getLayoutId(viewType));
+    }
+
+    @Override
+    public void onBindViewHolder(EasyHolder holder, int position) {
+        convert(holder, getItem(position), position);
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        return getViewType(getItem(position), position);
+    }
+
+    /**
+     * 获取在data数据列表上的位置
+     *
+     * @param position onBindViewHolder 所指定的position
+     * @return
+     */
+    public int getPositionOfData(int position) {
+        return position - getDataOffset();
+    }
+
+    @LayoutRes
+    protected abstract int getLayoutId(int viewType);
+
+    protected abstract int getViewType(T t, int position);
+
+    protected abstract void convert(EasyHolder holder, T t, int position);
+
+    protected void clickToHolder(final EasyHolder easyHolder) {
+        easyHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mOnItemClickListener != null) {
+                    mOnItemClickListener.onItemClick(easyHolder, easyHolder.getAdapterPosition());
+                }
+            }
+        });
+    }
+
+    protected void longClickToHolder(final EasyHolder easyHolder) {
+        easyHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return mOnItemLongClickListener != null &&
+                        mOnItemLongClickListener.onItemLongClick(easyHolder, easyHolder.getAdapterPosition());
+            }
+        });
+    }
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(EasyHolder holder, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.mOnItemClickListener = onItemClickListener;
+    }
+
+    private OnItemLongClickListener mOnItemLongClickListener;
+
+    public interface OnItemLongClickListener {
+        boolean onItemLongClick(EasyHolder holder, int position);
+    }
+
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
+        this.mOnItemLongClickListener = onItemLongClickListener;
     }
 }
