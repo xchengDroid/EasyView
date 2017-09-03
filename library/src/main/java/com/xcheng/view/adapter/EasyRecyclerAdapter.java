@@ -19,7 +19,7 @@ import java.util.List;
 public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHolder> {
 
     private Context mContext;
-    private LayoutInflater mLayoutInflater;
+    private LayoutInflater mInflater;
     private final List<T> mData;
 
     public EasyRecyclerAdapter(Context context, @Nullable List<T> data) {
@@ -28,7 +28,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
         }
         this.mData = data;
         mContext = context;
-        mLayoutInflater = LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(context);
     }
 
     public Context getContext() {
@@ -36,7 +36,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     }
 
     public LayoutInflater getInflater() {
-        return mLayoutInflater;
+        return mInflater;
     }
 
     /**

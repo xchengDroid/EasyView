@@ -214,7 +214,7 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
         }
         this.emptyView = emptyView;
         if (isAttachToRecycler && hasEmpty()) {
-            notifyItemInserted(getDataOffset());
+            notifyItemInserted(getHeaderCount());
         }
     }
 
@@ -226,7 +226,7 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
 
     public void notifyEmpty() {
         if (hasEmpty()) {
-            notifyItemChanged(getDataOffset());
+            notifyItemChanged(getHeaderCount());
         }
     }
 
