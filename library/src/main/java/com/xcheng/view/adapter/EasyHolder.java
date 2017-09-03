@@ -42,7 +42,6 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
         this(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
                 false));
     }
-
     public Context getContext() {
         return itemView.getContext();
     }

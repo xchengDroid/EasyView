@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xcheng.view.util.EasyPreconditions;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +23,20 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     private Context mContext;
     private LayoutInflater mInflater;
     private final List<T> mData;
+    private final int mLayoutId;
 
     public EasyRecyclerAdapter(Context context, @Nullable List<T> data) {
+        this(context, data, 0);
+    }
+
+    public EasyRecyclerAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId) {
         if (data == null) {
             data = new ArrayList<>();
         }
         this.mData = data;
         mContext = context;
         mInflater = LayoutInflater.from(context);
+        mLayoutId = layoutId;
     }
 
     public Context getContext() {
@@ -172,7 +180,9 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
     @Override
     public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new EasyHolder(parent, getLayoutId(viewType));
+        int layoutId = getLayoutId(viewType);
+        EasyPreconditions.checkState(layoutId != 0, "getLayoutId(viewType) must return a real layout res");
+        return new EasyHolder(parent, layoutId);
     }
 
     @Override
@@ -197,7 +207,9 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     }
 
     @LayoutRes
-    protected abstract int getLayoutId(int viewType);
+    protected int getLayoutId(int viewType) {
+        return mLayoutId;
+    }
 
     protected abstract int getViewType(T t, int position);
 

@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
+import com.xcheng.view.util.EasyPreconditions;
+
 import java.util.List;
 
 /**
@@ -184,12 +186,8 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
      * @param headerView header data
      */
     public void setHeader(View headerView) {
-        if (headerView == null) {
-            throw new NullPointerException("the headerView can not be null");
-        }
-        if (this.headerView != null) {
-            throw new IllegalStateException("the headerView already has been set");
-        }
+        EasyPreconditions.checkState(this.headerView == null, "the headerView already has been set");
+        EasyPreconditions.checkNotNull(headerView != null, "the headerView can not be null");
         this.headerView = headerView;
         if (isAttachToRecycler && hasHeader()) {
             notifyItemInserted(0);
@@ -206,12 +204,9 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
      * @param emptyView header data
      */
     public void setEmpty(View emptyView) {
-        if (emptyView == null) {
-            throw new NullPointerException("the emptyView can not be null");
-        }
-        if (this.emptyView != null) {
-            throw new IllegalStateException("the emptyView already has been set");
-        }
+
+        EasyPreconditions.checkState(this.emptyView == null, "the emptyView already has been set");
+        EasyPreconditions.checkNotNull(emptyView != null, "the emptyView can not be null");
         this.emptyView = emptyView;
         if (isAttachToRecycler && hasEmpty()) {
             notifyItemInserted(getHeaderCount());
@@ -250,12 +245,9 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
      * If you need a footer, you should set footer data in the adapter initialization code.
      */
     public void setFooter(View footerView) {
-        if (footerView == null) {
-            throw new NullPointerException("the footerView can not be null");
-        }
-        if (this.footerView != null) {
-            throw new IllegalStateException("the footerView already has been set");
-        }
+        EasyPreconditions.checkState(this.footerView == null, "the footerView already has been set");
+        EasyPreconditions.checkNotNull(footerView != null, "the footerView can not be null");
+
         this.footerView = footerView;
         if (isAttachToRecycler && hasFooter()) {
             //如果没有数据添加的情况下调用会crash
@@ -352,9 +344,7 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
     }
 
     private void validateItems(List<T> data) {
-        if (data == null) {
-            throw new IllegalArgumentException("You can't use a null List<Item> instance.");
-        }
+        EasyPreconditions.checkNotNull(data, "You can't use a null List<Item> instance.");
     }
 
     private boolean isFullSpan(int position) {
