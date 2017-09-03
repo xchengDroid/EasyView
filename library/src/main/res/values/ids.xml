@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--加载更多的id-->
+
     <item name="ev_id_titleView" type="id" />
     <item name="ev_id_toolBar" type="id" />
-    <item name="ev_id_load_textView" type="id" />
+
     <item name="ev_id_optionDialog_bottom" type="id" />
     <item name="ev_id_optionDialog_topTip" type="id" />
     <item name="ev_id_divider" type="id" />
+
+    <!--列表上刷新相关的id-->
     <item name="ev_id_recyclerView" type="id" />
     <item name="ev_id_ptrRVFrameLayout" type="id" />
+    <item name="ev_id_load_textView" type="id" />
+    <item name="ev_id_textLoadMore" type="id" />
+    <item name="ev_id_progressBarLoadMore" type="id" />
+    <item name="ev_id_emptyView" type="id" />
 
     <item name="ev_id_viewpager" type="id" />
     <item name="ev_id_tab_indicator" type="id" />
-    <item name="ev_id_emptyView" type="id" />
 
 </resources>

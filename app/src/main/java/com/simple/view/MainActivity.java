@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
+import com.xcheng.view.util.JumpUtil;
 
 public class MainActivity extends ListActivity {
 
@@ -54,7 +55,7 @@ public class MainActivity extends ListActivity {
 //                        .optionHeight(200)
 //                        .radius(LocalDisplay.dp2px(10))
 //                        .bottomText("底部测试")
-                        .optionTexts("登录", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码")
+                        .optionTexts("登录", "注册", "忘记密码")
                         .onSelectListener(new BottomOptionDialog.OnSelectListener() {
                             @Override
                             public void onBottomSelect(View view) {
@@ -71,6 +72,9 @@ public class MainActivity extends ListActivity {
                 break;
             case 5:
                 startTabActivity();
+                break;
+            case 6:
+                JumpUtil.toActivity(this, RefreshActivity.class);
                 break;
         }
     }

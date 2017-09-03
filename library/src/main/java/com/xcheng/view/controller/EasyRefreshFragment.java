@@ -9,7 +9,10 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
@@ -22,6 +25,9 @@ import com.xcheng.view.pullrefresh.PtrRVFrameLayout;
 import java.util.List;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
+
+import static com.xcheng.view.pullrefresh.LoadingState.LOADINGMORE;
+import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 
 /**
  * 刷新列表Fragment
@@ -92,6 +98,11 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         } else {
             mHFAdapter.addData(data);
         }
+        LoadingState loadingState = LoadingState.INIT;
+        if (data == null || data.size() < mHFAdapter.getLength()) {
+            loadingState = LoadingState.NOMORE;
+        }
+        complete(isRefresh, loadingState);
     }
 
     @Override
@@ -129,13 +140,13 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Nullable
     @Override
     public View getEmptyView() {
-        return null;
+        return new TextView(getContext());
     }
 
     @Nullable
     @Override
     public View getFooterView() {
-        return null;
+        return LayoutInflater.from(getContext()).inflate(R.layout.ev_footer_load_more, mRecyclerView, false);
     }
 
     @Override
@@ -145,11 +156,17 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
 
     @Override
     public void onBindEmpty(EasyHolder holder) {
-
+        Log.e("print","onBindEmpty");
     }
 
     @Override
     public void onBindFooter(EasyHolder holder) {
-
+        LoadingState loadingState = mPtrFrameLayout.getLoadingState();
+        if (loadingState == LOADINGMORE || loadingState == REFRESHING) {
+            holder.setVisible(R.id.ev_id_progressBarLoadMore, true);
+        } else {
+            holder.setVisible(R.id.ev_id_progressBarLoadMore, false, false);
+        }
+        holder.setText(R.id.ev_id_textLoadMore, loadingState.getText());
     }
 }
