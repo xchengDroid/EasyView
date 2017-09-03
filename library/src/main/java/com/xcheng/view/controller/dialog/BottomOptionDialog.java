@@ -5,21 +5,27 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.Nullable;
 import android.support.annotation.Size;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
+import com.xcheng.view.adapter.EasyHolder;
+import com.xcheng.view.adapter.EasyRecyclerAdapter;
 import com.xcheng.view.divider.DividerTextView;
 import com.xcheng.view.util.EasyPreconditions;
 import com.xcheng.view.util.LocalDisplay;
 import com.xcheng.view.util.ShapeBinder;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class BottomOptionDialog extends BottomDialog {
     private final Builder builder;
@@ -82,7 +88,7 @@ public class BottomOptionDialog extends BottomDialog {
         EasyPreconditions.checkState(recyclerView != null, "layout res must have a RecyclerView with id named ev_id_recyclerView");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerDecoration(builder.dividerColor, 1));
-        recyclerView.setAdapter(new OptionAdapter());
+        recyclerView.setAdapter(new OptionAdapter(builder.context, new ArrayList<>(Arrays.asList(builder.optionTexts)), R.layout.ev_text_option));
     }
 
     @Override
@@ -221,24 +227,18 @@ public class BottomOptionDialog extends BottomDialog {
         }
     }
 
-    private class OptionAdapter extends RecyclerView.Adapter<OptionHolder> {
+    private class OptionAdapter extends EasyRecyclerAdapter<String> {
+        private OptionAdapter(Context context, @Nullable List<String> data, @LayoutRes int layoutId) {
+            super(context, data, layoutId);
+        }
 
         @Override
-        public OptionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            TextView optionText = new TextView(getContext());
-            optionText.setGravity(Gravity.CENTER);
+        protected void convert(final EasyHolder holder, String s, int position) {
+            TextView optionText = (TextView) holder.itemView;
             RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(-1, builder.optionHeight);
             optionText.setTextColor(builder.optionTextColor);
             optionText.setTextSize(builder.textSize);
             optionText.setLayoutParams(lp);
-            ShapeBinder.with(builder.solidColor).radius(builder.radius).drawableStateTo(optionText);
-            return new OptionHolder(optionText);
-        }
-
-        @Override
-        public void onBindViewHolder(final OptionHolder holder, final int position) {
-            TextView optionText = (TextView) holder.itemView;
-
             ShapeBinder.with(builder.solidColor).radii(getRadii(position)).drawableStateTo(optionText);
             optionText.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -250,11 +250,6 @@ public class BottomOptionDialog extends BottomDialog {
                 }
             });
             optionText.setText(builder.optionTexts[position]);
-        }
-
-        @Override
-        public int getItemCount() {
-            return builder.optionTexts.length;
         }
 
         private float[] getRadii(int position) {
@@ -277,13 +272,6 @@ public class BottomOptionDialog extends BottomDialog {
                     }
                 }
             }
-        }
-    }
-
-    private class OptionHolder extends RecyclerView.ViewHolder {
-
-        private OptionHolder(View itemView) {
-            super(itemView);
         }
     }
 
