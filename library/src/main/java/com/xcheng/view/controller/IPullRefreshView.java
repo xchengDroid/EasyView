@@ -49,7 +49,7 @@ public interface IPullRefreshView<T> extends HFRecyclerAdapter.OnHolderBindListe
     View getHeaderView();
 
     /***
-     * 获取FooterView 如果为空不设置
+     * 获取FooterView,显示加载更多的状态 如果为空不设置
      */
     @Nullable
     View getFooterView();

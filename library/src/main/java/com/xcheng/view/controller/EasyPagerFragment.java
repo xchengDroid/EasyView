@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @author chengxin @date:2017-8-30
  */
-public abstract class EasyPagerFragment extends EasyFragment implements IPagerController {
+public abstract class EasyPagerFragment extends EasyFragment implements IPagerView {
 
     protected ViewPager mViewPager;
     protected EasyFragmentPagerAdapter mTabsAdapter;

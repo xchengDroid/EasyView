@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * @author xincheng
  */
-public interface IPagerController {
+public interface IPagerView {
     int DEFAULT_PAGE_LIMIT = 1;
 
     /**

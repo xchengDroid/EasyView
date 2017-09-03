@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hletong.mob.pullrefresh;
+package com.xcheng.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.IntRange;
@@ -23,8 +23,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
-import com.hletong.mob.base.BaseRecyclerAdapter;
 
 import java.util.List;
 
@@ -37,7 +35,7 @@ import java.util.List;
  * The usage of List<T> mData member is not mandatory. If you are going to provide your custom
  * implementation remember to override getItemCount method.
  */
-public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
+public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
     //-1为 INVALID_TYPE,不要设置为-1
     public static final int TYPE_HEADER = 0x00000111;
     public static final int TYPE_FOOTER = 0x00000222;
@@ -46,18 +44,18 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
     private View footerView;
     private View emptyView;
     private boolean showFooter = true;
-    private int mLength = 10;
+    private final int mLength;
     /**
      * 标记是否绑定到RecyclerView
      ***/
     private boolean isAttachToRecycler = false;
 
     public HFRecyclerAdapter(Context context, List<T> data) {
-        super(context, data);
+        this(context, data, 10);
     }
 
     public HFRecyclerAdapter(Context context, List<T> data, @IntRange(from = 1) int length) {
-        this(context, data);
+        super(context, data);
         mLength = length;
     }
 
@@ -70,7 +68,7 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      * based on the view type param.
      */
     @Override
-    public final BaseHolder<T> onCreateViewHolder(ViewGroup parent, int viewType) {
+    public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (isHeaderType(viewType) || isFooterType(viewType) || isEmptyType(viewType)) {
             // create a new framelayout, or inflate from a resource
             FrameLayout frameLayout = new FrameLayout(parent.getContext());
@@ -79,9 +77,9 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
                     .LayoutParams.MATCH_PARENT : ViewGroup
                     .LayoutParams.WRAP_CONTENT;
             frameLayout.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
-            return new BaseHolder<>(frameLayout);
+            return new EasyHolder(frameLayout);
         } else {
-            BaseHolder<T> itemHolder = onCreateItemViewHolder(parent, viewType);
+            EasyHolder itemHolder = onCreateItemViewHolder(parent, viewType);
             if (canBindListener()) {
                 setListener(itemHolder);
             }
@@ -98,13 +96,13 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         return false;
     }
 
-    protected void setListener(final BaseHolder<T> baseHolder) {
+    protected void setListener(final EasyHolder baseHolder) {
         baseHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mOnItemClickListener != null) {
                     int position = baseHolder.getAdapterPosition();
-                    mOnItemClickListener.onItemClick(v, baseHolder, getRealItemPosition(position));
+                    mOnItemClickListener.onItemClick(v, baseHolder, getRealPosition(position));
                 }
             }
         });
@@ -113,14 +111,14 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
             public boolean onLongClick(View v) {
                 if (mOnItemLongClickListener != null) {
                     int position = baseHolder.getAdapterPosition();
-                    return mOnItemLongClickListener.onItemLongClick(v, baseHolder, getRealItemPosition(position));
+                    return mOnItemLongClickListener.onItemLongClick(v, baseHolder, getRealPosition(position));
                 }
                 return false;
             }
         });
     }
 
-    protected abstract BaseHolder<T> onCreateItemViewHolder(ViewGroup parent, int viewType);
+    protected abstract EasyHolder onCreateItemViewHolder(ViewGroup parent, int viewType);
 
     /**
      * holder 在onCreateViewHolder 和 onBindViewHolder时 holder.itemView no parent
@@ -129,7 +127,7 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      * @param position
      */
     @Override
-    public final void onBindViewHolder(BaseHolder<T> holder, int position) {
+    public final void onBindViewHolder(EasyHolder holder, int position) {
         if (isHeaderPosition(position)) {
             prepareHeaderFooter(holder, headerView);
             if (mOnHolderBindListener != null) {
@@ -146,8 +144,8 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
                 mOnHolderBindListener.onEmptyBind(holder);
             }
         } else {
-            int realPosition = getRealItemPosition(position);
-            onBindItemViewHolder(holder, realPosition, getItem(realPosition));
+            int realPosition = getRealPosition(position);
+            onBindHolder(holder, realPosition, getItem(realPosition));
         }
     }
 
@@ -157,7 +155,7 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      * @param vh
      * @param view
      */
-    private void prepareHeaderFooter(BaseHolder<T> vh, View view) {
+    private void prepareHeaderFooter(EasyHolder vh, View view) {
         ViewGroup viewGroup = vh.getViewGroup();
         if (viewGroup.getChildCount() == 1 && viewGroup.getChildAt(0) == view) {
             return;
@@ -172,8 +170,9 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         viewGroup.addView(view);
     }
 
-    protected void onBindItemViewHolder(BaseHolder<T> holder, int position, T t) {
-        holder.setData(t);
+
+    protected void onBindHolder(EasyHolder holder, int position, T t) {
+
     }
 
     @Override
@@ -185,10 +184,10 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         } else if (isEmptyPosition(position)) {
             return TYPE_EMPTY;
         }
-        return getViewType(getRealItemPosition(position));
+        return getType(getRealPosition(position));
     }
 
-    public int getViewType(int position) {
+    public int getType(int position) {
         return super.getItemViewType(position);
     }
 
@@ -199,13 +198,13 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
      * @param position onBindViewHolder 所指定的position
      * @return
      */
-    public int getRealItemPosition(int position) {
+    public int getRealPosition(int position) {
         return position - getHeaderCount() - getEmptyCount()/*in case*/;
     }
 
 
     @Override
-    public int getBeginIndex() {
+    public int getDataOffset() {
         return getHeaderCount();
     }
 
@@ -273,7 +272,7 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
         }
         this.emptyView = emptyView;
         if (isAttachToRecycler && hasEmpty()) {
-            notifyItemInserted(getBeginIndex());
+            notifyItemInserted(getDataOffset());
         }
     }
 
@@ -285,7 +284,7 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
 
     public void notifyEmpty() {
         if (hasEmpty()) {
-            notifyItemChanged(getBeginIndex());
+            notifyItemChanged(getDataOffset());
         }
     }
 
@@ -438,7 +437,7 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
     }
 
     @Override
-    public void onViewAttachedToWindow(BaseHolder<T> holder) {
+    public void onViewAttachedToWindow(EasyHolder holder) {
         super.onViewAttachedToWindow(holder);
         int position = holder.getLayoutPosition();
         if (isFullSpan(position)) {
@@ -465,7 +464,7 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
             if (mSpanSizeLookup == null) {
                 return isFullSpan ? layoutManager.getSpanCount() : 1;
             } else {
-                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, getRealItemPosition(position));
+                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, getRealPosition(position));
             }
         }
     }
@@ -484,40 +483,40 @@ public abstract class HFRecyclerAdapter<T> extends BaseRecyclerAdapter<T> {
     }
 
 
-    private OnItemClickListener<T> mOnItemClickListener;
+    private OnItemClickListener mOnItemClickListener;
 
-    public interface OnItemClickListener<T> {
-        void onItemClick(View view, BaseHolder<T> holder, int position);
+    public interface OnItemClickListener {
+        void onItemClick(View view, EasyHolder holder, int position);
     }
 
-    public void setOnItemClickListener(OnItemClickListener<T> onItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
 
-    private OnItemLongClickListener<T> mOnItemLongClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
 
-    public interface OnItemLongClickListener<T> {
-        boolean onItemLongClick(View view, BaseHolder<T> holder, int position);
+    public interface OnItemLongClickListener {
+        boolean onItemLongClick(View view, EasyHolder holder, int position);
     }
 
-    public void setOnItemLongClickListener(OnItemLongClickListener<T> onItemLongClickListener) {
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         this.mOnItemLongClickListener = onItemLongClickListener;
     }
 
-    private OnHolderBindListener<T> mOnHolderBindListener;
+    private OnHolderBindListener mOnHolderBindListener;
 
-    public void setOnHolderBindListener(OnHolderBindListener<T> onHolderBindListener) {
+    public void setOnHolderBindListener(OnHolderBindListener onHolderBindListener) {
         this.mOnHolderBindListener = onHolderBindListener;
     }
 
     /**
      * 当 onBindViewHolder 调用的时候回调此函数中的方法
      */
-    public interface OnHolderBindListener<T> {
-        void onHeaderBind(BaseHolder<T> holder);
+    public interface OnHolderBindListener {
+        void onHeaderBind(EasyHolder holder);
 
-        void onEmptyBind(BaseHolder<T> holder);
+        void onEmptyBind(EasyHolder holder);
 
-        void onFooterBind(BaseHolder<T> holder);
+        void onFooterBind(EasyHolder holder);
     }
 }

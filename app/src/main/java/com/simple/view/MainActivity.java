@@ -42,7 +42,7 @@ public class MainActivity extends ListActivity {
                 break;
             case 4:
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
-                      //  .bottomText(null)
+                        //  .bottomText(null)
                         .tipText("请先登录或注册")
                         .tipTextColor(Color.RED)
                         .dividerColor(Color.GREEN)
@@ -54,7 +54,7 @@ public class MainActivity extends ListActivity {
 //                        .optionHeight(200)
 //                        .radius(LocalDisplay.dp2px(10))
 //                        .bottomText("底部测试")
-                        .optionTexts(new String[]{"登录", "注册","忘记密码"})
+                        .optionTexts("登录", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码", "注册", "忘记密码")
                         .onSelectListener(new BottomOptionDialog.OnSelectListener() {
                             @Override
                             public void onBottomSelect(View view) {
@@ -94,6 +94,7 @@ public class MainActivity extends ListActivity {
         Intent intent = new Intent(this, MessageActivity.class);
         startActivity(intent);
     }
+
     private void startTabActivity() {
         Intent intent = new Intent(this, TabActivity.class);
         startActivity(intent);

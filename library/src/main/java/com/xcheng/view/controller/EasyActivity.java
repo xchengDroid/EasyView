@@ -21,7 +21,7 @@ import java.io.Serializable;
  *
  * @author xincheng
  */
-public abstract class EasyActivity extends TopBarSupportActivity implements IEasyController {
+public abstract class EasyActivity extends TopBarSupportActivity implements IEasyView {
     public static final String TAG = "EasyActivity";
 
     private LoadingDialog mLoadingDialog;

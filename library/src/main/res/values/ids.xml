@@ -8,8 +8,10 @@
     <item name="ev_id_optionDialog_topTip" type="id" />
     <item name="ev_id_divider" type="id" />
     <item name="ev_id_recyclerView" type="id" />
+    <item name="ev_id_ptrRVFrameLayout" type="id" />
 
     <item name="ev_id_viewpager" type="id" />
     <item name="ev_id_tab_indicator" type="id" />
+    <item name="ev_id_emptyView" type="id" />
 
 </resources>

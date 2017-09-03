@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -22,7 +21,7 @@ import com.xcheng.view.util.ToastLess;
  *
  * @author xincheng @date:2014-8-4
  */
-public abstract class EasyFragment extends Fragment implements IEasyController {
+public abstract class EasyFragment extends Fragment implements IEasyView {
     public static final String TAG = "EasyFragment";
     /**
      * 需要缓存的RootView;
@@ -43,9 +42,9 @@ public abstract class EasyFragment extends Fragment implements IEasyController {
         super.onCreate(savedInstanceState);
     }
 
-    @NonNull
+    @Nullable
     @Override
-    public final View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (isCacheRootView()) {
             if (mRootView != null) {
                 ViewGroup parent = (ViewGroup) mRootView.getParent();

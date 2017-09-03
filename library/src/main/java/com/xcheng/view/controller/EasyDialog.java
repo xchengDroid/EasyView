@@ -15,7 +15,7 @@ import com.xcheng.view.util.ToastLess;
  * 基础的Dialog
  * Created by cc on 2016/11/7.
  */
-public abstract class EasyDialog extends Dialog implements IEasyController {
+public abstract class EasyDialog extends Dialog implements IEasyView {
     public EasyDialog(Context context, boolean flag,
                       OnCancelListener listener) {
         super(context, flag, listener);
