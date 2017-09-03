@@ -212,7 +212,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     }
 
     protected int getViewType(T t, int position) {
-        return 0;
+        return super.getItemViewType(position);
     }
 
     protected abstract void convert(EasyHolder holder, T t, int position);

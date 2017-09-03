@@ -396,7 +396,7 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
             if (mSpanSizeLookup == null) {
                 return isFullSpan ? layoutManager.getSpanCount() : 1;
             } else {
-                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, getPositionOfData(position));
+                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, position);
             }
         }
     }
