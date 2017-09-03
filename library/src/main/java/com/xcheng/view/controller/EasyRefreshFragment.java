@@ -139,17 +139,17 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     }
 
     @Override
-    public void onHeaderBind(EasyHolder holder) {
+    public void onBindHeader(EasyHolder holder) {
 
     }
 
     @Override
-    public void onEmptyBind(EasyHolder holder) {
+    public void onBindEmpty(EasyHolder holder) {
 
     }
 
     @Override
-    public void onFooterBind(EasyHolder holder) {
+    public void onBindFooter(EasyHolder holder) {
 
     }
 }

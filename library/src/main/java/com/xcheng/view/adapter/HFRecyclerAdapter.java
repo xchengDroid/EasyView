@@ -93,18 +93,18 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
     public final void onBindViewHolder(EasyHolder holder, int position) {
         if (isHeaderPosition(position)) {
             prepareHeaderFooter(holder, headerView);
-            if (mOnHolderBindListener != null) {
-                mOnHolderBindListener.onHeaderBind(holder);
+            if (mOnBindHolderListener != null) {
+                mOnBindHolderListener.onBindHeader(holder);
             }
         } else if (isFooterPosition(position)) {
             prepareHeaderFooter(holder, footerView);
-            if (mOnHolderBindListener != null) {
-                mOnHolderBindListener.onFooterBind(holder);
+            if (mOnBindHolderListener != null) {
+                mOnBindHolderListener.onBindFooter(holder);
             }
         } else if (isEmptyPosition(position)) {
             prepareHeaderFooter(holder, emptyView);
-            if (mOnHolderBindListener != null) {
-                mOnHolderBindListener.onEmptyBind(holder);
+            if (mOnBindHolderListener != null) {
+                mOnBindHolderListener.onBindEmpty(holder);
             }
         } else {
             super.onBindViewHolder(holder, position);
@@ -424,20 +424,20 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
         this.mSpanSizeLookup = spanSizeLookup;
     }
 
-    private OnHolderBindListener mOnHolderBindListener;
+    private OnBindHolderListener mOnBindHolderListener;
 
-    public void setOnHolderBindListener(OnHolderBindListener onHolderBindListener) {
-        this.mOnHolderBindListener = onHolderBindListener;
+    public void setOnHolderBindListener(OnBindHolderListener onBindHolderListener) {
+        this.mOnBindHolderListener = onBindHolderListener;
     }
 
     /**
      * 当 onBindViewHolder 调用的时候回调此函数中的方法
      */
-    public interface OnHolderBindListener {
-        void onHeaderBind(EasyHolder holder);
+    public interface OnBindHolderListener {
+        void onBindHeader(EasyHolder holder);
 
-        void onEmptyBind(EasyHolder holder);
+        void onBindEmpty(EasyHolder holder);
 
-        void onFooterBind(EasyHolder holder);
+        void onBindFooter(EasyHolder holder);
     }
 }

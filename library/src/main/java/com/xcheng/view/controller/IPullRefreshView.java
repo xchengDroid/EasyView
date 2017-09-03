@@ -15,7 +15,7 @@ import java.util.List;
  * T 代表http请求返回的数据
  * Created by cx on 2016/10/13.
  */
-public interface IPullRefreshView<T> extends HFRecyclerAdapter.OnHolderBindListener {
+public interface IPullRefreshView<T> extends HFRecyclerAdapter.OnBindHolderListener {
     /**
      * Http 请求
      *
