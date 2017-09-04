@@ -1,8 +1,7 @@
 package com.simple.view;
 
+import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.adapter.EasyHolder;
@@ -23,28 +22,28 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     }
 
     @Override
-    public void requestData(boolean isRefresh) {
-        List<String> data = new ArrayList<>();
-        for (int index = 0; index < 20; index++) {
-            data.add("数据：" + index);
+    public void requestData(final boolean isRefresh) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                List<String> data = new ArrayList<>();
+                for (int index = 0; index < 20; index++) {
+                    data.add("数据：" + index);
+                }
+                refreshView(isRefresh, data);
+            }
+        },2000);
 
-        }
-        refreshView(isRefresh, data);
     }
 
     @NonNull
     @Override
     public HFRecyclerAdapter<String> getHFAdapter() {
-        return new HFRecyclerAdapter<String>(getContext(), null, 10) {
+        return new HFRecyclerAdapter<String>(getContext(),R.layout.ev_item_text) {
             @Override
             protected void convert(EasyHolder holder, String s, int position) {
                 TextView textView = (TextView) holder.itemView;
                 textView.setText(s);
-            }
-
-            @Override
-            protected View getItemView(ViewGroup parent, int viewType) {
-                return inflater(R.layout.ev_item_text,parent);
             }
         };
     }

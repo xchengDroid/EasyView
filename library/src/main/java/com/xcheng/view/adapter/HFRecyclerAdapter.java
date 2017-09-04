@@ -54,10 +54,10 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
     private boolean isAttachToRecycler = false;
 
     public HFRecyclerAdapter(Context context) {
-        this(context, 0, 10);
+        this(context, 0);
     }
 
-    public HFRecyclerAdapter(Context context, @LayoutRes int layoutId, @IntRange(from = 1) int length) {
+    public HFRecyclerAdapter(Context context, @LayoutRes int layoutId) {
         this(context, null, layoutId, 10);
     }
 
