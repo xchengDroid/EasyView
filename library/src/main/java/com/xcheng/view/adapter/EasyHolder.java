@@ -78,6 +78,18 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
         return (T) view;
     }
 
+    public EasyHolder setOnClickListener(@IdRes int viewId, View.OnClickListener l) {
+        View view = getView(viewId);
+        view.setOnClickListener(l);
+        return this;
+    }
+
+    public EasyHolder setOnLongClickListener(@IdRes int viewId, View.OnLongClickListener l) {
+        View view = getView(viewId);
+        view.setOnLongClickListener(l);
+        return this;
+    }
+
     /**
      * Sets the tag of the view.
      *
