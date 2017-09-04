@@ -32,7 +32,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     }
 
     private void initViews() {
-        mState = LoadingState.INIT;
+        setState(LoadingState.INIT);
         mPtrCommonHeader = new PtrCommonHeader(getContext());
         setHeaderView(mPtrCommonHeader);
         addPtrUIHandler(mPtrCommonHeader);
