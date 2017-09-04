@@ -17,6 +17,7 @@ package com.xcheng.view.adapter;
 
 import android.content.Context;
 import android.support.annotation.IntRange;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -49,15 +50,19 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
     private final int mLength;
     /**
      * 标记是否绑定到RecyclerView
-     ***/
+     */
     private boolean isAttachToRecycler = false;
 
-    public HFRecyclerAdapter(Context context, List<T> data) {
-        this(context, data, 10);
+    public HFRecyclerAdapter(Context context) {
+        this(context, 0, 10);
     }
 
-    public HFRecyclerAdapter(Context context, List<T> data, @IntRange(from = 1) int length) {
-        super(context, data);
+    public HFRecyclerAdapter(Context context, @LayoutRes int layoutId, @IntRange(from = 1) int length) {
+        this(context, null, layoutId, 10);
+    }
+
+    public HFRecyclerAdapter(Context context, List<T> data, @LayoutRes int layoutId, @IntRange(from = 1) int length) {
+        super(context, data, layoutId);
         mLength = length;
     }
 
