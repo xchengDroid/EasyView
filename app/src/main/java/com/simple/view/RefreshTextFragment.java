@@ -1,6 +1,8 @@
 package com.simple.view;
 
 import android.support.annotation.NonNull;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.adapter.EasyHolder;
@@ -41,8 +43,8 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
             }
 
             @Override
-            protected int getLayoutId(int viewType) {
-                return R.layout.ev_text_option;
+            protected View getItemView(ViewGroup parent, int viewType) {
+                return inflater(R.layout.ev_item_text,parent);
             }
         };
     }

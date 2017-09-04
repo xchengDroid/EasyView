@@ -180,9 +180,13 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
     @Override
     public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        int layoutId = getLayoutId(viewType);
-        EasyPreconditions.checkState(layoutId != 0, "getLayoutId(viewType) must return a real layout res");
-        return new EasyHolder(parent, layoutId);
+        View itemView = getItemView(parent, viewType);
+        //如果为null,尝试从mLayoutId中构建布局
+        if (itemView == null) {
+            EasyPreconditions.checkState(mLayoutId != 0, "you can set a layoutId in construct method or override getItemView(parent,viewType) and return a NonNull itemView");
+            itemView = inflater(mLayoutId, parent);
+        }
+        return new EasyHolder(itemView);
     }
 
     @Override
@@ -206,11 +210,28 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
         return position - getDataOffset();
     }
 
-    @LayoutRes
-    protected int getLayoutId(int viewType) {
-        return mLayoutId;
+    public View inflater(int layoutId, ViewGroup parent) {
+        return mInflater.inflate(layoutId, parent, false);
     }
 
+    /**
+     * 这里不直接用getLayoutId的好处是可以兼容在代码里面构建的View，
+     * 而且可以做一些不用重复初始化的设置，如设置背景、字体、监听等，
+     * 无需在绑定数据复用的时候重新设置
+     * 获取 itemView布局
+     * * @return itemView
+     */
+    protected View getItemView(ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    /**
+     * 获取 对应position中的View类型
+     *
+     * @param t        对应位置上的数据
+     * @param position position onBindViewHolder 所指定的position
+     * @return
+     */
     protected int getViewType(T t, int position) {
         return super.getItemViewType(position);
     }

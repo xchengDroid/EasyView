@@ -10,6 +10,7 @@ import android.support.annotation.Size;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -88,7 +89,7 @@ public class BottomOptionDialog extends BottomDialog {
         EasyPreconditions.checkState(recyclerView != null, "layout res must have a RecyclerView with id named ev_id_recyclerView");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new DividerDecoration(builder.dividerColor, 1));
-        recyclerView.setAdapter(new OptionAdapter(builder.context, new ArrayList<>(Arrays.asList(builder.optionTexts)), R.layout.ev_text_option));
+        recyclerView.setAdapter(new OptionAdapter(builder.context, new ArrayList<>(Arrays.asList(builder.optionTexts))));
     }
 
     @Override
@@ -228,17 +229,24 @@ public class BottomOptionDialog extends BottomDialog {
     }
 
     private class OptionAdapter extends EasyRecyclerAdapter<String> {
-        private OptionAdapter(Context context, @Nullable List<String> data, @LayoutRes int layoutId) {
-            super(context, data, layoutId);
+        private OptionAdapter(Context context, @Nullable List<String> data) {
+            super(context, data);
+        }
+
+        @Override
+        protected View getItemView(ViewGroup parent, int viewType) {
+            TextView optionText = new TextView(getContext());
+            optionText.setGravity(Gravity.CENTER);
+            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(-1, builder.optionHeight);
+            optionText.setTextColor(builder.optionTextColor);
+            optionText.setTextSize(builder.textSize);
+            optionText.setLayoutParams(lp);
+            return optionText;
         }
 
         @Override
         protected void convert(final EasyHolder holder, String s, int position) {
             TextView optionText = (TextView) holder.itemView;
-            RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(-1, builder.optionHeight);
-            optionText.setTextColor(builder.optionTextColor);
-            optionText.setTextSize(builder.textSize);
-            optionText.setLayoutParams(lp);
             ShapeBinder.with(builder.solidColor).radii(getRadii(position)).drawableStateTo(optionText);
             optionText.setOnClickListener(new View.OnClickListener() {
                 @Override

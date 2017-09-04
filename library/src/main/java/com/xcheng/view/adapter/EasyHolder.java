@@ -14,7 +14,6 @@ import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
@@ -38,10 +37,6 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
         this.mViews = new SparseArray<>();
     }
 
-    public EasyHolder(ViewGroup parent, int layoutId) {
-        this(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent,
-                false));
-    }
     public Context getContext() {
         return itemView.getContext();
     }
