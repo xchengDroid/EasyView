@@ -175,6 +175,11 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
         return this;
     }
 
+    public EasyHolder setTextColorRes(int viewId, @ColorRes int colorId) {
+        TextView view = getView(viewId);
+        view.setTextColor(ContextCompat.getColorStateList(getContext(), colorId));
+        return this;
+    }
 
     /**
      * Will set the image of an ImageView from a drawable.
