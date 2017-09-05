@@ -1,6 +1,7 @@
 package com.xcheng.view.adapter;
 
 import android.content.Context;
+import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.xcheng.view.util.EasyPreconditions;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -18,7 +20,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T,EasyHolder> {
+public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -50,7 +52,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     /**
      * 刷新数据
      */
-    public void refresh(@Nullable List<T> newData) {
+    public void refresh(@Nullable Collection<? extends T> newData) {
         mData.clear();
         if (newData != null && newData.size() > 0) {
             /** 刷新数据 */
@@ -68,7 +70,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
      * }
      * 刷新数据
      */
-    public void addData(List<T> loadMore) {
+    public void addData(Collection<? extends T> loadMore) {
         if (loadMore != null && loadMore.size() > 0) {
             mData.addAll(loadMore);
             notifyItemRangeInserted(getDataOffset() + mData.size() - loadMore.size(), loadMore.size());
@@ -80,7 +82,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
      *
      * @param position position in mData
      */
-    public void addData(int position, List<T> data) {
+    public void addData(@IntRange(from = 0) int position, Collection<? extends T> data) {
         if (data != null && data.size() > 0) {
             mData.addAll(position, data);
             notifyItemInserted(getDataOffset() + position);
@@ -100,7 +102,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
      * @param position in mData
      * @param data     要追加的数据
      */
-    public void add(int position, T data) {
+    public void add(@IntRange(from = 0) int position, T data) {
         if (data != null) {
             mData.add(position, data);
             notifyItemInserted(getDataOffset() + position);
@@ -112,7 +114,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
      *
      * @param position in mData
      */
-    public void remove(int position) {
+    public void remove(@IntRange(from = 0) int position) {
         if (position >= 0 && position < mData.size()) {
             mData.remove(position);
             notifyItemRemoved(getDataOffset() + position);
@@ -181,11 +183,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     @Override
     public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = getItemView(parent, viewType);
-        //如果为null,尝试从mLayoutId中构建布局
-        if (itemView == null) {
-            EasyPreconditions.checkState(mLayoutId != 0, "you can set a layoutId in construct method or override getItemView(parent,viewType) and return a NonNull itemView");
-            itemView = inflater(mLayoutId, parent);
-        }
+        EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getItemView(parent,viewType) and return a NonNull itemView");
         return new EasyHolder(itemView);
     }
 
@@ -217,7 +215,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
     @Override
     public View getItemView(ViewGroup parent, int viewType) {
-        return null;
+        return mLayoutId != 0 ? inflater(mLayoutId, parent) : null;
     }
 
     @Override
