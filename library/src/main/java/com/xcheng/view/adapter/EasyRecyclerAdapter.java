@@ -83,7 +83,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     /**
      * add new data in to certain locations
      *
-     * @param position the position insert to mData
+     * @param position the position insert into mData
      */
     public void addData(@IntRange(from = 0) int position, Collection<? extends T> data) {
         if (data != null && data.size() > 0) {
@@ -102,7 +102,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     /**
      * 追加数据
      *
-     * @param position the  position insert to mData
+     * @param position the  position insert into mData
      * @param data     要追加的数据
      */
     public void add(@IntRange(from = 0) int position, T data) {
