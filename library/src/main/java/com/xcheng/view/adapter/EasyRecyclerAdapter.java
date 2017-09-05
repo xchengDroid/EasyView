@@ -160,6 +160,16 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
         return null;
     }
 
+    /**
+     * 获取在data数据列表上的位置
+     *
+     * @param adapterPosition onBindViewHolder 所指定的position
+     * @return position in mData
+     */
+    public int getPositionOfData(@IntRange(from = 0) int adapterPosition) {
+        return adapterPosition - getHeaderCount();
+    }
+
     public final List<T> getData() {
         return mData;
     }
@@ -191,13 +201,15 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
     @Override
     public void onBindViewHolder(EasyHolder holder, int position) {
-        convert(holder, getItem(position), position);
+        int positionOfData = getPositionOfData(position);
+        convert(holder, getItem(positionOfData), positionOfData);
     }
 
 
     @Override
     public int getItemViewType(int position) {
-        return getViewType(getItem(position), position);
+        int positionOfData = getPositionOfData(position);
+        return getViewType(getItem(positionOfData), positionOfData);
     }
 
 

@@ -76,7 +76,7 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
     @Override
     public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (isHeaderType(viewType)) {
-            return new EasyHolder(footerView);
+            return new EasyHolder(headerView);
         } else if (isEmptyType(viewType)) {
             return new EasyHolder(emptyView);
         } else if (isFooterType(viewType)) {
