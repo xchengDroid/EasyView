@@ -12,7 +12,6 @@ import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.TextView;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
@@ -140,7 +139,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Nullable
     @Override
     public View getEmptyView() {
-        return new TextView(getContext());
+        return null;
     }
 
     @Nullable
@@ -156,7 +155,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
 
     @Override
     public void onBindEmpty(EasyHolder holder) {
-        Log.e("print","onBindEmpty");
+        Log.e("print", "onBindEmpty");
     }
 
     @Override

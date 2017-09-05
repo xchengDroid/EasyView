@@ -68,56 +68,59 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
      * throw new IndexOutOfBoundsException("Inconsistency detected. Invalid view holder "
      * + "adapter position" + holder);
      * }
-     * 刷新数据
+     * <p>
+     * add new data to the end of mData
+     *
+     * @param loadMore the new data collection
      */
     public void addData(Collection<? extends T> loadMore) {
         if (loadMore != null && loadMore.size() > 0) {
             mData.addAll(loadMore);
-            notifyItemRangeInserted(getDataOffset() + mData.size() - loadMore.size(), loadMore.size());
+            notifyItemRangeInserted(getHeaderCount() + mData.size() - loadMore.size(), loadMore.size());
         }
     }
 
     /**
      * add new data in to certain locations
      *
-     * @param position position in mData
+     * @param position the position insert to mData
      */
     public void addData(@IntRange(from = 0) int position, Collection<? extends T> data) {
         if (data != null && data.size() > 0) {
             mData.addAll(position, data);
-            notifyItemInserted(getDataOffset() + position);
+            notifyItemInserted(getHeaderCount() + position);
         }
     }
 
     public void add(T data) {
         if (data != null) {
             mData.add(data);
-            notifyItemInserted(getDataOffset() + mData.size() - 1);
+            notifyItemInserted(getHeaderCount() + mData.size() - 1);
         }
     }
 
     /**
      * 追加数据
      *
-     * @param position in mData
+     * @param position the  position insert to mData
      * @param data     要追加的数据
      */
     public void add(@IntRange(from = 0) int position, T data) {
         if (data != null) {
             mData.add(position, data);
-            notifyItemInserted(getDataOffset() + position);
+            notifyItemInserted(getHeaderCount() + position);
         }
     }
 
     /**
      * 删除某条数据
      *
-     * @param position in mData
+     * @param position the  position in mData
      */
     public void remove(@IntRange(from = 0) int position) {
         if (position >= 0 && position < mData.size()) {
             mData.remove(position);
-            notifyItemRemoved(getDataOffset() + position);
+            notifyItemRemoved(getHeaderCount() + position);
         }
     }
 
@@ -132,7 +135,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
      *
      * @return 返回notify刷新的时候需要的起始位置
      */
-    public int getDataOffset() {
+    public int getHeaderCount() {
         return 0;
     }
 
@@ -143,17 +146,16 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
     @Override
     public int getItemCount() {
-        return getDataOffset() + getDataCount();
+        return getHeaderCount() + getDataCount();
     }
 
     /**
-     * @param position onBindViewHolder中的参数 position
+     * @param position the  position in mData
      * @return T
      */
-    public T getItem(int position) {
-        int positionOfData = getPositionOfData(position);
-        if (positionOfData >= 0 && positionOfData < mData.size()) {
-            return mData.get(positionOfData);
+    public T getItem(@IntRange(from = 0) int position) {
+        if (position >= 0 && position < mData.size()) {
+            return mData.get(position);
         }
         return null;
     }
@@ -198,15 +200,6 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
         return getViewType(getItem(position), position);
     }
 
-    /**
-     * 获取在data数据列表上的位置
-     *
-     * @param position onBindViewHolder 所指定的position
-     * @return
-     */
-    public int getPositionOfData(int position) {
-        return position - getDataOffset();
-    }
 
     public View inflater(int layoutId, ViewGroup parent) {
         return mInflater.inflate(layoutId, parent, false);

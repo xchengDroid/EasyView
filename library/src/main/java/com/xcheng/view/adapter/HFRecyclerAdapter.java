@@ -23,7 +23,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 
 import com.xcheng.view.util.EasyPreconditions;
 
@@ -76,15 +75,12 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
      */
     @Override
     public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (isHeaderType(viewType) || isFooterType(viewType) || isEmptyType(viewType)) {
-            // create a new FrameLayout, or inflate from a resource
-            FrameLayout frameLayout = new FrameLayout(parent.getContext());
-            // make sure it fills the space
-            int height = isEmptyType(viewType) ? ViewGroup
-                    .LayoutParams.MATCH_PARENT : ViewGroup
-                    .LayoutParams.WRAP_CONTENT;
-            frameLayout.setLayoutParams(new RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
-            return new EasyHolder(frameLayout);
+        if (isHeaderType(viewType)) {
+            return new EasyHolder(footerView);
+        } else if (isEmptyType(viewType)) {
+            return new EasyHolder(emptyView);
+        } else if (isFooterType(viewType)) {
+            return new EasyHolder(footerView);
         } else {
             return super.onCreateViewHolder(parent, viewType);
         }
@@ -98,70 +94,43 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
      */
     @Override
     public final void onBindViewHolder(EasyHolder holder, int position) {
-        if (isHeaderPosition(position)) {
-            prepareHeaderFooter(holder, headerView);
+        int viewType = holder.getItemViewType();
+        if (isHeaderType(viewType)) {
             if (mOnBindHolderListener != null) {
                 mOnBindHolderListener.onBindHeader(holder);
             }
-        } else if (isFooterPosition(position)) {
-            prepareHeaderFooter(holder, footerView);
-            if (mOnBindHolderListener != null) {
-                mOnBindHolderListener.onBindFooter(holder);
-            }
-        } else if (isEmptyPosition(position)) {
-            prepareHeaderFooter(holder, emptyView);
+        } else if (isEmptyType(viewType)) {
             if (mOnBindHolderListener != null) {
                 mOnBindHolderListener.onBindEmpty(holder);
+            }
+        } else if (isFooterType(viewType)) {
+            if (mOnBindHolderListener != null) {
+                mOnBindHolderListener.onBindFooter(holder);
             }
         } else {
             super.onBindViewHolder(holder, position);
         }
     }
 
-    /**
-     * safe deal,keep a same headerView 、footerView or emptyView
-     *
-     * @param vh
-     * @param view
-     */
-    private void prepareHeaderFooter(EasyHolder vh, View view) {
-        ViewGroup viewGroup = vh.getRootView();
-        if (viewGroup.getChildCount() == 1 && viewGroup.getChildAt(0) == view) {
-            return;
-        }
-        if (view.getParent() != null) {
-            ((ViewGroup) view.getParent()).removeView(view);
-        }
-        // empty out our FrameLayout and replace with our header/footer
-        if (viewGroup.getChildCount() > 0) {
-            viewGroup.removeAllViews();
-        }
-        viewGroup.addView(view);
-    }
-
     @Override
     public final int getItemViewType(int position) {
         if (isHeaderPosition(position)) {
             return TYPE_HEADER;
-        } else if (isFooterPosition(position)) {
-            return TYPE_FOOTER;
         } else if (isEmptyPosition(position)) {
             return TYPE_EMPTY;
+        } else if (isFooterPosition(position)) {
+            return TYPE_FOOTER;
         }
         return super.getItemViewType(position);
     }
 
 
     @Override
-    public int getDataOffset() {
-        return getHeaderCount();
-    }
-
-    @Override
     public int getItemCount() {
         return getDataCount() + getHeaderCount() + getFooterCount() + getEmptyCount();
     }
 
+    @Override
     public int getHeaderCount() {
         return hasHeader() ? 1 : 0;
     }
