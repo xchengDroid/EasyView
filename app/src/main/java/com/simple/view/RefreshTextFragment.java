@@ -1,10 +1,13 @@
 package com.simple.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.adapter.EasyHolder;
@@ -31,43 +34,112 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         mHFAdapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EasyHolder holder, int position) {
-                ToastLess.showToast("position:" + mHFAdapter.getPositionOfData(position));
+                ToastLess.showToast(position + "==position:");
+                mHFAdapter.notifyFooter();
             }
         });
     }
+
+    private boolean isFirst = true;
 
     @Override
     public void requestData(final boolean isRefresh) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                List<String> data = new ArrayList<>();
-                for (int index = 0; index < 20; index++) {
-                    data.add("数据：" + index);
+                if (isFirst) {
+                    isFirst = false;
+                    refreshView(true, null);
+
+                } else {
+                    if (isRefresh) {
+                        List<String> data = new ArrayList<>();
+                        for (int index = 0; index < 3; index++) {
+                            data.add("数据：" + index);
+                        }
+                        refreshView(true, data);
+                    } else {
+                        List<String> data = new ArrayList<>();
+                        for (int index = 0; index < 3; index++) {
+                            data.add("数据：" + index);
+                        }
+                        if (mHFAdapter.getDataCount() > 12) {
+                            refreshView(true, data);
+                        } else {
+                            refreshView(false, data);
+
+                        }
+                    }
                 }
-                refreshView(isRefresh, data);
             }
-        }, 2000);
+        }, 500);
+    }
+
+    @Override
+    public void onBindHeader(EasyHolder holder) {
+        super.onBindHeader(holder);
+        Log.e("print", "onBindHeader:"+holder.getAdapterPosition());
+
+    }
+
+    @Override
+    public void onBindEmpty(EasyHolder holder) {
+        super.onBindEmpty(holder);
+        Log.e("print", "onBindEmpty:"+holder.getAdapterPosition());
+
+    }
+    @Override
+    public void onBindFooter(EasyHolder holder) {
+        super.onBindFooter(holder);
+        Log.e("print", "footerBind:"+holder.getAdapterPosition());
     }
 
     @Nullable
     @Override
-    public View getHeaderView() {
+    public View getHeaderView(ViewGroup parent) {
         TextView textView = new TextView(getContext());
         textView.setText("这是Header");
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHFAdapter.notifyHeader();
+            }
+        });
+        return textView;
+    }
+
+    @Nullable
+    @Override
+    public View getEmptyView(ViewGroup parent) {
+        TextView textView = new TextView(getContext());
+        textView.setBackgroundColor(Color.RED);
+        textView.setText("这是EmptyView");
+        textView.setTextSize(30);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mHFAdapter.notifyEmpty();
+            }
+        });
         return textView;
     }
 
     @NonNull
     @Override
     public HFRecyclerAdapter<String> getHFAdapter() {
-        return new HFRecyclerAdapter<String>(getContext(), R.layout.ev_item_text) {
+        return new HFRecyclerAdapter<String>(getContext(), null, R.layout.ev_item_text, 3) {
             @Override
             public void convert(EasyHolder holder, String s, int position) {
+                Log.e("print", "adapterPosition:" + holder.getAdapterPosition());
                 TextView textView = (TextView) holder.itemView;
                 textView.setText(s);
                 clickToHolder(holder);
             }
+
+//            @Override
+//            public int getDataOffset() {
+//                return getHeaderCount()+3;
+//            }
         };
     }
 }

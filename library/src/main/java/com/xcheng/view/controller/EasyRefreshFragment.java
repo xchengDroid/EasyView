@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
@@ -56,15 +57,15 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         mHFAdapter = getHFAdapter();
         //设置header和footer监听
         mHFAdapter.setOnHolderBindListener(this);
-        View headerView = getHeaderView();
+        View headerView = getHeaderView(mRecyclerView);
         if (headerView != null) {
             mHFAdapter.setHeader(headerView);
         }
-        View emptyView = getEmptyView();
+        View emptyView = getEmptyView(mRecyclerView);
         if (emptyView != null) {
             mHFAdapter.setEmpty(emptyView);
         }
-        View footerView = getFooterView();
+        View footerView = getFooterView(mRecyclerView);
         if (footerView != null) {
             mHFAdapter.setFooter(footerView);
         }
@@ -132,20 +133,20 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
 
     @Nullable
     @Override
-    public View getHeaderView() {
+    public View getHeaderView(ViewGroup parent) {
         return null;
     }
 
     @Nullable
     @Override
-    public View getEmptyView() {
+    public View getEmptyView(ViewGroup parent) {
         return null;
     }
 
     @Nullable
     @Override
-    public View getFooterView() {
-        return LayoutInflater.from(getContext()).inflate(R.layout.ev_footer_load_more, mRecyclerView, false);
+    public View getFooterView(ViewGroup parent) {
+        return LayoutInflater.from(getContext()).inflate(R.layout.ev_footer_load_more, parent, false);
     }
 
     @Override
