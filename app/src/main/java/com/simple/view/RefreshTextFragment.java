@@ -19,7 +19,6 @@ import java.util.List;
 /**
  * Created by chengxin on 2017/9/3.
  */
-
 public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public int getLayoutId() {
@@ -32,7 +31,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         mHFAdapter.setOnItemClickListener(new EasyRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EasyHolder holder, int position) {
-                ToastLess.showToast("position:"+mHFAdapter.getPositionOfData(position));
+                ToastLess.showToast("position:" + mHFAdapter.getPositionOfData(position));
             }
         });
     }
@@ -48,13 +47,13 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
                 }
                 refreshView(isRefresh, data);
             }
-        },2000);
+        }, 2000);
     }
 
     @Nullable
     @Override
     public View getHeaderView() {
-        TextView textView=new TextView(getContext());
+        TextView textView = new TextView(getContext());
         textView.setText("这是Header");
         return textView;
     }
@@ -62,9 +61,9 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @NonNull
     @Override
     public HFRecyclerAdapter<String> getHFAdapter() {
-        return new HFRecyclerAdapter<String>(getContext(),R.layout.ev_item_text) {
+        return new HFRecyclerAdapter<String>(getContext(), R.layout.ev_item_text) {
             @Override
-            protected void convert(EasyHolder holder, String s, int position) {
+            public void convert(EasyHolder holder, String s, int position) {
                 TextView textView = (TextView) holder.itemView;
                 textView.setText(s);
                 clickToHolder(holder);

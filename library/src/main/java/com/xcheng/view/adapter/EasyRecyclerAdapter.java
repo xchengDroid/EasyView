@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHolder> {
+public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T,EasyHolder> {
 
     private Context mContext;
     private LayoutInflater mInflater;
@@ -214,29 +214,16 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
         return mInflater.inflate(layoutId, parent, false);
     }
 
-    /**
-     * 这里不直接用getLayoutId的好处是可以兼容在代码里面构建的View，
-     * 而且可以做一些不用重复初始化的设置，如设置背景、字体、监听等，
-     * 无需在绑定数据复用的时候重新设置
-     * 获取 itemView布局
-     * * @return itemView
-     */
-    protected View getItemView(ViewGroup parent, int viewType) {
+
+    @Override
+    public View getItemView(ViewGroup parent, int viewType) {
         return null;
     }
 
-    /**
-     * 获取 对应position中的View类型
-     *
-     * @param t        对应位置上的数据
-     * @param position position onBindViewHolder 所指定的position
-     * @return
-     */
-    protected int getViewType(T t, int position) {
+    @Override
+    public int getViewType(T t, int position) {
         return super.getItemViewType(position);
     }
-
-    protected abstract void convert(EasyHolder holder, T t, int position);
 
     protected void clickToHolder(final EasyHolder easyHolder) {
         easyHolder.itemView.setOnClickListener(new View.OnClickListener() {

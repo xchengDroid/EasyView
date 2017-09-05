@@ -234,7 +234,7 @@ public class BottomOptionDialog extends BottomDialog {
         }
 
         @Override
-        protected View getItemView(ViewGroup parent, int viewType) {
+        public View getItemView(ViewGroup parent, int viewType) {
             TextView optionText = new TextView(getContext());
             optionText.setGravity(Gravity.CENTER);
             RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(-1, builder.optionHeight);
@@ -245,7 +245,7 @@ public class BottomOptionDialog extends BottomDialog {
         }
 
         @Override
-        protected void convert(final EasyHolder holder, String s, int position) {
+        public void convert(final EasyHolder holder, String s, int position) {
             TextView optionText = (TextView) holder.itemView;
             ShapeBinder.with(builder.solidColor).radii(getRadii(position)).drawableStateTo(optionText);
             optionText.setOnClickListener(new View.OnClickListener() {
