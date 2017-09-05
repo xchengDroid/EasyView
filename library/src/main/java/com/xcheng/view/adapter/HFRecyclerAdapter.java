@@ -153,7 +153,7 @@ public abstract class HFRecyclerAdapter<T> extends EasyRecyclerAdapter<T> {
 
 
     @Override
-    public final int getDataOffset() {
+    public int getDataOffset() {
         return getHeaderCount();
     }
 
