@@ -13,6 +13,7 @@ import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.util.Linkify;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,6 +121,18 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
     public EasyHolder setText(@IdRes int viewId, @StringRes int strId) {
         TextView view = getView(viewId);
         view.setText(strId);
+        return this;
+    }
+
+    /**
+     * Add links into a TextView.
+     *
+     * @param viewId The id of the TextView to linkify.
+     * @return The EasyHolder for chaining.
+     */
+    public EasyHolder linkify(@IdRes int viewId) {
+        TextView view = getView(viewId);
+        Linkify.addLinks(view, Linkify.ALL);
         return this;
     }
 
