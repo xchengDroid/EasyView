@@ -17,7 +17,7 @@ public interface IAdapterDelegate<T, VH extends RecyclerView.ViewHolder> {
      * @return itemView
      * @see RecyclerView.Adapter#onBindViewHolder(RecyclerView.ViewHolder, int)
      */
-    View getItemView(ViewGroup parent, int viewType);
+    View getDelegateView(ViewGroup parent, int viewType);
 
     /**
      * 获取 对应position中的View类型
@@ -27,7 +27,7 @@ public interface IAdapterDelegate<T, VH extends RecyclerView.ViewHolder> {
      * @return viewType
      * @see RecyclerView.Adapter#getItemViewType(int)
      */
-    int getViewType(T t, int position);
+    int getDelegateType(T t, int position);
 
     /**
      * 绑定列表数据

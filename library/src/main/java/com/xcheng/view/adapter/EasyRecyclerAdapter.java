@@ -194,11 +194,16 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
     @Override
     public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = getItemView(parent, viewType);
+        View itemView = getDelegateView(parent, viewType);
         EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getItemView(parent,viewType) and return a NonNull itemView");
         return new EasyHolder(itemView);
     }
-
+    /**
+     * holder 在onCreateViewHolder 和 onBindViewHolder时 holder.itemView no parent
+     *
+     * @param holder EasyHolder
+     * @param position position in adapter
+     */
     @Override
     public void onBindViewHolder(EasyHolder holder, int position) {
         int positionOfData = getPositionOfData(position);
@@ -209,7 +214,7 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
     @Override
     public int getItemViewType(int position) {
         int positionOfData = getPositionOfData(position);
-        return getViewType(getItem(positionOfData), positionOfData);
+        return getDelegateType(getItem(positionOfData), positionOfData);
     }
 
 
@@ -219,12 +224,12 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
 
     @Override
-    public View getItemView(ViewGroup parent, int viewType) {
+    public View getDelegateView(ViewGroup parent, int viewType) {
         return mLayoutId != 0 ? inflater(mLayoutId, parent) : null;
     }
 
     @Override
-    public int getViewType(T t, int position) {
+    public int getDelegateType(T t, int position) {
         return super.getItemViewType(position);
     }
 

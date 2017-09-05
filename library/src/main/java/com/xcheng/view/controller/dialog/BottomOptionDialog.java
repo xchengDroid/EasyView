@@ -234,7 +234,7 @@ public class BottomOptionDialog extends BottomDialog {
         }
 
         @Override
-        public View getItemView(ViewGroup parent, int viewType) {
+        public View getDelegateView(ViewGroup parent, int viewType) {
             TextView optionText = new TextView(getContext());
             optionText.setGravity(Gravity.CENTER);
             RecyclerView.LayoutParams lp = new RecyclerView.LayoutParams(-1, builder.optionHeight);
