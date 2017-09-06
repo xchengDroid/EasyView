@@ -541,7 +541,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
             if (mSpanSizeLookup == null) {
                 return isFullSpan ? layoutManager.getSpanCount() : 1;
             } else {
-                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, position);
+                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, getPositionOfData(position));
             }
         }
     }
