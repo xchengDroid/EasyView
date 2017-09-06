@@ -37,7 +37,7 @@ import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
     protected PtrRVFrameLayout mPtrFrameLayout;
     protected RecyclerView mRecyclerView;
-    protected EasyAdapter<T> mHFAdapter;
+    protected EasyAdapter<T> mAdapter;
     private boolean mHasInitView;
 
     @CallSuper
@@ -54,22 +54,22 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         if (itemDecoration != null) {
             mRecyclerView.addItemDecoration(itemDecoration);
         }
-        mHFAdapter = getEasyAdapter();
+        mAdapter = getEasyAdapter();
         //设置header和footer监听
-        mHFAdapter.setOnHolderBindListener(this);
+        mAdapter.setOnHolderBindListener(this);
         View headerView = getHeaderView(mRecyclerView);
         if (headerView != null) {
-            mHFAdapter.setHeader(headerView);
+            mAdapter.setHeader(headerView);
         }
         View emptyView = getEmptyView(mRecyclerView);
         if (emptyView != null) {
-            mHFAdapter.setEmpty(emptyView);
+            mAdapter.setEmpty(emptyView);
         }
         View footerView = getFooterView(mRecyclerView);
         if (footerView != null) {
-            mHFAdapter.setFooter(footerView);
+            mAdapter.setFooter(footerView);
         }
-        mRecyclerView.setAdapter(mHFAdapter);
+        mRecyclerView.setAdapter(mAdapter);
         mHasInitView = true;
     }
 
@@ -94,12 +94,12 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Override
     public void refreshView(boolean isRefresh, List<T> data) {
         if (isRefresh) {
-            mHFAdapter.refresh(data);
+            mAdapter.refresh(data);
         } else {
-            mHFAdapter.addData(data);
+            mAdapter.addData(data);
         }
         LoadingState loadingState = LoadingState.INIT;
-        if (data == null || data.size() < mHFAdapter.getLength()) {
+        if (data == null || data.size() < mAdapter.getLength()) {
             loadingState = LoadingState.NOMORE;
         }
         complete(isRefresh, loadingState);

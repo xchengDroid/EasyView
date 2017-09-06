@@ -30,11 +30,11 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        mHFAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EasyHolder holder, int position) {
                 ToastLess.showToast(position + "==position:");
-                mHFAdapter.notifyFooter();
+                mAdapter.notifyFooter();
             }
         });
     }
@@ -62,7 +62,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
                         for (int index = 0; index < 3; index++) {
                             data.add("数据：" + index);
                         }
-                        if (mHFAdapter.getDataCount() > 12) {
+                        if (mAdapter.getDataCount() > 12) {
                             refreshView(true, data);
                         } else {
                             refreshView(false, data);
@@ -101,7 +101,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHFAdapter.notifyHeader();
+                mAdapter.notifyHeader();
             }
         });
         return textView;
@@ -117,7 +117,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mHFAdapter.notifyEmpty();
+                mAdapter.notifyEmpty();
             }
         });
         return textView;
