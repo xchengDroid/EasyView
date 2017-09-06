@@ -242,16 +242,17 @@ public abstract class HFRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHold
      */
     @Override
     public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (isHeaderType(viewType)) {
-            return new EasyHolder(headerView);
-        } else if (isEmptyType(viewType)) {
-            return new EasyHolder(emptyView);
-        } else if (isFooterType(viewType)) {
-            return new EasyHolder(footerView);
-        } else {
-            View itemView = getDelegateView(parent, viewType);
-            EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getItemView(parent,viewType) and return a NonNull itemView");
-            return new EasyHolder(itemView);
+        switch (viewType) {
+            case TYPE_HEADER:
+                return new EasyHolder(headerView);
+            case TYPE_EMPTY:
+                return new EasyHolder(emptyView);
+            case TYPE_FOOTER:
+                return new EasyHolder(footerView);
+            default:
+                View itemView = getDelegateView(parent, viewType);
+                EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getItemView(parent,viewType) and return a NonNull itemView");
+                return new EasyHolder(itemView);
         }
     }
 
@@ -269,21 +270,26 @@ public abstract class HFRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHold
     @Override
     public final void onBindViewHolder(EasyHolder holder, int position) {
         int viewType = holder.getItemViewType();
-        if (isHeaderType(viewType)) {
-            if (mOnBindHolderListener != null) {
-                mOnBindHolderListener.onBindHeader(holder);
-            }
-        } else if (isEmptyType(viewType)) {
-            if (mOnBindHolderListener != null) {
-                mOnBindHolderListener.onBindEmpty(holder);
-            }
-        } else if (isFooterType(viewType)) {
-            if (mOnBindHolderListener != null) {
-                mOnBindHolderListener.onBindFooter(holder);
-            }
-        } else {
-            int positionOfData = getPositionOfData(position);
-            convert(holder, getItem(positionOfData), positionOfData);
+        switch (viewType) {
+            case TYPE_HEADER:
+                if (mOnBindHolderListener != null) {
+                    mOnBindHolderListener.onBindHeader(holder);
+                }
+                break;
+            case TYPE_EMPTY:
+                if (mOnBindHolderListener != null) {
+                    mOnBindHolderListener.onBindEmpty(holder);
+                }
+                break;
+            case TYPE_FOOTER:
+                if (mOnBindHolderListener != null) {
+                    mOnBindHolderListener.onBindFooter(holder);
+                }
+                break;
+            default:
+                int positionOfData = getPositionOfData(position);
+                convert(holder, getItem(positionOfData), positionOfData);
+                break;
         }
     }
 
@@ -454,27 +460,6 @@ public abstract class HFRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHold
     public boolean isFooterPosition(int position) {
         int lastPosition = getItemCount() - 1;
         return hasFooter() && position == lastPosition;
-    }
-
-    /**
-     * Returns true if the view type parameter passed as argument is equals to TYPE_HEADER.
-     */
-    protected boolean isHeaderType(int viewType) {
-        return viewType == TYPE_HEADER;
-    }
-
-    /**
-     * Returns true if the view type parameter passed as argument is equals to TYPE_FOOTER.
-     */
-    protected boolean isFooterType(int viewType) {
-        return viewType == TYPE_FOOTER;
-    }
-
-    /**
-     * Returns true if the view type parameter passed as argument is equals to TYPE_FOOTER.
-     */
-    protected boolean isEmptyType(int viewType) {
-        return viewType == TYPE_EMPTY;
     }
 
     /**
