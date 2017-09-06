@@ -131,9 +131,9 @@ public abstract class EasyRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHo
 
     /**
      * mData数据位置开始的position之前可能有header,camera拍照按钮等等
-     * 重写时注意是否需要考虑重写getItemCont方法
+     * 重写时注意是否需要考虑重写getItemCount方法
      *
-     * @return 返回notify刷新的时候需要的起始位置
+     * @return headerCount
      */
     public int getHeaderCount() {
         return 0;
