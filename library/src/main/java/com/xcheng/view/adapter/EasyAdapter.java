@@ -46,6 +46,13 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     private LayoutInflater mInflater;
     private final List<T> mData;
     private final int mLayoutId;
+    /**
+     * param to be used to query number of spans occupied by each item
+     */
+    private SpanSizeLookup mSpanSizeLookup;
+    private OnBindHolderListener mOnBindHolderListener;
+    private OnItemClickListener mOnItemClickListener;
+    private OnItemLongClickListener mOnItemLongClickListener;
 
     //-1为 INVALID_TYPE,不要设置为-1
     public static final int TYPE_HEADER = 0x00000111;
@@ -62,7 +69,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     /**
      * 标记是否绑定到RecyclerView
      */
-    private boolean isAttachToRecycler = false;
+    private boolean mAttachToRecycler = false;
 
     public EasyAdapter(Context context) {
         this(context, 0);
@@ -349,7 +356,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         EasyPreconditions.checkState(this.headerView == null, "the headerView already has been set");
         EasyPreconditions.checkNotNull(headerView != null, "the headerView can not be null");
         this.headerView = headerView;
-        if (isAttachToRecycler && hasHeader()) {
+        if (mAttachToRecycler && hasHeader()) {
             notifyItemInserted(0);
         }
     }
@@ -368,7 +375,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         EasyPreconditions.checkState(this.emptyView == null, "the emptyView already has been set");
         EasyPreconditions.checkNotNull(emptyView != null, "the emptyView can not be null");
         this.emptyView = emptyView;
-        if (isAttachToRecycler && hasEmpty()) {
+        if (mAttachToRecycler && hasEmpty()) {
             notifyItemInserted(getHeaderCount());
         }
     }
@@ -391,7 +398,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         EasyPreconditions.checkNotNull(footerView != null, "the footerView can not be null");
 
         this.footerView = footerView;
-        if (isAttachToRecycler && hasFooter()) {
+        if (mAttachToRecycler && hasFooter()) {
             //如果没有数据添加的情况下调用会crash
             notifyItemInserted(0);
         }
@@ -492,7 +499,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        isAttachToRecycler = true;
+        mAttachToRecycler = true;
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
         if (layoutManager instanceof GridLayoutManager) {
             GridLayoutManager gridManager = ((GridLayoutManager) layoutManager);
@@ -503,7 +510,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        isAttachToRecycler = false;
+        mAttachToRecycler = false;
     }
 
     @Override
@@ -539,11 +546,6 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         }
     }
 
-    /**
-     * param to be used to query number of spans occupied by each item
-     */
-    private SpanSizeLookup mSpanSizeLookup;
-
     public interface SpanSizeLookup {
         int getSpanSize(GridLayoutManager gridLayoutManager, int position);
     }
@@ -552,7 +554,6 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         this.mSpanSizeLookup = spanSizeLookup;
     }
 
-    private OnBindHolderListener mOnBindHolderListener;
 
     public void setOnHolderBindListener(OnBindHolderListener onBindHolderListener) {
         this.mOnBindHolderListener = onBindHolderListener;
@@ -590,8 +591,6 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         });
     }
 
-    private OnItemClickListener mOnItemClickListener;
-
     public interface OnItemClickListener {
         void onItemClick(EasyHolder holder, int position);
     }
@@ -599,8 +598,6 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.mOnItemClickListener = onItemClickListener;
     }
-
-    private OnItemLongClickListener mOnItemLongClickListener;
 
     public interface OnItemLongClickListener {
         boolean onItemLongClick(EasyHolder holder, int position);
