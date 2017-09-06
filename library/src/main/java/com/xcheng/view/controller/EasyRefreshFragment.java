@@ -17,7 +17,7 @@ import android.view.ViewGroup;
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
 import com.xcheng.view.adapter.EasyHolder;
-import com.xcheng.view.adapter.HFRecyclerAdapter;
+import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.pullrefresh.LoadingState;
 import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
 import com.xcheng.view.pullrefresh.PtrRVFrameLayout;
@@ -37,7 +37,7 @@ import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
     protected PtrRVFrameLayout mPtrFrameLayout;
     protected RecyclerView mRecyclerView;
-    protected HFRecyclerAdapter<T> mHFAdapter;
+    protected EasyAdapter<T> mHFAdapter;
     private boolean mHasInitView;
 
     @CallSuper
@@ -54,7 +54,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         if (itemDecoration != null) {
             mRecyclerView.addItemDecoration(itemDecoration);
         }
-        mHFAdapter = getHFAdapter();
+        mHFAdapter = getEasyAdapter();
         //设置header和footer监听
         mHFAdapter.setOnHolderBindListener(this);
         View headerView = getHeaderView(mRecyclerView);

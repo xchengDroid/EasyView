@@ -41,7 +41,7 @@ import java.util.List;
  * The usage of List<T> mData member is not mandatory. If you are going to provide your custom
  * implementation remember to override getItemCount method.
  */
-public abstract class HFRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
+public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
     private Context mContext;
     private LayoutInflater mInflater;
     private final List<T> mData;
@@ -64,23 +64,23 @@ public abstract class HFRecyclerAdapter<T> extends RecyclerView.Adapter<EasyHold
      */
     private boolean isAttachToRecycler = false;
 
-    public HFRecyclerAdapter(Context context) {
+    public EasyAdapter(Context context) {
         this(context, 0);
     }
 
-    public HFRecyclerAdapter(Context context, @LayoutRes int layoutId) {
+    public EasyAdapter(Context context, @LayoutRes int layoutId) {
         this(context, layoutId, 10);
     }
 
-    public HFRecyclerAdapter(Context context, @LayoutRes int layoutId, @IntRange(from = 1) int length) {
-        this(context, null, layoutId, 10);
+    public EasyAdapter(Context context, @LayoutRes int layoutId, @IntRange(from = 1) int length) {
+        this(context, null, layoutId, length);
     }
 
-    public HFRecyclerAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId) {
+    public EasyAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId) {
         this(context, data, layoutId, 10);
     }
 
-    public HFRecyclerAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId, @IntRange(from = 1) int length) {
+    public EasyAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId, @IntRange(from = 1) int length) {
         if (data == null) {
             data = new ArrayList<>();
         }

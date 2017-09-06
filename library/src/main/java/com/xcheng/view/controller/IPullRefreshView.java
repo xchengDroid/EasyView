@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xcheng.view.adapter.HFRecyclerAdapter;
+import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.pullrefresh.LoadingState;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * T 代表http请求返回的数据
  * Created by cx on 2016/10/13.
  */
-public interface IPullRefreshView<T> extends HFRecyclerAdapter.OnBindHolderListener {
+public interface IPullRefreshView<T> extends EasyAdapter.OnBindHolderListener {
     /**
      * Http 请求
      *
@@ -56,7 +56,7 @@ public interface IPullRefreshView<T> extends HFRecyclerAdapter.OnBindHolderListe
     View getFooterView(ViewGroup parent);
 
     @NonNull
-    HFRecyclerAdapter<T> getHFAdapter();
+    EasyAdapter<T> getEasyAdapter();
 
     /**
      * for recyclerView

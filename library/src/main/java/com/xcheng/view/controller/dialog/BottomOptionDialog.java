@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
 import com.xcheng.view.adapter.EasyHolder;
-import com.xcheng.view.adapter.EasyRecyclerAdapter;
+import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.divider.DividerTextView;
 import com.xcheng.view.util.EasyPreconditions;
 import com.xcheng.view.util.LocalDisplay;
@@ -228,9 +228,9 @@ public class BottomOptionDialog extends BottomDialog {
         }
     }
 
-    private class OptionAdapter extends EasyRecyclerAdapter<String> {
+    private class OptionAdapter extends EasyAdapter<String> {
         private OptionAdapter(Context context, @Nullable List<String> data) {
-            super(context, data);
+            super(context, data, 0);
         }
 
         @Override
