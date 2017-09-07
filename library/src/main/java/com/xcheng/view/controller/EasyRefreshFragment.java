@@ -9,15 +9,15 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
-import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.EasyAdapter;
+import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.pullrefresh.LoadingState;
 import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
 import com.xcheng.view.pullrefresh.PtrRVFrameLayout;
@@ -55,8 +55,6 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             mRecyclerView.addItemDecoration(itemDecoration);
         }
         mAdapter = getEasyAdapter();
-        //设置header和footer监听
-        mAdapter.setOnHolderBindListener(this);
         View headerView = getHeaderView(mRecyclerView);
         if (headerView != null) {
             mAdapter.setHeader(headerView);
@@ -76,6 +74,8 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Override
     public void setListener() {
         super.setListener();
+        //设置header和footer监听
+        mAdapter.setOnHolderBindListener(this);
         mPtrFrameLayout.setPtrHandler(new PtrDefaultHandlerWithLoadMore() {
             @Override
             public void onLoadMore() {
@@ -89,6 +89,32 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
                 }
             }
         });
+        lazyLoad();
+    }
+
+    private void lazyLoad() {
+        if (getUserVisibleHint() && mHasInitView) {
+            if (mAdapter != null && mAdapter.getDataCount() == 0) {
+                if (mPtrFrameLayout.getWidth() != 0) {
+                    mPtrFrameLayout.autoRefresh(true, 1000);
+                } else {
+                    mPtrFrameLayout.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                        @Override
+                        public boolean onPreDraw() {
+                            mPtrFrameLayout.autoRefresh(true, 1000);
+                            mPtrFrameLayout.getViewTreeObserver().removeOnPreDrawListener(this);
+                            return true;
+                        }
+                    });
+                }
+            }
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        lazyLoad();
     }
 
     @Override
@@ -156,7 +182,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
 
     @Override
     public void onBindEmpty(EasyHolder holder) {
-        Log.e("print", "onBindEmpty");
+
     }
 
     @Override
