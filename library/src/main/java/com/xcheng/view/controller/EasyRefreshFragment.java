@@ -92,23 +92,33 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         lazyLoad();
     }
 
+    /**
+     * 是否需要懒加载 ，如需改动由子类实现修改
+     *
+     * @return isLazyLoad
+     */
+    protected boolean isLazyLoad() {
+        return true;
+    }
+
     private void lazyLoad() {
-        if (getUserVisibleHint() && mHasInitView) {
-            if (mAdapter != null && mAdapter.getDataCount() == 0) {
-                if (mPtrFrameLayout.getWidth() != 0) {
+        if (!getUserVisibleHint() || !mHasInitView)
+            return;
+        if (mAdapter == null || mAdapter.getDataCount() != 0)
+            return;
+        if (mPtrFrameLayout.getWidth() != 0) {
+            mPtrFrameLayout.autoRefresh(true, 1000);
+        } else {
+            mPtrFrameLayout.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
                     mPtrFrameLayout.autoRefresh(true, 1000);
-                } else {
-                    mPtrFrameLayout.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                        @Override
-                        public boolean onPreDraw() {
-                            mPtrFrameLayout.autoRefresh(true, 1000);
-                            mPtrFrameLayout.getViewTreeObserver().removeOnPreDrawListener(this);
-                            return true;
-                        }
-                    });
+                    mPtrFrameLayout.getViewTreeObserver().removeOnPreDrawListener(this);
+                    return true;
                 }
-            }
+            });
         }
+
     }
 
     @Override
