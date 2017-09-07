@@ -188,10 +188,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * @param loadMore the new data collection
      */
     public void addData(Collection<? extends T> loadMore) {
-        if (loadMore != null && loadMore.size() > 0) {
-            mData.addAll(loadMore);
-            notifyItemRangeInserted(getHeaderCount() + mData.size() - loadMore.size(), loadMore.size());
-        }
+        addData(mData.size(), loadMore);
     }
 
     /**
@@ -199,30 +196,64 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      *
      * @param position the position insert into mData
      */
-    public void addData(@IntRange(from = 0) int position, Collection<? extends T> data) {
-        if (data != null && data.size() > 0) {
-            mData.addAll(position, data);
-            notifyItemInserted(getHeaderCount() + position);
+    public void addData(@IntRange(from = 0) int position, Collection<? extends T> loadMore) {
+        if (loadMore != null && loadMore.size() > 0) {
+            byte oldFlag = HEFViewFlag();
+            mData.addAll(position, loadMore);
+            if (oldFlag == HEFViewFlag()) {
+                notifyItemRangeInserted(getHeaderCount() + position, loadMore.size());
+            } else {
+                notifyDataSetChanged();
+            }
         }
     }
 
-    public void add(T data) {
-        if (data != null) {
-            mData.add(data);
-            notifyItemInserted(getHeaderCount() + mData.size() - 1);
+    /**
+     * mData的变化会影响HeaderView footerView emptyView 是否显示问题，
+     * 导致getItemCount发生变化
+     *
+     * @return flag
+     */
+    private byte HEFViewFlag() {
+        byte flag = 0x0;
+        if (hasHeader()) {
+            flag |= 0x1;
         }
+        if (hasEmpty()) {
+            flag |= 0x2;
+        }
+        if (hasFooter()) {
+            flag |= 0x4;
+        }
+        return flag;
+    }
+
+    public void add(T item) {
+        add(mData.size(), item);
     }
 
     /**
      * 追加数据
      *
      * @param position the  position insert into mData
-     * @param data     要追加的数据
+     * @param item     要追加的数据
      */
-    public void add(@IntRange(from = 0) int position, T data) {
-        if (data != null) {
-            mData.add(position, data);
-            notifyItemInserted(getHeaderCount() + position);
+    public void add(@IntRange(from = 0) int position, T item) {
+        if (item != null) {
+            byte oldFlag = HEFViewFlag();
+            mData.add(position, item);
+            if (oldFlag == HEFViewFlag()) {
+                notifyItemInserted(getHeaderCount() + position);
+            } else {
+                notifyDataSetChanged();
+            }
+        }
+    }
+
+    public void remove(T item) {
+        if (item != null) {
+            int index = mData.indexOf(item);
+            remove(index);
         }
     }
 
@@ -233,15 +264,17 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      */
     public void remove(@IntRange(from = 0) int position) {
         if (position >= 0 && position < mData.size()) {
+            byte oldFlag = HEFViewFlag();
             mData.remove(position);
-            notifyItemRemoved(getHeaderCount() + position);
+            if (oldFlag == HEFViewFlag()) {
+                notifyItemRemoved(getHeaderCount() + position);
+            } else {
+                //compatible emptyView headerView and footerView control
+                notifyDataSetChanged();
+            }
         }
     }
 
-    public void remove(T item) {
-        int index = mData.indexOf(item);
-        remove(index);
-    }
 
     /**
      * Invokes onCreateHeaderViewHolder, onCreateItemViewHolder or onCreateFooterViewHolder methods
