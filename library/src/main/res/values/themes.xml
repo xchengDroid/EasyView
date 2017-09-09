@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme.基础主题. -->
-    <style name="ev_BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="ev_AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/ev_colorPrimary</item>
         <item name="colorPrimaryDark">@color/ev_colorPrimaryDark</item>
@@ -9,7 +9,7 @@
         <item name="android:windowBackground">@color/ev_bgColor</item>
     </style>
 
-    <style name="ev_BaseToolbarStyle">
+    <style name="ev_ToolbarStyle">
         <item name="android:id">@id/ev_id_toolBar</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/ev_toolbar_height</item>
@@ -17,6 +17,7 @@
         <item name="android:background">?colorPrimary</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ev_ToolbarMenu</item>
+        <item name="navigationIcon">@drawable/ev_nav_back_arrow</item>
         <item name="navigationContentDescription">Navigation</item>
     </style>
 

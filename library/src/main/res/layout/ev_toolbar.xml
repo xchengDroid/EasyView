@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ev_ToolbarStyle">
+
+    <TextView
+        android:id="@id/ev_id_titleView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textColor="@color/ev_white"
+        android:textSize="@dimen/ev_titleSize" />
+</android.support.v7.widget.Toolbar>
