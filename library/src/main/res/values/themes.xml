@@ -14,7 +14,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/ev_toolbar_height</item>
         <item name="android:minHeight">@dimen/ev_toolbar_height</item>
-        <item name="android:background">?colorPrimary</item>
+        <item name="android:background">?attr/colorPrimary</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="actionMenuTextColor">@color/ev_white</item>
         <item name="android:textSize">@dimen/ev_smallSize</item>
