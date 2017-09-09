@@ -92,13 +92,12 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         lazyLoad();
     }
 
-    /**
-     * 是否需要懒加载 ，如需改动由子类实现修改
-     *
-     * @return isLazyLoad
-     */
-    protected boolean isLazyLoad() {
-        return true;
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (mPtrFrameLayout.isRefreshing()) {
+            mPtrFrameLayout.complete(true, LoadingState.INIT);
+        }
     }
 
     private void lazyLoad() {
@@ -118,7 +117,6 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
                 }
             });
         }
-
     }
 
     @Override
