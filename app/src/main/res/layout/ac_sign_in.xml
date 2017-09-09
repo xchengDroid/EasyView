@@ -2,38 +2,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:ev_topBarTitle="注册"
+    android:orientation="vertical"
     app:ev_topBarLayout="@layout/ev_toolbar"
-    android:orientation="vertical">
-
+    app:ev_topBarTitle="注册">
     <EditText
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:layout_marginTop="80dp"
         android:id="@+id/editEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="80dp"
         android:inputType="textEmailAddress"
         android:text="@string/dummy_email" />
 
     <EditText
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:id="@+id/editPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:inputType="textPassword"
         android:text="@string/dummy_password" />
 
     <com.xcheng.view.processbtn.ActionProcessButton
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:id="@+id/btnSignIn"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="endLess"
         android:textColor="@android:color/white"
         android:textSize="18sp"
@@ -47,12 +46,12 @@
         app:ev_pb_textProgress="@string/Loading" />
 
     <com.xcheng.view.processbtn.ActionProcessButton
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
         android:id="@+id/btnSignIn2"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginBottom="16dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:text="progress"
         android:textColor="@android:color/white"
         android:textSize="18sp"
