@@ -58,10 +58,10 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     public static final int TYPE_HEADER = 0x00000111;
     public static final int TYPE_FOOTER = 0x00000222;
     public static final int TYPE_EMPTY = 0x00000333;
-    private View headerView;
-    private View footerView;
-    private View emptyView;
-    private boolean showFooter = true;
+    private View mHeaderView;
+    private View mFooterView;
+    private View mEmptyView;
+    private boolean mShowFooter = true;
     /**
      * 刷新加载每页的长度
      */
@@ -209,7 +209,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     }
 
     /**
-     * mData的变化会影响HeaderView footerView emptyView 是否显示问题，
+     * mData的变化会影响HeaderView mFooterView mEmptyView 是否显示问题，
      * 导致getItemCount发生变化
      *
      * @return flag
@@ -269,7 +269,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
             if (oldFlag == HEFViewFlag()) {
                 notifyItemRemoved(getHeaderCount() + position);
             } else {
-                //compatible emptyView headerView and footerView control
+                //compatible mEmptyView mHeaderView and mFooterView control
                 notifyDataSetChanged();
             }
         }
@@ -284,11 +284,11 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER:
-                return new EasyHolder(headerView);
+                return new EasyHolder(mHeaderView);
             case TYPE_EMPTY:
-                return new EasyHolder(emptyView);
+                return new EasyHolder(mEmptyView);
             case TYPE_FOOTER:
-                return new EasyHolder(footerView);
+                return new EasyHolder(mFooterView);
             default:
                 View itemView = getDelegateView(parent, viewType);
                 EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getItemView(parent,viewType) and return a NonNull itemView");
@@ -377,7 +377,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * @return header data
      */
     public View getHeader() {
-        return footerView;
+        return mFooterView;
     }
 
     /**
@@ -386,25 +386,25 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * @param headerView header data
      */
     public void setHeader(View headerView) {
-        EasyPreconditions.checkState(this.headerView == null, "the headerView already has been set");
-        this.headerView = EasyPreconditions.checkNotNull(headerView, "the headerView can not be null");
+        EasyPreconditions.checkState(mHeaderView == null, "the mHeaderView already has been set");
+        this.mHeaderView = EasyPreconditions.checkNotNull(headerView, "the headerView can not be null");
         if (mAttachToRecycler && hasHeader()) {
             notifyItemInserted(0);
         }
     }
 
     public View getEmpty() {
-        return emptyView;
+        return mEmptyView;
     }
 
     /**
-     * If you need a emptyView, you should set header data in the adapter initialization code.
+     * If you need a mEmptyView, you should set header data in the adapter initialization code.
      *
      * @param emptyView header data
      */
     public void setEmpty(View emptyView) {
-        EasyPreconditions.checkState(this.emptyView == null, "the emptyView already has been set");
-        this.emptyView = EasyPreconditions.checkNotNull(emptyView, "the emptyView can not be null");
+        EasyPreconditions.checkState(mEmptyView == null, "the mEmptyView already has been set");
+        this.mEmptyView = EasyPreconditions.checkNotNull(emptyView, "the emptyView can not be null");
         if (mAttachToRecycler && hasEmpty()) {
             notifyItemInserted(getHeaderCount());
         }
@@ -417,15 +417,15 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * @return footer data
      */
     public View getFooter() {
-        return footerView;
+        return mFooterView;
     }
 
     /**
      * If you need a footer, you should set footer data in the adapter initialization code.
      */
     public void setFooter(View footerView) {
-        EasyPreconditions.checkState(this.footerView == null, "the footerView already has been set");
-        this.footerView = EasyPreconditions.checkNotNull(footerView, "the footerView can not be null");
+        EasyPreconditions.checkState(mFooterView == null, "the mFooterView already has been set");
+        this.mFooterView = EasyPreconditions.checkNotNull(footerView, "the footerView can not be null");
         if (mAttachToRecycler && hasFooter()) {
             //如果没有数据添加的情况下调用会crash
             notifyItemInserted(0);
@@ -455,7 +455,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      */
     public void showFooter() {
         if (!hasFooter()) {
-            this.showFooter = true;
+            this.mShowFooter = true;
             if (hasFooter()) {
                 //添加footer之后 count+1,追加至最后一项的后面
                 notifyItemInserted(getItemCount() - 1);
@@ -469,7 +469,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     public void hideFooter() {
         boolean hasFooter = hasFooter();
         //会影响 hasFooter()的结果，故之后赋值
-        this.showFooter = false;
+        this.mShowFooter = false;
         if (hasFooter) {
             notifyItemRemoved(getItemCount());
         }
@@ -501,19 +501,19 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * Returns true if the header configured is not null.
      */
     public boolean hasHeader() {
-        return headerView != null;
+        return mHeaderView != null;
     }
 
 
     public boolean hasEmpty() {
-        return emptyView != null && isEmpty();
+        return mEmptyView != null && isEmpty();
     }
 
     /**
      * Returns true if the footer configured is not null.
      */
     public boolean hasFooter() {
-        return footerView != null && showFooter && !isEmpty() && (getDataCount() >= mLength)/*不满一屏不加载*/;
+        return mFooterView != null && mShowFooter && !isEmpty() && (getDataCount() >= mLength)/*不满一屏不加载*/;
     }
 
     private void validateItems(List<T> data) {
