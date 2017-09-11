@@ -387,8 +387,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      */
     public void setHeader(View headerView) {
         EasyPreconditions.checkState(this.headerView == null, "the headerView already has been set");
-        EasyPreconditions.checkNotNull(headerView != null, "the headerView can not be null");
-        this.headerView = headerView;
+        this.headerView = EasyPreconditions.checkNotNull(headerView, "the headerView can not be null");
         if (mAttachToRecycler && hasHeader()) {
             notifyItemInserted(0);
         }
@@ -404,10 +403,8 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * @param emptyView header data
      */
     public void setEmpty(View emptyView) {
-
         EasyPreconditions.checkState(this.emptyView == null, "the emptyView already has been set");
-        EasyPreconditions.checkNotNull(emptyView != null, "the emptyView can not be null");
-        this.emptyView = emptyView;
+        this.emptyView = EasyPreconditions.checkNotNull(emptyView, "the emptyView can not be null");
         if (mAttachToRecycler && hasEmpty()) {
             notifyItemInserted(getHeaderCount());
         }
@@ -428,9 +425,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      */
     public void setFooter(View footerView) {
         EasyPreconditions.checkState(this.footerView == null, "the footerView already has been set");
-        EasyPreconditions.checkNotNull(footerView != null, "the footerView can not be null");
-
-        this.footerView = footerView;
+        this.footerView = EasyPreconditions.checkNotNull(footerView, "the footerView can not be null");
         if (mAttachToRecycler && hasFooter()) {
             //如果没有数据添加的情况下调用会crash
             notifyItemInserted(0);
