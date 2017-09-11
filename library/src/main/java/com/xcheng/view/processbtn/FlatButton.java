@@ -22,7 +22,7 @@ public class FlatButton extends Button {
 
     private StateListDrawable mNormalDrawable;
     private CharSequence mNormalText;
-    private float cornerRadius;
+    private float mCornerRadius;
 
     public FlatButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
@@ -44,7 +44,7 @@ public class FlatButton extends Button {
         LocalDisplay.init(context);
         mNormalDrawable = new StateListDrawable();
         TypedArray attr = getTypedArray(context, attrs, R.styleable.FlatButton);
-        cornerRadius = attr.getDimension(R.styleable.FlatButton_ev_pb_cornerRadius, LocalDisplay.dp2px(2));
+        mCornerRadius = attr.getDimension(R.styleable.FlatButton_ev_pb_cornerRadius, LocalDisplay.dp2px(2));
         int colorNormal = attr.getColor(R.styleable.FlatButton_ev_pb_colorNormal, getColor(R.color.ev_blue_normal));
         int colorPressed = attr.getColor(R.styleable.FlatButton_ev_pb_colorPressed, ColorUtil.pressed(colorNormal));
         int colorDisable = attr.getColor(R.styleable.FlatButton_ev_pb_colorDisable, ColorUtil.disabled(colorNormal));
@@ -57,7 +57,7 @@ public class FlatButton extends Button {
                 .focused(colorPressed)
                 .selected(colorPressed)
                 .disable(colorDisable)
-                .radius(cornerRadius);
+                .radius(mCornerRadius);
         //如果设置了边框颜色
         if (colorStroke != ShapeBinder.INVALID_VALUE) {
             shapeBinder.stroke(colorStroke);
@@ -90,7 +90,7 @@ public class FlatButton extends Button {
     }
 
     public final float getCornerRadius() {
-        return cornerRadius;
+        return mCornerRadius;
     }
 
     public StateListDrawable getNormalDrawable() {
