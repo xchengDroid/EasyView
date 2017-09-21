@@ -9,9 +9,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
@@ -55,18 +52,9 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             mRecyclerView.addItemDecoration(itemDecoration);
         }
         mAdapter = getEasyAdapter();
-        View headerView = getHeaderView(mRecyclerView);
-        if (headerView != null) {
-            mAdapter.setHeader(headerView);
-        }
-        View emptyView = getEmptyView(mRecyclerView);
-        if (emptyView != null) {
-            mAdapter.setEmpty(emptyView);
-        }
-        View footerView = getFooterView(mRecyclerView);
-        if (footerView != null) {
-            mAdapter.setFooter(footerView);
-        }
+        mAdapter.setHeader(getHeaderId());
+        mAdapter.setEmpty(getEmptyId());
+        mAdapter.setFooter(getFooterId());
         mRecyclerView.setAdapter(mAdapter);
         mHasInitView = true;
     }
@@ -170,36 +158,34 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         return defaultItemAnimator;
     }
 
-    @Nullable
     @Override
-    public View getHeaderView(ViewGroup parent) {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public View getEmptyView(ViewGroup parent) {
-        return null;
-    }
-
-    @Nullable
-    @Override
-    public View getFooterView(ViewGroup parent) {
-        return LayoutInflater.from(getContext()).inflate(R.layout.ev_footer_load_more, parent, false);
+    public int getHeaderId() {
+        return 0;
     }
 
     @Override
-    public void onBindHeader(EasyHolder holder) {
-
+    public int getEmptyId() {
+        return 0;
     }
 
     @Override
-    public void onBindEmpty(EasyHolder holder) {
+    public int getFooterId() {
+        return R.layout.ev_footer_load_more;
+    }
+
+
+    @Override
+    public void onBindHeader(EasyHolder holder, boolean isCreate) {
 
     }
 
     @Override
-    public void onBindFooter(EasyHolder holder) {
+    public void onBindEmpty(EasyHolder holder, boolean isCreate) {
+
+    }
+
+    @Override
+    public void onBindFooter(EasyHolder holder, boolean isCreate) {
         LoadingState loadingState = mPtrFrameLayout.getLoadingState();
         if (loadingState == LOADINGMORE || loadingState == REFRESHING) {
             holder.setVisible(R.id.ev_id_progressBarLoadMore, true);

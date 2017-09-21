@@ -1,17 +1,14 @@
 package com.simple.view;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.EasyAdapter;
+import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.controller.EasyRefreshFragment;
 import com.xcheng.view.util.ToastLess;
 
@@ -75,52 +72,21 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     }
 
     @Override
-    public void onBindHeader(EasyHolder holder) {
-        super.onBindHeader(holder);
-        Log.e("print", "onBindHeader:"+holder.getAdapterPosition());
-
-    }
-
-    @Override
-    public void onBindEmpty(EasyHolder holder) {
-        super.onBindEmpty(holder);
-        Log.e("print", "onBindEmpty:"+holder.getAdapterPosition());
-
-    }
-    @Override
-    public void onBindFooter(EasyHolder holder) {
-        super.onBindFooter(holder);
-        Log.e("print", "footerBind:"+holder.getAdapterPosition());
-    }
-
-    @Nullable
-    @Override
-    public View getHeaderView(ViewGroup parent) {
-        TextView textView = new TextView(getContext());
-        textView.setText("这是Header");
-        textView.setOnClickListener(new View.OnClickListener() {
+    public void onBindHeader(EasyHolder holder, boolean isCreate) {
+        super.onBindHeader(holder, isCreate);
+        Log.e("print","isCreate:"+isCreate);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ToastLess.showToast("点击头部");
                 mAdapter.notifyHeader();
             }
         });
-        return textView;
     }
 
-    @Nullable
     @Override
-    public View getEmptyView(ViewGroup parent) {
-        TextView textView = new TextView(getContext());
-        textView.setBackgroundColor(Color.RED);
-        textView.setText("这是EmptyView");
-        textView.setTextSize(30);
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAdapter.notifyEmpty();
-            }
-        });
-        return textView;
+    public int getHeaderId() {
+        return R.layout.header;
     }
 
     @NonNull
@@ -133,11 +99,6 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
                 TextView textView = (TextView) holder.itemView;
                 textView.setText(s);
             }
-
-//            @Override
-//            public int getDataOffset() {
-//                return getHeaderCount()+3;
-//            }
         };
     }
 }

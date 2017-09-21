@@ -221,11 +221,23 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER:
-                return new EasyHolder(inflater(mHeaderId, parent));
+                EasyHolder headerHolder = new EasyHolder(inflater(mHeaderId, parent));
+                if (mOnBindHolderListener != null) {
+                    mOnBindHolderListener.onBindHeader(headerHolder, true);
+                }
+                return headerHolder;
             case TYPE_EMPTY:
-                return new EasyHolder(inflater(mEmptyId, parent));
+                EasyHolder emptyHolder = new EasyHolder(inflater(mEmptyId, parent));
+                if (mOnBindHolderListener != null) {
+                    mOnBindHolderListener.onBindEmpty(emptyHolder, true);
+                }
+                return emptyHolder;
             case TYPE_FOOTER:
-                return new EasyHolder(inflater(mFooterId, parent));
+                EasyHolder footerHolder = new EasyHolder(inflater(mFooterId, parent));
+                if (mOnBindHolderListener != null) {
+                    mOnBindHolderListener.onBindFooter(footerHolder, true);
+                }
+                return footerHolder;
             default:
                 View itemView = getDelegateView(parent, viewType);
                 EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getDelegateView(parent,viewType) and return a NonNull itemView");
@@ -248,17 +260,17 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
         switch (viewType) {
             case TYPE_HEADER:
                 if (mOnBindHolderListener != null) {
-                    mOnBindHolderListener.onBindHeader(holder);
+                    mOnBindHolderListener.onBindHeader(holder, false);
                 }
                 break;
             case TYPE_EMPTY:
                 if (mOnBindHolderListener != null) {
-                    mOnBindHolderListener.onBindEmpty(holder);
+                    mOnBindHolderListener.onBindEmpty(holder, false);
                 }
                 break;
             case TYPE_FOOTER:
                 if (mOnBindHolderListener != null) {
-                    mOnBindHolderListener.onBindFooter(holder);
+                    mOnBindHolderListener.onBindFooter(holder, false);
                 }
                 break;
             default:
@@ -316,7 +328,7 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
      * If you need a footer, you should set footer data in the adapter initialization code.
      */
     public void setFooter(@LayoutRes int footerId) {
-        EasyPreconditions.checkState(footerId == 0, "the mFooterView already has been set");
+        EasyPreconditions.checkState(mFooterId == 0, "the mFooterView already has been set");
         mFooterId = footerId;
         if (mAttachToRecycler && hasFooter()) {
             //如果没有数据添加的情况下调用会crash
@@ -483,11 +495,16 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
      * 当 onBindViewHolder 调用的时候回调此函数中的方法
      */
     public interface OnBindHolderListener {
-        void onBindHeader(EasyHolder holder);
 
-        void onBindEmpty(EasyHolder holder);
+        /**
+         * @param isCreate 是否是第一次创建即onCreateViewHolder中执行的
+         *                 此参数的目的是为了避免View一些重复的初始化操作
+         */
+        void onBindHeader(EasyHolder holder, boolean isCreate);
 
-        void onBindFooter(EasyHolder holder);
+        void onBindEmpty(EasyHolder holder, boolean isCreate);
+
+        void onBindFooter(EasyHolder holder, boolean isCreate);
     }
 
 

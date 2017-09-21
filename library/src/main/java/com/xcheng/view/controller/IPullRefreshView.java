@@ -1,12 +1,11 @@
 package com.xcheng.view.controller;
 
 import android.support.annotation.IntRange;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.pullrefresh.LoadingState;
@@ -38,23 +37,24 @@ public interface IPullRefreshView<T> extends EasyAdapter.OnBindHolderListener {
     @UiThread
     void complete(boolean isRefresh, LoadingState state);
 
-    /***
-     * 获取EmptyView 如果为空不设置
-     */
-    @Nullable
-    View getEmptyView(ViewGroup parent);
 
     /***
-     * 获取HeaderView ,如果为空不设置
+     * 获取HeaderView ,如果为0不设置
      */
-    @Nullable
-    View getHeaderView(ViewGroup parent);
+    @LayoutRes
+    int getHeaderId();
 
     /***
-     * 获取FooterView,显示加载更多的状态 如果为空不设置
+     * 获取EmptyView 如果为0不设置
      */
-    @Nullable
-    View getFooterView(ViewGroup parent);
+    @LayoutRes
+    int getEmptyId();
+
+    /***
+     * 获取FooterView,如果为0不设置
+     */
+    @LayoutRes
+    int getFooterId();
 
     @NonNull
     EasyAdapter<T> getEasyAdapter();
