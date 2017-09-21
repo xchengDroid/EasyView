@@ -222,7 +222,9 @@ public abstract class HEFAdapter<T> extends EasyAdapter<T> {
             case TYPE_FOOTER:
                 return new EasyHolder(mFooterView);
             default:
-                return super.onCreateViewHolder(parent, viewType);
+                EasyHolder holder = super.onCreateViewHolder(parent, viewType);
+                bindClickListener(holder);
+                return holder;
         }
     }
 
@@ -505,25 +507,27 @@ public abstract class HEFAdapter<T> extends EasyAdapter<T> {
         void onBindFooter(EasyHolder holder);
     }
 
-    protected void clickToHolder(final EasyHolder easyHolder) {
-        easyHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(easyHolder, getPositionOfData(easyHolder.getAdapterPosition()));
-                }
-            }
-        });
-    }
 
-    protected void longClickToHolder(final EasyHolder easyHolder) {
-        easyHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return mOnItemLongClickListener != null &&
-                        mOnItemLongClickListener.onItemLongClick(easyHolder, getPositionOfData(easyHolder.getAdapterPosition()));
-            }
-        });
+    private void bindClickListener(final EasyHolder easyHolder) {
+        if (mOnItemClickListener != null) {
+            easyHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mOnItemClickListener != null) {
+                        mOnItemClickListener.onItemClick(easyHolder, getPositionOfData(easyHolder.getAdapterPosition()));
+                    }
+                }
+            });
+        }
+        if (mOnItemLongClickListener != null) {
+            easyHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return mOnItemLongClickListener != null &&
+                            mOnItemLongClickListener.onItemLongClick(easyHolder, getPositionOfData(easyHolder.getAdapterPosition()));
+                }
+            });
+        }
     }
 
     public interface OnItemClickListener {
