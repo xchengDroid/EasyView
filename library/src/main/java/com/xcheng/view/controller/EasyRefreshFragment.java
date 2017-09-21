@@ -54,7 +54,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         mAdapter = getEasyAdapter();
         mAdapter.setHeader(getHeaderId());
         mAdapter.setEmpty(getEmptyId());
-        mAdapter.setFooter(getFooterId());
+        mAdapter.setFooter(getFooterId(),false);
         mRecyclerView.setAdapter(mAdapter);
         mHasInitView = true;
     }
@@ -79,7 +79,6 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         });
         lazyLoad();
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();

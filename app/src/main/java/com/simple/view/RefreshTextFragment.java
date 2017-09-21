@@ -36,6 +36,11 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         });
     }
 
+    @Override
+    public int getLimit() {
+        return 3;
+    }
+
     private boolean isFirst = true;
 
     @Override

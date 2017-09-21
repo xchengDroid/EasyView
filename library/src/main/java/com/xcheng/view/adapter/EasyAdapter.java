@@ -304,6 +304,9 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     }
 
 
+    /**
+     * @param headerId LayoutResId,如果为0则没有Header
+     */
     public void setHeader(@LayoutRes int headerId) {
         EasyPreconditions.checkState(mHeaderId == 0, "the mHeaderView already has been set");
         mHeaderId = headerId;
@@ -312,6 +315,9 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
         }
     }
 
+    /**
+     * @param emptyId LayoutResId,如果为0则没有Empty
+     */
     public void setEmpty(@LayoutRes int emptyId) {
         EasyPreconditions.checkState(mEmptyId == 0, "the mEmptyView already has been set");
         mEmptyId = emptyId;
@@ -321,7 +327,7 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     }
 
     /**
-     * @param footerId         footer的布局id
+     * @param footerId         LayoutResId,如果为0则没有Footer
      * @param hasFooterIfEmpty 如果为true,则表示 {@link #isEmpty()} 为true时也显示footer
      */
     public void setFooter(@LayoutRes int footerId, boolean hasFooterIfEmpty) {
