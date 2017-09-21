@@ -74,14 +74,36 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void onBindHeader(EasyHolder holder, boolean isCreate) {
         super.onBindHeader(holder, isCreate);
-        Log.e("print","isCreate:"+isCreate);
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastLess.showToast("点击头部");
-                mAdapter.notifyHeader();
-            }
-        });
+        Log.e("print","Header isCreate:"+isCreate);
+        if (isCreate){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastLess.showToast("点击头部");
+                    mAdapter.notifyHeader();
+                }
+            });
+        }
+    }
+
+    @Override
+    public void onBindEmpty(EasyHolder holder, boolean isCreate) {
+        super.onBindEmpty(holder, isCreate);
+        Log.e("print","Empty isCreate:"+isCreate);
+        if (isCreate){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastLess.showToast("点击空Empty");
+                    mAdapter.notifyEmpty();
+                }
+            });
+        }
+    }
+
+    @Override
+    public int getEmptyId() {
+        return R.layout.empty;
     }
 
     @Override
@@ -95,7 +117,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         return new EasyAdapter<String>(getContext(), R.layout.ev_item_text) {
             @Override
             public void convert(EasyHolder holder, String s, int position) {
-                Log.e("print", "adapterPosition:" + holder.getAdapterPosition());
+               // Log.e("print", "adapterPosition:" + holder.getAdapterPosition());
                 TextView textView = (TextView) holder.itemView;
                 textView.setText(s);
             }

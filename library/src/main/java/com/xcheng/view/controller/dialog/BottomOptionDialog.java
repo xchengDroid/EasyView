@@ -230,7 +230,7 @@ public class BottomOptionDialog extends BottomDialog {
 
     private class OptionAdapter extends EasyAdapter<String> {
         private OptionAdapter(Context context, @Nullable List<String> data) {
-            super(context, data, 0);
+            super(context, data);
         }
 
         @Override
