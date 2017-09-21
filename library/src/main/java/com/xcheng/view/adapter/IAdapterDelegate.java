@@ -23,7 +23,7 @@ public interface IAdapterDelegate<T, VH extends RecyclerView.ViewHolder> {
      * 获取 对应position中的View类型
      *
      * @param t        对应位置上的数据
-     * @param position position (adapterPosition-headerCount)
+     * @param position position in data
      * @return viewType
      * @see RecyclerView.Adapter#getItemViewType(int)
      */
@@ -32,7 +32,7 @@ public interface IAdapterDelegate<T, VH extends RecyclerView.ViewHolder> {
     /**
      * 绑定列表数据
      *
-     * @param position (adapterPosition-headerCount)
+     * @param position position in data
      * @see RecyclerView.Adapter#onBindViewHolder(RecyclerView.ViewHolder, int)
      */
     void convert(VH holder, T t, int position);

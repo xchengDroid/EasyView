@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.adapter.EasyHolder;
-import com.xcheng.view.adapter.EasyAdapter;
+import com.xcheng.view.adapter.HEFAdapter;
 import com.xcheng.view.controller.EasyRefreshFragment;
 import com.xcheng.view.util.ToastLess;
 
@@ -30,7 +30,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        mAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new HEFAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EasyHolder holder, int position) {
                 ToastLess.showToast(position + "==position:");
@@ -125,8 +125,8 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
 
     @NonNull
     @Override
-    public EasyAdapter<String> getEasyAdapter() {
-        return new EasyAdapter<String>(getContext(), null, R.layout.ev_item_text, 3) {
+    public HEFAdapter<String> getHEFAdapter() {
+        return new HEFAdapter<String>(getContext(), R.layout.ev_item_text) {
             @Override
             public void convert(EasyHolder holder, String s, int position) {
                 Log.e("print", "adapterPosition:" + holder.getAdapterPosition());

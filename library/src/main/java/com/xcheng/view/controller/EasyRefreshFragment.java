@@ -16,7 +16,7 @@ import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
-import com.xcheng.view.adapter.EasyAdapter;
+import com.xcheng.view.adapter.HEFAdapter;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.pullrefresh.LoadingState;
 import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
@@ -37,7 +37,7 @@ import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
     protected PtrRVFrameLayout mPtrFrameLayout;
     protected RecyclerView mRecyclerView;
-    protected EasyAdapter<T> mAdapter;
+    protected HEFAdapter<T> mAdapter;
     private boolean mHasInitView;
 
     @CallSuper
@@ -54,7 +54,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         if (itemDecoration != null) {
             mRecyclerView.addItemDecoration(itemDecoration);
         }
-        mAdapter = getEasyAdapter();
+        mAdapter = getHEFAdapter();
         View headerView = getHeaderView(mRecyclerView);
         if (headerView != null) {
             mAdapter.setHeader(headerView);
@@ -133,10 +133,15 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             mAdapter.addData(data);
         }
         LoadingState loadingState = LoadingState.INIT;
-        if (data == null || data.size() < mAdapter.getLength()) {
+        if (data == null || data.size() < getLimit()) {
             loadingState = LoadingState.NOMORE;
         }
         complete(isRefresh, loadingState);
+    }
+
+    @Override
+    public int getLimit() {
+        return 10;
     }
 
     @Override
