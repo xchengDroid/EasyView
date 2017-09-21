@@ -16,7 +16,7 @@ import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
-import com.xcheng.view.adapter.HEFAdapter;
+import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.pullrefresh.LoadingState;
 import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
@@ -37,7 +37,7 @@ import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
     protected PtrRVFrameLayout mPtrFrameLayout;
     protected RecyclerView mRecyclerView;
-    protected HEFAdapter<T> mAdapter;
+    protected EasyAdapter<T> mAdapter;
     private boolean mHasInitView;
 
     @CallSuper
@@ -54,7 +54,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         if (itemDecoration != null) {
             mRecyclerView.addItemDecoration(itemDecoration);
         }
-        mAdapter = getHEFAdapter();
+        mAdapter = getEasyAdapter();
         View headerView = getHeaderView(mRecyclerView);
         if (headerView != null) {
             mAdapter.setHeader(headerView);

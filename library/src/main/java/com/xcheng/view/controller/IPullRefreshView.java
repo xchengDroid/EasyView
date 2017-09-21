@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xcheng.view.adapter.HEFAdapter;
+import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.pullrefresh.LoadingState;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.List;
  * T 代表http请求返回的数据
  * Created by cx on 2016/10/13.
  */
-public interface IPullRefreshView<T> extends HEFAdapter.OnBindHolderListener {
+public interface IPullRefreshView<T> extends EasyAdapter.OnBindHolderListener {
     /**
      * Http 请求
      *
@@ -57,7 +57,7 @@ public interface IPullRefreshView<T> extends HEFAdapter.OnBindHolderListener {
     View getFooterView(ViewGroup parent);
 
     @NonNull
-    HEFAdapter<T> getHEFAdapter();
+    EasyAdapter<T> getEasyAdapter();
 
     /**
      * 每页的长度
