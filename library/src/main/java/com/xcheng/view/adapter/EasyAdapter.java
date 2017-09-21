@@ -59,7 +59,12 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     @LayoutRes
     private int mEmptyId;
 
+    /**
+     * 控制是否显示footer
+     */
     private boolean mShowFooter = true;
+
+    private boolean mHasFooterIfEmpty;
 
     /**
      * 标记是否绑定到RecyclerView
@@ -298,11 +303,7 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
         return hasEmpty() ? 1 : 0;
     }
 
-    /**
-     * If you need a header, you should set header data in the adapter initialization code.
-     *
-     * @param headerId header data
-     */
+
     public void setHeader(@LayoutRes int headerId) {
         EasyPreconditions.checkState(mHeaderId == 0, "the mHeaderView already has been set");
         mHeaderId = headerId;
@@ -311,11 +312,6 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
         }
     }
 
-    /**
-     * If you need a mEmptyView, you should set header data in the adapter initialization code.
-     *
-     * @param emptyId header data
-     */
     public void setEmpty(@LayoutRes int emptyId) {
         EasyPreconditions.checkState(mEmptyId == 0, "the mEmptyView already has been set");
         mEmptyId = emptyId;
@@ -325,11 +321,13 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     }
 
     /**
-     * If you need a footer, you should set footer data in the adapter initialization code.
+     * @param footerId         footer的布局id
+     * @param hasFooterIfEmpty 如果为true,则表示 {@link #isEmpty()} 为true时也显示footer
      */
-    public void setFooter(@LayoutRes int footerId) {
+    public void setFooter(@LayoutRes int footerId, boolean hasFooterIfEmpty) {
         EasyPreconditions.checkState(mFooterId == 0, "the mFooterView already has been set");
         mFooterId = footerId;
+        mHasFooterIfEmpty = hasFooterIfEmpty;
         if (mAttachToRecycler && hasFooter()) {
             //如果没有数据添加的情况下调用会crash
             notifyItemInserted(0);
@@ -401,9 +399,7 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
         return hasFooter() && position == lastPosition;
     }
 
-    /**
-     * Returns true if the header configured is not null.
-     */
+
     public boolean hasHeader() {
         return mHeaderId != 0;
     }
@@ -413,11 +409,8 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
         return mEmptyId != 0 && isEmpty();
     }
 
-    /**
-     * Returns true if the footer configured is not null.
-     */
     public boolean hasFooter() {
-        return mFooterId != 0 && mShowFooter && !isEmpty();
+        return mFooterId != 0 && mShowFooter && (!isEmpty() || mHasFooterIfEmpty);
     }
 
     private void validateItems(List<T> data) {
