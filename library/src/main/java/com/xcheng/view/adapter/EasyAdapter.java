@@ -52,9 +52,13 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     public static final int TYPE_HEADER = 0x00000111;
     public static final int TYPE_FOOTER = 0x00000222;
     public static final int TYPE_EMPTY = 0x00000333;
-    private View mHeaderView;
-    private View mFooterView;
-    private View mEmptyView;
+    @LayoutRes
+    private int mHeaderId;
+    @LayoutRes
+    private int mFooterId;
+    @LayoutRes
+    private int mEmptyId;
+
     private boolean mShowFooter = true;
 
     /**
@@ -217,11 +221,11 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER:
-                return new EasyHolder(mHeaderView);
+                return new EasyHolder(inflater(mHeaderId, parent));
             case TYPE_EMPTY:
-                return new EasyHolder(mEmptyView);
+                return new EasyHolder(inflater(mEmptyId, parent));
             case TYPE_FOOTER:
-                return new EasyHolder(mFooterView);
+                return new EasyHolder(inflater(mFooterId, parent));
             default:
                 View itemView = getDelegateView(parent, viewType);
                 EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getDelegateView(parent,viewType) and return a NonNull itemView");
@@ -282,63 +286,38 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
         return hasEmpty() ? 1 : 0;
     }
 
-
-    /**
-     * Get header data in this adapter, you should previously use {@link #setHeader(View header)}
-     * in the adapter initialization code to set header data.
-     *
-     * @return header data
-     */
-    public View getHeader() {
-        return mFooterView;
-    }
-
     /**
      * If you need a header, you should set header data in the adapter initialization code.
      *
-     * @param headerView header data
+     * @param headerId header data
      */
-    public void setHeader(View headerView) {
-        EasyPreconditions.checkState(mHeaderView == null, "the mHeaderView already has been set");
-        mHeaderView = EasyPreconditions.checkNotNull(headerView, "the headerView can not be null");
+    public void setHeader(@LayoutRes int headerId) {
+        EasyPreconditions.checkState(mHeaderId == 0, "the mHeaderView already has been set");
+        mHeaderId = headerId;
         if (mAttachToRecycler && hasHeader()) {
             notifyItemInserted(0);
         }
     }
 
-    public View getEmpty() {
-        return mEmptyView;
-    }
-
     /**
      * If you need a mEmptyView, you should set header data in the adapter initialization code.
      *
-     * @param emptyView header data
+     * @param emptyId header data
      */
-    public void setEmpty(View emptyView) {
-        EasyPreconditions.checkState(mEmptyView == null, "the mEmptyView already has been set");
-        this.mEmptyView = EasyPreconditions.checkNotNull(emptyView, "the emptyView can not be null");
+    public void setEmpty(@LayoutRes int emptyId) {
+        EasyPreconditions.checkState(mEmptyId == 0, "the mEmptyView already has been set");
+        mEmptyId = emptyId;
         if (mAttachToRecycler && hasEmpty()) {
             notifyItemInserted(getHeaderCount());
         }
     }
 
     /**
-     * Get footer data in this adapter, you should previously use {@link #setFooter}
-     * in the adapter initialization code to set footer data.
-     *
-     * @return footer data
-     */
-    public View getFooter() {
-        return mFooterView;
-    }
-
-    /**
      * If you need a footer, you should set footer data in the adapter initialization code.
      */
-    public void setFooter(View footerView) {
-        EasyPreconditions.checkState(mFooterView == null, "the mFooterView already has been set");
-        this.mFooterView = EasyPreconditions.checkNotNull(footerView, "the footerView can not be null");
+    public void setFooter(@LayoutRes int footerId) {
+        EasyPreconditions.checkState(footerId == 0, "the mFooterView already has been set");
+        mFooterId = footerId;
         if (mAttachToRecycler && hasFooter()) {
             //如果没有数据添加的情况下调用会crash
             notifyItemInserted(0);
@@ -414,19 +393,19 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
      * Returns true if the header configured is not null.
      */
     public boolean hasHeader() {
-        return mHeaderView != null;
+        return mHeaderId != 0;
     }
 
 
     public boolean hasEmpty() {
-        return mEmptyView != null && isEmpty();
+        return mEmptyId != 0 && isEmpty();
     }
 
     /**
      * Returns true if the footer configured is not null.
      */
     public boolean hasFooter() {
-        return mFooterView != null && mShowFooter && !isEmpty();
+        return mFooterId != 0 && mShowFooter && !isEmpty();
     }
 
     private void validateItems(List<T> data) {
