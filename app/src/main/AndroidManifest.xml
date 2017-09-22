@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.simple.view">
 
     <application
@@ -25,9 +26,8 @@
 
         <activity
             android:name=".SignInActivity"
-            android:theme="@style/ev_AppTheme"
             android:configChanges="orientation|screenSize|smallestScreenSize"
-            />
+            android:theme="@style/ev_AppTheme" />
 
         <activity
             android:name=".UploadActivity"
@@ -43,6 +43,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".RefreshActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CardActivity"
             android:screenOrientation="portrait" />
     </application>
 
