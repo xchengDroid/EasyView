@@ -20,7 +20,7 @@ public class DividerTextView extends TextView implements IDividerView {
 
     public DividerTextView(Context context, AttributeSet attrs) {
         //必须传递android.R.attr.textStyle，否则没有默认的样式掉
-        this(context, attrs, android.R.attr.textStyle);
+        this(context, attrs, android.R.attr.textViewStyle);
     }
 
     public DividerTextView(Context context, AttributeSet attrs, int defStyleAttr) {
