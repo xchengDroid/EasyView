@@ -13,7 +13,7 @@ import com.xcheng.view.processbtn.ActionProcessButton;
 public class SignInActivity extends EasyActivity implements ProgressGenerator.OnCompleteListener {
 
     public static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
-
+//./gradlew clean build bintrayUpload -PbintrayUser=xcheng -PbintrayKey=4f8465004b752b103ea2e374ad6cb73ec38d8601 -PdryRun=false
 
     @Override
     public int getLayoutId() {

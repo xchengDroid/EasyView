@@ -22,8 +22,7 @@
         <activity
             android:name=".MessageActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light" />
-
+            />
         <activity
             android:name=".SignInActivity"
             android:windowSoftInputMode="stateAlwaysHidden"
@@ -32,13 +31,11 @@
 
         <activity
             android:name=".UploadActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".StateSampleActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo.Light" />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".TabActivity"
             android:screenOrientation="portrait" />

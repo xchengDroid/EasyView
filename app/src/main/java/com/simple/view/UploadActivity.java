@@ -1,14 +1,14 @@
 package com.simple.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.xcheng.view.controller.EasyActivity;
 import com.xcheng.view.processbtn.GenerateProcessButton;
 
 
-public class UploadActivity extends Activity implements ProgressGenerator.OnCompleteListener {
+public class UploadActivity extends EasyActivity implements ProgressGenerator.OnCompleteListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,5 +30,10 @@ public class UploadActivity extends Activity implements ProgressGenerator.OnComp
     @Override
     public void onComplete() {
         Toast.makeText(this, R.string.Loading_Complete, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
     }
 }

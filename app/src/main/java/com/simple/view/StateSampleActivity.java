@@ -1,15 +1,15 @@
 package com.simple.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.xcheng.view.controller.EasyActivity;
 import com.xcheng.view.processbtn.ActionProcessButton;
 import com.xcheng.view.processbtn.GenerateProcessButton;
 import com.xcheng.view.processbtn.SubmitProcessButton;
 
 
-public class StateSampleActivity extends Activity implements View.OnClickListener {
+public class StateSampleActivity extends EasyActivity implements View.OnClickListener {
 
     private ActionProcessButton mBtnAction;
     private GenerateProcessButton mBtnGenerate;
@@ -54,5 +54,10 @@ public class StateSampleActivity extends Activity implements View.OnClickListene
                 mBtnGenerate.setProgress(0);
                 break;
         }
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
     }
 }

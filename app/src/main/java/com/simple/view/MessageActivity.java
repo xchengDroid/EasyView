@@ -1,15 +1,15 @@
 package com.simple.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.xcheng.view.controller.EasyActivity;
 import com.xcheng.view.processbtn.SubmitProcessButton;
 
 
-public class MessageActivity extends Activity implements ProgressGenerator.OnCompleteListener {
+public class MessageActivity extends EasyActivity implements ProgressGenerator.OnCompleteListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,4 +35,8 @@ public class MessageActivity extends Activity implements ProgressGenerator.OnCom
         Toast.makeText(this, R.string.Loading_Complete, Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
 }
