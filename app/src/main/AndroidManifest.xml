@@ -26,6 +26,7 @@
 
         <activity
             android:name=".SignInActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="orientation|screenSize|smallestScreenSize"
             android:theme="@style/ev_AppTheme" />
 
