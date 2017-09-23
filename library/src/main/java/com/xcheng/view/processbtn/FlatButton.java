@@ -24,19 +24,17 @@ public class FlatButton extends Button {
     private CharSequence mNormalText;
     private float mCornerRadius;
 
-    public FlatButton(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
-        init(context, attrs);
+    public FlatButton(Context context) {
+        this(context, null);
     }
 
     public FlatButton(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context, attrs);
+        this(context, attrs,android.R.attr.buttonStyle);
     }
 
-    public FlatButton(Context context) {
-        super(context);
-        init(context, null);
+    public FlatButton(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(context, attrs);
     }
 
     @CallSuper
