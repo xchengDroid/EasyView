@@ -43,7 +43,8 @@
     <Button
         android:id="@+id/btnProgressError"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:background="@color/colorAccent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Error State setProgress(-1)" />
 
@@ -65,7 +66,6 @@
         android:id="@+id/btnProgressComplete"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="8dp"
         android:text="Complete State setProgress(100)" />
 
 

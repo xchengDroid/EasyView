@@ -20,11 +20,6 @@ import java.util.List;
  */
 public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
-    public int getLayoutId() {
-        return R.layout.fr_refresh;
-    }
-
-    @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         mAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {

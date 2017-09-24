@@ -28,14 +28,22 @@ import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 
 /**
  * 刷新列表Fragment
+ * 约定大于配置，
+ * 设置PtrRVFrameLayout 的id 为ev_id_ptrRVFrameLayout，
+ * 设置RecyclerView 的 id为ev_id_recyclerView
  *
- * @author xincheng @date:2014-8-4
+ * @author xincheng @date:2017-9-4
  */
 public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
     protected PtrRVFrameLayout mPtrFrameLayout;
     protected RecyclerView mRecyclerView;
     protected EasyAdapter<T> mAdapter;
     private boolean mHasInitView;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.ev_ptr_refresh;
+    }
 
     @CallSuper
     @Override
@@ -54,7 +62,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         mAdapter = getEasyAdapter();
         mAdapter.setHeader(getHeaderId());
         mAdapter.setEmpty(getEmptyId());
-        mAdapter.setFooter(getFooterId(),false);
+        mAdapter.setFooter(getFooterId(), false);
         mRecyclerView.setAdapter(mAdapter);
         mHasInitView = true;
     }
@@ -79,6 +87,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         });
         lazyLoad();
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
