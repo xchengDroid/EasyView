@@ -1,9 +1,14 @@
 package com.xcheng.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.ColorRes;
+import android.support.annotation.DimenRes;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 
 import com.xcheng.view.util.LocalDisplay;
 
@@ -53,6 +58,21 @@ public class EasyView {
     public static CharSequence getText(@StringRes int stringId) {
         checkInit();
         return sAppContext.getText(stringId);
+    }
+
+    public static int getColor(@ColorRes int colorId) {
+        checkInit();
+        return ContextCompat.getColor(sAppContext, colorId);
+    }
+
+    public static Drawable getDrawable(@DrawableRes int drawableId) {
+        checkInit();
+        return ContextCompat.getDrawable(sAppContext, drawableId);
+    }
+
+    public static int getDimen(@DimenRes int dimenId) {
+        checkInit();
+        return sAppContext.getResources().getDimensionPixelOffset(dimenId);
     }
 
     /**

@@ -544,4 +544,22 @@ public abstract class EasyAdapter<T> extends TAdapter<T> {
     public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
         this.mOnItemLongClickListener = onItemLongClickListener;
     }
+
+    public static class SimpleBindHolderListener implements OnBindHolderListener {
+
+        @Override
+        public void onBindHeader(EasyHolder holder, boolean isCreate) {
+
+        }
+
+        @Override
+        public void onBindEmpty(EasyHolder holder, boolean isCreate) {
+
+        }
+
+        @Override
+        public void onBindFooter(EasyHolder holder, boolean isCreate) {
+
+        }
+    }
 }
