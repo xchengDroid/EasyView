@@ -14,7 +14,7 @@ import java.util.List;
  * 生命周期控制订阅类
  * Created by chengxin on 2017/9/29.
  */
-public class LifeCycleSubject {
+public class LifecycleSubject {
     private static final List<FragmentLifecycleCallbacks> sFragmentLifecycleCallbacks = new ArrayList<>();
 
     public static void registerFragmentLifecycleCallbacks(FragmentLifecycleCallbacks callback) {

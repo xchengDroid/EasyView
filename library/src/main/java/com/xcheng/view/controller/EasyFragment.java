@@ -34,14 +34,14 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     public void onAttach(Context context) {
         // TODO Auto-generated method stub
         super.onAttach(context);
-        LifeCycleSubject.dispatchAttach(this, context);
+        LifecycleSubject.dispatchAttach(this, context);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        LifeCycleSubject.dispatchCreate(this, savedInstanceState);
+        LifecycleSubject.dispatchCreate(this, savedInstanceState);
     }
 
     @Nullable
@@ -61,7 +61,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
             mRootView = inflater.inflate(getLayoutId(), container, false);
             init(savedInstanceState);
         }
-        LifeCycleSubject.dispatchCreateView(this, mRootView, savedInstanceState);
+        LifecycleSubject.dispatchCreateView(this, mRootView, savedInstanceState);
         return mRootView;
     }
 
@@ -94,50 +94,50 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      *
      * @return
      */
-    protected boolean isCacheRootView() {
+    public boolean isCacheRootView() {
         return true;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        LifeCycleSubject.dispatchActivityCreated(this, savedInstanceState);
+        LifecycleSubject.dispatchActivityCreated(this, savedInstanceState);
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        LifeCycleSubject.dispatchStart(this);
+        LifecycleSubject.dispatchStart(this);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        LifeCycleSubject.dispatchResume(this);
+        LifecycleSubject.dispatchResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        LifeCycleSubject.dispatchPause(this);
+        LifecycleSubject.dispatchPause(this);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        LifeCycleSubject.dispatchStop(this);
+        LifecycleSubject.dispatchStop(this);
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        LifeCycleSubject.dispatchSaveInstanceState(this, outState);
+        LifecycleSubject.dispatchSaveInstanceState(this, outState);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        LifeCycleSubject.dispatchDestroyView(this);
+        LifecycleSubject.dispatchDestroyView(this);
         if (!isCacheRootView()) {
             mRootView = null;
         }
@@ -147,7 +147,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     public void onDestroy() {
         // TODO Auto-generated method stub
         super.onDestroy();
-        LifeCycleSubject.dispatchDestroy(this);
+        LifecycleSubject.dispatchDestroy(this);
         //页面销毁的时候，防止外部引用Fragment，导致mRootView一直被引用,并且只支持FragmentPagerAdapter的页面缓存
         mRootView = null;
     }
@@ -155,7 +155,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     @Override
     public void onDetach() {
         super.onDetach();
-        LifeCycleSubject.dispatchDetach(this);
+        LifecycleSubject.dispatchDetach(this);
     }
 
     public View findViewById(@IdRes int id) {
