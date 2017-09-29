@@ -3,7 +3,6 @@ package com.simple.view;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -74,7 +73,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void onBindHeader(EasyHolder holder, boolean isCreate) {
         super.onBindHeader(holder, isCreate);
-        Log.e("print","Header isCreate:"+isCreate);
+       // Log.e("print","Header isCreate:"+isCreate);
         if (isCreate){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -89,7 +88,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void onBindEmpty(EasyHolder holder, boolean isCreate) {
         super.onBindEmpty(holder, isCreate);
-        Log.e("print","Empty isCreate:"+isCreate);
+       // Log.e("print","Empty isCreate:"+isCreate);
         if (isCreate){
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
