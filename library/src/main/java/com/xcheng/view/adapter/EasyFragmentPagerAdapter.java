@@ -26,8 +26,7 @@ public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter impl
         mContext = context;
     }
 
-    public void addInfo(String title, String tag, Class<?> clazz) {
-        TabInfo tabInfo = new TabInfo(title, tag, clazz);
+    public void addInfo(TabInfo tabInfo) {
         mTabInfos.add(tabInfo);
     }
 
