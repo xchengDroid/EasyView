@@ -26,11 +26,11 @@ public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter impl
         mContext = context;
     }
 
-    public void addInfo(TabInfo tabInfo) {
+    public void addTabInfo(TabInfo tabInfo) {
         mTabInfos.add(tabInfo);
     }
 
-    public void setInfo(int index, TabInfo info) {
+    public void setTabInfo(int index, TabInfo info) {
         mTabInfos.set(index, info);
     }
 
