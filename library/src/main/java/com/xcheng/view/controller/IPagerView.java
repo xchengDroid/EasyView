@@ -25,11 +25,12 @@ public interface IPagerView {
 
 
     /**
-     * @param position     当前Tab指针的位置
-     * @param tabInfo 对应Tab的信息
+     * @param position 当前Tab指针的位置
+     * @param tabInfo  对应Tab的信息
      * @return
      */
     @NonNull
     View createTabView(int position, TabInfo tabInfo);
 
+    boolean isPagerScroll();
 }

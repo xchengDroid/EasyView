@@ -42,6 +42,11 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     public interface TabAdapter {
         @NonNull
         View getTabView(int position);
+
+        /**
+         * 点击tab切换时是否有滚动动画
+         */
+        boolean smoothScroll();
     }
 
     private LinearLayout.LayoutParams defaultTabLayoutParams;
@@ -198,7 +203,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             @Override
             public void onClick(View v) {
                 //取消翻页动画
-                viewPager.setCurrentItem(position, false);
+                viewPager.setCurrentItem(position, ((TabAdapter) getAdapter()).smoothScroll());
             }
         });
         //设置在setBackgroundResource后面防止当tabBackgroundResId是shape的时候导致padding被覆盖
@@ -269,9 +274,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
             currentPosition = position;
             currentPositionOffset = positionOffset;
-
-            scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
-
+            //tabCount为0的时候 添加tabInfo然后调用 notifyDataSetChanged 执行会调用此方法导致奔溃(tabsContainer没有child),故加此判断
+            if (tabCount != 0) {
+                scrollToChild(position, (int) (positionOffset * tabsContainer.getChildAt(position).getWidth()));
+            }
             invalidate();
 
             if (delegatePageListener != null) {

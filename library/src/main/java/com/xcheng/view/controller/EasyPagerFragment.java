@@ -28,6 +28,11 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
     protected PagerSlidingTabStrip mIndicator;
 
     @Override
+    public int getLayoutId() {
+        return R.layout.ev_pager;
+    }
+
+    @Override
     public void initView(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.initView(savedInstanceState);
@@ -40,6 +45,11 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
             @Override
             public View getTabView(int position) {
                 return createTabView(position, mTabsAdapter.getViewPageInfo(position));
+            }
+
+            @Override
+            public boolean smoothScroll() {
+                return isPagerScroll();
             }
         };
         mViewPager.setAdapter(mTabsAdapter);
@@ -56,5 +66,10 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
     @Override
     public int getScreenPageLimit() {
         return DEFAULT_PAGE_LIMIT;
+    }
+
+    @Override
+    public boolean isPagerScroll() {
+        return true;
     }
 }
