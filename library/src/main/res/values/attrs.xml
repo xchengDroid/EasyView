@@ -1,12 +1,12 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="ResourceName">
 
-    <declare-styleable name="TopBarLayout" tools:ignore="ResourceName">
+    <declare-styleable name="TopBarLayout">
         <attr name="ev_topBarLayout" format="reference" />
         <!--居中标题-->
         <attr name="ev_topBarTitle" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="ActionProcessButton" tools:ignore="ResourceName">
+    <declare-styleable name="ActionProcessButton">
         <attr name="ev_pb_mode">
             <!--google风格 一直加载-->
             <enum name="endLess" value="0" />
@@ -14,7 +14,7 @@
         </attr>
         <attr name="ev_pb_indicatorHeight" format="dimension" />
     </declare-styleable>
-    <declare-styleable name="ProcessButton" tools:ignore="ResourceName">
+    <declare-styleable name="ProcessButton">
         <attr name="ev_pb_textProgress" format="string" />
         <attr name="ev_pb_textComplete" format="string" />
         <attr name="ev_pb_textError" format="string" />
@@ -25,7 +25,7 @@
         <attr name="ev_pb_maskWhenProgress" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="FlatButton" tools:ignore="ResourceName">
+    <declare-styleable name="FlatButton">
         <attr name="ev_pb_colorNormal" format="color" />
         <attr name="ev_pb_colorPressed" format="color" />
         <attr name="ev_pb_colorDisable" format="color" />
@@ -34,7 +34,7 @@
         <attr name="ev_pb_cornerRadius" format="dimension" />
     </declare-styleable>
 
-    <declare-styleable name="DividerView" tools:ignore="ResourceName">
+    <declare-styleable name="DividerView">
         <attr name="ev_position">
             <flag name="none" value="0x00" />
             <flag name="top" value="0x1" />
@@ -50,7 +50,7 @@
         <attr name="ev_bottomToRight" format="dimension" />
     </declare-styleable>
     <!--end-->
-    <declare-styleable name="DividerContainer" tools:ignore="ResourceName">
+    <declare-styleable name="DividerContainer">
         <attr name="ev_position" />
         <attr name="ev_topHeight" />
         <attr name="ev_topColor" />
@@ -73,7 +73,7 @@
         <attr name="ev_bottomToLeft" />
         <attr name="ev_bottomToRight" />
     </declare-styleable>
-    <declare-styleable name="DividerTextView" tools:ignore="ResourceName">
+    <declare-styleable name="DividerTextView">
         <attr name="ev_position" />
         <attr name="ev_topHeight" />
         <attr name="ev_topColor" />
@@ -85,7 +85,7 @@
         <attr name="ev_bottomToRight" />
     </declare-styleable>
 
-    <declare-styleable name="PagerSlidingTabStrip" tools:ignore="ResourceName">
+    <declare-styleable name="PagerSlidingTabStrip">
         <attr name="ev_pstsIndicatorColor" format="color" />
         <attr name="ev_pstsUnderlineColor" format="color" />
         <attr name="ev_pstsDividerColor" format="color" />
@@ -94,5 +94,6 @@
         <attr name="ev_pstsDividerPadding" format="dimension" />
         <attr name="ev_pstsScrollOffset" format="dimension" />
         <attr name="ev_pstsShouldExpand" format="boolean" />
+        <attr name="ev_pstsSmoothScroll" format="boolean" />
     </declare-styleable>
 </resources>

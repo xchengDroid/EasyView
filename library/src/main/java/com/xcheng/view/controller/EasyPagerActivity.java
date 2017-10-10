@@ -46,11 +46,6 @@ public abstract class EasyPagerActivity extends EasyActivity implements IPagerVi
             public View getTabView(int position) {
                 return createTabView(position, mTabsAdapter.getViewPageInfo(position));
             }
-
-            @Override
-            public boolean smoothScroll() {
-                return isPagerScroll();
-            }
         };
         mViewPager.setAdapter(mTabsAdapter);
         mIndicator = (PagerSlidingTabStrip) findViewById(R.id.ev_id_tab_indicator);
@@ -64,10 +59,5 @@ public abstract class EasyPagerActivity extends EasyActivity implements IPagerVi
     @Override
     public int getScreenPageLimit() {
         return DEFAULT_PAGE_LIMIT;
-    }
-
-    @Override
-    public boolean isPagerScroll() {
-        return true;
     }
 }

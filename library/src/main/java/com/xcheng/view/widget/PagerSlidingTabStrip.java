@@ -42,11 +42,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     public interface TabAdapter {
         @NonNull
         View getTabView(int position);
-
-        /**
-         * 点击tab切换时是否有滚动动画
-         */
-        boolean smoothScroll();
     }
 
     private LinearLayout.LayoutParams defaultTabLayoutParams;
@@ -69,7 +64,10 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
     private int indicatorColor = 0xFF666666;
     private int underlineColor = 0x1A000000;
     private int dividerColor = 0x1A000000;
+    //点击tab是否滚动viewPager
+    private boolean smoothScroll;
     private boolean shouldExpand;
+
     private int scrollOffset;
     private int indicatorHeight;
     private int underlineHeight;
@@ -106,6 +104,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         dividerPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_ev_pstsDividerPadding, LocalDisplay.dp2px(12));
         shouldExpand = a.getBoolean(R.styleable.PagerSlidingTabStrip_ev_pstsShouldExpand, false);
         scrollOffset = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_ev_pstsScrollOffset, LocalDisplay.dp2px(52));
+        smoothScroll=a.getBoolean(R.styleable.PagerSlidingTabStrip_ev_pstsSmoothScroll, true);
         a.recycle();
 
         rectPaint = new Paint();
@@ -203,7 +202,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             @Override
             public void onClick(View v) {
                 //取消翻页动画
-                viewPager.setCurrentItem(position, ((TabAdapter) getAdapter()).smoothScroll());
+                viewPager.setCurrentItem(position, smoothScroll);
             }
         });
         //设置在setBackgroundResource后面防止当tabBackgroundResId是shape的时候导致padding被覆盖

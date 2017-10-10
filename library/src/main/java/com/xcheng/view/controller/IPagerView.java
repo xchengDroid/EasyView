@@ -31,6 +31,4 @@ public interface IPagerView {
      */
     @NonNull
     View createTabView(int position, TabInfo tabInfo);
-
-    boolean isPagerScroll();
 }
