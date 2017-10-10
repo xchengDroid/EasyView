@@ -62,7 +62,7 @@
         <attr name="ev_bottomToRight" />
     </declare-styleable>
     <!--end-->
-    <declare-styleable name="DividerLayout" tools:ignore="ResourceName">
+    <declare-styleable name="DividerLayout">
         <attr name="ev_position" />
         <attr name="ev_topHeight" />
         <attr name="ev_topColor" />
