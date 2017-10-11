@@ -12,6 +12,7 @@
         android:id="@id/ev_id_tab_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:ev_pstsShouldExpand="true"
         app:ev_pstsSmoothScroll="false"
         android:layout_gravity="center" />
 

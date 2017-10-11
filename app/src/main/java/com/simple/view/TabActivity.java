@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -62,10 +63,10 @@ public class TabActivity extends EasyPagerActivity {
 
     @Override
     public void getTabInfos(List<TabInfo> tabInfos) {
-        tabInfos.add(new TabInfo("0", "新闻", TabFragment.class));
-        tabInfos.add(new TabInfo("1", "咨询", TabFragment.class));
+        tabInfos.add(new TabInfo("0", "新12312闻", TabFragment.class));
+        tabInfos.add(new TabInfo("1", "咨123213询", TabFragment.class));
         tabInfos.add(new TabInfo("2", "视频", TabFragment.class));
-        tabInfos.add(new TabInfo("3", "本地", TabFragment.class));
+        tabInfos.add(new TabInfo("3", "本123地", TabFragment.class));
         tabInfos.add(new TabInfo("4", "小说", TabFragment.class));
         tabInfos.add(new TabInfo("5", "阅读", TabFragment.class));
         tabInfos.add(new TabInfo("6", "本地", TabFragment.class));
@@ -78,6 +79,8 @@ public class TabActivity extends EasyPagerActivity {
     @Override
     public View createTabView(int position, TabInfo tabInfo) {
         TextView textView = new TextView(getContext());
+        textView.setSingleLine();
+        textView.setEllipsize(TextUtils.TruncateAt.END);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(-2, 200);
         textView.setLayoutParams(layoutParams);
         textView.setPadding(30, 20, 30, 20);
@@ -98,7 +101,7 @@ public class TabActivity extends EasyPagerActivity {
         public void initView(Bundle savedInstanceState) {
             super.initView(savedInstanceState);
             TextView tv = (TextView) findViewById(R.id.tvTab);
-            tv.setText("Tab测试");
+            tv.setText(getArguments().getString("tag"));
         }
     }
 
