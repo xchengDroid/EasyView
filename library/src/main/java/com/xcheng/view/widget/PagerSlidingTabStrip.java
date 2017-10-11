@@ -92,7 +92,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         tabsContainer.setOrientation(LinearLayout.HORIZONTAL);
         tabsContainer.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
         addView(tabsContainer);
-
         // get custom attrs
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.PagerSlidingTabStrip);
 
@@ -104,7 +103,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         dividerPadding = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_ev_pstsDividerPadding, LocalDisplay.dp2px(12));
         shouldExpand = a.getBoolean(R.styleable.PagerSlidingTabStrip_ev_pstsShouldExpand, false);
         scrollOffset = a.getDimensionPixelSize(R.styleable.PagerSlidingTabStrip_ev_pstsScrollOffset, LocalDisplay.dp2px(52));
-        smoothScroll=a.getBoolean(R.styleable.PagerSlidingTabStrip_ev_pstsSmoothScroll, true);
+        smoothScroll = a.getBoolean(R.styleable.PagerSlidingTabStrip_ev_pstsSmoothScroll, true);
         a.recycle();
 
         rectPaint = new Paint();
@@ -116,7 +115,9 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
         dividerPaint.setStrokeWidth(LocalDisplay.dp2px(1));
 
         defaultTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
-        expandedTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT/*解决如果设置为0在android 7.0上测量错误的bug*/, LayoutParams.MATCH_PARENT, 1.0f);
+        //当PagerSlidingTabStrip的宽度为wrap_content，或者为match_parent但是需要滚动的时候，如果每个tab的内容不同导致宽度不一致，
+        //TextView在7.0的时候计算有问题，但内容多的TextView有部分文字不能显示,但是每个宽度都一样。在7.0以下，宽度不一致但能正常显示
+        expandedTabLayoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f);
     }
 
     public void setViewPager(ViewPager pager) {
@@ -154,25 +155,6 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
             @SuppressLint("NewApi")
             @Override
             public void onGlobalLayout() {
-                /*解决shouldExpand 为true 时 如果 当前PagerSlidingTabStrip
-                 * 宽度不足够的情况下导致每个ITEM宽度不一致的bug
-                 */
-                if (shouldExpand && tabCount > 0) {
-                    int maxTabWidth = 0;
-                    for (int index = 0; index < tabCount; index++) {
-                        int tempWidth = tabsContainer.getChildAt(index).getWidth();
-                        if (tempWidth > maxTabWidth) {
-                            maxTabWidth = tempWidth;
-                        }
-                    }
-                    if (maxTabWidth > 0) {
-                        for (int index = 0; index < tabCount; index++) {
-                            View view = tabsContainer.getChildAt(index);
-                            view.setMinimumWidth(maxTabWidth);
-                        }
-                    }
-                }
-                /*end bug**/
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
                     getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
