@@ -116,7 +116,7 @@ public class PagerSlidingTabStrip extends HorizontalScrollView {
 
         defaultTabLayoutParams = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         //当PagerSlidingTabStrip的宽度为wrap_content，或者为match_parent但是需要滚动的时候，如果每个tab的内容不同导致宽度不一致，
-        //TextView在7.0的时候计算有问题，但内容多的TextView有部分文字不能显示,但是每个宽度都一样。在7.0以下，宽度不一致但能正常显示
+        //TextView在7.0的时候,TextView会自动换行保持每个宽度都一样。在7.0以下，宽度不一致但能不会换行
         expandedTabLayoutParams = new LinearLayout.LayoutParams(0, LayoutParams.MATCH_PARENT, 1.0f);
     }
 
