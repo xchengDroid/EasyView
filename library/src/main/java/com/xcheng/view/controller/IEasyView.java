@@ -8,7 +8,7 @@ import android.view.View;
 /**
  * @author xincheng
  */
-public interface IEasyView extends View.OnClickListener {
+public interface IEasyView extends View.OnClickListener,ILoadingView {
     /**
      * 获取布局Layout的id
      */
@@ -43,15 +43,5 @@ public interface IEasyView extends View.OnClickListener {
     void showMessage(CharSequence text);
 
     void showMessage(@StringRes int stringId);
-
-    /**
-     * 显示加载
-     */
-    void showLoading();
-
-    /**
-     * 隐藏加载
-     */
-    void hideLoading();
 
 }
