@@ -2,13 +2,12 @@ package com.xcheng.view.controller;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
 import android.view.View;
 
 /**
  * @author xincheng
  */
-public interface IEasyView extends View.OnClickListener,ILoadingView {
+public interface IEasyView extends View.OnClickListener, ILoadingView {
     /**
      * 获取布局Layout的id
      */
@@ -34,14 +33,5 @@ public interface IEasyView extends View.OnClickListener,ILoadingView {
      * 设置监听
      */
     void setListener();
-
-    /**
-     * 显示消息提醒等
-     *
-     * @param text 消息内容
-     */
-    void showMessage(CharSequence text);
-
-    void showMessage(@StringRes int stringId);
 
 }
