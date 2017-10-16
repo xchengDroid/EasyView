@@ -9,6 +9,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
+import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
@@ -89,16 +90,14 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     }
 
     @Override
-    public boolean isAutoRefresh() {
-        return true;
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mPtrFrameLayout.complete(true, LoadingState.INIT);
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mPtrFrameLayout.isRefreshing()) {
-            mPtrFrameLayout.complete(true, LoadingState.INIT);
-        }
+    public boolean isAutoRefresh() {
+        return true;
     }
 
     private void lazyLoad() {
