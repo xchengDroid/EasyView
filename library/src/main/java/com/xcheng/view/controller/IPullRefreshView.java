@@ -45,19 +45,19 @@ public interface IPullRefreshView<T> extends EasyAdapter.OnBindHolderListener {
     void complete(boolean isRefresh, LoadingState state);
 
 
-    /***
+    /**
      * 获取HeaderView ,如果为0不设置
      */
     @LayoutRes
     int getHeaderId();
 
-    /***
+    /**
      * 获取EmptyView 如果为0不设置
      */
     @LayoutRes
     int getEmptyId();
 
-    /***
+    /**
      * 获取FooterView,如果为0不设置
      */
     @LayoutRes
