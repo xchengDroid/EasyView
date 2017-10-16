@@ -90,7 +90,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     /**
      * 满足加载的物理条件 和外在条件 是否可以加载更多
      *
-     * @return
+     * @return true 可以加载更多,其他false
      */
     private boolean canLoadMore() {
         EasyAdapter adapter = getEasyAdapter();
