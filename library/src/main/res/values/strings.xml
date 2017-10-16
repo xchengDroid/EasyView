@@ -7,6 +7,8 @@
     <string name="ev_skip">跳过</string>
     <string name="ev_login">登录</string>
     <string name="ev_account">账号</string>
+    <string name="ev_userName">用户名</string>
+    <string name="ev_loginName">登录名</string>
     <string name="ev_password">密码</string>
     <string name="ev_no_account">没有账号?</string>
     <string name="ev_to_register">去注册</string>
