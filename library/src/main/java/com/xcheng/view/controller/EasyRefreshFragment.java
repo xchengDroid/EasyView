@@ -89,6 +89,11 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     }
 
     @Override
+    public boolean isAutoRefresh() {
+        return true;
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (mPtrFrameLayout.isRefreshing()) {
@@ -97,7 +102,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     }
 
     private void lazyLoad() {
-        if (!getUserVisibleHint() || !mHasInitView)
+        if (!isAutoRefresh() || !getUserVisibleHint() || !mHasInitView)
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;

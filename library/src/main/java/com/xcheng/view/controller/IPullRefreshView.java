@@ -29,6 +29,13 @@ public interface IPullRefreshView<T> extends EasyAdapter.OnBindHolderListener {
     void refreshView(boolean isRefresh, List<T> data);
 
     /**
+     * 是否自动刷新
+     *
+     * @return true 自动刷新,否则false
+     */
+    boolean isAutoRefresh();
+
+    /**
      * 加载数据结束之后复位UI
      *
      * @param isRefresh 是否为刷新
