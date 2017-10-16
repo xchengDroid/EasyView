@@ -16,5 +16,9 @@
     <string name="ev_cancel">取消</string>
     <string name="ev_reload">重新加载</string>
     <string name="ev_call">呼叫</string>
-    <string name="ev_network_error">网络出错</string>
+    <string name="ev_network_error">网络异常</string>
+    <string name="ev_save">保存</string>
+    <string name="ev_delete">删除</string>
+    <string name="ev_modifyPassword">修改密码</string>
+
 </resources>
