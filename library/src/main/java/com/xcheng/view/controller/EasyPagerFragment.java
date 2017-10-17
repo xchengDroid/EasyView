@@ -47,8 +47,8 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
             }
 
             @Override
-            public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
-                return !isUseCacheWhenSetAdapter(position, tabInfo);
+            public boolean isUseCacheFragment(int position, TabInfo tabInfo) {
+                return EasyPagerFragment.this.isUseCacheFragment(position, tabInfo);
             }
         };
         mViewPager.setAdapter(mTabsAdapter);
@@ -57,7 +57,7 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
     }
 
     @Override
-    public boolean isUseCacheWhenSetAdapter(int position, TabInfo tabInfo) {
+    public boolean isUseCacheFragment(int position, TabInfo tabInfo) {
         return true;
     }
 

@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.xcheng.view.widget.PagerSlidingTabStrip;
@@ -56,6 +57,7 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
 
     @Override
     public Fragment getItem(int position) {
+        Log.e("print", "getItem:" + position);
         TabInfo info = mTabInfos.get(position);
         return Fragment.instantiate(mContext, info.clazz.getName(), info.args);
     }
@@ -72,16 +74,14 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
     }
 
     /**
-     * 当ViewPager调用setAdapter的时候是否重新创建之前原位置的Fragment
-     *
-     * @return true 重新创建,否则 false
-     */
-    public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
-        return false;
+     * 当ViewPager调用setAdapter的时候是否使用之前原位置的Fragment
+     **/
+    public boolean isUseCacheFragment(int position, TabInfo tabInfo) {
+        return true;
     }
 
     public Object instantiateItem(ViewGroup container, int position) {
-        if (isRecreateWhenSetAdapter(position, getTabInfo(position)))
+        if (!isUseCacheFragment(position, getTabInfo(position)))
             removeFragment(container, position);
         return super.instantiateItem(container, position);
     }
