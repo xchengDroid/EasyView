@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.ViewGroup;
 
 import com.xcheng.view.widget.PagerSlidingTabStrip;
@@ -57,7 +56,6 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
 
     @Override
     public Fragment getItem(int position) {
-        Log.e("print", "getItem:" + position);
         TabInfo info = mTabInfos.get(position);
         return Fragment.instantiate(mContext, info.clazz.getName(), info.args);
     }

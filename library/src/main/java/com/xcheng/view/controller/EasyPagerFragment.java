@@ -45,20 +45,10 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
             public View getTabView(int position) {
                 return createTabView(position, mTabsAdapter.getTabInfo(position));
             }
-
-            @Override
-            public boolean isUseCacheFragment(int position, TabInfo tabInfo) {
-                return EasyPagerFragment.this.isUseCacheFragment(position, tabInfo);
-            }
         };
         mViewPager.setAdapter(mTabsAdapter);
         mIndicator = (PagerSlidingTabStrip) findViewById(R.id.ev_id_tab_indicator);
         mIndicator.setViewPager(mViewPager);
-    }
-
-    @Override
-    public boolean isUseCacheFragment(int position, TabInfo tabInfo) {
-        return true;
     }
 
     @Override
