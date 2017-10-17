@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @param <T>
  */
-public abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
+abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
 
     private final Context mContext;
     private final LayoutInflater mInflater;
@@ -52,11 +52,6 @@ public abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> imple
 
     public View inflater(int layoutId, ViewGroup parent) {
         return mInflater.inflate(layoutId, parent, false);
-    }
-
-    @Override
-    public int getItemCount() {
-        return getDataCount();
     }
 
     @Override
