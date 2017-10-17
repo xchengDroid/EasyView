@@ -2,12 +2,11 @@ package com.xcheng.view.controller;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.xcheng.view.R;
-import com.xcheng.view.adapter.EasyFragmentPagerAdapter;
+import com.xcheng.view.adapter.EasyFragmentAdapter;
 import com.xcheng.view.adapter.TabInfo;
 import com.xcheng.view.widget.PagerSlidingTabStrip;
 
@@ -24,7 +23,7 @@ import java.util.List;
 public abstract class EasyPagerActivity extends EasyActivity implements IPagerView {
 
     protected ViewPager mViewPager;
-    protected EasyFragmentPagerAdapter mTabsAdapter;
+    protected EasyFragmentAdapter mTabsAdapter;
     protected PagerSlidingTabStrip mIndicator;
 
     @Override
@@ -40,20 +39,16 @@ public abstract class EasyPagerActivity extends EasyActivity implements IPagerVi
         mViewPager.setOffscreenPageLimit(getScreenPageLimit());
         List<TabInfo> tabInfos = new ArrayList<>();
         getTabInfos(tabInfos);
-        mTabsAdapter = new EasyFragmentPagerAdapter(getSupportFragmentManager(), getContext(), tabInfos) {
+        mTabsAdapter = new EasyFragmentAdapter(getSupportFragmentManager(), getContext(), tabInfos) {
             @NonNull
             @Override
             public View getTabView(int position) {
-                return createTabView(position, mTabsAdapter.getViewPageInfo(position));
+                return createTabView(position, mTabsAdapter.getTabInfo(position));
             }
         };
         mViewPager.setAdapter(mTabsAdapter);
         mIndicator = (PagerSlidingTabStrip) findViewById(R.id.ev_id_tab_indicator);
         mIndicator.setViewPager(mViewPager);
-    }
-
-    protected Fragment getFragmentFromViewPager(int position) {
-        return (Fragment) mTabsAdapter.instantiateItem(mViewPager, position);
     }
 
     @Override
