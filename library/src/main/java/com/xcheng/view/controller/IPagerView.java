@@ -37,5 +37,5 @@ public interface IPagerView {
      *
      * @return true 重新创建,否则 false
      */
-    boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo);
+    boolean isUseCacheWhenSetAdapter(int position, TabInfo tabInfo);
 }

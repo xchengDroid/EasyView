@@ -47,7 +47,7 @@ public abstract class EasyPagerActivity extends EasyActivity implements IPagerVi
             }
             @Override
             public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
-                return EasyPagerActivity.this.isRecreateWhenSetAdapter(position, tabInfo);
+                return !isUseCacheWhenSetAdapter(position, tabInfo);
             }
         };
         mViewPager.setAdapter(mTabsAdapter);
@@ -61,7 +61,7 @@ public abstract class EasyPagerActivity extends EasyActivity implements IPagerVi
     }
 
     @Override
-    public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
-        return false;
+    public boolean isUseCacheWhenSetAdapter(int position, TabInfo tabInfo) {
+        return true;
     }
 }
