@@ -1,6 +1,7 @@
 package com.xcheng.view.adapter;
 
 import android.content.Context;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -75,7 +76,7 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
      *
      * @return false
      */
-    protected boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
+    public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
         return false;
     }
 
@@ -101,6 +102,7 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
      * @param position  位置
      * @return Fragment
      */
+    @Nullable
     public Fragment findFragment(ViewGroup container, int position) {
         String tag = "android:switcher:" + container.getId() + ":" + getItemId(position);
         return mFragmentManager.findFragmentByTag(tag);
