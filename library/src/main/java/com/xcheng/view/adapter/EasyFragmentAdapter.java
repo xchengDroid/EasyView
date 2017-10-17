@@ -70,7 +70,12 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
         super.destroyItem(container, position, object);
     }
 
-    public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
+    /**
+     * 当ViewPager调用setAdapter的时候是否重新创建之前原位置的Fragment
+     *
+     * @return false
+     */
+    protected boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
         return false;
     }
 
