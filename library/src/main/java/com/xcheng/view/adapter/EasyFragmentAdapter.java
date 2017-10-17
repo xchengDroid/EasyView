@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.view.ViewGroup;
 
@@ -11,17 +12,19 @@ import com.xcheng.view.widget.PagerSlidingTabStrip;
 
 import java.util.List;
 
-public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.TabAdapter {
+public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.TabAdapter {
     private Context mContext;
     private final List<TabInfo> mTabInfos;
+    private FragmentManager mFragmentManager;
 
-    public EasyFragmentPagerAdapter(FragmentManager fm, Context context,
-                                    List<TabInfo> tabs) {
+    public EasyFragmentAdapter(FragmentManager fm, Context context,
+                               List<TabInfo> tabs) {
         super(fm);
         if (tabs == null) {
             throw new IllegalArgumentException(
                     "tabs can not be null,please initialized it");
         }
+        mFragmentManager = fm;
         mTabInfos = tabs;
         mContext = context;
     }
@@ -40,7 +43,7 @@ public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter impl
         return mTabInfos.size();
     }
 
-    public TabInfo getViewPageInfo(int position) {
+    public TabInfo getTabInfo(int position) {
         return mTabInfos.get(position);
     }
 
@@ -67,4 +70,34 @@ public abstract class EasyFragmentPagerAdapter extends FragmentPagerAdapter impl
         super.destroyItem(container, position, object);
     }
 
+    public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
+        return false;
+    }
+
+    public Object instantiateItem(ViewGroup container, int position) {
+        if (isRecreateWhenSetAdapter(position, getTabInfo(position)))
+            removeFragment(container, position);
+        return super.instantiateItem(container, position);
+    }
+
+    private void removeFragment(ViewGroup container, int index) {
+        Fragment fragment = findFragment(container, index);
+        if (fragment == null)
+            return;
+        FragmentTransaction ft = mFragmentManager.beginTransaction();
+        ft.remove(fragment);
+        ft.commit();
+        mFragmentManager.executePendingTransactions();
+    }
+
+
+    /**
+     * @param container ViewPager
+     * @param position  位置
+     * @return Fragment
+     */
+    public Fragment findFragment(ViewGroup container, int position) {
+        String tag = "android:switcher:" + container.getId() + ":" + getItemId(position);
+        return mFragmentManager.findFragmentByTag(tag);
+    }
 }
