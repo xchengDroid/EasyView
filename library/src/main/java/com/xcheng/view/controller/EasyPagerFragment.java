@@ -45,10 +45,20 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
             public View getTabView(int position) {
                 return createTabView(position, mTabsAdapter.getTabInfo(position));
             }
+
+            @Override
+            public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
+                return EasyPagerFragment.this.isRecreateWhenSetAdapter(position, tabInfo);
+            }
         };
         mViewPager.setAdapter(mTabsAdapter);
         mIndicator = (PagerSlidingTabStrip) findViewById(R.id.ev_id_tab_indicator);
         mIndicator.setViewPager(mViewPager);
+    }
+
+    @Override
+    public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
+        return false;
     }
 
     @Override

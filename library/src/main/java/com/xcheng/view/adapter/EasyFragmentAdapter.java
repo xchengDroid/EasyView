@@ -74,7 +74,7 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
     /**
      * 当ViewPager调用setAdapter的时候是否重新创建之前原位置的Fragment
      *
-     * @return false
+     * @return true 重新创建,否则 false
      */
     public boolean isRecreateWhenSetAdapter(int position, TabInfo tabInfo) {
         return false;
