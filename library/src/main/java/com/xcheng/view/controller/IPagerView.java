@@ -31,9 +31,5 @@ public interface IPagerView {
      */
     @NonNull
     View createTabView(int position, TabInfo tabInfo);
-
-    /**
-     * 当ViewPager调用setAdapter的时候是否使用之前原位置的Fragment
-     **/
-    boolean isUseCacheFragment(int position, TabInfo tabInfo);
+    
 }

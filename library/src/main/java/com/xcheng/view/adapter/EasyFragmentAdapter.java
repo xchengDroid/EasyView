@@ -73,20 +73,8 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
         super.destroyItem(container, position, object);
     }
 
-    /**
-     * 当ViewPager调用setAdapter的时候是否使用之前原位置的Fragment
-     **/
-    public boolean isUseCacheFragment(int position, TabInfo tabInfo) {
-        return true;
-    }
 
-    public Object instantiateItem(ViewGroup container, int position) {
-        if (!isUseCacheFragment(position, getTabInfo(position)))
-            removeFragment(container, position);
-        return super.instantiateItem(container, position);
-    }
-
-    private void removeFragment(ViewGroup container, int index) {
+    public void removeFragment(ViewGroup container, int index) {
         Fragment fragment = findFragment(container, index);
         if (fragment == null)
             return;
@@ -96,6 +84,11 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
         mFragmentManager.executePendingTransactions();
     }
 
+    public void removeAllFragment(ViewGroup container) {
+        for (int index = 0; index < getCount(); index++) {
+            removeFragment(container, index);
+        }
+    }
 
     /**
      * @param container ViewPager
