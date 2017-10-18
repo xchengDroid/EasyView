@@ -1,6 +1,7 @@
 package com.xcheng.view.adapter;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -17,8 +18,9 @@ import java.util.List;
  * @param <T>
  */
 abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
-
+    
     private final Context mContext;
+    private final Resources mResources;
     private final LayoutInflater mInflater;
     private final List<T> mData;
     private final int mLayoutId;
@@ -37,13 +39,17 @@ abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements I
         }
         this.mData = data;
         mContext = context;
+        mResources = mContext.getResources();
         mInflater = LayoutInflater.from(context);
         mLayoutId = layoutId;
     }
 
-
     public Context getContext() {
         return mContext;
+    }
+
+    public Resources getRes() {
+        return mResources;
     }
 
     public LayoutInflater getInflater() {
@@ -101,4 +107,5 @@ abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements I
     public final boolean isEmpty() {
         return mData == null || mData.size() == 0;
     }
+
 }
