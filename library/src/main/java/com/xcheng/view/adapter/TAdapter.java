@@ -19,11 +19,11 @@ import java.util.List;
  */
 abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
 
-    private final Context mContext;
-    private final Resources mResources;
-    private final LayoutInflater mInflater;
+    protected final Context mContext;
+    protected final Resources mResources;
+    protected final LayoutInflater mInflater;
+    protected final int mLayoutId;
     private final List<T> mData;
-    private final int mLayoutId;
 
     public TAdapter(Context context, @Nullable List<T> data) {
         this(context, data, 0);
@@ -42,18 +42,6 @@ abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements I
         mResources = mContext.getResources();
         mInflater = LayoutInflater.from(context);
         mLayoutId = layoutId;
-    }
-
-    public Context getContext() {
-        return mContext;
-    }
-
-    public Resources getResources() {
-        return mResources;
-    }
-
-    public LayoutInflater getInflater() {
-        return mInflater;
     }
 
     public View inflater(int layoutId, ViewGroup parent) {
