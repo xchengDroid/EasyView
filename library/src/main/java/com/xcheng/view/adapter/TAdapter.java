@@ -18,7 +18,7 @@ import java.util.List;
  * @param <T>
  */
 abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
-    
+
     private final Context mContext;
     private final Resources mResources;
     private final LayoutInflater mInflater;
@@ -48,7 +48,7 @@ abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements I
         return mContext;
     }
 
-    public Resources getRes() {
+    public Resources getResources() {
         return mResources;
     }
 
