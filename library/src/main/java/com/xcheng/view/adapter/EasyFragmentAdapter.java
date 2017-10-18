@@ -30,12 +30,29 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
         mContext = context;
     }
 
+    /**
+     * called {@link #notifyDataSetChanged()} after this method
+     */
     public void addTabInfo(TabInfo tabInfo) {
         mTabInfos.add(tabInfo);
     }
 
+    /**
+     * called {@link #notifyDataSetChanged()} after this method
+     */
+    public void removeTabInfo(int index) {
+        mTabInfos.remove(index);
+    }
+
+    /**
+     * called {@link #notifyDataSetChanged()} after this method
+     */
     public void setTabInfo(int index, TabInfo info) {
         mTabInfos.set(index, info);
+    }
+
+    public TabInfo getTabInfo(int position) {
+        return mTabInfos.get(position);
     }
 
     @Override
@@ -44,9 +61,6 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
         return mTabInfos.size();
     }
 
-    public TabInfo getTabInfo(int position) {
-        return mTabInfos.get(position);
-    }
 
     @Override
     public int getItemPosition(Object object) {
