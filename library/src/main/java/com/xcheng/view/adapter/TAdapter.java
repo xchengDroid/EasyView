@@ -19,29 +19,47 @@ import java.util.List;
  */
 abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
 
-    protected final Context mContext;
-    protected final Resources mResources;
-    protected final LayoutInflater mInflater;
-    protected final int mLayoutId;
+    private final Context mContext;
+    private final Resources mResources;
+    private final LayoutInflater mInflater;
+    //默认布局ID
+    @LayoutRes
+    private final int mLayoutId;
     private final List<T> mData;
 
-    public TAdapter(Context context, @Nullable List<T> data) {
+    TAdapter(Context context, @Nullable List<T> data) {
         this(context, data, 0);
     }
 
-    public TAdapter(Context context, @LayoutRes int layoutId) {
+    TAdapter(Context context, @LayoutRes int layoutId) {
         this(context, null, layoutId);
     }
 
-    public TAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId) {
+    TAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId) {
         if (data == null) {
             data = new ArrayList<>();
         }
-        this.mData = data;
+        mData = data;
         mContext = context;
-        mResources = mContext.getResources();
+        mResources = context.getResources();
         mInflater = LayoutInflater.from(context);
         mLayoutId = layoutId;
+    }
+
+    public final int getLayoutId() {
+        return mLayoutId;
+    }
+
+    public Resources getResources() {
+        return mResources;
+    }
+
+    public LayoutInflater getInflater() {
+        return mInflater;
+    }
+
+    public Context getContext() {
+        return mContext;
     }
 
     public View inflater(int layoutId, ViewGroup parent) {
