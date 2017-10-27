@@ -20,4 +20,11 @@
     <item name="ev_id_tab_indicator" type="id" />
     <item name="ev_id_submit" type="id" />
     <item name="ev_id_headerPhoto" type="id" />
+
+
+    <!--CommonView相关的id-->
+    <item name="ev_id_cv_label" type="id" />
+    <item name="ev_id_cv_display" type="id" />
+    <item name="ev_id_cv_input" type="id" />
+    <item name="ev_id_cv_suffix" type="id" />
 </resources>

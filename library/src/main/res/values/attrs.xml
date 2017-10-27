@@ -96,4 +96,48 @@
         <attr name="ev_pstsShouldExpand" format="boolean" />
         <attr name="ev_pstsSmoothScroll" format="boolean" />
     </declare-styleable>
+
+    <declare-styleable name="CommonView">
+        <attr name="ev_cv_label" format="string" />
+        <attr name="ev_cv_labelColor" format="color" />
+        <attr name="ev_cv_labelSize" format="dimension" />
+        <attr name="ev_cv_labelWidth" format="dimension" />
+
+        <!--displayText 和 inputText的样式-->
+        <attr name="ev_cv_text" format="string" />
+        <attr name="ev_cv_hint" format="string" />
+        <attr name="ev_cv_textSize" format="dimension" />
+        <attr name="ev_cv_textColor" format="color" />
+        <attr name="ev_cv_hintColor" format="color" />
+        <attr name="ev_cv_maxLength" format="integer" />
+
+        <!--内容显示位置 左侧还是右侧-->
+        <attr name="ev_cv_gravity">
+            <enum name="start" value="0" />
+            <enum name="end" value="1" />
+        </attr>
+
+        <attr name="ev_cv_suffixText" format="string" />
+        <attr name="ev_cv_suffixTextColor" format="color" />
+        <attr name="ev_cv_suffixTextSize" format="dimension" />
+
+        <attr name="ev_cv_suffixIcon" format="color" />
+
+        <!--自定义的布局文件，id和控件必须保和ev_common_view持一致-->
+        <attr name="ev_cv_layout" format="reference" />
+
+        <attr name="ev_cv_inputType">//输入的内容限制
+            <enum name="none" value="0" />
+            <enum name="number" value="1" />
+            <enum name="numberDecimal" value="2" />
+            <enum name="numberPassword" value="3" />
+            <enum name="phone" value="4" />
+            <enum name="money" value="5" />//保留两位小数，其他类型能输入小数的保留三位
+        </attr>
+        <attr name="ev_cv_mode">
+            <enum name="input" value="0" />//输入
+            <enum name="display" value="1" />//view用于查看数据
+            <enum name="select" value="2" />//用作选择器
+        </attr>
+    </declare-styleable>
 </resources>

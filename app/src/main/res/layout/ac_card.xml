@@ -6,25 +6,54 @@
     android:padding="16dp">
 
     <android.support.v7.widget.CardView
-        app:cardBackgroundColor="?colorAccent"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="100dp"
         android:layout_marginRight="100dp"
         android:layout_marginTop="10dp"
+        app:cardBackgroundColor="?colorAccent"
         app:cardCornerRadius="20dp"
         app:cardElevation="40dp"
         app:cardMaxElevation="40dp"
-        app:cardUseCompatPadding="false"
         app:cardPreventCornerOverlap="true"
-        android:layout_height="wrap_content">
+        app:cardUseCompatPadding="false">
 
         <TextView
-            android:background="@color/ev_blue_normal"
-            android:text="卡片View"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:textColor="@color/ev_white"
             android:layout_width="match_parent"
-            android:layout_height="200dp" />
+            android:layout_height="200dp"
+            android:background="@color/ev_blue_normal"
+            android:gravity="center"
+            android:text="卡片View"
+            android:textColor="@color/ev_white"
+            android:textSize="20sp" />
     </android.support.v7.widget.CardView>
+
+    <com.xcheng.view.widget.CommonView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        app:ev_cv_hint="请输入账号"
+        app:ev_cv_label="账号"
+        app:ev_cv_labelSize="16sp"
+        app:ev_cv_mode="input"
+        app:ev_cv_suffixTextColor="@color/colorAccent"
+        app:ev_cv_textColor="@color/ev_holo_red_light"
+        app:ev_position="bottom|top" />
+
+    <com.xcheng.view.widget.CommonView
+        android:id="@+id/cv2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        app:ev_cv_hint="请输入密码"
+        app:ev_cv_inputType="numberPassword"
+        app:ev_cv_label="密码"
+        app:ev_cv_labelSize="16sp"
+        app:ev_cv_mode="input"
+        app:ev_cv_suffixTextColor="@color/colorAccent"
+        app:ev_cv_textColor="@color/ev_holo_red_light"
+        app:ev_position="bottom" />
 </LinearLayout>
