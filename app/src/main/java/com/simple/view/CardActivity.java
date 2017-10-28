@@ -27,8 +27,6 @@ public class CardActivity extends EasyActivity {
                 int mode = commonView.getMode();
                 if (mode == CommonView.INPUT) {
                     commonView.setMode(CommonView.DISPLAY);
-                } else if (mode == CommonView.DISPLAY) {
-                    commonView.setMode(CommonView.SELECT);
                 } else {
                     commonView.setMode(CommonView.INPUT);
                 }
