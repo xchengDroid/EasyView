@@ -100,8 +100,13 @@ public class CommonView extends DividerLayout {
         mInputView = (EditText) findViewById(R.id.ev_id_cv_input);
         mDisplayView = (TextView) findViewById(R.id.ev_id_cv_display);
         mSuffixView = (TextView) findViewById(R.id.ev_id_cv_suffix);
+        int minHeight = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_minHeight, 0);
+        //元素的最小高度
+        mInputView.setMinimumHeight(minHeight);
+        mDisplayView.setMinimumHeight(minHeight);
         // in px
         final int defaultTextSize = LocalDisplay.convert(TypedValue.COMPLEX_UNIT_SP, 16, context);
+
 
         int labelSize = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_labelSize, defaultTextSize);
         int labelWidth = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_labelWidth, -1);

@@ -110,6 +110,7 @@
         <attr name="ev_cv_textColor" format="color" />
         <attr name="ev_cv_hintColor" format="color" />
         <attr name="ev_cv_maxLength" format="integer" />
+        <attr name="ev_cv_minHeight" format="dimension" />
 
         <!--内容显示位置 左侧还是右侧-->
         <attr name="ev_cv_gravity">
