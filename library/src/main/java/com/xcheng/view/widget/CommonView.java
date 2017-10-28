@@ -7,7 +7,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IntDef;
-import android.support.v4.content.ContextCompat;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -49,14 +48,14 @@ public class CommonView extends DividerLayout {
     @interface Mode {
     }
 
-    public static final int NONE = 0;
+    public static final int TEXT = 0;
     public static final int NUMBER = 1;
     public static final int NUMBER_DECIMAL = 2;
     public static final int TEXT_PASSWORD = 3;
     public static final int NUMBER_PASSWORD = 4;
     public static final int PHONE = 5;
 
-    @IntDef({NONE, NUMBER, NUMBER_DECIMAL, TEXT_PASSWORD, NUMBER_PASSWORD, PHONE})
+    @IntDef({TEXT, NUMBER, NUMBER_DECIMAL, TEXT_PASSWORD, NUMBER_PASSWORD, PHONE})
     @Retention(RetentionPolicy.SOURCE)
     @interface InputMethod {
     }
@@ -76,9 +75,6 @@ public class CommonView extends DividerLayout {
     private int mMode;
 
     private int mInputType;
-
-    private Drawable mSuffixIcon;
-    private CharSequence mSuffixText;
 
     public CommonView(Context context) {
         this(context, null);
@@ -100,13 +96,22 @@ public class CommonView extends DividerLayout {
         mInputView = (EditText) findViewById(R.id.ev_id_cv_input);
         mDisplayView = (TextView) findViewById(R.id.ev_id_cv_display);
         mSuffixView = (TextView) findViewById(R.id.ev_id_cv_suffix);
+        //是否为单行，默认为true
+        boolean singleLine = typedValue.getBoolean(R.styleable.CommonView_ev_cv_singleLine, true);
         int minHeight = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_minHeight, 0);
-        //元素的最小高度
+        //元素的最小高度,不能调用setMinHeight,否则如果后面再调用 setLines setMaxLines setMinLines 会被覆盖，他们都是通用 mMinimum 和mMaximum 属性控制
+        //setMinimumHeight是View中的方法，mMinHeight属性在View中不会被覆盖
+        //{@link #getSuggestedMinimumHeight()}
         mInputView.setMinimumHeight(minHeight);
         mDisplayView.setMinimumHeight(minHeight);
+        if (singleLine) {
+            mInputView.setMaxLines(1);
+            mDisplayView.setMaxLines(1);
+            mDisplayView.setEllipsize(TextUtils.TruncateAt.END);
+        }
+
         // in px
         final int defaultTextSize = LocalDisplay.convert(TypedValue.COMPLEX_UNIT_SP, 16, context);
-
 
         int labelSize = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_labelSize, defaultTextSize);
         int labelWidth = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_labelWidth, -1);
@@ -125,16 +130,12 @@ public class CommonView extends DividerLayout {
         //如果没有设置就是用layout中View默认的设置
         int cvGravity = typedValue.getInt(R.styleable.CommonView_ev_cv_gravity, GRAVITY_START);
 
-
         int suffixTextColor = typedValue.getColor(R.styleable.CommonView_ev_cv_suffixTextColor, DEFAULT_TEXT_COLOR);
         int suffixTextSize = typedValue.getInt(R.styleable.CommonView_ev_cv_suffixTextSize, defaultTextSize);
-        mSuffixText = typedValue.getText(R.styleable.CommonView_ev_cv_suffixText);
-        mSuffixIcon = typedValue.getDrawable(R.styleable.CommonView_ev_cv_suffixIcon);
-        if (mSuffixIcon == null) {
-            mSuffixIcon = ContextCompat.getDrawable(getContext(), R.drawable.ev_enter_arrow);
-        }
+        CharSequence suffixText = typedValue.getText(R.styleable.CommonView_ev_cv_suffixText);
+        Drawable suffixIcon = typedValue.getDrawable(R.styleable.CommonView_ev_cv_suffixIcon);
 
-        int inputType = typedValue.getInt(R.styleable.CommonView_ev_cv_inputType, NONE);
+        int inputType = typedValue.getInt(R.styleable.CommonView_ev_cv_inputType, TEXT);
         int mode = typedValue.getInt(R.styleable.CommonView_ev_cv_mode, INPUT);
         typedValue.recycle();
         mLabelView.setText(label);
@@ -153,10 +154,14 @@ public class CommonView extends DividerLayout {
         setMaxLength(maxLength);
         setTextGravity((cvGravity == GRAVITY_START ? Gravity.START : Gravity.END) | Gravity.CENTER_VERTICAL);
 
-        //icon和text初始化放在setMode中动态控制
         mSuffixView.setTextColor(suffixTextColor);
         mSuffixView.setTextSize(TypedValue.COMPLEX_UNIT_PX, suffixTextSize);
-
+        if (suffixIcon != null) {
+            mSuffixView.setCompoundDrawablesWithIntrinsicBounds(null, null, suffixIcon, null);
+        }
+        if (suffixText != null) {
+            mSuffixView.setText(suffixText);
+        }
         setInputType(inputType);
         setMode(mode);
     }
@@ -176,19 +181,10 @@ public class CommonView extends DividerLayout {
             mDisplayView.setVisibility(VISIBLE);
             mInputView.setVisibility(GONE);
         }
-        //选择模式
-        if (mMode == SELECT) {
-            mSuffixView.setCompoundDrawablesWithIntrinsicBounds(null, null, mSuffixIcon, null);
-            mSuffixView.setText(null);
+        if (!TextUtils.isEmpty(mSuffixView.getText()) || mSuffixView.getCompoundDrawables()[2] != null) {
             mSuffixView.setVisibility(VISIBLE);
         } else {
-            mSuffixView.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
-            if (TextUtils.isEmpty(mSuffixText)) {
-                mSuffixView.setVisibility(GONE);
-            } else {
-                mSuffixView.setText(mSuffixText);
-                mSuffixView.setVisibility(VISIBLE);
-            }
+            mSuffixView.setVisibility(GONE);
         }
     }
 
@@ -215,9 +211,10 @@ public class CommonView extends DividerLayout {
     public void setInputType(@InputMethod int inputMethod) {
         this.mInputType = inputMethod;
         switch (mInputType) {
-            case NONE:
-                //会导致无法弹出软键盘，无光标，默认即可
-                //mInputView.setInputType(InputType.TYPE_NULL);
+            case TEXT:
+                //InputType.TYPE_NULL会导致无法弹出软键盘，无光标。且如果xml属性inputType 不设置或者设置为none,
+                // 设置maxLines=1代替singleLine无效，能上下滚动的形式而不是左右滚动
+                mInputView.setInputType(InputType.TYPE_CLASS_TEXT);
                 break;
             case NUMBER:
                 mInputView.setInputType(InputType.TYPE_CLASS_NUMBER);
