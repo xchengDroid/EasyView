@@ -120,7 +120,7 @@ public class CommonView extends DividerLayout {
         CharSequence text = typedValue.getText(R.styleable.CommonView_ev_cv_text);
         CharSequence hint = typedValue.getText(R.styleable.CommonView_ev_cv_hint);
         //最大长度,默认为15
-        int maxLength = typedValue.getInt(R.styleable.CommonView_ev_cv_maxLength, 15);
+        int maxLength = typedValue.getInt(R.styleable.CommonView_ev_cv_maxLength, -1);
 
         //如果没有设置就是用layout中View默认的设置
         int cvGravity = typedValue.getInt(R.styleable.CommonView_ev_cv_gravity, GRAVITY_START);
