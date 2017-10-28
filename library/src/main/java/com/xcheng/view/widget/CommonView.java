@@ -41,9 +41,8 @@ public class CommonView extends DividerLayout {
 
     public static final int INPUT = 0;
     public static final int DISPLAY = 1;
-    public static final int SELECT = 2;
 
-    @IntDef({SELECT, DISPLAY, INPUT})
+    @IntDef({INPUT, DISPLAY})
     @Retention(RetentionPolicy.SOURCE)
     @interface Mode {
     }
