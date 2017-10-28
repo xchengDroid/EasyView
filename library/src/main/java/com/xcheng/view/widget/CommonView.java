@@ -226,10 +226,10 @@ public class CommonView extends DividerLayout {
                 mInputView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 break;
             case TEXT_PASSWORD:
-                mInputView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                mInputView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 break;
             case NUMBER_PASSWORD:
-                mInputView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                mInputView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
                 break;
             case PHONE:
                 mInputView.setInputType(InputType.TYPE_CLASS_PHONE);
