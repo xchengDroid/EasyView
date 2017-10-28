@@ -52,11 +52,11 @@ public class CommonView extends DividerLayout {
     public static final int NONE = 0;
     public static final int NUMBER = 1;
     public static final int NUMBER_DECIMAL = 2;
-    public static final int PASSWORD = 3;
-    public static final int PHONE = 4;
-    public static final int MONEY = 5;//输入的内容与钱相关，保留两位小数
+    public static final int TEXT_PASSWORD = 3;
+    public static final int NUMBER_PASSWORD = 4;
+    public static final int PHONE = 5;
 
-    @IntDef({NONE, NUMBER, NUMBER_DECIMAL, PASSWORD, PHONE, MONEY})
+    @IntDef({NONE, NUMBER, NUMBER_DECIMAL, TEXT_PASSWORD, NUMBER_PASSWORD, PHONE})
     @Retention(RetentionPolicy.SOURCE)
     @interface InputMethod {
     }
@@ -215,21 +215,25 @@ public class CommonView extends DividerLayout {
     public void setInputType(@InputMethod int inputMethod) {
         this.mInputType = inputMethod;
         switch (mInputType) {
+            case NONE:
+                //会导致无法弹出软键盘，无光标，默认即可
+                //mInputView.setInputType(InputType.TYPE_NULL);
+                break;
             case NUMBER:
                 mInputView.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
             case NUMBER_DECIMAL:
                 mInputView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 break;
-            case PASSWORD:
+            case TEXT_PASSWORD:
+                mInputView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+                break;
+            case NUMBER_PASSWORD:
                 mInputView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
                 break;
             case PHONE:
                 mInputView.setInputType(InputType.TYPE_CLASS_PHONE);
                 setMaxLength(11);
-                break;
-            case MONEY:
-                mInputView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
                 break;
         }
     }
