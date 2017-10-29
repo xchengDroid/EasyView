@@ -116,7 +116,8 @@
         <!--内容显示位置 左侧还是右侧-->
         <attr name="ev_cv_gravity">
             <enum name="start" value="0" />
-            <enum name="end" value="1" />
+            <enum name="center" value="1" />
+            <enum name="end" value="2" />
         </attr>
 
         <attr name="ev_cv_suffixText" format="string" />

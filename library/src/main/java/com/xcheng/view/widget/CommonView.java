@@ -35,7 +35,8 @@ public class CommonView extends DividerLayout {
     private static final int DEFAULT_HINT_COLOR = Color.parseColor("#c2c9cc");
 
     private static final int GRAVITY_START = 0;
-    private static final int GRAVITY_END = 1;
+    private static final int GRAVITY_CENTER = 1;
+    private static final int GRAVITY_END = 2;
 
     private static final InputFilter[] NO_FILTERS = new InputFilter[0];
 
@@ -151,7 +152,15 @@ public class CommonView extends DividerLayout {
         mDisplayView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         mInputView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
         setMaxLength(maxLength);
-        setTextGravity((cvGravity == GRAVITY_START ? Gravity.START : Gravity.END) | Gravity.CENTER_VERTICAL);
+        int gravity;
+        if (cvGravity == GRAVITY_START) {
+            gravity = Gravity.START | Gravity.CENTER_VERTICAL;
+        } else if (cvGravity == GRAVITY_CENTER) {
+            gravity = Gravity.CENTER;
+        } else {
+            gravity = Gravity.END | Gravity.CENTER_VERTICAL;
+        }
+        setTextGravity(gravity);
 
         mSuffixView.setTextColor(suffixTextColor);
         mSuffixView.setTextSize(TypedValue.COMPLEX_UNIT_PX, suffixTextSize);
