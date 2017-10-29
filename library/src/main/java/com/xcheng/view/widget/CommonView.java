@@ -290,6 +290,10 @@ public class CommonView extends DividerLayout {
         return mDisplayView.getText().toString();
     }
 
+    public boolean isEmpty() {
+        return TextUtils.isEmpty(getText());
+    }
+
     public int getMode() {
         return mMode;
     }
