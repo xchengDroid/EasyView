@@ -109,6 +109,13 @@ public class CommonView extends DividerLayout {
             mDisplayView.setSingleLine();
             mDisplayView.setEllipsize(TextUtils.TruncateAt.END);
         }
+        int paddingStart = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingStart, -1);
+        int paddingTop = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingTop, -1);
+        int paddingTopEnd = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingEnd, -1);
+        int paddingBottom = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingBottom, -1);
+
+        mInputView.setPadding(paddingStart > 0 ? paddingStart : 0, paddingTop > 0 ? paddingTop : 0, paddingTopEnd > 0 ? paddingTopEnd : 0, paddingBottom > 0 ? paddingBottom : 0);
+        mDisplayView.setPadding(paddingStart > 0 ? paddingStart : 0, paddingTop > 0 ? paddingTop : 0, paddingTopEnd > 0 ? paddingTopEnd : 0, paddingBottom > 0 ? paddingBottom : 0);
 
         // in px
         final int defaultTextSize = LocalDisplay.convert(TypedValue.COMPLEX_UNIT_SP, 16, context);
