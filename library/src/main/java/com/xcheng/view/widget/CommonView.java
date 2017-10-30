@@ -87,7 +87,6 @@ public class CommonView extends DividerLayout {
     @SuppressWarnings("WrongConstant")
     public CommonView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-
         TypedArray typedValue = getContext().obtainStyledAttributes(attrs, R.styleable.CommonView);
         //初始化布局
         int layoutId = typedValue.getResourceId(R.styleable.CommonView_ev_cv_layout, R.layout.ev_commom_view);
@@ -113,10 +112,10 @@ public class CommonView extends DividerLayout {
         int paddingTop = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingTop, -1);
         int paddingTopEnd = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingEnd, -1);
         int paddingBottom = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingBottom, -1);
-
-        mInputView.setPadding(paddingStart > 0 ? paddingStart : 0, paddingTop > 0 ? paddingTop : 0, paddingTopEnd > 0 ? paddingTopEnd : 0, paddingBottom > 0 ? paddingBottom : 0);
-        mDisplayView.setPadding(paddingStart > 0 ? paddingStart : 0, paddingTop > 0 ? paddingTop : 0, paddingTopEnd > 0 ? paddingTopEnd : 0, paddingBottom > 0 ? paddingBottom : 0);
-
+        if (paddingStart >= 0 || paddingTop >= 0 || paddingTopEnd >= 0 || paddingBottom >= 0) {
+            mInputView.setPadding(paddingStart > 0 ? paddingStart : 0, paddingTop > 0 ? paddingTop : 0, paddingTopEnd > 0 ? paddingTopEnd : 0, paddingBottom > 0 ? paddingBottom : 0);
+            mDisplayView.setPadding(paddingStart > 0 ? paddingStart : 0, paddingTop > 0 ? paddingTop : 0, paddingTopEnd > 0 ? paddingTopEnd : 0, paddingBottom > 0 ? paddingBottom : 0);
+        }
         // in px
         final int defaultTextSize = LocalDisplay.convert(TypedValue.COMPLEX_UNIT_SP, 16, context);
 
