@@ -104,7 +104,8 @@ public class CommonView extends DividerLayout {
         mInputView.setMinimumHeight(minHeight);
         mDisplayView.setMinimumHeight(minHeight);
         if (singleLine) {
-            //对于EditText来说，singleLine maxLines minLines lines只有对inputType="none"才有效，其他类型的inputType默认只有一行的..
+            //对于EditText来说，singleLine maxLines minLines lines只有对inputType="none"才有效(maxLines==1的情况下输入的内容超过宽度上下滚动)，
+            // 其他类型的inputType默认只有一行的左右滑动..
             mInputView.setSingleLine();
             mDisplayView.setSingleLine();
             mDisplayView.setEllipsize(TextUtils.TruncateAt.END);
