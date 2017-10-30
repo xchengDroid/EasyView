@@ -7,6 +7,7 @@ import android.os.Looper;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 
@@ -18,10 +19,8 @@ import com.xcheng.view.util.LocalDisplay;
  */
 public class EasyView {
     private static Context sAppContext;
-
+    private static int sLoadingLayout;
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
-    //default false
-    private static boolean sInitialized;
 
     /**
      * *********************************************************************************************
@@ -30,14 +29,14 @@ public class EasyView {
      */
     //调用初始化数据
     public static void init(Context context) {
-        sAppContext = context.getApplicationContext();
-        LocalDisplay.init(sAppContext);
-        sInitialized = true;
+        init(context, R.layout.ev_dialog_loading);
     }
 
-    private static void checkInit() {
-        if (!sInitialized)
-            throw new IllegalStateException("EasyView has not init");
+    //调用初始化数据
+    public static void init(Context context, @LayoutRes int loadingLayout) {
+        sAppContext = context.getApplicationContext();
+        LocalDisplay.init(sAppContext);
+        sLoadingLayout = loadingLayout;
     }
 
     /**
@@ -46,32 +45,30 @@ public class EasyView {
      * @return applicationContext 对象
      */
     public static Context getContext() {
-        checkInit();
         return sAppContext;
     }
 
+    public static int getLoadingLayout() {
+        return sLoadingLayout;
+    }
+
     public static String getString(@StringRes int stringId) {
-        checkInit();
         return sAppContext.getString(stringId);
     }
 
     public static CharSequence getText(@StringRes int stringId) {
-        checkInit();
         return sAppContext.getText(stringId);
     }
 
     public static int getColor(@ColorRes int colorId) {
-        checkInit();
         return ContextCompat.getColor(sAppContext, colorId);
     }
 
     public static Drawable getDrawable(@DrawableRes int drawableId) {
-        checkInit();
         return ContextCompat.getDrawable(sAppContext, drawableId);
     }
 
     public static int getDimen(@DimenRes int dimenId) {
-        checkInit();
         return sAppContext.getResources().getDimensionPixelOffset(dimenId);
     }
 
@@ -99,5 +96,4 @@ public class EasyView {
     public static boolean isOnMainThread() {
         return Looper.myLooper() == Looper.getMainLooper();
     }
-
 }
