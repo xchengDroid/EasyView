@@ -129,7 +129,7 @@
         <attr name="ev_cv_layout" format="reference" />
 
         <attr name="ev_cv_inputType">//输入的内容限制
-            <enum name="text" value="0" />
+            <enum name="none" value="0" />
             <enum name="number" value="1" />
             <enum name="numberDecimal" value="2" />
             <enum name="textPassword" value="3" />

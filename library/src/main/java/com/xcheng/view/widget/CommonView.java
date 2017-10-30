@@ -48,14 +48,14 @@ public class CommonView extends DividerLayout {
     @interface Mode {
     }
 
-    public static final int TEXT = 0;
+    public static final int NONE = 0;
     public static final int NUMBER = 1;
     public static final int NUMBER_DECIMAL = 2;
     public static final int TEXT_PASSWORD = 3;
     public static final int NUMBER_PASSWORD = 4;
     public static final int PHONE = 5;
 
-    @IntDef({TEXT, NUMBER, NUMBER_DECIMAL, TEXT_PASSWORD, NUMBER_PASSWORD, PHONE})
+    @IntDef({NONE, NUMBER, NUMBER_DECIMAL, TEXT_PASSWORD, NUMBER_PASSWORD, PHONE})
     @Retention(RetentionPolicy.SOURCE)
     @interface InputMethod {
     }
@@ -105,8 +105,8 @@ public class CommonView extends DividerLayout {
         mInputView.setMinimumHeight(minHeight);
         mDisplayView.setMinimumHeight(minHeight);
         if (singleLine) {
-            mInputView.setMaxLines(1);
-            mDisplayView.setMaxLines(1);
+            mInputView.setSingleLine();
+            mDisplayView.setSingleLine();
             mDisplayView.setEllipsize(TextUtils.TruncateAt.END);
         }
 
@@ -135,7 +135,7 @@ public class CommonView extends DividerLayout {
         CharSequence suffixText = typedValue.getText(R.styleable.CommonView_ev_cv_suffixText);
         Drawable suffixIcon = typedValue.getDrawable(R.styleable.CommonView_ev_cv_suffixIcon);
 
-        int inputType = typedValue.getInt(R.styleable.CommonView_ev_cv_inputType, TEXT);
+        int inputType = typedValue.getInt(R.styleable.CommonView_ev_cv_inputType, NONE);
         int mode = typedValue.getInt(R.styleable.CommonView_ev_cv_mode, INPUT);
         typedValue.recycle();
         mLabelView.setText(label);
@@ -219,10 +219,10 @@ public class CommonView extends DividerLayout {
     public void setInputType(@InputMethod int inputMethod) {
         this.mInputType = inputMethod;
         switch (mInputType) {
-            case TEXT:
-                //InputType.TYPE_NULL会导致无法弹出软键盘，无光标。且如果xml属性inputType 不设置或者设置为none,
-                // 设置maxLines=1代替singleLine无效，能上下滚动的形式而不是左右滚动
-                mInputView.setInputType(InputType.TYPE_CLASS_TEXT);
+            case NONE:
+                // line minLines maxLines 只有在inputType为 none的情况下才有效，否则和singleLine效果一些样，只能左右滑动.
+                //但是当inputType为none的时候设置 maxLines为1不能实现单行的效果，能上下滚动，问不左右滚动
+                //InputType.TYPE_NULL会导致无法弹出软键盘，无光标。
                 break;
             case NUMBER:
                 mInputView.setInputType(InputType.TYPE_CLASS_NUMBER);
