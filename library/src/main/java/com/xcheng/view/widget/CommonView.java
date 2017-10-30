@@ -95,21 +95,15 @@ public class CommonView extends DividerLayout {
         mInputView = (EditText) findViewById(R.id.ev_id_cv_input);
         mDisplayView = (TextView) findViewById(R.id.ev_id_cv_display);
         mSuffixView = (TextView) findViewById(R.id.ev_id_cv_suffix);
-        //是否为单行，默认为true
-        boolean singleLine = typedValue.getBoolean(R.styleable.CommonView_ev_cv_singleLine, true);
         int minHeight = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_minHeight, 0);
         //元素的最小高度,不能调用setMinHeight,否则如果后面再调用 setLines setMaxLines setMinLines 会被覆盖，他们都是通用 mMinimum 和mMaximum 属性控制
         //setMinimumHeight是View中的方法，mMinHeight属性在View中不会被覆盖
         //{@link #getSuggestedMinimumHeight()}
         mInputView.setMinimumHeight(minHeight);
         mDisplayView.setMinimumHeight(minHeight);
-        if (singleLine) {
-            //对于EditText来说，singleLine maxLines minLines lines只有对inputType="none"才有效(maxLines==1的情况下输入的内容超过宽度上下滚动)，
-            // 其他类型的inputType默认只有一行的左右滑动..
-            mInputView.setSingleLine();
-            mDisplayView.setSingleLine();
-            mDisplayView.setEllipsize(TextUtils.TruncateAt.END);
-        }
+        //是否为单行，默认为true
+        boolean singleLine = typedValue.getBoolean(R.styleable.CommonView_ev_cv_singleLine, true);
+
         int paddingStart = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingStart, -1);
         int paddingTop = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingTop, -1);
         int paddingTopEnd = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_paddingEnd, -1);
@@ -178,8 +172,16 @@ public class CommonView extends DividerLayout {
         if (suffixText != null) {
             mSuffixView.setText(suffixText);
         }
-        setInputType(inputType);
         setMode(mode);
+        setInputType(inputType);
+        //需要在setInputType之后否则会被覆盖
+        if (singleLine) {
+            //对于EditText来说，singleLine maxLines minLines lines只有对inputType="none"才有效(maxLines==1的情况下输入的内容超过宽度上下滚动)，
+            // 其他类型的inputType默认只有一行的左右滑动..
+            mInputView.setSingleLine();
+            mDisplayView.setSingleLine();
+            mDisplayView.setEllipsize(TextUtils.TruncateAt.END);
+        }
     }
 
     @Override
@@ -231,6 +233,8 @@ public class CommonView extends DividerLayout {
                 // line minLines maxLines 只有在inputType为 none的情况下才有效，否则和singleLine效果一些样，只能左右滑动.
                 //但是当inputType为none的时候设置 maxLines为1不能实现单行的效果，能上下滚动，问不左右滚动
                 //InputType.TYPE_NULL会导致无法弹出软键盘，无光标。
+                //多行Text
+                mInputView.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
                 break;
             case NUMBER:
                 mInputView.setInputType(InputType.TYPE_CLASS_NUMBER);
