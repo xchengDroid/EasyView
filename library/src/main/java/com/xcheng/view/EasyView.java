@@ -29,7 +29,7 @@ public class EasyView {
      */
     //调用初始化数据
     public static void init(Context context) {
-        init(context, R.layout.ev_dialog_loading);
+        init(context, 0);
     }
 
     //调用初始化数据
@@ -49,7 +49,10 @@ public class EasyView {
     }
 
     public static int getLoadingLayout() {
-        return sLoadingLayout;
+        if (sLoadingLayout != 0) {
+            return sLoadingLayout;
+        }
+        return R.layout.ev_dialog_loading;
     }
 
     public static String getString(@StringRes int stringId) {

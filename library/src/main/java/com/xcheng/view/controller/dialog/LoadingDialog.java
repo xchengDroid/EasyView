@@ -3,6 +3,7 @@ package com.xcheng.view.controller.dialog;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 
+import com.xcheng.view.EasyView;
 import com.xcheng.view.R;
 import com.xcheng.view.controller.EasyDialog;
 
@@ -28,6 +29,6 @@ public class LoadingDialog extends EasyDialog {
 
     @Override
     public int getLayoutId() {
-        return R.layout.ev_dialog_loading;
+        return EasyView.getLoadingLayout();
     }
 }
