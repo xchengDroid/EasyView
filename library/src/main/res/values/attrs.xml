@@ -112,7 +112,12 @@
         <attr name="ev_cv_maxLength" format="integer" />
         <attr name="ev_cv_minHeight" format="dimension" />
         <attr name="ev_cv_singleLine" format="boolean" />
-
+        <!--内容部分的上下padding,这个作用是增大EditText的显示区域和当字体在不通scaledDensity上大小不同均能保持一定的上下间距-->
+        <attr name="ev_cv_paddingTop" format="dimension" />
+        <attr name="ev_cv_paddingBottom" format="dimension" />
+        <attr name="ev_cv_paddingStart" format="dimension" />
+        <attr name="ev_cv_paddingEnd" format="dimension" />
+        
         <!--内容显示位置 左侧还是右侧-->
         <attr name="ev_cv_gravity">
             <enum name="start" value="0" />
