@@ -77,6 +77,8 @@ public class CommonView extends DividerLayout {
     private boolean mSingleLine;
 
     private int mInputType;
+    //如后面追加的冒号空格等
+    private CharSequence mLabelSuffix;
 
     public CommonView(Context context) {
         this(context, null);
@@ -124,9 +126,10 @@ public class CommonView extends DividerLayout {
 
         int labelSize = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_labelSize, defaultTextSize);
         int labelWidth = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_labelWidth, -1);
-
         int labelColor = typedValue.getColor(R.styleable.CommonView_ev_cv_labelColor, DEFAULT_TEXT_COLOR);
         CharSequence label = typedValue.getText(R.styleable.CommonView_ev_cv_label);
+        mLabelSuffix = typedValue.getText(R.styleable.CommonView_ev_cv_labelSuffix);
+
 
         int textSize = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_textSize, defaultTextSize);
         int textColor = typedValue.getColor(R.styleable.CommonView_ev_cv_textColor, DEFAULT_TEXT_COLOR);
@@ -147,7 +150,8 @@ public class CommonView extends DividerLayout {
         int inputType = typedValue.getInt(R.styleable.CommonView_ev_cv_inputType, NONE);
         int mode = typedValue.getInt(R.styleable.CommonView_ev_cv_mode, INPUT);
         typedValue.recycle();
-        mLabelView.setText(label);
+
+        setLabel(label);
         mLabelView.setTextColor(labelColor);
         mLabelView.setTextSize(TypedValue.COMPLEX_UNIT_PX, labelSize);
         if (labelWidth >= 0) {
@@ -265,6 +269,18 @@ public class CommonView extends DividerLayout {
         mInputView.removeTextChangedListener(this.mTextWatcher);
         this.mTextWatcher = textWatcher;
         mInputView.addTextChangedListener(mTextWatcher);
+    }
+
+    /**
+     * 设置label 如果有labelSuffix 会格式化拼接
+     *
+     * @param label 标签内容
+     */
+    public void setLabel(CharSequence label) {
+        if (label != null && mLabelSuffix != null) {
+            label = label.toString().concat(mLabelSuffix.toString());
+        }
+        mLabelView.setText(label);
     }
 
     public void setHint(CharSequence s) {

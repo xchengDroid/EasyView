@@ -102,6 +102,8 @@
         <attr name="ev_cv_labelColor" format="color" />
         <attr name="ev_cv_labelSize" format="dimension" />
         <attr name="ev_cv_labelWidth" format="dimension" />
+        <!--后缀如：等-->
+        <attr name="ev_cv_labelSuffix" format="string" />
 
         <!--displayText 和 inputText的样式-->
         <attr name="ev_cv_text" format="string" />
@@ -117,7 +119,7 @@
         <attr name="ev_cv_paddingBottom" format="dimension" />
         <attr name="ev_cv_paddingStart" format="dimension" />
         <attr name="ev_cv_paddingEnd" format="dimension" />
-        
+
         <!--内容显示位置 左侧还是右侧-->
         <attr name="ev_cv_gravity">
             <enum name="start" value="0" />
