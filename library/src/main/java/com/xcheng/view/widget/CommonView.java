@@ -77,8 +77,9 @@ public class CommonView extends DividerLayout {
     private boolean mSingleLine;
 
     private int mInputType;
-    //如后面追加的冒号空格等
-    private CharSequence mLabelSuffix;
+    //追加的*:空格等前后缀
+    private String mLabelPrefix;
+    private String mLabelSuffix;
 
     public CommonView(Context context) {
         this(context, null);
@@ -128,7 +129,8 @@ public class CommonView extends DividerLayout {
         int labelWidth = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_labelWidth, -1);
         int labelColor = typedValue.getColor(R.styleable.CommonView_ev_cv_labelColor, DEFAULT_TEXT_COLOR);
         CharSequence label = typedValue.getText(R.styleable.CommonView_ev_cv_label);
-        mLabelSuffix = typedValue.getText(R.styleable.CommonView_ev_cv_labelSuffix);
+        mLabelPrefix = typedValue.getString(R.styleable.CommonView_ev_cv_labelPrefix);
+        mLabelSuffix = typedValue.getString(R.styleable.CommonView_ev_cv_labelSuffix);
 
 
         int textSize = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_textSize, defaultTextSize);
@@ -277,8 +279,10 @@ public class CommonView extends DividerLayout {
      * @param label 标签内容
      */
     public void setLabel(CharSequence label) {
-        if (label != null && mLabelSuffix != null) {
-            label = label.toString().concat(mLabelSuffix.toString());
+        if (mLabelPrefix != null || mLabelSuffix != null) {
+            label = (mLabelPrefix != null ? mLabelPrefix : "") +
+                    (label != null ? label.toString() : "") +
+                    (mLabelSuffix != null ? mLabelSuffix : "");
         }
         mLabelView.setText(label);
     }
