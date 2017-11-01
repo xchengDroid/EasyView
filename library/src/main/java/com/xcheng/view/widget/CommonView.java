@@ -185,10 +185,8 @@ public class CommonView extends DividerLayout {
         if (suffixText != null) {
             mSuffixView.setText(suffixText);
         }
-        setMode(mode);
+        setModeInner(mode);
         setInputType(inputType);
-        //需要在setInputType之后否则会被覆盖
-
     }
 
     @Override
@@ -198,6 +196,19 @@ public class CommonView extends DividerLayout {
     }
 
     public void setMode(@Mode int mode) {
+        if (mode != mMode) {
+            setModeInner(mode);
+            //保持Text同步性
+            if (mode == INPUT) {
+                setText(mDisplayView.getText());
+            } else {
+                setText(mInputView.getText());
+            }
+        }
+    }
+
+    private void setModeInner(@Mode int mode) {
+        this.mMode = mode;
         if (mode == INPUT) {
             mDisplayView.setVisibility(GONE);
             mInputView.setVisibility(VISIBLE);
@@ -210,9 +221,7 @@ public class CommonView extends DividerLayout {
         } else {
             mSuffixView.setVisibility(GONE);
         }
-        this.mMode = mode;
     }
-
 
     /**
      * @param maxLength not limit set -1;
@@ -287,14 +296,23 @@ public class CommonView extends DividerLayout {
         mLabelView.setText(label);
     }
 
-    public void setHint(CharSequence s) {
-        mInputView.setHint(s);
-        mDisplayView.setHint(s);
+    public void setHint(CharSequence hint) {
+        mInputView.setHint(hint);
+        mDisplayView.setHint(hint);
     }
 
-    public void setText(CharSequence s) {
-        mInputView.setText(s);
-        mDisplayView.setText(s);
+
+    /**
+     * 内容部分区分对待，可能会频繁设置
+     *
+     * @param text 绑定的内容
+     */
+    public void setText(CharSequence text) {
+        if (mMode == INPUT) {
+            mInputView.setText(text);
+        } else {
+            mDisplayView.setText(text);
+        }
     }
 
     public void setTextColor(@ColorInt int color) {
