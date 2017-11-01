@@ -185,7 +185,7 @@ public class CommonView extends DividerLayout {
         if (suffixText != null) {
             mSuffixView.setText(suffixText);
         }
-        setModeInner(mode);
+        applyMode(mode);
         setInputType(inputType);
     }
 
@@ -197,7 +197,7 @@ public class CommonView extends DividerLayout {
 
     public void setMode(@Mode int mode) {
         if (mode != mMode) {
-            setModeInner(mode);
+            applyMode(mode);
             //保持Text同步性
             if (mode == INPUT) {
                 setText(mDisplayView.getText());
@@ -207,7 +207,7 @@ public class CommonView extends DividerLayout {
         }
     }
 
-    private void setModeInner(@Mode int mode) {
+    private void applyMode(@Mode int mode) {
         this.mMode = mode;
         if (mode == INPUT) {
             mDisplayView.setVisibility(GONE);
