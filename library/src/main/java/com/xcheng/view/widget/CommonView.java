@@ -72,11 +72,11 @@ public class CommonView extends DividerLayout {
     //单位或图标 nav_arrow
     private TextView mSuffixView;
 
-    private int mMode;
-
     private boolean mSingleLine;
 
+    private int mMode;
     private int mInputType;
+    
     //追加的*:空格等前后缀
     private String mLabelPrefix;
     private String mLabelSuffix;
@@ -207,6 +207,12 @@ public class CommonView extends DividerLayout {
         }
     }
 
+    /**
+     * mode 默认值就是0即为{{@link #INPUT}}，所以不做mMode！=mode的判断,
+     * 或者将mode的默认值改为@Mode之外的任意值
+     *
+     * @param mode 当前模式
+     */
     private void applyMode(@Mode int mode) {
         this.mMode = mode;
         if (mode == INPUT) {
