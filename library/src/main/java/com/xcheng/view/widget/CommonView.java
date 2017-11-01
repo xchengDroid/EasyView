@@ -198,8 +198,7 @@ public class CommonView extends DividerLayout {
     }
 
     public void setMode(@Mode int mode) {
-        this.mMode = mode;
-        if (mMode == INPUT) {
+        if (mode == INPUT) {
             mDisplayView.setVisibility(GONE);
             mInputView.setVisibility(VISIBLE);
         } else {
@@ -211,6 +210,7 @@ public class CommonView extends DividerLayout {
         } else {
             mSuffixView.setVisibility(GONE);
         }
+        this.mMode = mode;
     }
 
 
