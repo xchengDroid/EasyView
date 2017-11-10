@@ -7,7 +7,7 @@ import android.support.annotation.Size;
  * 权限请求类
  * Created by chengxin on 2017/11/9.
  */
-public final class PermissionRequest {
+final class PermissionRequest {
     final OnRequestCallback onRequestCallback;
     final String[] permissions;
     final int requestCode;

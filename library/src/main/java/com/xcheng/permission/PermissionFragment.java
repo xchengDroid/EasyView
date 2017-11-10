@@ -23,7 +23,8 @@ public class PermissionFragment extends Fragment {
         final int requestCode = permissionRequest.requestCode;
         int index = mPermissionRequests.indexOfKey(requestCode);
         if (index >= 0) {
-            throw new IllegalStateException("have a same requestCode " + requestCode + " that not deal");
+            Log.e(EasyPermission.TAG, "EasyPermission have a same requestCode " + requestCode + " that not deal");
+            return;
         }
         mPermissionRequests.put(requestCode, permissionRequest);
         List<String> denyPermissions = EasyPermission.findDeniedPermissions(getContext(), permissionRequest.permissions);
@@ -41,36 +42,18 @@ public class PermissionFragment extends Fragment {
         }
         mPermissionRequests.remove(requestCode);
 
-        final OnRequestCallback onRequestCallback = permissionRequest.onRequestCallback;
-
-        List<String> deniedPermissions = new ArrayList<>();
+        List<String> deniedPerms = new ArrayList<>();
         for (int i = 0; i < permissions.length; i++) {
             if (grantResults[i] != PackageManager.PERMISSION_GRANTED) {
-                deniedPermissions.add(permissions[i]);
+                deniedPerms.add(permissions[i]);
             }
         }
-        if (deniedPermissions.isEmpty()) {
-            onRequestCallback.onAllowed();
+        if (deniedPerms.isEmpty()) {
+            permissionRequest.onRequestCallback.onAllowed();
             return;
         }
 
-        List<String> rationales = EasyPermission.findRationalePermissions(getActivity(), EasyPermission.toArray(deniedPermissions));
-
-        if (!rationales.isEmpty()) {
-            onRequestCallback.onShowRationale(rationales);
-        }
-
-        //处理被完全拒绝的
-        List<String> neverAskedPermissions = new ArrayList<>();
-        for (String permission : deniedPermissions) {
-            //rationales 不包含 deniedPermissions 的就是完全被拒绝的
-            if (!rationales.contains(permission)) {
-                neverAskedPermissions.add(permission);
-            }
-        }
-
-        if (!neverAskedPermissions.isEmpty()) {
-            onRequestCallback.onNeverAsked(neverAskedPermissions);
-        }
+        List<String> showRationalePerms = EasyPermission.findRationalePermissions(getActivity(), EasyPermission.toArray(deniedPerms));
+        permissionRequest.onRequestCallback.onRefused(new DeniedPerms(deniedPerms, showRationalePerms));
     }
 }
