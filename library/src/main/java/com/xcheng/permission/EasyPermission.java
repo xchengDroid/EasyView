@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.PermissionChecker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class EasyPermission {
      * @return true代表有，false 其他
      */
     public static boolean isGranted(Context context, String permission) {
-        return !isMarshmallow() || context.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED;
+        return !isMarshmallow() || /*兼容 AppOps*/PermissionChecker.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
     }
 
     /**
