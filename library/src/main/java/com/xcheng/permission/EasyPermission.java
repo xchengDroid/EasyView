@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,11 +84,9 @@ public class EasyPermission {
      */
     public static List<String> findRationalePermissions(Activity activity, String... permissions) {
         List<String> rationales = new ArrayList<>();
-        if (isMarshmallow()) {
-            for (String permission : permissions) {
-                if (activity.shouldShowRequestPermissionRationale(permission)) {
-                    rationales.add(permission);
-                }
+        for (String permission : permissions) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+                rationales.add(permission);
             }
         }
         return rationales;
