@@ -1,5 +1,6 @@
 package com.xcheng.permission;
 
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.Size;
 
@@ -33,7 +34,7 @@ final class PermissionRequest {
             return this;
         }
 
-        public void request(int requestCode, OnRequestCallback onRequestCallback) {
+        public void request(final @IntRange(from = 0) int requestCode, OnRequestCallback onRequestCallback) {
             //此处统一检测
             if (onRequestCallback == null) {
                 throw new NullPointerException("onRequestCallback==null");
