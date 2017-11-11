@@ -36,14 +36,14 @@ final class PermissionRequest {
 
         public void request(final @IntRange(from = 0) int requestCode, OnRequestCallback onRequestCallback) {
             //此处统一检测
+            if (requestCode < 0) {
+                throw new IllegalStateException("requestCode must be >=0");
+            }
             if (onRequestCallback == null) {
                 throw new NullPointerException("onRequestCallback==null");
             }
             if (permissions == null || permissions.length == 0) {
                 throw new IllegalStateException("permissions must be not null or empty");
-            }
-            if (requestCode < 0) {
-                throw new IllegalStateException("requestCode must be >=0");
             }
             this.onRequestCallback = onRequestCallback;
             this.requestCode = requestCode;
