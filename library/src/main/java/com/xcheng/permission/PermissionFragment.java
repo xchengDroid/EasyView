@@ -41,6 +41,11 @@ public class PermissionFragment extends Fragment {
             return;
         }
         mPermissionRequests.remove(requestCode);
+        //just in case
+        if (permissions.length == 0) {
+            permissionRequest.onRequestCallback.onRefused(new DeniedPerms(new ArrayList<String>(), new ArrayList<String>()));
+            return;
+        }
 
         List<String> deniedPerms = new ArrayList<>();
         for (int i = 0; i < permissions.length; i++) {
