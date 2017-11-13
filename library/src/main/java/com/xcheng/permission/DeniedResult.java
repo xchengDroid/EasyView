@@ -9,7 +9,7 @@ import java.util.List;
  * 被拒绝的权限封装类
  * Created by chengxin on 2017/11/10.
  */
-public final class DeniedPerms {
+public final class DeniedResult {
     public final List<String> deniedPerms;
     public final List<String> showRationalePerms;
     public final List<String> neverAskedPerms;
@@ -18,7 +18,7 @@ public final class DeniedPerms {
      */
     public final boolean allNeverAsked;
 
-    DeniedPerms(@NonNull List<String> deniedPerms, @NonNull List<String> showRationalePerms) {
+    DeniedResult(@NonNull List<String> deniedPerms, @NonNull List<String> showRationalePerms) {
         this.deniedPerms = deniedPerms;
         this.showRationalePerms = showRationalePerms;
         this.allNeverAsked = showRationalePerms.isEmpty();

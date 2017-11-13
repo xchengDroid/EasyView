@@ -12,5 +12,5 @@ public interface OnRequestCallback {
     /**
      * 申请失败，有权限被拒绝
      */
-    void onRefused(DeniedPerms deniedPerms);
+    void onRefused(DeniedResult deniedResult);
 }

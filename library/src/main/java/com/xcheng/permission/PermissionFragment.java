@@ -43,7 +43,7 @@ public class PermissionFragment extends Fragment {
         mPermissionRequests.remove(requestCode);
         //just in case
         if (permissions.length == 0) {
-            permissionRequest.onRequestCallback.onRefused(new DeniedPerms(new ArrayList<String>(), new ArrayList<String>()));
+            permissionRequest.onRequestCallback.onRefused(new DeniedResult(new ArrayList<String>(), new ArrayList<String>()));
             return;
         }
 
@@ -59,6 +59,6 @@ public class PermissionFragment extends Fragment {
         }
 
         List<String> showRationalePerms = EasyPermission.findRationalePermissions(getActivity(), EasyPermission.toArray(deniedPerms));
-        permissionRequest.onRequestCallback.onRefused(new DeniedPerms(deniedPerms, showRationalePerms));
+        permissionRequest.onRequestCallback.onRefused(new DeniedResult(deniedPerms, showRationalePerms));
     }
 }
