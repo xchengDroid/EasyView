@@ -2,7 +2,6 @@ package com.xcheng.permission;
 
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.support.annotation.Size;
 
 /**
  * 权限请求类
@@ -29,7 +28,7 @@ final class PermissionRequest {
             this.easyPermission = easyPermission;
         }
 
-        public Builder permissions(@Size(min = 1) String... permissions) {
+        public Builder permissions(@NonNull String... permissions) {
             this.permissions = permissions;
             return this;
         }
