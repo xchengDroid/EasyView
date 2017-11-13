@@ -28,7 +28,7 @@ final class PermissionRequest {
             this.easyPermission = easyPermission;
         }
 
-        public Builder permissions(@NonNull String... permissions) {
+        public Builder permissions(String... permissions) {
             this.permissions = permissions;
             return this;
         }

@@ -70,7 +70,7 @@ public class EasyPermission {
     /**
      * 找到未授权的Permission
      */
-    public static List<String> findDeniedPermissions(Context context, @NonNull String... permissions) {
+    public static List<String> findDeniedPermissions(Context context, String... permissions) {
         List<String> denyPermissions = new ArrayList<>();
         for (String value : permissions) {
             if (!isGranted(context, value)) {
@@ -83,7 +83,7 @@ public class EasyPermission {
     /**
      * 找到未授权的权限，但是未被完全拒绝
      */
-    public static List<String> findRationalePermissions(Activity activity, @NonNull String... permissions) {
+    public static List<String> findRationalePermissions(Activity activity, String... permissions) {
         List<String> rationales = new ArrayList<>();
         for (String permission : permissions) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
