@@ -10,12 +10,13 @@ import java.util.List;
  * Created by chengxin on 2017/11/10.
  */
 public final class DeniedResult {
+    // 所有被拒绝的权限
     public final List<String> deniedPerms;
+    // 被拒绝但未勾选不再询问的权限
     public final List<String> showRationalePerms;
+    // 被拒绝且勾选不再询问的权限
     public final List<String> neverAskedPerms;
-    /**
-     * 是否全部权限都是被拒绝且不再询问
-     */
+    // 是否全部权限都是被拒绝且不再询问
     public final boolean allNeverAsked;
 
     DeniedResult(@NonNull List<String> deniedPerms, @NonNull List<String> showRationalePerms) {
