@@ -9,10 +9,7 @@
 
   `compile 'com.xcheng:easyview:1.6.4'`
 
-
-
-##UseAge
-
+## UaseAge
 * **请求单个权限**
 
   ```
