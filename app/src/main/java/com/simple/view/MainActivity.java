@@ -30,18 +30,21 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         switch (position) {
             case 0:
-                startSignInActivity();
+                JumpUtil.toActivity(this, PermissionActivity.class);
                 break;
             case 1:
-                startMessageActivity();
+                startSignInActivity();
                 break;
             case 2:
-                startUploadActivity();
+                startMessageActivity();
                 break;
             case 3:
-                startStateSampleActivity();
+                startUploadActivity();
                 break;
             case 4:
+                startStateSampleActivity();
+                break;
+            case 5:
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
                         //  .bottomText(null)
                         .tipText("请先登录或注册")
@@ -70,13 +73,13 @@ public class MainActivity extends ListActivity {
                         .create();
                 dialog.show();
                 break;
-            case 5:
+            case 6:
                 startTabActivity();
                 break;
-            case 6:
+            case 7:
                 JumpUtil.toActivity(this, RefreshActivity.class);
                 break;
-            case 7:
+            case 8:
                 JumpUtil.toActivity(this, CardActivity.class);
                 break;
         }

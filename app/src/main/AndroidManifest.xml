@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.simple.view">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,17 +25,16 @@
         </activity>
         <activity
             android:name=".MessageActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignInActivity"
-            android:windowSoftInputMode="stateAlwaysHidden"
             android:configChanges="orientation|screenSize|smallestScreenSize"
-            android:theme="@style/ev_AppTheme" />
+            android:theme="@style/ev_AppTheme"
+            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".UploadActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".StateSampleActivity"
@@ -44,6 +47,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".CardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PermissionActivity"
             android:screenOrientation="portrait" />
     </application>
 
