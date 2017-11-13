@@ -1,2 +1,2 @@
-# EasyView
-Activity Fragment Controller CustomView android 6.0 Permissions
+# EasyPermission
+一款非常简洁，依赖很少的权限请求框架。不依赖第三方类库，如RxJava，不依赖运行时或编译时注解。核心代码只有5个类。
