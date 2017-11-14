@@ -15,7 +15,6 @@
     <string name="Loading_Complete">Loading Complete, button is disabled</string>
 
     <array name="sample_list">
-        <item>android 6.0 Permission</item>
         <item>Action Button Progress/EndLess</item>
         <item>Submit Button Progress sample</item>
         <item>Generate Button Progress sample</item>

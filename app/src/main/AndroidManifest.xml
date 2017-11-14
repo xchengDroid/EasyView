@@ -48,9 +48,6 @@
         <activity
             android:name=".CardActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".PermissionActivity"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
