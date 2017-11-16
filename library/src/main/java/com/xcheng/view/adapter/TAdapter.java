@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -17,25 +18,25 @@ import java.util.List;
  *
  * @param <T>
  */
-abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
+public abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements IAdapterDelegate<T, EasyHolder> {
 
-    private final Context mContext;
-    private final Resources mResources;
-    private final LayoutInflater mInflater;
+    public final Context mContext;
+    public final Resources mResources;
+    public final LayoutInflater mInflater;
     //默认布局ID
     @LayoutRes
-    private final int mLayoutId;
-    private final List<T> mData;
+    public final int mLayoutId;
+    public final List<T> mData;
 
-    TAdapter(Context context, @Nullable List<T> data) {
+    public TAdapter(Context context, @Nullable List<T> data) {
         this(context, data, 0);
     }
 
-    TAdapter(Context context, @LayoutRes int layoutId) {
+    public TAdapter(Context context, @LayoutRes int layoutId) {
         this(context, null, layoutId);
     }
 
-    TAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId) {
+    public TAdapter(Context context, @Nullable List<T> data, @LayoutRes int layoutId) {
         if (data == null) {
             data = new ArrayList<>();
         }
@@ -46,21 +47,18 @@ abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements I
         mLayoutId = layoutId;
     }
 
-    public final int getLayoutId() {
-        return mLayoutId;
+    /**
+     * 刷新数据
+     */
+    public void refresh(@Nullable Collection<? extends T> newData) {
+        mData.clear();
+        if (newData != null && newData.size() > 0) {
+            /*刷新数据 */
+            mData.addAll(newData);
+        }
+        notifyDataSetChanged();
     }
 
-    public Resources getResources() {
-        return mResources;
-    }
-
-    public LayoutInflater getInflater() {
-        return mInflater;
-    }
-
-    public Context getContext() {
-        return mContext;
-    }
 
     public View inflater(int layoutId, ViewGroup parent) {
         return mInflater.inflate(layoutId, parent, false);
@@ -90,10 +88,6 @@ abstract class TAdapter<T> extends RecyclerView.Adapter<EasyHolder> implements I
             return mData.get(position);
         }
         return null;
-    }
-
-    public final List<T> getData() {
-        return mData;
     }
 
     /**
