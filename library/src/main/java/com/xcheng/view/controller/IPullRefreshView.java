@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.UiThread;
 import android.support.v7.widget.RecyclerView;
 
-import com.xcheng.view.adapter.EasyAdapter;
+import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.pullrefresh.LoadingState;
 
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
  * T 代表http请求返回的数据
  * Created by cx on 2016/10/13.
  */
-public interface IPullRefreshView<T> extends EasyAdapter.OnBindHolderListener {
+public interface IPullRefreshView<T> extends HFAdapter.OnBindHolderListener {
     /**
      * Http 请求
      *
@@ -64,7 +64,7 @@ public interface IPullRefreshView<T> extends EasyAdapter.OnBindHolderListener {
     int getFooterId();
 
     @NonNull
-    EasyAdapter<T> getEasyAdapter();
+    HFAdapter<T> getHFAdapter();
 
     /**
      * 每页的长度

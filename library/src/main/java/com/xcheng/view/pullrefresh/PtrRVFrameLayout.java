@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
-import com.xcheng.view.adapter.EasyAdapter;
+import com.xcheng.view.adapter.HFAdapter;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
@@ -93,7 +93,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @return true 可以加载更多,其他false
      */
     private boolean canLoadMore() {
-        EasyAdapter adapter = getEasyAdapter();
+        HFAdapter adapter = getEasyAdapter();
         if (adapter != null && adapter.hasFooter()) {
             //note: footer必须有高度否则  PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView())返回false
             return PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView()) && (mState == LoadingState.INIT);
@@ -121,9 +121,9 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @return
      */
     @Nullable
-    private EasyAdapter getEasyAdapter() {
+    private HFAdapter getEasyAdapter() {
         if (mRecyclerView != null) {
-            return (EasyAdapter) mRecyclerView.getAdapter();
+            return (HFAdapter) mRecyclerView.getAdapter();
         }
         return null;
     }
@@ -156,7 +156,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
 
     private void setState(LoadingState state) {
         this.mState = state;
-        EasyAdapter adapter = getEasyAdapter();
+        HFAdapter adapter = getEasyAdapter();
         if (adapter != null) {
             //刷新footer和 emptyView
             adapter.notifyFooter();

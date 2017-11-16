@@ -79,6 +79,9 @@ public class MainActivity extends ListActivity {
             case 7:
                 JumpUtil.toActivity(this, CardActivity.class);
                 break;
+            case 8:
+                JumpUtil.toActivity(this, HFActivity.class);
+                break;
         }
     }
 

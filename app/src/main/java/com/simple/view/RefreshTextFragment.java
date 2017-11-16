@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.EasyHolder;
+import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.controller.EasyRefreshFragment;
 import com.xcheng.view.util.ToastLess;
 
@@ -73,8 +74,8 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void onBindHeader(EasyHolder holder, boolean isCreate) {
         super.onBindHeader(holder, isCreate);
-       // Log.e("print","Header isCreate:"+isCreate);
-        if (isCreate){
+        // Log.e("print","Header isCreate:"+isCreate);
+        if (isCreate) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -88,8 +89,8 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void onBindEmpty(EasyHolder holder, boolean isCreate) {
         super.onBindEmpty(holder, isCreate);
-       // Log.e("print","Empty isCreate:"+isCreate);
-        if (isCreate){
+        // Log.e("print","Empty isCreate:"+isCreate);
+        if (isCreate) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -112,11 +113,11 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
 
     @NonNull
     @Override
-    public EasyAdapter<String> getEasyAdapter() {
-        return new EasyAdapter<String>(getContext(), R.layout.ev_item_text) {
+    public HFAdapter<String> getHFAdapter() {
+        return new HFAdapter<String>(getContext(), R.layout.ev_item_text) {
             @Override
             public void convert(EasyHolder holder, String s, int position) {
-               // Log.e("print", "adapterPosition:" + holder.getAdapterPosition());
+                // Log.e("print", "adapterPosition:" + holder.getAdapterPosition());
                 TextView textView = (TextView) holder.itemView;
                 textView.setText(s);
             }

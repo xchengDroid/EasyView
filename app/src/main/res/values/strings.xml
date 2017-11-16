@@ -23,5 +23,6 @@
         <item>Tab导航</item>
         <item>刷新列表</item>
         <item>卡片</item>
+        <item>Adapter</item>
     </array>
 </resources>
