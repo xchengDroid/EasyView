@@ -373,10 +373,6 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         return mFooterId != 0 && mShowFooter && (!isEmpty() || mHasFooterIfEmpty);
     }
 
-    private void validateItems(List<T> data) {
-        EasyPreconditions.checkNotNull(data, "You can't use a null List<Item> instance.");
-    }
-
     private boolean isFullSpan(int position) {
         return isHeaderPosition(position) || isFooterPosition(position) || isEmptyPosition(position);
     }
