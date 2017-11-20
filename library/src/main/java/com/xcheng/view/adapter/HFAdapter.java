@@ -15,13 +15,9 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * RecyclerView.Adapter extension created to add header capability support and a generic List of
- * mData really useful most of the cases. You should extend from this class and override
- * onCreateViewHolder to create your ViewHolder instances and onBindViewHolder methods to draw your
- * user interface as you wish.
- * <p/>
- * The usage of List<T> mData member is not mandatory. If you are going to provide your custom
- * implementation remember to override getItemCount method.
+ * 支持HeaderView FooterView emptyView
+ *
+ * @param <T>
  */
 public abstract class HFAdapter<T> extends EasyAdapter<T> {
     /**
@@ -31,9 +27,9 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     private OnBindHolderListener mOnBindHolderListener;
 
     //-1为 INVALID_TYPE,不要设置为-1
-    public static final int TYPE_HEADER = 0x00000111;
-    public static final int TYPE_FOOTER = 0x00000222;
-    public static final int TYPE_EMPTY = 0x00000333;
+    public static final int TYPE_HEADER = Integer.MAX_VALUE - 101;
+    public static final int TYPE_FOOTER = Integer.MAX_VALUE - 102;
+    public static final int TYPE_EMPTY = Integer.MAX_VALUE - 103;
     @LayoutRes
     private int mHeaderId;
     @LayoutRes
