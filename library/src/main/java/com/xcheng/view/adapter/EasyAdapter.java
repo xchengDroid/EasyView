@@ -68,11 +68,18 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         return getDataCount();
     }
 
+    /**
+     * 如果需要覆盖此方法，请重写{@link #getDelegateType(T, int)}
+     */
     @Override
     public int getItemViewType(int position) {
         return getDelegateType(getItem(position), position);
     }
 
+    /**
+     * 如果需要覆盖此方法，请重写{@link #getDelegateView(ViewGroup, int)},
+     * holder 在onCreateViewHolder 和 onBindViewHolder时 holder.itemView no parent
+     */
     @Override
     public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = getDelegateView(parent, viewType);
@@ -82,6 +89,9 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         return holder;
     }
 
+    /**
+     * 如果需要覆盖此方法，请重写{@link #convert(RecyclerView.ViewHolder, T, int)}}
+     */
     @Override
     public void onBindViewHolder(EasyHolder holder, int position) {
         convert(holder, getItem(position), position);

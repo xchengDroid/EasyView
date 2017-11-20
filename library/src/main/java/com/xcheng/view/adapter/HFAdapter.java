@@ -172,7 +172,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     }
 
     @Override
-    public final int getItemViewType(int position) {
+    public int getItemViewType(int position) {
         if (isHeaderPosition(position)) {
             return TYPE_HEADER;
         } else if (isEmptyPosition(position)) {
@@ -183,12 +183,8 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         return super.getItemViewType(getPositionOfData(position));
     }
 
-    /**
-     * Invokes onCreateHeaderViewHolder, onCreateItemViewHolder or onCreateFooterViewHolder methods
-     * based on the view type param.
-     */
     @Override
-    public final EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER:
                 EasyHolder headerHolder = new EasyHolder(inflater(mHeaderId, parent));
@@ -213,15 +209,8 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         }
     }
 
-
-    /**
-     * holder 在onCreateViewHolder 和 onBindViewHolder时 holder.itemView no parent
-     *
-     * @param holder
-     * @param position
-     */
     @Override
-    public final void onBindViewHolder(EasyHolder holder, int position) {
+    public void onBindViewHolder(EasyHolder holder, int position) {
         int viewType = holder.getItemViewType();
         switch (viewType) {
             case TYPE_HEADER:
@@ -246,7 +235,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     }
 
     @Override
-    public final int getItemCount() {
+    public int getItemCount() {
         return getDataCount() + getHeaderCount() + getFooterCount() + getEmptyCount();
     }
 
@@ -333,10 +322,6 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         notifyDataSetChanged();
     }
 
-    /**
-     * Returns true if the position type parameter passed as argument is equals to 0 and the adapter
-     * has a not null header already configured.
-     */
     public boolean isHeaderPosition(int position) {
         return hasHeader() && position == 0;
     }
@@ -344,12 +329,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     public boolean isEmptyPosition(int position) {
         return hasEmpty() && ((hasHeader() && position == 1) || (!hasHeader() && position == 0));
     }
-
-    /**
-     * Returns true if the position type parameter passed as argument is equals to
-     * <code>getItemCount() - 1</code>
-     * and the adapter has a not null header already configured.
-     */
+    
     public boolean isFooterPosition(int position) {
         int lastPosition = getItemCount() - 1;
         return hasFooter() && position == lastPosition;
