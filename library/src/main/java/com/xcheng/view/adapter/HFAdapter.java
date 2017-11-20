@@ -1,18 +1,3 @@
-/*
- * Copyright (C) 2015 Karumi.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.xcheng.view.adapter;
 
 import android.content.Context;
@@ -290,7 +275,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         EasyPreconditions.checkState(mHeaderId == 0, "the mHeaderView already has been set");
         mHeaderId = headerId;
         if (mAttachToRecycler && hasHeader()) {
-            notifyItemInserted(0);
+            notifyDataSetChanged();
         }
     }
 
@@ -301,7 +286,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         EasyPreconditions.checkState(mEmptyId == 0, "the mEmptyView already has been set");
         mEmptyId = emptyId;
         if (mAttachToRecycler && hasEmpty()) {
-            notifyItemInserted(getHeaderCount());
+            notifyDataSetChanged();
         }
     }
 
@@ -314,8 +299,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         mFooterId = footerId;
         mHasFooterIfEmpty = hasFooterIfEmpty;
         if (mAttachToRecycler && hasFooter()) {
-            //如果没有数据添加的情况下调用会crash
-            notifyItemInserted(0);
+            notifyDataSetChanged();
         }
     }
 
@@ -341,25 +325,16 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
      * Call this method to show hiding footer.
      */
     public void showFooter() {
-        if (!hasFooter()) {
-            this.mShowFooter = true;
-            if (hasFooter()) {
-                //添加footer之后 count+1,追加至最后一项的后面
-                notifyItemInserted(getItemCount() - 1);
-            }
-        }
+        this.mShowFooter = true;
+        notifyDataSetChanged();
     }
 
     /**
      * Call this method to hide footer.
      */
     public void hideFooter() {
-        boolean hasFooter = hasFooter();
-        //会影响 hasFooter()的结果，故之后赋值
         this.mShowFooter = false;
-        if (hasFooter) {
-            notifyItemRemoved(getItemCount());
-        }
+        notifyDataSetChanged();
     }
 
     /**
