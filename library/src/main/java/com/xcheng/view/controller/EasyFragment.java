@@ -45,27 +45,19 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (isCacheRootView()) {
-            if (mRootView != null) {
-                ViewGroup parent = (ViewGroup) mRootView.getParent();
-                if (parent != null) {
-                    parent.removeView(mRootView);
-                }
-            } else {
-                mRootView = inflater.inflate(getLayoutId(), container, false);
-                init(savedInstanceState);
-            }
-        } else {
+        boolean needInflater = !isCacheRootView() || mRootView == null;
+        if (needInflater) {
             mRootView = inflater.inflate(getLayoutId(), container, false);
-            init(savedInstanceState);
+            initData();
+            initView(savedInstanceState);
+            setListener();
+        } else {
+            ViewGroup parent = (ViewGroup) mRootView.getParent();
+            if (parent != null) {
+                parent.removeView(mRootView);
+            }
         }
         return mRootView;
-    }
-
-    private void init(Bundle savedInstanceState) {
-        initData();
-        initView(savedInstanceState);
-        setListener();
     }
 
     @Override
