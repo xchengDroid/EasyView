@@ -23,12 +23,12 @@ public class SignInActivity extends EasyActivity implements ProgressGenerator.On
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        final EditText editEmail = (EditText) findViewById(R.id.editEmail);
-        final EditText editPassword = (EditText) findViewById(R.id.editPassword);
+        final EditText editEmail = findViewById(R.id.editEmail);
+        final EditText editPassword =  findViewById(R.id.editPassword);
 
         final ProgressGenerator progressGenerator = new ProgressGenerator(this);
-        final ActionProcessButton btnSignIn = (ActionProcessButton) findViewById(R.id.btnSignIn);
-        final ActionProcessButton btnSignIn2 = (ActionProcessButton) findViewById(R.id.btnSignIn2);
+        final ActionProcessButton btnSignIn =  findViewById(R.id.btnSignIn);
+        final ActionProcessButton btnSignIn2 = findViewById(R.id.btnSignIn2);
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
