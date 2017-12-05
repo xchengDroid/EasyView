@@ -27,6 +27,7 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
+    //由于依赖其资源无法设置为compileOnly
     api 'com.android.support:appcompat-v7:26.1.0'
     api "com.android.support:recyclerview-v7:26.1.0"
     api 'com.wang.avi:library:2.1.3'
