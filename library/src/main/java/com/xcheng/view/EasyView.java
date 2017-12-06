@@ -1,5 +1,6 @@
 package com.xcheng.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
@@ -15,6 +16,7 @@ import com.xcheng.view.util.LocalDisplay;
  */
 public class EasyView {
     static final String TAG = EasyView.class.getSimpleName();
+    @SuppressLint("StaticFieldLeak")
     private static ViewConfig sViewConfig;
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
 
