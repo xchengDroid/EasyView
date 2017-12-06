@@ -29,6 +29,6 @@ public class LoadingDialog extends EasyDialog {
 
     @Override
     public int getLayoutId() {
-        return EasyView.getViewConfig().getLoadingLayout();
+        return EasyView.getLoadingLayout();
     }
 }

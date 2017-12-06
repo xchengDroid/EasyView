@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.xcheng.view.EasyView;
-import com.xcheng.view.ViewConfig;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
 import com.xcheng.view.util.JumpUtil;
 
@@ -19,7 +18,7 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EasyView.init(ViewConfig.newBuilder(this).build());
+        EasyView.init(this);
         String[] items = getResources().getStringArray(R.array.sample_list);
 
         ArrayAdapter<String> adapter =

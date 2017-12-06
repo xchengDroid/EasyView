@@ -1,12 +1,10 @@
 package com.xcheng.view;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.NonNull;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
-import android.util.Log;
 
 import com.xcheng.view.util.LocalDisplay;
 
@@ -15,19 +13,21 @@ import com.xcheng.view.util.LocalDisplay;
  * Created by chengxin on 2017/8/24.
  */
 public class EasyView {
-    static final String TAG = EasyView.class.getSimpleName();
-    @SuppressLint("StaticFieldLeak")
-    private static ViewConfig sViewConfig;
+    private static Context sAppContext;
+    private static int sLoadingLayout;
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
 
-    //调用初始化EasyView
-    public static void init(@NonNull ViewConfig viewConfig) {
-        if (sViewConfig != null) {
-            Log.e(TAG, "try to initialize ViewConfig which had already been initialized before");
-            return;
-        }
-        sViewConfig = viewConfig;
-        LocalDisplay.init(getContext());
+    public static void init(Context context) {
+        init(context, 0);
+    }
+
+    /**
+     * 初始化全局Context 和loadingLayout
+     */
+    public static void init(Context context, @LayoutRes int loadingLayout) {
+        sAppContext = context.getApplicationContext();
+        LocalDisplay.init(sAppContext);
+        sLoadingLayout = loadingLayout;
     }
 
     /**
@@ -36,19 +36,22 @@ public class EasyView {
      * @return applicationContext 对象
      */
     public static Context getContext() {
-        return sViewConfig.getContext();
+        return sAppContext;
     }
 
-    public static ViewConfig getViewConfig() {
-        return sViewConfig;
+    public static int getLoadingLayout() {
+        if (sLoadingLayout != 0) {
+            return sLoadingLayout;
+        }
+        return R.layout.ev_dialog_loading;
     }
 
     public static String getString(@StringRes int stringId) {
-        return getContext().getString(stringId);
+        return sAppContext.getString(stringId);
     }
 
     public static CharSequence getText(@StringRes int stringId) {
-        return getContext().getText(stringId);
+        return sAppContext.getText(stringId);
     }
 
     /**
