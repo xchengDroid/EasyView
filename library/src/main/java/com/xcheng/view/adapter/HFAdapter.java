@@ -239,7 +239,6 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         return getDataCount() + getHeaderCount() + getFooterCount() + getEmptyCount();
     }
 
-
     public int getHeaderCount() {
         return hasHeader() ? 1 : 0;
     }
@@ -251,7 +250,6 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     public int getEmptyCount() {
         return hasEmpty() ? 1 : 0;
     }
-
 
     /**
      * @param headerId LayoutResId,如果为0则没有Header
