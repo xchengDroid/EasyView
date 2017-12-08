@@ -27,9 +27,9 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     private OnBindHolderListener mOnBindHolderListener;
 
     //-1为 INVALID_TYPE,不要设置为-1
-    public static final int TYPE_HEADER = Integer.MAX_VALUE - 101;
-    public static final int TYPE_FOOTER = Integer.MAX_VALUE - 102;
-    public static final int TYPE_EMPTY = Integer.MAX_VALUE - 103;
+    private static final int TYPE_HEADER = Integer.MAX_VALUE - 101;
+    private static final int TYPE_FOOTER = Integer.MAX_VALUE - 102;
+    private static final int TYPE_EMPTY = Integer.MAX_VALUE - 103;
     @LayoutRes
     private int mHeaderId;
     @LayoutRes
@@ -329,7 +329,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     public boolean isEmptyPosition(int position) {
         return hasEmpty() && ((hasHeader() && position == 1) || (!hasHeader() && position == 0));
     }
-    
+
     public boolean isFooterPosition(int position) {
         int lastPosition = getItemCount() - 1;
         return hasFooter() && position == lastPosition;
