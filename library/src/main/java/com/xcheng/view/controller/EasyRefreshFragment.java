@@ -60,7 +60,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         if (itemDecoration != null) {
             mRecyclerView.addItemDecoration(itemDecoration);
         }
-        mAdapter = getHFAdapter();
+        mAdapter = createAdapter();
         mAdapter.setHeader(getHeaderId());
         mAdapter.setEmpty(getEmptyId());
         mAdapter.setFooter(getFooterId(), false);

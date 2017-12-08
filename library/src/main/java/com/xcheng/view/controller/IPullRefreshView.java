@@ -63,8 +63,11 @@ public interface IPullRefreshView<T> extends HFAdapter.OnBindHolderListener {
     @LayoutRes
     int getFooterId();
 
+    /**
+     * 创建一个HFAdapter对象
+     */
     @NonNull
-    HFAdapter<T> getHFAdapter();
+    HFAdapter<T> createAdapter();
 
     /**
      * 每页的长度
