@@ -62,16 +62,6 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     }
 
     /**
-     * 获取在data数据列表上的位置
-     *
-     * @param adapterPosition onBindViewHolder 所指定的position
-     * @return position in mData
-     */
-    public int getPositionOfData(@IntRange(from = 0) int adapterPosition) {
-        return adapterPosition - getHeaderCount();
-    }
-
-    /**
      * notifyItemRangeInserted notifyItemRemoved notifyItemChanged 时必须要保持数据修改和操作的一致性，否则会越位时会报错，
      * // boolean validateViewHolderForOffsetPosition(ViewHolder holder),每次都会检测
      * if (holder.mPosition < 0 || holder.mPosition >= mAdapter.getItemCount()) {
@@ -180,7 +170,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
         } else if (isFooterPosition(position)) {
             return TYPE_FOOTER;
         }
-        return super.getItemViewType(getPositionOfData(position));
+        return super.getItemViewType(position - getHeaderCount());
     }
 
     @Override
@@ -229,7 +219,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
                 }
                 break;
             default:
-                super.onBindViewHolder(holder, getPositionOfData(position));
+                super.onBindViewHolder(holder, position - getHeaderCount());
                 break;
         }
     }
@@ -396,7 +386,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
             if (mSpanSizeLookup == null) {
                 return isFullSpan ? layoutManager.getSpanCount() : 1;
             } else {
-                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, getPositionOfData(position));
+                return isFullSpan ? layoutManager.getSpanCount() : mSpanSizeLookup.getSpanSize(layoutManager, position - getHeaderCount());
             }
         }
     }
