@@ -202,9 +202,9 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         if (getFooterId() == R.layout.ev_footer_load_more) {
             LoadingState loadingState = mPtrFrameLayout.getLoadingState();
             if (loadingState == LOADINGMORE || loadingState == REFRESHING) {
-                holder.setVisible(R.id.ev_id_progressBarLoadMore, true);
+                holder.setVisible(R.id.ev_id_progressBarLoadMore, View.VISIBLE);
             } else {
-                holder.setVisible(R.id.ev_id_progressBarLoadMore, false, false);
+                holder.setVisible(R.id.ev_id_progressBarLoadMore, View.INVISIBLE);
             }
             holder.setText(R.id.ev_id_textLoadMore, loadingState.getText());
         }
