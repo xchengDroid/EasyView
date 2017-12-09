@@ -26,11 +26,6 @@
         <activity
             android:name=".MessageActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".SignInActivity"
-            android:configChanges="orientation|screenSize|smallestScreenSize"
-            android:theme="@style/ev_AppTheme"
-            android:windowSoftInputMode="stateAlwaysHidden" />
 
         <activity
             android:name=".UploadActivity"

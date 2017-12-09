@@ -4,14 +4,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.xcheng.view.controller.EasyActivity;
-import com.xcheng.view.processbtn.ActionProcessButton;
 import com.xcheng.view.processbtn.GenerateProcessButton;
 import com.xcheng.view.processbtn.SubmitProcessButton;
 
 
 public class StateSampleActivity extends EasyActivity implements View.OnClickListener {
 
-    private ActionProcessButton mBtnAction;
     private GenerateProcessButton mBtnGenerate;
     private SubmitProcessButton mBtnSubmit;
 
@@ -20,9 +18,8 @@ public class StateSampleActivity extends EasyActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ac_states);
 
-        mBtnAction = (ActionProcessButton) findViewById(R.id.btnAction);
-        mBtnSubmit = (SubmitProcessButton) findViewById(R.id.btnSubmit);
-        mBtnGenerate = (GenerateProcessButton) findViewById(R.id.btnGenerate);
+        mBtnSubmit = findViewById(R.id.btnSubmit);
+        mBtnGenerate = findViewById(R.id.btnGenerate);
 
         findViewById(R.id.btnProgressLoading).setOnClickListener(this);
         findViewById(R.id.btnProgressError).setOnClickListener(this);
@@ -34,22 +31,18 @@ public class StateSampleActivity extends EasyActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnProgressLoading:
-                mBtnAction.setProgress(50);
                 mBtnSubmit.setProgress(50);
                 mBtnGenerate.setProgress(50);
                 break;
             case R.id.btnProgressError:
-                mBtnAction.setProgress(-1);
                 mBtnSubmit.setProgress(-1);
                 mBtnGenerate.setProgress(-1);
                 break;
             case R.id.btnProgressComplete:
-                mBtnAction.setProgress(100);
                 mBtnSubmit.setProgress(100);
                 mBtnGenerate.setProgress(100);
                 break;
             case R.id.btnProgressNormal:
-                mBtnAction.setProgress(0);
                 mBtnSubmit.setProgress(0);
                 mBtnGenerate.setProgress(0);
                 break;

@@ -30,7 +30,7 @@ public class MainActivity extends ListActivity {
     protected void onListItemClick(ListView l, View v, int position, long id) {
         switch (position) {
             case 0:
-                startSignInActivity();
+                // startSignInActivity();
                 break;
             case 1:
                 startMessageActivity();
@@ -95,10 +95,6 @@ public class MainActivity extends ListActivity {
         startActivity(intent);
     }
 
-    private void startSignInActivity() {
-        Intent intent = new Intent(this, SignInActivity.class);
-        startActivity(intent);
-    }
 
     private void startMessageActivity() {
         Intent intent = new Intent(this, MessageActivity.class);

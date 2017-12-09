@@ -3,6 +3,7 @@ package com.simple.view;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,8 +26,19 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         mAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EasyHolder holder, int position) {
-                ToastLess.showToast(position + "==position:");
-                mAdapter.notifyFooter();
+//                ToastLess.showToast(position + "==position:");
+//                mAdapter.notifyFooter();
+                int beforeAp = holder.getAdapterPosition();
+                Log.e("print", "beforeAp:" + beforeAp);
+                int beforeLp = holder.getLayoutPosition();
+                Log.e("print", "beforeLp:" + beforeLp);
+
+                mAdapter.remove(position - 2);
+                int afterAp = holder.getAdapterPosition();
+                Log.e("print", "afterAp:" + afterAp);
+
+                int afterLp = holder.getLayoutPosition();
+                Log.e("print", "afterLp:" + afterLp);
             }
         });
     }
@@ -113,7 +125,7 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
 
     @NonNull
     @Override
-    public HFAdapter<String> getHFAdapter() {
+    public HFAdapter<String> createAdapter() {
         return new HFAdapter<String>(getContext(), R.layout.ev_item_text) {
             @Override
             public void convert(EasyHolder holder, String s, int position) {
