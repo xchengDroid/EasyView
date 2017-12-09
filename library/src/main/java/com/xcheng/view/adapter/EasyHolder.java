@@ -234,27 +234,9 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
         return this;
     }
 
-    /**
-     * Set a view visibility to VISIBLE (true) or GONE (false).
-     *
-     * @param viewId  The view id.
-     * @param visible True for VISIBLE, false for GONE.
-     * @return The BaseViewHolder for chaining.
-     */
-    public EasyHolder setVisible(@IdRes int viewId, boolean visible) {
-        return setVisible(viewId, visible, true);
-    }
-
-
-    /**
-     * @param viewId
-     * @param visible
-     * @param isGone  visible 为false时是否占位 如果为 true为View.GONE else View.INVISIBLE
-     * @return
-     */
-    public EasyHolder setVisible(@IdRes int viewId, boolean visible, boolean isGone) {
+    public EasyHolder setVisible(@IdRes int viewId, int visibility) {
         View view = getView(viewId);
-        view.setVisibility(visible ? View.VISIBLE : (isGone ? View.GONE : View.INVISIBLE));
+        view.setVisibility(visibility);
         return this;
     }
 
