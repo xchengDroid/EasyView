@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
@@ -182,7 +183,7 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
      * @param textColor The text color (not a resource id).
      * @return The BaseViewHolder for chaining.
      */
-    public EasyHolder setTextColor(@IdRes int viewId, int textColor) {
+    public EasyHolder setTextColor(@IdRes int viewId, @ColorInt int textColor) {
         TextView view = getView(viewId);
         view.setTextColor(textColor);
         return this;
