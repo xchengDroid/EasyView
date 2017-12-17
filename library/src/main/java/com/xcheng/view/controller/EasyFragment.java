@@ -138,8 +138,12 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
         super.onDetach();
     }
 
-    public View findViewById(@IdRes int id) {
-        return getView() != null ? getView().findViewById(id) : null;
+    public <T extends View> T findViewById(@IdRes int id) {
+        final View view = getView();
+        if (view != null) {
+            return view.findViewById(id);
+        }
+        return null;
     }
 
     @Nullable
