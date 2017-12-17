@@ -100,7 +100,7 @@ public class TabActivity extends EasyPagerActivity {
         @Override
         public void initView(Bundle savedInstanceState) {
             super.initView(savedInstanceState);
-            TextView tv = (TextView) findViewById(R.id.tvTab);
+            TextView tv = findViewById(R.id.tvTab);
             tv.setText(getArguments().getString("tag"));
         }
     }

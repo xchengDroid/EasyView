@@ -35,7 +35,7 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
     public void initView(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.initView(savedInstanceState);
-        mViewPager = (ViewPager) findViewById(R.id.ev_id_viewpager);
+        mViewPager = findViewById(R.id.ev_id_viewpager);
         mViewPager.setOffscreenPageLimit(getScreenPageLimit());
         List<TabInfo> tabInfos = new ArrayList<>();
         getTabInfos(tabInfos);
@@ -47,7 +47,7 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
             }
         };
         mViewPager.setAdapter(mTabsAdapter);
-        mIndicator = (PagerSlidingTabStrip) findViewById(R.id.ev_id_tab_indicator);
+        mIndicator = findViewById(R.id.ev_id_tab_indicator);
         mIndicator.setViewPager(mViewPager);
     }
 

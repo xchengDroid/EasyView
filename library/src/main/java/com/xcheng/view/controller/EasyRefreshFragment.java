@@ -51,8 +51,8 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         //子类如果要自己实现Presenter,可以在onCreate方法里面调用setPresenter方法
-        mPtrFrameLayout = (PtrRVFrameLayout) findViewById(R.id.ev_id_ptrRVFrameLayout);
-        mRecyclerView = (RecyclerView) findViewById(R.id.ev_id_recyclerView);
+        mPtrFrameLayout = findViewById(R.id.ev_id_ptrRVFrameLayout);
+        mRecyclerView = findViewById(R.id.ev_id_recyclerView);
 
         mRecyclerView.setLayoutManager(getLayoutManager());
         mRecyclerView.setItemAnimator(getItemAnimator());
