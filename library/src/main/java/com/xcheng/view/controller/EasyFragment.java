@@ -140,10 +140,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
     public <T extends View> T findViewById(@IdRes int id) {
         final View view = getView();
-        if (view != null) {
-            return view.findViewById(id);
-        }
-        return null;
+        return view != null ? view.<T>findViewById(id) : null;
     }
 
     @Nullable
