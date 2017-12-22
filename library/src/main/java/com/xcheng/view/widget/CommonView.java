@@ -76,7 +76,7 @@ public class CommonView extends DividerLayout {
 
     private int mMode;
     private int mInputType;
-    
+
     //追加的*:空格等前后缀
     private String mLabelPrefix;
     private String mLabelSuffix;
@@ -96,10 +96,10 @@ public class CommonView extends DividerLayout {
         //初始化布局
         int layoutId = typedValue.getResourceId(R.styleable.CommonView_ev_cv_layout, R.layout.ev_commom_view);
         inflate(getContext(), layoutId, this);
-        mLabelView = (TextView) findViewById(R.id.ev_id_cv_label);
-        mInputView = (EditText) findViewById(R.id.ev_id_cv_input);
-        mDisplayView = (TextView) findViewById(R.id.ev_id_cv_display);
-        mSuffixView = (TextView) findViewById(R.id.ev_id_cv_suffix);
+        mLabelView = findViewById(R.id.ev_id_cv_label);
+        mInputView = findViewById(R.id.ev_id_cv_input);
+        mDisplayView = findViewById(R.id.ev_id_cv_display);
+        mSuffixView = findViewById(R.id.ev_id_cv_suffix);
         int minHeight = typedValue.getDimensionPixelSize(R.styleable.CommonView_ev_cv_minHeight, 0);
         //元素的最小高度,不能调用setMinHeight,否则如果后面再调用 setLines setMaxLines setMinLines 会被覆盖，他们都是通用 mMinimum 和mMaximum 属性控制
         //setMinimumHeight是View中的方法，mMinHeight属性在View中不会被覆盖
