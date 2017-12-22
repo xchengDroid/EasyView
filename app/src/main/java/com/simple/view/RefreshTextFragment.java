@@ -43,9 +43,13 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
         });
     }
 
+    @NonNull
     @Override
-    public int getLimit() {
-        return 3;
+    protected Config getConfig() {
+        return new Config(getContext())
+                .limit(3)
+                .emptyId(R.layout.empty)
+                .headerId(R.layout.header);
     }
 
     private boolean isFirst = true;
@@ -111,16 +115,6 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
                 }
             });
         }
-    }
-
-    @Override
-    public int getEmptyId() {
-        return R.layout.empty;
-    }
-
-    @Override
-    public int getHeaderId() {
-        return R.layout.header;
     }
 
     @NonNull

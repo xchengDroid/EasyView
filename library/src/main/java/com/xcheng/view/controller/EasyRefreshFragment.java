@@ -38,11 +38,12 @@ import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
  *
  * @author xincheng @date:2017-9-4
  */
-public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
+public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T>, HFAdapter.OnBindHolderListener {
     protected PtrRVFrameLayout mPtrFrameLayout;
     protected RecyclerView mRecyclerView;
     protected HFAdapter<T> mAdapter;
     private boolean mHasInitView;
+    private Config mConfig;
 
     @Override
     public int getLayoutId() {
@@ -57,18 +58,33 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         mPtrFrameLayout = findViewById(R.id.ev_id_ptrRVFrameLayout);
         mRecyclerView = findViewById(R.id.ev_id_recyclerView);
 
-        mRecyclerView.setLayoutManager(getLayoutManager());
-        mRecyclerView.setItemAnimator(getItemAnimator());
-        ItemDecoration itemDecoration = getItemDecoration();
+        mConfig = getConfig();
+        mRecyclerView.setLayoutManager(mConfig.layoutManager);
+        mRecyclerView.setItemAnimator(mConfig.itemAnimator);
+        ItemDecoration itemDecoration = mConfig.itemDecoration;
         if (itemDecoration != null) {
             mRecyclerView.addItemDecoration(itemDecoration);
         }
         mAdapter = createAdapter();
-        mAdapter.setHeader(getHeaderId());
-        mAdapter.setEmpty(getEmptyId());
-        mAdapter.setFooter(getFooterId(), false);
+        mAdapter.setHeader(mConfig.headerId);
+        mAdapter.setEmpty(mConfig.emptyId);
+        mAdapter.setFooter(mConfig.footerId, false);
         mRecyclerView.setAdapter(mAdapter);
         mHasInitView = true;
+    }
+
+    /**
+     * 创建一个HFAdapter对象
+     */
+    @NonNull
+    protected abstract HFAdapter<T> createAdapter();
+
+    /**
+     * 子类重写修改配置
+     */
+    @NonNull
+    protected Config getConfig() {
+        return new Config(getContext());
     }
 
     @Override
@@ -98,13 +114,9 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         mPtrFrameLayout.complete(true, LoadingState.INIT);
     }
 
-    @Override
-    public boolean isAutoRefresh() {
-        return true;
-    }
 
     private void lazyLoad() {
-        if (!isAutoRefresh() || !getUserVisibleHint() || !mHasInitView)
+        if (!mConfig.autoRefresh || !getUserVisibleHint() || !mHasInitView)
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
@@ -136,56 +148,15 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             mAdapter.addData(data);
         }
         LoadingState loadingState = LoadingState.INIT;
-        if (data == null || data.size() < getLimit()) {
+        if (data == null || data.size() < mConfig.limit) {
             loadingState = LoadingState.NOMORE;
         }
         complete(isRefresh, loadingState);
     }
 
     @Override
-    public int getLimit() {
-        return 10;
-    }
-
-    @Override
     public void complete(boolean isRefresh, LoadingState state) {
         mPtrFrameLayout.complete(isRefresh, state);
-    }
-
-    @NonNull
-    @Override
-    public RecyclerView.LayoutManager getLayoutManager() {
-        return new LinearLayoutManager(getContext());
-    }
-
-    @Nullable
-    @Override
-    public ItemDecoration getItemDecoration() {
-        return new DividerDecoration(ContextCompat.getColor(getContext(), R.color.ev_divider_color), 1);
-    }
-
-    @Nullable
-    @Override
-    public RecyclerView.ItemAnimator getItemAnimator() {
-        DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
-        // 取消notifyItemChanged动画
-        defaultItemAnimator.setSupportsChangeAnimations(false);
-        return defaultItemAnimator;
-    }
-
-    @Override
-    public int getHeaderId() {
-        return 0;
-    }
-
-    @Override
-    public int getEmptyId() {
-        return 0;
-    }
-
-    @Override
-    public int getFooterId() {
-        return R.layout.ev_footer_load_more;
     }
 
 
@@ -202,7 +173,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Override
     public void onBindFooter(EasyHolder holder, boolean isCreate) {
         //防止不是此布局的情况下报空指针
-        if (getFooterId() == R.layout.ev_footer_load_more) {
+        if (mConfig.footerId == R.layout.ev_footer_load_more) {
             LoadingState loadingState = mPtrFrameLayout.getLoadingState();
             if (loadingState == LOADINGMORE || loadingState == REFRESHING) {
                 holder.setVisible(R.id.ev_id_progressBarLoadMore, View.VISIBLE);
@@ -216,7 +187,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     /**
      * 配置RecyclerView的配置，footerView headerView emptyView LayoutManager ItemAnimator ItemDecoration等
      */
-    class Config {
+    public static class Config {
         private int footerId = R.layout.ev_footer_load_more;
         private int emptyId = 0;
         private int headerId = 0;
