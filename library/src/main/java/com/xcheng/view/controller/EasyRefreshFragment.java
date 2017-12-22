@@ -192,7 +192,6 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         private int emptyId = 0;
         private int headerId = 0;
         private boolean autoRefresh = true;
-        //默认分页长度
         private int limit = 10;
         private RecyclerView.LayoutManager layoutManager;
 
@@ -232,6 +231,9 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             return this;
         }
 
+        /**
+         * @param limit 分页长度
+         */
         public Config limit(@IntRange(from = 1) int limit) {
             this.limit = limit;
             return this;
