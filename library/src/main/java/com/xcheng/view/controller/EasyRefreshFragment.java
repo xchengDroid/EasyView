@@ -1,7 +1,10 @@
 package com.xcheng.view.controller;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
+import android.support.annotation.IntRange;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -14,8 +17,8 @@ import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
-import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.adapter.EasyHolder;
+import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.pullrefresh.LoadingState;
 import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
 import com.xcheng.view.pullrefresh.PtrRVFrameLayout;
@@ -207,6 +210,86 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
                 holder.setVisible(R.id.ev_id_progressBarLoadMore, View.INVISIBLE);
             }
             holder.setText(R.id.ev_id_textLoadMore, loadingState.getText());
+        }
+    }
+
+    /**
+     * 配置RecyclerView的配置，footerView headerView emptyView LayoutManager ItemAnimator ItemDecoration等
+     */
+    class Config {
+        private int footerId = R.layout.ev_footer_load_more;
+        private int emptyId = 0;
+        private int headerId = 0;
+        private boolean autoRefresh = true;
+        //默认分页长度
+        private int limit = 10;
+        private RecyclerView.LayoutManager layoutManager;
+
+        private RecyclerView.ItemAnimator itemAnimator;
+        private RecyclerView.ItemDecoration itemDecoration;
+
+        public Config(Context context) {
+            this.layoutManager = new LinearLayoutManager(context);
+            DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
+            // 取消notifyItemChanged动画
+            defaultItemAnimator.setSupportsChangeAnimations(false);
+            this.itemAnimator = defaultItemAnimator;
+            this.itemDecoration = new DividerDecoration(ContextCompat.getColor(context, R.color.ev_divider_color), 1);
+        }
+
+        /**
+         * 获取EmptyView 如果为0不设置
+         */
+        public Config emptyId(@LayoutRes int emptyId) {
+            this.emptyId = emptyId;
+            return this;
+        }
+
+        /**
+         * 获取HeaderView ,如果为0不设置
+         */
+        public Config headerId(@LayoutRes int headerId) {
+            this.headerId = headerId;
+            return this;
+        }
+
+        /**
+         * 获取FooterView,如果为0不设置
+         */
+        public Config footerId(@LayoutRes int footerId) {
+            this.footerId = footerId;
+            return this;
+        }
+
+        public Config limit(@IntRange(from = 1) int limit) {
+            this.limit = limit;
+            return this;
+        }
+
+        public Config layoutManager(@NonNull RecyclerView.LayoutManager layoutManager) {
+            this.layoutManager = layoutManager;
+            return this;
+        }
+
+        /**
+         * 为null的情况下 没有ItemAnimator
+         **/
+        public Config animator(@Nullable RecyclerView.ItemAnimator animator) {
+            this.itemAnimator = animator;
+            return this;
+        }
+
+        /**
+         * 为null的情况下 不设置ItemDecoration
+         **/
+        public Config decoration(@Nullable RecyclerView.ItemDecoration decoration) {
+            this.itemDecoration = decoration;
+            return this;
+        }
+
+        public Config autoRefresh(boolean autoRefresh) {
+            this.autoRefresh = autoRefresh;
+            return this;
         }
     }
 }
