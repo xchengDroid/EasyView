@@ -46,10 +46,11 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @NonNull
     @Override
     protected Config getConfig() {
-        return new Config(getContext())
+        return super.getConfig().newBuilder()
                 .limit(3)
                 .emptyId(R.layout.empty)
-                .headerId(R.layout.header);
+                .headerId(R.layout.header)
+                .build();
     }
 
     private boolean isFirst = true;

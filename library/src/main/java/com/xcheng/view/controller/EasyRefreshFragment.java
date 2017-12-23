@@ -27,6 +27,7 @@ import java.util.List;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
+import static android.support.v7.widget.RecyclerView.*;
 import static com.xcheng.view.pullrefresh.LoadingState.LOADINGMORE;
 import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 
@@ -54,7 +55,6 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        //子类如果要自己实现Presenter,可以在onCreate方法里面调用setPresenter方法
         mPtrFrameLayout = findViewById(R.id.ev_id_ptrRVFrameLayout);
         mRecyclerView = findViewById(R.id.ev_id_recyclerView);
 
@@ -84,7 +84,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
      */
     @NonNull
     protected Config getConfig() {
-        return new Config(getContext());
+        return new Config.Builder(getContext()).build();
     }
 
     @Override
@@ -185,84 +185,125 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     }
 
     /**
-     * 配置RecyclerView的配置，footerView headerView emptyView LayoutManager ItemAnimator ItemDecoration等
+     * 设置RecyclerView的配置，footerView headerView emptyView LayoutManager ItemAnimator ItemDecoration等
      */
     public static class Config {
-        private int footerId = R.layout.ev_footer_load_more;
-        private int emptyId = 0;
-        private int headerId = 0;
-        private boolean autoRefresh = true;
-        private int limit = 10;
-        private RecyclerView.LayoutManager layoutManager;
+        private final int footerId;
+        private final int emptyId;
+        private final int headerId;
+        private final boolean autoRefresh;
+        private final int limit;
+        private final LayoutManager layoutManager;
+        private final ItemAnimator itemAnimator;
+        private final ItemDecoration itemDecoration;
 
-        private RecyclerView.ItemAnimator itemAnimator;
-        private RecyclerView.ItemDecoration itemDecoration;
-
-        public Config(Context context) {
-            this.layoutManager = new LinearLayoutManager(context);
-            DefaultItemAnimator defaultItemAnimator = new DefaultItemAnimator();
-            // 取消notifyItemChanged动画
-            defaultItemAnimator.setSupportsChangeAnimations(false);
-            this.itemAnimator = defaultItemAnimator;
-            this.itemDecoration = new DividerDecoration(ContextCompat.getColor(context, R.color.ev_divider_color), 1);
+        private Config(Builder builder) {
+            this.footerId = builder.footerId;
+            this.emptyId = builder.emptyId;
+            this.headerId = builder.headerId;
+            this.autoRefresh = builder.autoRefresh;
+            this.limit = builder.limit;
+            this.layoutManager = builder.layoutManager;
+            this.itemAnimator = builder.itemAnimator;
+            this.itemDecoration = builder.itemDecoration;
         }
 
-        /**
-         * 获取EmptyView 如果为0不设置
-         */
-        public Config emptyId(@LayoutRes int emptyId) {
-            this.emptyId = emptyId;
-            return this;
+        public Builder newBuilder() {
+            return new Builder(this);
         }
 
-        /**
-         * 获取HeaderView ,如果为0不设置
-         */
-        public Config headerId(@LayoutRes int headerId) {
-            this.headerId = headerId;
-            return this;
-        }
+        public static class Builder {
+            private int footerId = R.layout.ev_footer_load_more;
+            private int emptyId = 0;
+            private int headerId = 0;
+            private boolean autoRefresh = true;
+            private int limit = 10;
+            private LayoutManager layoutManager;
+            private ItemAnimator itemAnimator;
+            private ItemDecoration itemDecoration;
 
-        /**
-         * 获取FooterView,如果为0不设置
-         */
-        public Config footerId(@LayoutRes int footerId) {
-            this.footerId = footerId;
-            return this;
-        }
 
-        /**
-         * @param limit 分页长度
-         */
-        public Config limit(@IntRange(from = 1) int limit) {
-            this.limit = limit;
-            return this;
-        }
+            public Builder(Context context) {
+                this.layoutManager = new LinearLayoutManager(context);
+                DefaultItemAnimator defaultAnimator = new DefaultItemAnimator();
+                // 取消notifyItemChanged动画
+                defaultAnimator.setSupportsChangeAnimations(false);
+                this.itemAnimator = defaultAnimator;
+                this.itemDecoration = new DividerDecoration(ContextCompat.getColor(context, R.color.ev_divider_color), 1);
+            }
 
-        public Config layoutManager(@NonNull RecyclerView.LayoutManager layoutManager) {
-            this.layoutManager = layoutManager;
-            return this;
-        }
+            private Builder(Config config) {
+                this.footerId = config.footerId;
+                this.emptyId = config.emptyId;
+                this.headerId = config.headerId;
+                this.autoRefresh = config.autoRefresh;
+                this.limit = config.limit;
+                this.layoutManager = config.layoutManager;
+                this.itemAnimator = config.itemAnimator;
+                this.itemDecoration = config.itemDecoration;
+            }
 
-        /**
-         * 为null的情况下 没有ItemAnimator
-         **/
-        public Config animator(@Nullable RecyclerView.ItemAnimator animator) {
-            this.itemAnimator = animator;
-            return this;
-        }
+            /**
+             * 获取EmptyView 如果为0不设置
+             */
+            public Builder emptyId(@LayoutRes int emptyId) {
+                this.emptyId = emptyId;
+                return this;
+            }
 
-        /**
-         * 为null的情况下 不设置ItemDecoration
-         **/
-        public Config decoration(@Nullable RecyclerView.ItemDecoration decoration) {
-            this.itemDecoration = decoration;
-            return this;
-        }
+            /**
+             * 获取HeaderView ,如果为0不设置
+             */
+            public Builder headerId(@LayoutRes int headerId) {
+                this.headerId = headerId;
+                return this;
+            }
 
-        public Config autoRefresh(boolean autoRefresh) {
-            this.autoRefresh = autoRefresh;
-            return this;
+            /**
+             * 获取FooterView,如果为0不设置
+             */
+            public Builder footerId(@LayoutRes int footerId) {
+                this.footerId = footerId;
+                return this;
+            }
+
+            /**
+             * @param limit 分页长度
+             */
+            public Builder limit(@IntRange(from = 1) int limit) {
+                this.limit = limit;
+                return this;
+            }
+
+            public Builder layoutManager(@NonNull LayoutManager layoutManager) {
+                this.layoutManager = layoutManager;
+                return this;
+            }
+
+            /**
+             * 为null的情况下 没有ItemAnimator
+             **/
+            public Builder animator(@Nullable ItemAnimator animator) {
+                this.itemAnimator = animator;
+                return this;
+            }
+
+            /**
+             * 为null的情况下 不设置ItemDecoration
+             **/
+            public Builder decoration(@Nullable ItemDecoration decoration) {
+                this.itemDecoration = decoration;
+                return this;
+            }
+
+            public Builder autoRefresh(boolean autoRefresh) {
+                this.autoRefresh = autoRefresh;
+                return this;
+            }
+
+            public Config build() {
+                return new Config(this);
+            }
         }
     }
 }
