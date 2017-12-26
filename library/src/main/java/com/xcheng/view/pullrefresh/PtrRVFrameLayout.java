@@ -13,7 +13,6 @@ import in.srain.cube.views.ptr.PtrHandler;
 
 public class PtrRVFrameLayout extends PtrFrameLayout {
 
-    private PtrCommonHeader mPtrCommonHeader;
     private LoadingState mState;
     private PtrHandlerWithLoadMore mPtrHandlerWithLoadMore;
     private RecyclerView mRecyclerView;
@@ -33,9 +32,9 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
 
     private void initViews() {
         setState(LoadingState.INIT);
-        mPtrCommonHeader = new PtrCommonHeader(getContext());
-        setHeaderView(mPtrCommonHeader);
-        addPtrUIHandler(mPtrCommonHeader);
+        PtrCommonHeader commonHeader = new PtrCommonHeader(getContext());
+        setHeaderView(commonHeader);
+        addPtrUIHandler(commonHeader);
     }
 
     @Override
