@@ -147,14 +147,18 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @param isRefresh    是否在刷新
      * @param loadingState 加载状态
      */
-    public void complete(boolean isRefresh, LoadingState loadingState) {
+    public void complete(boolean isRefresh, @NonNull LoadingState loadingState) {
         if (isRefresh) {
             super.refreshComplete();
         }
         setState(loadingState);
     }
 
-    private void setState(LoadingState state) {
+
+    /**
+     * 统一入口赋值
+     */
+    private void setState(@NonNull LoadingState state) {
         this.mState = state;
         HFAdapter adapter = getEasyAdapter();
         if (adapter != null) {
