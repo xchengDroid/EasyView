@@ -1,8 +1,6 @@
 package com.xcheng.view.pullrefresh;
 
 
-import java.util.List;
-
 public enum RequestState {
     LOADING("正在加载..."), SUCCESS("加载成功"), FAILED("加载失败"), NO_DATA("暂无数据"), SESSION_TIME_OUT(
             "会话过期,请重新登录"), TIME_OUT("请求超时"), NETWORK_ERROR("网络异常"), SERVER_ERROR(
@@ -20,16 +18,5 @@ public enum RequestState {
     public void setText(String text) {
         this.text = text;
     }
-
-    /**
-     * 是否有数据
-     *
-     * @param data
-     * @return
-     */
-    public static boolean isEmptyData(List<?> data) {
-        return data == null || data.size() == 0;
-    }
-
 
 }
