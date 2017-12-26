@@ -50,7 +50,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
                     //  sp.invalidateSpanAssignments();
                     if (newState != RecyclerView.SCROLL_STATE_DRAGGING) {
                         if (canLoadMore() && mPtrHandlerWithLoadMore != null) {
-                            setState(LoadingState.LOADINGMORE);
+                            setState(LoadingState.LOADING_MORE);
                             mPtrHandlerWithLoadMore.onLoadMore();
                         }
                     }
@@ -75,7 +75,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @return
      */
     public boolean canRefresh() {
-        boolean canRefresh = (mState == LoadingState.INIT || mState == LoadingState.NOMORE);
+        boolean canRefresh = (mState == LoadingState.INIT || mState == LoadingState.NO_MORE);
         if (isRefreshing()) {
             if (!canRefresh) {
                 super.refreshComplete();

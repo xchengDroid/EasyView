@@ -28,7 +28,7 @@ import java.util.List;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 import static android.support.v7.widget.RecyclerView.*;
-import static com.xcheng.view.pullrefresh.LoadingState.LOADINGMORE;
+import static com.xcheng.view.pullrefresh.LoadingState.LOADING_MORE;
 import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
 
 /**
@@ -149,7 +149,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         }
         LoadingState loadingState = LoadingState.INIT;
         if (data == null || data.size() < mConfig.limit) {
-            loadingState = LoadingState.NOMORE;
+            loadingState = LoadingState.NO_MORE;
         }
         complete(isRefresh, loadingState);
     }
@@ -175,7 +175,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         //防止不是此布局的情况下报空指针
         if (mConfig.footerId == R.layout.ev_footer_load_more) {
             LoadingState loadingState = mPtrFrameLayout.getLoadingState();
-            if (loadingState == LOADINGMORE || loadingState == REFRESHING) {
+            if (loadingState == LOADING_MORE || loadingState == REFRESHING) {
                 holder.setVisible(R.id.ev_id_progressBarLoadMore, View.VISIBLE);
             } else {
                 holder.setVisible(R.id.ev_id_progressBarLoadMore, View.INVISIBLE);
