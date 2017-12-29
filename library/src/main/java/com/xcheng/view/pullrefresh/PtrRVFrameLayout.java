@@ -95,7 +95,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
         HFAdapter adapter = getEasyAdapter();
         if (adapter != null && adapter.hasFooter()) {
             //note: footer必须有高度否则  PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView())返回false
-            return PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView()) && (mState == UIState.INIT);
+            return PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView()) && mState.canLoadMore();
         }
         return false;
     }
