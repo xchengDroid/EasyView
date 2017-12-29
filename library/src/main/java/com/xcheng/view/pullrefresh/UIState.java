@@ -5,21 +5,40 @@ package com.xcheng.view.pullrefresh;
  */
 public enum UIState {
 
-    INIT("上拉加载更多"/*可以刷新和加载更多*/),
+    INIT("上拉加载更多", true, true),
 
-    REFRESHING("正在刷新"/*无法再刷新或加载更多*/),
+    REFRESHING("正在刷新", false, false),
 
-    LOADING_MORE("加载更多"/*无法再刷新或加载更多*/),
+    LOADING_MORE("加载更多", false, false),
 
-    NO_MORE("已全部加载"/*可以刷新*/);
+    NO_MORE("已全部加载", true, false);
 
     private final String text;
+    private final boolean canRefresh;
+    private final boolean canLoadMore;
 
-    UIState(String text) {
+    UIState(String text, boolean canRefresh, boolean canLoadMore) {
         this.text = text;
+        this.canRefresh = canRefresh;
+        this.canLoadMore = canLoadMore;
+
     }
 
     public String getText() {
         return text;
+    }
+
+    /**
+     * 能否刷新
+     */
+    public boolean canRefresh() {
+        return canRefresh;
+    }
+
+    /**
+     * 能否加载更多
+     */
+    public boolean canLoadMore() {
+        return canLoadMore;
     }
 }
