@@ -8,6 +8,8 @@ import com.xcheng.view.adapter.TabInfo;
 import java.util.List;
 
 /**
+ * 左右切换ViewPager
+ *
  * @author xincheng
  */
 public interface IPagerView {
@@ -31,5 +33,5 @@ public interface IPagerView {
      */
     @NonNull
     View createTabView(int position, TabInfo tabInfo);
-    
+
 }
