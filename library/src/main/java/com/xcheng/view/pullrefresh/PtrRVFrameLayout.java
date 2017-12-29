@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.xcheng.view.adapter.HFAdapter;
+import com.xcheng.view.util.EasyPreconditions;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
 import in.srain.cube.views.ptr.PtrHandler;
@@ -75,13 +76,10 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @return
      */
     public boolean canRefresh() {
-        boolean canRefresh = (mState == UIState.INIT || mState == UIState.NO_MORE);
-        if (isRefreshing()) {
-            if (!canRefresh) {
-                super.refreshComplete();
-            } else {
-                setState(UIState.REFRESHING);
-            }
+        boolean canRefresh = mState.canRefresh();
+        //isRefreshing()为true 如果在 onRefreshBegin(PtrFrameLayout frame) 里面调用
+        if (isRefreshing() && canRefresh) {
+            setState(UIState.REFRESHING);
         }
         return canRefresh;
     }
@@ -157,7 +155,8 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     /**
      * 统一入口赋值
      */
-    private void setState(@NonNull UIState state) {
+    private void setState(UIState state) {
+        EasyPreconditions.checkNotNull(state, "state==null");
         this.mState = state;
         HFAdapter adapter = getEasyAdapter();
         if (adapter != null) {
