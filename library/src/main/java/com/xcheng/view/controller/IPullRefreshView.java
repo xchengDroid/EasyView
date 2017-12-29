@@ -2,7 +2,7 @@ package com.xcheng.view.controller;
 
 import android.support.annotation.UiThread;
 
-import com.xcheng.view.pullrefresh.LoadingState;
+import com.xcheng.view.pullrefresh.UIState;
 
 import java.util.List;
 
@@ -29,5 +29,5 @@ public interface IPullRefreshView<T> {
      * @param state     加载状态
      */
     @UiThread
-    void complete(boolean isRefresh, LoadingState state);
+    void complete(boolean isRefresh, UIState state);
 }

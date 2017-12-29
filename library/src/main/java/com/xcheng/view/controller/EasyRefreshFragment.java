@@ -19,7 +19,7 @@ import com.xcheng.view.R;
 import com.xcheng.view.adapter.DividerDecoration;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.HFAdapter;
-import com.xcheng.view.pullrefresh.LoadingState;
+import com.xcheng.view.pullrefresh.UIState;
 import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
 import com.xcheng.view.pullrefresh.PtrRVFrameLayout;
 
@@ -28,8 +28,8 @@ import java.util.List;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
 import static android.support.v7.widget.RecyclerView.*;
-import static com.xcheng.view.pullrefresh.LoadingState.LOADING_MORE;
-import static com.xcheng.view.pullrefresh.LoadingState.REFRESHING;
+import static com.xcheng.view.pullrefresh.UIState.LOADING_MORE;
+import static com.xcheng.view.pullrefresh.UIState.REFRESHING;
 
 /**
  * 刷新列表Fragment
@@ -111,7 +111,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPtrFrameLayout.complete(true, LoadingState.INIT);
+        mPtrFrameLayout.complete(true, UIState.INIT);
     }
 
 
@@ -147,15 +147,15 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         } else {
             mAdapter.addData(data);
         }
-        LoadingState loadingState = LoadingState.INIT;
+        UIState uiState = UIState.INIT;
         if (data == null || data.size() < mConfig.limit) {
-            loadingState = LoadingState.NO_MORE;
+            uiState = UIState.NO_MORE;
         }
-        complete(isRefresh, loadingState);
+        complete(isRefresh, uiState);
     }
 
     @Override
-    public void complete(boolean isRefresh, LoadingState state) {
+    public void complete(boolean isRefresh, UIState state) {
         mPtrFrameLayout.complete(isRefresh, state);
     }
 
@@ -174,13 +174,13 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     public void onBindFooter(EasyHolder holder, boolean isCreate) {
         //防止不是此布局的情况下报空指针
         if (mConfig.footerId == R.layout.ev_footer_load_more) {
-            LoadingState loadingState = mPtrFrameLayout.getLoadingState();
-            if (loadingState == LOADING_MORE || loadingState == REFRESHING) {
+            UIState uiState = mPtrFrameLayout.getState();
+            if (uiState == LOADING_MORE || uiState == REFRESHING) {
                 holder.setVisible(R.id.ev_id_progressBarLoadMore, View.VISIBLE);
             } else {
                 holder.setVisible(R.id.ev_id_progressBarLoadMore, View.INVISIBLE);
             }
-            holder.setText(R.id.ev_id_textLoadMore, loadingState.getText());
+            holder.setText(R.id.ev_id_textLoadMore, uiState.getText());
         }
     }
 

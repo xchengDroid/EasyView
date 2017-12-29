@@ -13,7 +13,7 @@ import in.srain.cube.views.ptr.PtrHandler;
 
 public class PtrRVFrameLayout extends PtrFrameLayout {
 
-    private LoadingState mState;
+    private UIState mState;
     private PtrHandlerWithLoadMore mPtrHandlerWithLoadMore;
     private RecyclerView mRecyclerView;
 
@@ -31,7 +31,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     }
 
     private void initViews() {
-        setState(LoadingState.INIT);
+        setState(UIState.INIT);
         PtrCommonHeader commonHeader = new PtrCommonHeader(getContext());
         setHeaderView(commonHeader);
         addPtrUIHandler(commonHeader);
@@ -50,7 +50,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
                     //  sp.invalidateSpanAssignments();
                     if (newState != RecyclerView.SCROLL_STATE_DRAGGING) {
                         if (canLoadMore() && mPtrHandlerWithLoadMore != null) {
-                            setState(LoadingState.LOADING_MORE);
+                            setState(UIState.LOADING_MORE);
                             mPtrHandlerWithLoadMore.onLoadMore();
                         }
                     }
@@ -75,12 +75,12 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @return
      */
     public boolean canRefresh() {
-        boolean canRefresh = (mState == LoadingState.INIT || mState == LoadingState.NO_MORE);
+        boolean canRefresh = (mState == UIState.INIT || mState == UIState.NO_MORE);
         if (isRefreshing()) {
             if (!canRefresh) {
                 super.refreshComplete();
             } else {
-                setState(LoadingState.REFRESHING);
+                setState(UIState.REFRESHING);
             }
         }
         return canRefresh;
@@ -95,7 +95,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
         HFAdapter adapter = getEasyAdapter();
         if (adapter != null && adapter.hasFooter()) {
             //note: footer必须有高度否则  PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView())返回false
-            return PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView()) && (mState == LoadingState.INIT);
+            return PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView()) && (mState == UIState.INIT);
         }
         return false;
     }
@@ -143,21 +143,21 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     /**
      * 恢复UI
      *
-     * @param isRefresh    是否在刷新
-     * @param loadingState 加载状态
+     * @param isRefresh 是否在刷新
+     * @param state     组件状态
      */
-    public void complete(boolean isRefresh, @NonNull LoadingState loadingState) {
+    public void complete(boolean isRefresh, @NonNull UIState state) {
         if (isRefresh) {
             super.refreshComplete();
         }
-        setState(loadingState);
+        setState(state);
     }
 
 
     /**
      * 统一入口赋值
      */
-    private void setState(@NonNull LoadingState state) {
+    private void setState(@NonNull UIState state) {
         this.mState = state;
         HFAdapter adapter = getEasyAdapter();
         if (adapter != null) {
@@ -168,7 +168,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     }
 
     @NonNull
-    public LoadingState getLoadingState() {
+    public UIState getState() {
         return mState;
     }
 }

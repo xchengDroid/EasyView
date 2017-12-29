@@ -3,7 +3,7 @@ package com.xcheng.view.pullrefresh;
 /**
  * 刷新加载组件的状态
  */
-public enum LoadingState {
+public enum UIState {
 
     INIT("上拉加载更多"/*可以刷新和加载更多*/),
 
@@ -15,7 +15,7 @@ public enum LoadingState {
 
     private final String text;
 
-    LoadingState(String text) {
+    UIState(String text) {
         this.text = text;
     }
 
