@@ -109,7 +109,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @return true 可以加载更多,其他false
      */
     private boolean canLoadMore() {
-        HFAdapter adapter = getEasyAdapter();
+        HFAdapter adapter = getHFAdapter();
         if (adapter != null && adapter.hasFooter()) {
             //note: footer必须有高度否则  PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView())返回false
             return PtrDefaultHandlerWithLoadMore.checkContentCanBePulledUp(this, mContent, getHeaderView()) && mState.canLoadMore();
@@ -137,7 +137,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @return
      */
     @Nullable
-    private HFAdapter getEasyAdapter() {
+    private HFAdapter getHFAdapter() {
         if (mRecyclerView != null) {
             return (HFAdapter) mRecyclerView.getAdapter();
         }
@@ -177,7 +177,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     private void setState(UIState state) {
         EasyPreconditions.checkNotNull(state, "state==null");
         this.mState = state;
-        HFAdapter adapter = getEasyAdapter();
+        HFAdapter adapter = getHFAdapter();
         if (adapter != null) {
             //刷新footer和 emptyView
             adapter.notifyFooter();
