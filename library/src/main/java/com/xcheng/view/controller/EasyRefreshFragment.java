@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
-import com.xcheng.view.adapter.DividerDecoration;
+import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.pullrefresh.UIState;
@@ -219,7 +219,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
                 // 取消notifyItemChanged动画
                 defaultAnimator.setSupportsChangeAnimations(false);
                 this.itemAnimator = defaultAnimator;
-                this.itemDecoration = new DividerDecoration(ContextCompat.getColor(context, R.color.ev_divider_color), 1);
+                this.itemDecoration = new SpaceDecoration(ContextCompat.getColor(context, R.color.ev_divider_color), 1);
             }
 
             private Builder(Config config) {

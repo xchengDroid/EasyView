@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.R;
-import com.xcheng.view.adapter.DividerDecoration;
+import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.divider.DividerTextView;
@@ -88,7 +88,7 @@ public class BottomOptionDialog extends BottomDialog {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ev_id_recyclerView);
         EasyPreconditions.checkState(recyclerView != null, "layout res must have a RecyclerView with id named ev_id_recyclerView");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new DividerDecoration(mBuilder.dividerColor, 1));
+        recyclerView.addItemDecoration(new SpaceDecoration(mBuilder.dividerColor, 1));
         recyclerView.setAdapter(new OptionAdapter(mBuilder.context, new ArrayList<>(Arrays.asList(mBuilder.optionTexts))));
     }
 
