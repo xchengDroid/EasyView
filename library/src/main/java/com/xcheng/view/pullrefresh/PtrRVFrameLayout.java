@@ -29,7 +29,8 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
 
     public PtrRVFrameLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        initViews();
+        setState(UIState.INIT);
+        initHeader();
     }
 
     @Override
@@ -50,8 +51,10 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
         mRefreshWhenDetached = isRefreshing();
     }
 
-    private void initViews() {
-        setState(UIState.INIT);
+    /**
+     * 如果自定义Header 重写此方法
+     */
+    protected void initHeader() {
         PtrCommonHeader commonHeader = new PtrCommonHeader(getContext());
         setHeaderView(commonHeader);
         addPtrUIHandler(commonHeader);
