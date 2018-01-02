@@ -7,7 +7,6 @@ import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,18 +15,19 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
-import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.HFAdapter;
-import com.xcheng.view.pullrefresh.UIState;
+import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
 import com.xcheng.view.pullrefresh.PtrRVFrameLayout;
+import com.xcheng.view.pullrefresh.UIState;
 
 import java.util.List;
 
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-import static android.support.v7.widget.RecyclerView.*;
+import static android.support.v7.widget.RecyclerView.ItemAnimator;
+import static android.support.v7.widget.RecyclerView.LayoutManager;
 import static com.xcheng.view.pullrefresh.UIState.LOADING_MORE;
 import static com.xcheng.view.pullrefresh.UIState.REFRESHING;
 
@@ -219,7 +219,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
                 // 取消notifyItemChanged动画
                 defaultAnimator.setSupportsChangeAnimations(false);
                 this.itemAnimator = defaultAnimator;
-                this.itemDecoration = new SpaceDecoration(ContextCompat.getColor(context, R.color.ev_divider_color), 1);
+                this.itemDecoration = new SpaceDecoration(1);
             }
 
             private Builder(Config config) {

@@ -73,7 +73,6 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
                         refreshView(true, data);
                     } else {
                         refreshView(false, data);
-
                     }
                 }
             }
