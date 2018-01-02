@@ -49,7 +49,7 @@ public class PtrCommonHeader extends FrameLayout implements PtrUIHandler {
         View header = LayoutInflater.from(getContext()).inflate(R.layout.ev_ptr_common_header, this);
 
         mRotateView = header.findViewById(R.id.ptr_classic_header_rotate_view);
-        mTitleTextView = (TextView) header.findViewById(R.id.ptr_classic_header_rotate_view_header_title);
+        mTitleTextView = header.findViewById(R.id.ptr_classic_header_rotate_view_header_title);
         mProgressBar = header.findViewById(R.id.ptr_classic_header_rotate_view_progressbar);
         resetView();
         if (arr != null) {
