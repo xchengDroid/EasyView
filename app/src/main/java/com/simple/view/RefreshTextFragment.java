@@ -53,39 +53,31 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
                 .build();
     }
 
-    private boolean isFirst = true;
-
     @Override
     public void requestData(final boolean isRefresh) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (isFirst) {
-                    isFirst = false;
-                    refreshView(true, null);
-
+                if (isRefresh) {
+                    List<String> data = new ArrayList<>();
+                    for (int index = 0; index < 3; index++) {
+                        data.add("数据：" + index);
+                    }
+                    refreshView(true, data);
                 } else {
-                    if (isRefresh) {
-                        List<String> data = new ArrayList<>();
-                        for (int index = 0; index < 3; index++) {
-                            data.add("数据：" + index);
-                        }
+                    List<String> data = new ArrayList<>();
+                    for (int index = 0; index < 3; index++) {
+                        data.add("数据：" + index);
+                    }
+                    if (mAdapter.getDataCount() > 12) {
                         refreshView(true, data);
                     } else {
-                        List<String> data = new ArrayList<>();
-                        for (int index = 0; index < 3; index++) {
-                            data.add("数据：" + index);
-                        }
-                        if (mAdapter.getDataCount() > 12) {
-                            refreshView(true, data);
-                        } else {
-                            refreshView(false, data);
+                        refreshView(false, data);
 
-                        }
                     }
                 }
             }
-        }, 500);
+        }, 5000);
     }
 
     @Override
