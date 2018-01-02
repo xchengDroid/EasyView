@@ -111,7 +111,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPtrFrameLayout.complete(true, UIState.INIT);
+        mPtrFrameLayout.refreshComplete();
     }
 
 
@@ -147,11 +147,8 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         } else {
             mAdapter.addData(data);
         }
-        UIState uiState = UIState.INIT;
-        if (data == null || data.size() < mConfig.limit) {
-            uiState = UIState.NO_MORE;
-        }
-        complete(isRefresh, uiState);
+        boolean allLoaded = data == null || data.size() < mConfig.limit;
+        complete(isRefresh, allLoaded ? UIState.NO_MORE : UIState.INIT);
     }
 
     @Override
