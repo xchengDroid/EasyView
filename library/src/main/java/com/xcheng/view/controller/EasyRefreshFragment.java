@@ -107,9 +107,9 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         });
         lazyLoad();
     }
-    
+
     private void lazyLoad() {
-        if (!mConfig.autoRefresh || !getUserVisibleHint() || !mHasInitView)
+        if (!getUserVisibleHint() || !mHasInitView || !mConfig.autoRefresh)
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
