@@ -63,16 +63,15 @@ public class TabActivity extends EasyPagerActivity {
 
     @Override
     public void getTabInfos(List<TabInfo> tabInfos) {
-        tabInfos.add(new TabInfo("0", "新12312闻", TabFragment.class));
-        tabInfos.add(new TabInfo("1", "咨123213询", TabFragment.class));
-        tabInfos.add(new TabInfo("2", "视频", TabFragment.class));
-        tabInfos.add(new TabInfo("3", "本123地", TabFragment.class));
-        tabInfos.add(new TabInfo("4", "小说", TabFragment.class));
-        tabInfos.add(new TabInfo("5", "阅读", TabFragment.class));
-        tabInfos.add(new TabInfo("6", "本地", TabFragment.class));
-        tabInfos.add(new TabInfo("7", "贴吧", TabFragment.class));
-        tabInfos.add(new TabInfo("8", "评论", TabFragment.class));
-
+        tabInfos.add(new TabInfo("0", "新12312闻", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("1", "咨123213询", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("2", "视频", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("3", "本123地", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("4", "小说", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("5", "阅读", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("6", "本地", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("7", "贴吧", RefreshTextFragment.class));
+        tabInfos.add(new TabInfo("8", "评论", RefreshTextFragment.class));
     }
 
     @NonNull
@@ -83,7 +82,7 @@ public class TabActivity extends EasyPagerActivity {
         textView.setEllipsize(TextUtils.TruncateAt.END);
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(-2, 200);
         textView.setLayoutParams(layoutParams);
-        textView.setPadding(30, 20, 30, 20);
+        textView.setPadding(30, 40, 30, 40);
         textView.setText(tabInfo.title);
         return textView;
     }
