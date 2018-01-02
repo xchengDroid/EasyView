@@ -15,6 +15,7 @@ import in.srain.cube.views.ptr.PtrHandler;
 public class PtrRVFrameLayout extends PtrFrameLayout {
 
     private UIState mState;
+    private boolean mRefreshWhenDetached;
     private PtrHandlerWithLoadMore mPtrHandlerWithLoadMore;
     private RecyclerView mRecyclerView;
 
@@ -32,13 +33,21 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
     }
 
     @Override
-    protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
         try {
             //ViewPager fragment onDetach 如果此时处于下拉加载中，之后重新切换回来，UI状态复原
-            refreshComplete();
+            if (mRefreshWhenDetached && mState.canRefresh()) {
+                refreshComplete();
+            }
         } catch (Exception ignore) {
         }
+    }
+    
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mRefreshWhenDetached = isRefreshing();
     }
 
     private void initViews() {
