@@ -31,6 +31,16 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
         initViews();
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        try {
+            //ViewPager fragment onDetach 如果此时处于下拉加载中，之后重新切换回来，UI状态复原
+            refreshComplete();
+        } catch (Exception ignore) {
+        }
+    }
+
     private void initViews() {
         setState(UIState.INIT);
         PtrCommonHeader commonHeader = new PtrCommonHeader(getContext());

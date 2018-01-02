@@ -107,14 +107,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         });
         lazyLoad();
     }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mPtrFrameLayout.refreshComplete();
-    }
-
-
+    
     private void lazyLoad() {
         if (!mConfig.autoRefresh || !getUserVisibleHint() || !mHasInitView)
             return;
