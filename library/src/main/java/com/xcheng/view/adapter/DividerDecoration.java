@@ -1,6 +1,7 @@
 package com.xcheng.view.adapter;
 
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.support.annotation.ColorInt;
@@ -12,6 +13,10 @@ public class DividerDecoration extends RecyclerView.ItemDecoration {
     private int mDividerHeight;
     private boolean hasEndDivider;
     private Paint mPaint;
+
+    public DividerDecoration(int dividerHeight) {
+        this(Color.parseColor("#dae1e5"), dividerHeight);
+    }
 
     public DividerDecoration(@ColorInt int dividerColor, int dividerHeight) {
         this(dividerColor, dividerHeight, false);
