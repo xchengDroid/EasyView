@@ -12,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
 import android.view.View;
-import android.view.ViewTreeObserver;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyHolder;
@@ -113,18 +112,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
-        if (mPtrFrameLayout.getWidth() != 0) {
-            mPtrFrameLayout.autoRefresh(true, 1000);
-        } else {
-            mPtrFrameLayout.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
-                @Override
-                public boolean onPreDraw() {
-                    mPtrFrameLayout.autoRefresh(true, 1000);
-                    mPtrFrameLayout.getViewTreeObserver().removeOnPreDrawListener(this);
-                    return true;
-                }
-            });
-        }
+        mPtrFrameLayout.autoRefresh(true, 1000);
     }
 
     @Override

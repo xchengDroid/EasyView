@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
+import android.view.ViewTreeObserver;
 
 import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.util.EasyPreconditions;
@@ -127,11 +128,22 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
      * @param duration
      */
     @Override
-    public void autoRefresh(boolean atOnce, int duration) {
+    public void autoRefresh(final boolean atOnce, final int duration) {
         if (mRecyclerView != null) {
             mRecyclerView.scrollToPosition(0);
         }
-        super.autoRefresh(atOnce, duration);
+        if (getWidth() == 0 || getHeight() == 0) {
+            getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    autoRefresh(atOnce, duration);
+                    getViewTreeObserver().removeOnPreDrawListener(this);
+                    return true;
+                }
+            });
+        } else {
+            super.autoRefresh(atOnce, duration);
+        }
     }
 
     /**
