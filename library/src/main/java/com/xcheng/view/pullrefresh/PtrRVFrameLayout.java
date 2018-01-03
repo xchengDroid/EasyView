@@ -132,7 +132,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
         if (mRecyclerView != null) {
             mRecyclerView.scrollToPosition(0);
         }
-        if (getWidth() == 0 || getHeight() == 0) {
+        if (getWidth() == 0) {
             getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
                 @Override
                 public boolean onPreDraw() {
