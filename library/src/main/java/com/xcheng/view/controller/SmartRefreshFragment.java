@@ -13,8 +13,7 @@ import android.support.v7.widget.RecyclerView.ItemDecoration;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
-import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.SpaceDecoration;
@@ -81,15 +80,14 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     @Override
     public void setListener() {
         super.setListener();
-        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+        mSmartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
             @Override
-            public void onRefresh(final RefreshLayout refreshlayout) {
+            public void onRefresh(RefreshLayout refreshlayout) {
                 requestData(true);
             }
-        });
-        mSmartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+
             @Override
-            public void onLoadmore(final RefreshLayout refreshlayout) {
+            public void onLoadmore(RefreshLayout refreshlayout) {
                 requestData(false);
             }
         });
