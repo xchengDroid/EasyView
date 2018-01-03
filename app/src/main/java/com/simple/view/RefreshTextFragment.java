@@ -69,20 +69,15 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
                     for (int index = 0; index < 3; index++) {
                         data.add("数据：" + index);
                     }
-                    if (mAdapter.getDataCount() > 12) {
-                        refreshView(true, data);
-                    } else {
-                        refreshView(false, data);
-                    }
+                    refreshView(false, data);
                 }
             }
-        }, 5000);
+        }, 500);
     }
 
     @Override
     public void onBindHeader(EasyHolder holder, boolean isCreate) {
         super.onBindHeader(holder, isCreate);
-        // Log.e("print","Header isCreate:"+isCreate);
         if (isCreate) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -97,7 +92,6 @@ public class RefreshTextFragment extends EasyRefreshFragment<String> {
     @Override
     public void onBindEmpty(EasyHolder holder, boolean isCreate) {
         super.onBindEmpty(holder, isCreate);
-        // Log.e("print","Empty isCreate:"+isCreate);
         if (isCreate) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
