@@ -1,4 +1,4 @@
-package com.xcheng.view.pullrefresh;
+package com.xcheng.view.widget;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xcheng.view.R;
+import com.xcheng.view.util.RequestState;
 import com.xcheng.view.util.LocalDisplay;
 import com.xcheng.view.util.ShapeBinder;
 
