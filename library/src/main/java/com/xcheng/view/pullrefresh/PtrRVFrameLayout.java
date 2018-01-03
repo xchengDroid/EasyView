@@ -39,7 +39,7 @@ public class PtrRVFrameLayout extends PtrFrameLayout {
         super.onAttachedToWindow();
         try {
             //ViewPager fragment onDetach 如果此时处于下拉加载中，之后重新切换回来，UI状态复原
-            if (mDetached && !isRefreshing()) {
+            if (mDetached) {
                 refreshComplete();
             }
         } catch (Exception ignore) {
