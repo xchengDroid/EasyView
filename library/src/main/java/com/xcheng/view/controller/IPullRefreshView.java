@@ -30,4 +30,11 @@ public interface IPullRefreshView<T> {
      */
     @UiThread
     void complete(boolean isRefresh, UIState state);
+
+    /**
+     * @param isRefresh  是否为刷新
+     * @param success    是否成功
+     * @param noMoreData 是否已全部加在
+     */
+    void complete(boolean isRefresh, boolean success, boolean noMoreData);
 }

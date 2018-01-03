@@ -74,7 +74,7 @@ public class MainActivity extends ListActivity {
                 startTabActivity();
                 break;
             case 6:
-                JumpUtil.toActivity(this, RefreshActivity.class);
+                JumpUtil.toActivity(this, TabSmartActivity.class);
                 break;
             case 7:
                 JumpUtil.toActivity(this, CardActivity.class);

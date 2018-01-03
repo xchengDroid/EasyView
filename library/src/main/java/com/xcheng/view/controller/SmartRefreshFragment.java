@@ -4,60 +4,55 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.IntRange;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
-import android.view.View;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xcheng.view.R;
-import com.xcheng.view.adapter.EasyHolder;
-import com.xcheng.view.adapter.HFAdapter;
+import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.SpaceDecoration;
-import com.xcheng.view.pullrefresh.PtrDefaultHandlerWithLoadMore;
-import com.xcheng.view.pullrefresh.PtrRVFrameLayout;
-import com.xcheng.view.pullrefresh.UIState;
 
 import java.util.List;
 
-import in.srain.cube.views.ptr.PtrFrameLayout;
-
 import static android.support.v7.widget.RecyclerView.ItemAnimator;
 import static android.support.v7.widget.RecyclerView.LayoutManager;
-import static com.xcheng.view.pullrefresh.UIState.LOADING_MORE;
-import static com.xcheng.view.pullrefresh.UIState.REFRESHING;
 
 /**
  * 刷新列表Fragment
  * 约定大于配置，
- * 设置PtrRVFrameLayout 的id 为ev_id_ptrRVFrameLayout，
+ * SmartRefreshLayout 的id ev_id_smartRefreshLayout，
  * 设置RecyclerView 的 id为ev_id_recyclerView
  *
  * @author xincheng @date:2017-9-4
  */
-public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T>, HFAdapter.OnBindHolderListener {
-    protected PtrRVFrameLayout mPtrFrameLayout;
+public abstract class SmartRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
+    protected SmartRefreshLayout mSmartRefreshLayout;
     protected RecyclerView mRecyclerView;
-    protected HFAdapter<T> mAdapter;
+    protected EasyAdapter<T> mAdapter;
     private boolean mHasInitView;
     private Config mConfig;
 
     @Override
     public int getLayoutId() {
-        return R.layout.ev_ptr_refresh;
+        return R.layout.ev_smart_refresh;
     }
 
     @CallSuper
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        mPtrFrameLayout = findViewById(R.id.ev_id_ptrRVFrameLayout);
+        mConfig = getConfig();
+        mSmartRefreshLayout = findViewById(R.id.ev_id_smartRefreshLayout);
+        mSmartRefreshLayout.setEnableLoadmore(mConfig.enableLoadMore);
         mRecyclerView = findViewById(R.id.ev_id_recyclerView);
 
-        mConfig = getConfig();
         mRecyclerView.setLayoutManager(mConfig.layoutManager);
         mRecyclerView.setItemAnimator(mConfig.itemAnimator);
         ItemDecoration itemDecoration = mConfig.itemDecoration;
@@ -65,9 +60,6 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             mRecyclerView.addItemDecoration(itemDecoration);
         }
         mAdapter = createAdapter();
-        mAdapter.setHeader(mConfig.headerId);
-        mAdapter.setEmpty(mConfig.emptyId);
-        mAdapter.setFooter(mConfig.footerId, false);
         mRecyclerView.setAdapter(mAdapter);
         mHasInitView = true;
     }
@@ -76,7 +68,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
      * 创建一个HFAdapter对象
      */
     @NonNull
-    protected abstract HFAdapter<T> createAdapter();
+    protected abstract EasyAdapter<T> createAdapter();
 
     /**
      * 子类重写修改配置
@@ -89,19 +81,16 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
     @Override
     public void setListener() {
         super.setListener();
-        //设置header和footer监听
-        mAdapter.setOnHolderBindListener(this);
-        mPtrFrameLayout.setPtrHandler(new PtrDefaultHandlerWithLoadMore() {
+        mSmartRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onLoadMore() {
-                requestData(false);
+            public void onRefresh(final RefreshLayout refreshlayout) {
+                requestData(true);
             }
-
+        });
+        mSmartRefreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
             @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                if (mPtrFrameLayout.canRefresh()) {
-                    requestData(true);
-                }
+            public void onLoadmore(final RefreshLayout refreshlayout) {
+                requestData(false);
             }
         });
         lazyLoad();
@@ -112,7 +101,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
-        mPtrFrameLayout.autoRefresh(true, 1000);
+        mSmartRefreshLayout.autoRefresh();
     }
 
     @Override
@@ -128,41 +117,17 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         } else {
             mAdapter.addData(data);
         }
-        boolean allLoaded = data == null || data.size() < mConfig.limit;
-        complete(isRefresh, allLoaded ? UIState.NO_MORE : UIState.INIT);
-    }
-
-    @Override
-    public void complete(boolean isRefresh, UIState state) {
-        mPtrFrameLayout.complete(isRefresh, state);
+        boolean noMoreData = data == null || data.size() < mConfig.limit;
+        complete(isRefresh, true, noMoreData);
     }
 
     @Override
     public void complete(boolean isRefresh, boolean success, boolean noMoreData) {
-
-    }
-
-    @Override
-    public void onBindHeader(EasyHolder holder, boolean isCreate) {
-
-    }
-
-    @Override
-    public void onBindEmpty(EasyHolder holder, boolean isCreate) {
-
-    }
-
-    @Override
-    public void onBindFooter(EasyHolder holder, boolean isCreate) {
-        //防止不是此布局的情况下报空指针
-        if (mConfig.footerId == R.layout.ev_footer_load_more) {
-            UIState uiState = mPtrFrameLayout.getState();
-            if (uiState == LOADING_MORE || uiState == REFRESHING) {
-                holder.setVisible(R.id.ev_id_progressBarLoadMore, View.VISIBLE);
-            } else {
-                holder.setVisible(R.id.ev_id_progressBarLoadMore, View.INVISIBLE);
-            }
-            holder.setText(R.id.ev_id_textLoadMore, uiState.getText());
+        if (isRefresh) {
+            mSmartRefreshLayout.finishRefresh(200, success);
+            mSmartRefreshLayout.setLoadmoreFinished(noMoreData);
+        } else {
+            mSmartRefreshLayout.finishLoadmore(200, success, noMoreData);
         }
     }
 
@@ -170,20 +135,17 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
      * 设置RecyclerView的配置，footerView headerView emptyView LayoutManager ItemAnimator ItemDecoration等
      */
     public static class Config {
-        private final int footerId;
-        private final int emptyId;
-        private final int headerId;
         private final boolean autoRefresh;
+        private final boolean enableLoadMore;
+
         private final int limit;
         private final LayoutManager layoutManager;
         private final ItemAnimator itemAnimator;
         private final ItemDecoration itemDecoration;
 
         private Config(Builder builder) {
-            this.footerId = builder.footerId;
-            this.emptyId = builder.emptyId;
-            this.headerId = builder.headerId;
             this.autoRefresh = builder.autoRefresh;
+            this.enableLoadMore = builder.enableLoadMore;
             this.limit = builder.limit;
             this.layoutManager = builder.layoutManager;
             this.itemAnimator = builder.itemAnimator;
@@ -195,9 +157,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
         }
 
         public static class Builder {
-            private int footerId = R.layout.ev_footer_load_more;
-            private int emptyId = 0;
-            private int headerId = 0;
+            private boolean enableLoadMore = true;
             private boolean autoRefresh = true;
             private int limit = 10;
             private LayoutManager layoutManager;
@@ -215,9 +175,7 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             }
 
             private Builder(Config config) {
-                this.footerId = config.footerId;
-                this.emptyId = config.emptyId;
-                this.headerId = config.headerId;
+                this.enableLoadMore = config.enableLoadMore;
                 this.autoRefresh = config.autoRefresh;
                 this.limit = config.limit;
                 this.layoutManager = config.layoutManager;
@@ -228,24 +186,8 @@ public abstract class EasyRefreshFragment<T> extends EasyFragment implements IPu
             /**
              * 获取EmptyView 如果为0不设置
              */
-            public Builder emptyId(@LayoutRes int emptyId) {
-                this.emptyId = emptyId;
-                return this;
-            }
-
-            /**
-             * 获取HeaderView ,如果为0不设置
-             */
-            public Builder headerId(@LayoutRes int headerId) {
-                this.headerId = headerId;
-                return this;
-            }
-
-            /**
-             * 获取FooterView,如果为0不设置
-             */
-            public Builder footerId(@LayoutRes int footerId) {
-                this.footerId = footerId;
+            public Builder enableLoadMore(boolean enableLoadMore) {
+                this.enableLoadMore = enableLoadMore;
                 return this;
             }
 

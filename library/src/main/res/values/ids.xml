@@ -11,6 +11,8 @@
     <!--列表上刷新相关的id-->
     <item name="ev_id_recyclerView" type="id" />
     <item name="ev_id_ptrRVFrameLayout" type="id" />
+    <item name="ev_id_smartRefreshLayout" type="id" />
+
     <item name="ev_id_load_textView" type="id" />
     <item name="ev_id_textLoadMore" type="id" />
     <item name="ev_id_progressBarLoadMore" type="id" />
