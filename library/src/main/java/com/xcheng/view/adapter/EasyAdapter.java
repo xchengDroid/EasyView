@@ -2,6 +2,7 @@ package com.xcheng.view.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
@@ -61,6 +62,34 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
             mData.addAll(newData);
         }
         notifyDataSetChanged();
+    }
+    
+    /**
+     * notifyItemRangeInserted notifyItemRemoved notifyItemChanged 时必须要保持数据修改和操作的一致性，否则会越位时会报错，
+     * // boolean validateViewHolderForOffsetPosition(ViewHolder holder),每次都会检测
+     * if (holder.mPosition < 0 || holder.mPosition >= mAdapter.getItemCount()) {
+     * throw new IndexOutOfBoundsException("Inconsistency detected. Invalid view holder "
+     * + "adapter position" + holder);
+     * }
+     * <p>
+     * add new data to the end of mData
+     *
+     * @param loadMore the new data collection
+     */
+    public void addData(Collection<? extends T> loadMore) {
+        addData(getDataCount(), loadMore);
+    }
+
+    /**
+     * add new data in to certain locations
+     *
+     * @param position the position insert into mData
+     */
+    public void addData(@IntRange(from = 0) int position, Collection<? extends T> loadMore) {
+        if (loadMore != null && loadMore.size() > 0) {
+            mData.addAll(position, loadMore);
+            notifyItemRangeInserted(position, loadMore.size());
+        }
     }
 
     @Override
