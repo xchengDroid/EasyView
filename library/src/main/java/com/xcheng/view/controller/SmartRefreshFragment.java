@@ -142,7 +142,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
-        mSmartRefreshLayout.autoRefresh();
+        mSmartRefreshLayout.autoRefresh(200);
     }
 
     @Override
