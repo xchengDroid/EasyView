@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.EasyHolder;
+import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.controller.SmartRefreshFragment;
-import com.xcheng.view.pullrefresh.UIState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,7 +45,8 @@ public class RefreshSmtFragment extends SmartRefreshFragment<String> {
     @Override
     protected Config getConfig() {
         return super.getConfig().newBuilder()
-                .limit(5)
+                .limit(8)
+                .autoRefresh(true)
                 .build();
     }
 
@@ -56,14 +57,14 @@ public class RefreshSmtFragment extends SmartRefreshFragment<String> {
             public void run() {
                 if (isRefresh) {
                     List<String> data = new ArrayList<>();
-                    for (int index = 0; index < 5; index++) {
+                    for (int index = 0; index < 8; index++) {
                         data.add("数据：" + index);
                     }
                     refreshView(true, data);
                 } else {
                     List<String> data = new ArrayList<>();
-                    if (mAdapter.getDataCount() < 25) {
-                        for (int index = 0; index < 5; index++) {
+                    if (mAdapter.getDataCount() < 40) {
+                        for (int index = 0; index < 8; index++) {
                             data.add("数据：" + index);
                         }
                     } else {
@@ -77,15 +78,10 @@ public class RefreshSmtFragment extends SmartRefreshFragment<String> {
         }, 500);
     }
 
-    @Override
-    public void complete(boolean isRefresh, UIState state) {
-
-    }
-
     @NonNull
     @Override
-    public EasyAdapter<String> createAdapter() {
-        return new EasyAdapter<String>(getContext(), R.layout.ev_item_text) {
+    public HFAdapter<String> createAdapter() {
+        return new HFAdapter<String>(getContext(), R.layout.ev_item_text) {
             @Override
             public void convert(EasyHolder holder, String s, int position) {
                 // Log.e("print", "adapterPosition:" + holder.getAdapterPosition());

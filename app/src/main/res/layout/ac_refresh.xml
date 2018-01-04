@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <fragment
-        android:name="com.simple.view.RefreshTextFragment"
+        android:name="com.simple.view.RefreshSmtFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/refresh" />

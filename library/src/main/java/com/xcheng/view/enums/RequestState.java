@@ -1,4 +1,4 @@
-package com.xcheng.view.util;
+package com.xcheng.view.enums;
 
 
 public enum RequestState {

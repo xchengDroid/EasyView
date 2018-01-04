@@ -74,7 +74,7 @@ public class MainActivity extends ListActivity {
                 startTabActivity();
                 break;
             case 6:
-                JumpUtil.toActivity(this, TabSmartActivity.class);
+                // JumpUtil.toActivity(this, Smar.class);
                 break;
             case 7:
                 JumpUtil.toActivity(this, CardActivity.class);
@@ -102,7 +102,7 @@ public class MainActivity extends ListActivity {
     }
 
     private void startTabActivity() {
-        Intent intent = new Intent(this, TabActivity.class);
+        Intent intent = new Intent(this, TabSmartActivity.class);
         startActivity(intent);
     }
 }

@@ -12,11 +12,16 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ItemDecoration;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshFooter;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.SpaceDecoration;
+import com.xcheng.view.enums.SmartState;
 
 import java.util.List;
 
@@ -60,6 +65,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
         }
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
+        onSmartStateChanged(SmartState.NONE);
         mHasInitView = true;
     }
 
@@ -68,6 +74,14 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
      */
     @NonNull
     protected abstract EasyAdapter<T> createAdapter();
+
+
+    /**
+     * 创建一个HFAdapter对象
+     */
+    protected void onSmartStateChanged(SmartState smartState) {
+
+    }
 
     /**
      * 子类重写修改配置
@@ -89,6 +103,35 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             @Override
             public void onLoadmore(RefreshLayout refreshlayout) {
                 requestData(false);
+            }
+        });
+        mSmartRefreshLayout.setOnMultiPurposeListener(new SimpleMultiPurposeListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                onSmartStateChanged(SmartState.REFRESHING);
+            }
+
+            @Override
+            public void onHeaderFinish(RefreshHeader header, boolean success) {
+                onSmartStateChanged(SmartState.REFRESH_FINISHED);
+            }
+
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+                onSmartStateChanged(SmartState.LOADING_MORE);
+
+            }
+
+            @Override
+            public void onFooterFinish(RefreshFooter footer, boolean success) {
+                onSmartStateChanged(SmartState.LOADING_FINISHED);
+            }
+
+            @Override
+            public void onStateChanged(RefreshLayout refreshLayout, RefreshState oldState, RefreshState newState) {
+                if (newState == RefreshState.None) {
+                    onSmartStateChanged(SmartState.NONE);
+                }
             }
         });
         lazyLoad();
