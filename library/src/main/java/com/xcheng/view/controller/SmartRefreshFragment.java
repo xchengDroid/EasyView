@@ -77,7 +77,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
 
 
     /**
-     * 创建一个HFAdapter对象
+     * 子类如果需要监听状态可以重写此函数
      */
     protected void onSmartStateChanged(SmartState smartState) {
 
