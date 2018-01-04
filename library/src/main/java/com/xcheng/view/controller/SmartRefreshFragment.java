@@ -205,7 +205,6 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             private ItemAnimator itemAnimator;
             private ItemDecoration itemDecoration;
 
-
             public Builder(Context context) {
                 this.layoutManager = new LinearLayoutManager(context);
                 DefaultItemAnimator defaultAnimator = new DefaultItemAnimator();
