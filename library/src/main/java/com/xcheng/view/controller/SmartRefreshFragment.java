@@ -54,9 +54,11 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
         super.initView(savedInstanceState);
         mConfig = getConfig();
         mSmartRefreshLayout = findViewById(R.id.ev_id_smartRefreshLayout);
-        mSmartRefreshLayout.setEnableLoadmore(mConfig.enableLoadMore);
-        mRecyclerView = findViewById(R.id.ev_id_recyclerView);
+        if (mConfig.enableLoadMore != null) {
+            mSmartRefreshLayout.setEnableLoadmore(mConfig.enableLoadMore);
+        }
 
+        mRecyclerView = findViewById(R.id.ev_id_recyclerView);
         mRecyclerView.setLayoutManager(mConfig.layoutManager);
         mRecyclerView.setItemAnimator(mConfig.itemAnimator);
         ItemDecoration itemDecoration = mConfig.itemDecoration;
@@ -142,7 +144,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
-        mSmartRefreshLayout.autoRefresh(200);
+        mSmartRefreshLayout.autoRefresh();
     }
 
     @Override
@@ -177,7 +179,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
      */
     public static class Config {
         private final boolean autoRefresh;
-        private final boolean enableLoadMore;
+        private final Boolean enableLoadMore;
 
         private final int limit;
         private final LayoutManager layoutManager;
@@ -198,7 +200,8 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
         }
 
         public static class Builder {
-            private boolean enableLoadMore = true;
+            //如果没设置 不覆盖xml里面的内容或默认值,包装类能通过是否为空判断是否设置
+            private Boolean enableLoadMore;
             private boolean autoRefresh = true;
             private int limit = 10;
             private LayoutManager layoutManager;
