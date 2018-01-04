@@ -6,7 +6,9 @@
     android:layout_height="match_parent"
     app:srlEnableAutoLoadmore="false"
     app:srlEnableLoadmore="true"
-    app:srlFooterHeight="45dp">
+    app:srlFooterHeight="45dp"
+    app:srlFooterMaxDragRate="1.6"
+    app:srlHeaderMaxDragRate="1.6">
     <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
     <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
     <com.scwang.smartrefresh.layout.header.ClassicsHeader
