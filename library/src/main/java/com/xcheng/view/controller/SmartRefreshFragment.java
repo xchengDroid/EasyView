@@ -144,7 +144,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
-        mSmartRefreshLayout.autoRefresh();
+        mSmartRefreshLayout.autoRefresh(mConfig.autoRefreshDelayed);
     }
 
     @Override
@@ -179,6 +179,8 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
      */
     public static class Config {
         private final boolean autoRefresh;
+        private final int autoRefreshDelayed;
+
         private final Boolean enableLoadMore;
 
         private final int limit;
@@ -188,6 +190,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
 
         private Config(Builder builder) {
             this.autoRefresh = builder.autoRefresh;
+            this.autoRefreshDelayed = builder.autoRefreshDelayed;
             this.enableLoadMore = builder.enableLoadMore;
             this.limit = builder.limit;
             this.layoutManager = builder.layoutManager;
@@ -203,6 +206,9 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             //如果没设置 不覆盖xml里面的内容或默认值,包装类能通过是否为空判断是否设置
             private Boolean enableLoadMore;
             private boolean autoRefresh = true;
+            //调用自动刷新方法延迟时间 毫秒数
+            private int autoRefreshDelayed = 300;
+
             private int limit = 10;
             private LayoutManager layoutManager;
             private ItemAnimator itemAnimator;
@@ -218,8 +224,9 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             }
 
             private Builder(Config config) {
-                this.enableLoadMore = config.enableLoadMore;
                 this.autoRefresh = config.autoRefresh;
+                this.autoRefreshDelayed = config.autoRefreshDelayed;
+                this.enableLoadMore = config.enableLoadMore;
                 this.limit = config.limit;
                 this.layoutManager = config.layoutManager;
                 this.itemAnimator = config.itemAnimator;
@@ -265,6 +272,11 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
 
             public Builder autoRefresh(boolean autoRefresh) {
                 this.autoRefresh = autoRefresh;
+                return this;
+            }
+
+            public Builder autoRefreshDelayed(int delayed) {
+                this.autoRefreshDelayed = delayed;
                 return this;
             }
 
