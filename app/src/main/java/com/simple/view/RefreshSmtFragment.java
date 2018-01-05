@@ -19,6 +19,11 @@ import java.util.List;
  */
 public class RefreshSmtFragment extends SmartRefreshFragment<String> {
     @Override
+    public int getLayoutId() {
+        return R.layout.layout_smart_refresh;
+    }
+
+    @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
         mAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
