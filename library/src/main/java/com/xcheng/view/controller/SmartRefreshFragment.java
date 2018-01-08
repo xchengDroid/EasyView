@@ -167,10 +167,10 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     @Override
     public void complete(boolean isRefresh, boolean success, boolean noMoreData) {
         if (isRefresh) {
-            mSmartRefreshLayout.finishRefresh(200, success);
+            mSmartRefreshLayout.finishRefresh(0, success);
             mSmartRefreshLayout.setLoadmoreFinished(noMoreData);
         } else {
-            mSmartRefreshLayout.finishLoadmore(200, success, noMoreData);
+            mSmartRefreshLayout.finishLoadmore(0, success, noMoreData);
         }
     }
 
