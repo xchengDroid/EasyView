@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srlDrawableSize="16dp"
-        app:srlFinishDuration="500"
+        app:srlFinishDuration="300"
         app:srlTextSizeTitle="14sp" />
     <!--可自行嵌套Layout 添加empty header footer -->
     <android.support.v7.widget.RecyclerView
