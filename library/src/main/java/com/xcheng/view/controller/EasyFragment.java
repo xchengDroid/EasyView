@@ -11,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.dialog.LoadingDialog;
 import com.xcheng.view.util.ToastLess;
 
 /**
  * 基础Fragment，提供公有方法
- * 支持缓存RootView
+ * 1、支持缓存RootView
+ * 2、支持ViewPager懒加载
  *
  * @author xincheng @date:2014-8-4
  */
@@ -26,6 +28,10 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      * 需要缓存的RootView;
      */
     private View mRootView;
+    /**
+     * view是否已经初始化
+     */
+    private boolean mHasInitView;
 
     private LoadingDialog mLoadingDialog;
 
@@ -45,6 +51,21 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
             }
         }
         return mRootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mHasInitView = true;
+        //防止在onViewCreate中初始化View，但是在onLazyLoad中需要使用此view导致空指针，故延迟执行
+        EasyView.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (canLazyLoad()) {
+                    onLazyLoad();
+                }
+            }
+        });
     }
 
     @Override
@@ -74,9 +95,28 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
         return true;
     }
 
+
+    protected abstract void onLazyLoad();
+
+    /**
+     * @return true 视图已经初始化并对用户可见
+     */
+    private boolean canLazyLoad() {
+        return mHasInitView && getUserVisibleHint();
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (canLazyLoad()) {
+            onLazyLoad();
+        }
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        mHasInitView = false;
         if (!cacheView()) {
             mRootView = null;
         }

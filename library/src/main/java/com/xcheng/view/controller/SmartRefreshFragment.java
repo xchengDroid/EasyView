@@ -36,7 +36,7 @@ import static android.support.v7.widget.RecyclerView.LayoutManager;
  *
  * @author xincheng @date:2017-9-4
  */
-public abstract class SmartRefreshFragment<T> extends LazyLoadFragment implements IPullRefreshView<T> {
+public abstract class SmartRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
     protected SmartRefreshLayout mSmartRefreshLayout;
     protected RecyclerView mRecyclerView;
     protected EasyAdapter<T> mAdapter;
