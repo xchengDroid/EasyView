@@ -96,7 +96,9 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     }
 
 
-    protected abstract void onLazyLoad();
+    protected void onLazyLoad() {
+        
+    }
 
     /**
      * @return true 视图已经初始化并对用户可见
