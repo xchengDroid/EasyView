@@ -25,11 +25,9 @@ public abstract class LazyLoadFragment extends EasyFragment {
     protected abstract void onLazyLoad();
 
     /**
-     * 如果需要过滤更多条件请重写此方法
-     *
-     * @return true 视图已经初始化并对用户可见,false others
+     * @return true 视图已经初始化并对用户可见
      */
-    protected boolean canLazyLoad() {
+    private boolean canLazyLoad() {
         return mHasInitView && getUserVisibleHint();
     }
 

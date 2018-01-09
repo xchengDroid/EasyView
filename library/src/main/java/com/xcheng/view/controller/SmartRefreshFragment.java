@@ -36,11 +36,10 @@ import static android.support.v7.widget.RecyclerView.LayoutManager;
  *
  * @author xincheng @date:2017-9-4
  */
-public abstract class SmartRefreshFragment<T> extends EasyFragment implements IPullRefreshView<T> {
+public abstract class SmartRefreshFragment<T> extends LazyLoadFragment implements IPullRefreshView<T> {
     protected SmartRefreshLayout mSmartRefreshLayout;
     protected RecyclerView mRecyclerView;
     protected EasyAdapter<T> mAdapter;
-    private boolean mHasInitView;
     private Config mConfig;
 
     @Override
@@ -68,7 +67,6 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
         onSmartStateChanged(SmartState.NONE);
-        mHasInitView = true;
     }
 
     /**
@@ -136,21 +134,15 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
                 }
             }
         });
-        lazyLoad();
     }
 
-    private void lazyLoad() {
-        if (!getUserVisibleHint() || !mHasInitView || !mConfig.autoRefresh)
+    @Override
+    protected void onLazyLoad() {
+        if (!mConfig.autoRefresh)
             return;
         if (mAdapter == null || mAdapter.getDataCount() != 0)
             return;
         mSmartRefreshLayout.autoRefresh(mConfig.autoRefreshDelayed);
-    }
-
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        lazyLoad();
     }
 
     @Override
