@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
 
+import com.xcheng.view.EasyView;
+
 /**
  * 懒加载Fragment,当对用用户可见的时候调用
  */
@@ -17,9 +19,15 @@ public abstract class LazyLoadFragment extends EasyFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mHasInitView = true;
-        if (canLazyLoad()) {
-            onLazyLoad();
-        }
+        //防止在onViewCreate中初始化View，但是在onLazyLoad中需要使用此view导致空指针，故延迟执行
+        EasyView.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (canLazyLoad()) {
+                    onLazyLoad();
+                }
+            }
+        });
     }
 
     protected abstract void onLazyLoad();
