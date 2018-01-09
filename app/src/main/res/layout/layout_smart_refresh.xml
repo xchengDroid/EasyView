@@ -9,6 +9,7 @@
     app:srlFixedHeaderViewId="@+id/fixHeader2"
     app:srlFixedFooterViewId="@+id/fixFooter2"
     app:srlFooterHeight="45dp"
+    app:srlReboundDuration="300"
     app:srlFooterMaxDragRate="1.8"
     app:srlHeaderMaxDragRate="1.8">
     <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->

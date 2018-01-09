@@ -172,7 +172,6 @@ public abstract class SmartRefreshFragment<T> extends LazyLoadFragment implement
     public static class Config {
         private final boolean autoRefresh;
         private final int autoRefreshDelayed;
-
         private final Boolean enableLoadMore;
 
         private final int limit;
@@ -195,11 +194,11 @@ public abstract class SmartRefreshFragment<T> extends LazyLoadFragment implement
         }
 
         public static class Builder {
-            //如果没设置 不覆盖xml里面的内容或默认值,包装类能通过是否为空判断是否设置
-            private Boolean enableLoadMore;
             private boolean autoRefresh = true;
             //调用自动刷新方法延迟时间 毫秒数
-            private int autoRefreshDelayed = 300;
+            private int autoRefreshDelayed = 200;
+            //如果没设置 不覆盖xml里面的内容或默认值,包装类能通过是否为空判断是否设置
+            private Boolean enableLoadMore;
 
             private int limit = 10;
             private LayoutManager layoutManager;
