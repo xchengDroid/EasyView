@@ -16,7 +16,7 @@ import com.xcheng.view.util.ToastLess;
 
 /**
  * 基础Fragment，提供公有方法
- * 缓存RootView
+ * 支持缓存RootView
  *
  * @author xincheng @date:2014-8-4
  */
@@ -32,7 +32,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        boolean needInflater = !isCacheRootView() || mRootView == null;
+        boolean needInflater = !cacheView() || mRootView == null;
         if (needInflater) {
             mRootView = inflater.inflate(getLayoutId(), container, false);
             initData();
@@ -66,23 +66,18 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     }
 
     /**
-     * 是否需要缓存rootView 防止onCreteView 重新执行后重新加载数据
+     * 是否需要缓存rootView 防止onCreteView 重新执行后重新初始化视图
      *
      * @return
      */
-    public boolean isCacheRootView() {
+    public boolean cacheView() {
         return true;
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (!isCacheRootView()) {
+        if (!cacheView()) {
             mRootView = null;
         }
     }
@@ -93,11 +88,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
         super.onDestroy();
         //页面销毁的时候，防止外部引用Fragment，导致mRootView一直被引用,并且只支持FragmentPagerAdapter的页面缓存
         mRootView = null;
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     public <T extends View> T findViewById(@IdRes int id) {
