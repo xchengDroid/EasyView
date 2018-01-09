@@ -1,7 +1,6 @@
 package com.xcheng.view.controller;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
@@ -29,18 +28,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     private View mRootView;
 
     private LoadingDialog mLoadingDialog;
-
-    @Override
-    public void onAttach(Context context) {
-        // TODO Auto-generated method stub
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
@@ -90,31 +77,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -185,7 +147,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
             onActivityResultOk(requestCode, data);
     }
 
-    public void onActivityResultOk(int requestCode, Intent data) {
+    protected void onActivityResultOk(int requestCode, Intent data) {
 
     }
 }
