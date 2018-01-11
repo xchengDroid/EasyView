@@ -7,17 +7,15 @@
     app:srlEnableAutoLoadmore="false"
     app:srlEnableLoadmore="true"
     app:srlFooterHeight="45dp"
-    app:srlFooterMaxDragRate="1.8"
-    app:srlHeaderMaxDragRate="1.8"
+    app:srlFooterMaxDragRate="2"
+    app:srlHeaderMaxDragRate="2"
     app:srlReboundDuration="300">
     <!--srlAccentColor srlPrimaryColor 将会改变 Header 和 Footer 的主题颜色-->
     <!--srlEnablePreviewInEditMode 可以开启和关闭预览功能-->
     <com.scwang.smartrefresh.layout.header.ClassicsHeader
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srlDrawableSize="16dp"
-        app:srlFinishDuration="300"
-        app:srlTextSizeTitle="14sp" />
+        app:srlFinishDuration="300" />
     <!--可自行嵌套Layout 添加empty header footer -->
     <android.support.v7.widget.RecyclerView
         android:id="@id/ev_id_recyclerView"
@@ -28,7 +26,5 @@
     <com.scwang.smartrefresh.layout.footer.ClassicsFooter
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srlDrawableSize="16dp"
-        app:srlFinishDuration="300"
-        app:srlTextSizeTitle="14sp" />
+        app:srlFinishDuration="300" />
 </com.scwang.smartrefresh.layout.SmartRefreshLayout>
