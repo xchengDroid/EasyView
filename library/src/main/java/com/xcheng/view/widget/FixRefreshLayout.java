@@ -24,12 +24,12 @@ public class FixRefreshLayout extends SmartRefreshLayout {
 
     @Override
     protected void onDetachedFromWindow() {
-        super.onDetachedFromWindow();
         if (reboundAnimator != null) {
             reboundAnimator.removeAllUpdateListeners();
             reboundAnimator.removeAllListeners();
             reboundAnimator.cancel();
             reboundAnimator = null;
         }
+        super.onDetachedFromWindow();
     }
 }
