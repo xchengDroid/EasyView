@@ -2,6 +2,7 @@ package com.xcheng.view.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 
@@ -31,5 +32,15 @@ public class FixRefreshLayout extends SmartRefreshLayout {
             reboundAnimator = null;
         }
         super.onDetachedFromWindow();
+    }
+
+    /**
+     * @param spinner    竖直方向偏移
+     * @param isAnimator true 是否为动画回弹 false 为{@link #dispatchTouchEvent(MotionEvent)}
+     *                   {@link MotionEvent#ACTION_CANCEL} 的touch事件回弹
+     */
+    @Override
+    protected void moveSpinner(int spinner, boolean isAnimator) {
+        super.moveSpinner(spinner, isAnimator);
     }
 }
