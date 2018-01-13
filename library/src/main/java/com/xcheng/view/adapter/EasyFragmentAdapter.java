@@ -86,19 +86,23 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
     }
 
 
-    public void removeFragment(ViewGroup container, int index) {
+    public void removeFragment(ViewGroup container, int index, boolean allowingStateLoss) {
         Fragment fragment = findFragment(container, index);
         if (fragment == null)
             return;
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         ft.remove(fragment);
-        ft.commit();
+        if (allowingStateLoss) {
+            ft.commitAllowingStateLoss();
+        } else {
+            ft.commit();
+        }
         mFragmentManager.executePendingTransactions();
     }
 
-    public void removeAllFragment(ViewGroup container) {
+    public void removeAllFragment(ViewGroup container, boolean allowingStateLoss) {
         for (int index = 0; index < getCount(); index++) {
-            removeFragment(container, index);
+            removeFragment(container, index, allowingStateLoss);
         }
     }
 
