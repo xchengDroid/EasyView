@@ -30,8 +30,8 @@ public abstract class TopBarSupportActivity extends AppCompatActivity {
 
     @SuppressWarnings("ConstantConditions")
     private void initToolBar() {
-        mTitleView = (TextView) findViewById(R.id.ev_id_titleView);
-        mToolbar = (Toolbar) findViewById(R.id.ev_id_toolBar);
+        mTitleView = findViewById(R.id.ev_id_titleView);
+        mToolbar = findViewById(R.id.ev_id_toolBar);
         if (mToolbar != null) {
             if (isSupportActionBar()) {
                 setSupportActionBar(mToolbar);
