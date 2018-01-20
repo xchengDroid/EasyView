@@ -11,6 +11,7 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
@@ -41,6 +42,14 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
 
     public Context getContext() {
         return itemView.getContext();
+    }
+
+    /**
+     * @param itemView 获取itemView的 在adapter中的位置
+     */
+    public static int getAdapterPosition(@NonNull View itemView) {
+        RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) itemView.getLayoutParams();
+        return lp.getViewAdapterPosition();
     }
 
     @Override
