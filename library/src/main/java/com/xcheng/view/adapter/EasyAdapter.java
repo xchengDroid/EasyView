@@ -25,13 +25,13 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     private OnItemClickListener mOnItemClickListener;
     private OnItemLongClickListener mOnItemLongClickListener;
 
-    public final Context mContext;
-    public final Resources mResources;
-    public final LayoutInflater mInflater;
+    protected final Context mContext;
+    protected final Resources mResources;
+    protected final LayoutInflater mInflater;
     //默认布局ID
     @LayoutRes
-    public final int mLayoutId;
-    public final List<T> mData;
+    protected final int mLayoutId;
+    protected final List<T> mData;
 
     public EasyAdapter(Context context, @Nullable List<T> data) {
         this(context, data, 0);
@@ -63,7 +63,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
         }
         notifyDataSetChanged();
     }
-    
+
     /**
      * notifyItemRangeInserted notifyItemRemoved notifyItemChanged 时必须要保持数据修改和操作的一致性，否则会越位时会报错，
      * // boolean validateViewHolderForOffsetPosition(ViewHolder holder),每次都会检测
@@ -163,6 +163,10 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      */
     public final int getDataCount() {
         return mData.size();
+    }
+
+    public List<T> getData() {
+        return mData;
     }
 
     /**
