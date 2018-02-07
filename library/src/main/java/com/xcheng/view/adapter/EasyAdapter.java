@@ -158,9 +158,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
 
     /**
      * 获取mData数据的长度
-     *
-     * @return
-     */
+     **/
     public final int getDataCount() {
         return mData.size();
     }
