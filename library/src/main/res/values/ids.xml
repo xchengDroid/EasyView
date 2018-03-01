@@ -19,7 +19,7 @@
     <item name="ev_id_emptyView" type="id" />
 
     <item name="ev_id_viewpager" type="id" />
-    <item name="ev_id_tab_indicator" type="id" />
+    <item name="ev_id_tabLayout" type="id" />
     <item name="ev_id_submit" type="id" />
     <item name="ev_id_headerPhoto" type="id" />
 

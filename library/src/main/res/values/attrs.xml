@@ -77,18 +77,6 @@
         <attr name="ev_bottomToRight" />
     </declare-styleable>
 
-    <declare-styleable name="PagerSlidingTabStrip">
-        <attr name="ev_pstsIndicatorColor" format="color" />
-        <attr name="ev_pstsUnderlineColor" format="color" />
-        <attr name="ev_pstsDividerColor" format="color" />
-        <attr name="ev_pstsIndicatorHeight" format="dimension" />
-        <attr name="ev_pstsUnderlineHeight" format="dimension" />
-        <attr name="ev_pstsDividerPadding" format="dimension" />
-        <attr name="ev_pstsScrollOffset" format="dimension" />
-        <attr name="ev_pstsShouldExpand" format="boolean" />
-        <attr name="ev_pstsSmoothScroll" format="boolean" />
-    </declare-styleable>
-
     <declare-styleable name="CommonView">
         <attr name="ev_cv_label" format="string" />
         <attr name="ev_cv_labelColor" format="color" />

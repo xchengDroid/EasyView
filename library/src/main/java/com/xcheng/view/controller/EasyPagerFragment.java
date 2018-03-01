@@ -1,14 +1,12 @@
 package com.xcheng.view.controller;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
-import android.view.View;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyFragmentAdapter;
 import com.xcheng.view.adapter.TabInfo;
-import com.xcheng.view.widget.PagerSlidingTabStrip;
+import com.xcheng.view.widget.smarttab.SmartTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,15 +14,15 @@ import java.util.List;
 /**
  * 约定大于配置，
  * 设置Viewpager 的id 为ev_id_viewpager，
- * 设置PagerSlidingTabStrip 的 id为ev_id_tab_indicator
+ * 设置PagerSlidingTabStrip 的 id为ev_id_tabLayout
  *
  * @author chengxin @date:2017-8-30
  */
-public abstract class EasyPagerFragment extends EasyFragment implements IPagerView {
+public abstract class EasyPagerFragment extends EasyFragment {
 
     protected ViewPager mViewPager;
     protected EasyFragmentAdapter mTabsAdapter;
-    protected PagerSlidingTabStrip mIndicator;
+    protected SmartTabLayout mTabLayout;
 
     @Override
     public int getLayoutId() {
@@ -36,23 +34,18 @@ public abstract class EasyPagerFragment extends EasyFragment implements IPagerVi
         // TODO Auto-generated method stub
         super.initView(savedInstanceState);
         mViewPager = findViewById(R.id.ev_id_viewpager);
-        mViewPager.setOffscreenPageLimit(getScreenPageLimit());
         List<TabInfo> tabInfos = new ArrayList<>();
         getTabInfos(tabInfos);
-        mTabsAdapter = new EasyFragmentAdapter(getChildFragmentManager(), getContext(), tabInfos) {
-            @NonNull
-            @Override
-            public View getTabView(int position) {
-                return createTabView(position, mTabsAdapter.getTabInfo(position));
-            }
-        };
+        mTabsAdapter = new EasyFragmentAdapter(getChildFragmentManager(), getContext(), tabInfos);
         mViewPager.setAdapter(mTabsAdapter);
-        mIndicator = findViewById(R.id.ev_id_tab_indicator);
-        mIndicator.setViewPager(mViewPager);
+        mTabLayout = findViewById(R.id.ev_id_tabLayout);
+        mTabLayout.setViewPager(mViewPager);
     }
 
-    @Override
-    public int getScreenPageLimit() {
-        return DEFAULT_PAGE_LIMIT;
+    /**
+     * 设置Tab页面加载的每个页面
+     */
+    protected void getTabInfos(final List<TabInfo> tabInfos) {
+
     }
 }

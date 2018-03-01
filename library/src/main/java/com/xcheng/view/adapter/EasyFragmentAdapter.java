@@ -9,11 +9,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.view.ViewGroup;
 
-import com.xcheng.view.widget.PagerSlidingTabStrip;
-
 import java.util.List;
 
-public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implements PagerSlidingTabStrip.TabAdapter {
+public class EasyFragmentAdapter extends FragmentPagerAdapter {
     private Context mContext;
     private final List<TabInfo> mTabInfos;
     private FragmentManager mFragmentManager;
@@ -30,29 +28,15 @@ public abstract class EasyFragmentAdapter extends FragmentPagerAdapter implement
         mContext = context;
     }
 
-    /**
-     * called {@link #notifyDataSetChanged()} after this method
-     */
-    public void addTabInfo(TabInfo tabInfo) {
-        mTabInfos.add(tabInfo);
-    }
-
-    /**
-     * called {@link #notifyDataSetChanged()} after this method
-     */
-    public void removeTabInfo(int index) {
-        mTabInfos.remove(index);
-    }
-
-    /**
-     * called {@link #notifyDataSetChanged()} after this method
-     */
-    public void setTabInfo(int index, TabInfo info) {
-        mTabInfos.set(index, info);
-    }
-
     public TabInfo getTabInfo(int position) {
         return mTabInfos.get(position);
+    }
+
+    /**
+     * called {@link #notifyDataSetChanged()} if tabInfos has changed
+     */
+    public List<TabInfo> getTabInfos() {
+        return mTabInfos;
     }
 
     @Override
