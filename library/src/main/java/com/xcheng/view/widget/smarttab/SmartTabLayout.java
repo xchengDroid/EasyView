@@ -96,6 +96,7 @@ public class SmartTabLayout extends HorizontalScrollView {
         this(context, attrs, 0);
     }
 
+    @SuppressWarnings("ConstantConditions")
     public SmartTabLayout(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
