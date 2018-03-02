@@ -39,6 +39,9 @@ public abstract class EasyPagerActivity extends EasyActivity {
         mTabsAdapter = new EasyFragmentAdapter(getSupportFragmentManager(), getContext(), tabInfos);
         mViewPager.setAdapter(mTabsAdapter);
         mTabLayout = findViewById(R.id.ev_id_tabLayout);
+        /**if call {@link SmartTabLayout#setCustomTabView(SmartTabLayout.TabProvider)}
+         * {@link SmartTabLayout#setCustomTabView(int, int)},you must call{@link SmartTabLayout#setViewPager(ViewPager)} again
+         */
         mTabLayout.setViewPager(mViewPager);
     }
 
@@ -46,6 +49,6 @@ public abstract class EasyPagerActivity extends EasyActivity {
      * 设置Tab页面加载的每个页面
      */
     protected void getTabInfos(final List<TabInfo> tabInfos) {
-        
+
     }
 }
