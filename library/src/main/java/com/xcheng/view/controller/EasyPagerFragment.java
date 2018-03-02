@@ -21,7 +21,7 @@ import java.util.List;
 public abstract class EasyPagerFragment extends EasyFragment {
 
     protected ViewPager mViewPager;
-    protected EasyFragmentAdapter mTabsAdapter;
+    protected EasyFragmentAdapter mTabAdapter;
     protected SmartTabLayout mTabLayout;
 
     @Override
@@ -36,8 +36,8 @@ public abstract class EasyPagerFragment extends EasyFragment {
         mViewPager = findViewById(R.id.ev_id_viewpager);
         List<TabInfo> tabInfos = new ArrayList<>();
         getTabInfos(tabInfos);
-        mTabsAdapter = new EasyFragmentAdapter(getChildFragmentManager(), getContext(), tabInfos);
-        mViewPager.setAdapter(mTabsAdapter);
+        mTabAdapter = new EasyFragmentAdapter(getChildFragmentManager(), getContext(), tabInfos);
+        mViewPager.setAdapter(mTabAdapter);
         mTabLayout = findViewById(R.id.ev_id_tabLayout);
         mTabLayout.setViewPager(mViewPager);
     }
