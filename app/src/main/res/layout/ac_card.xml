@@ -4,6 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+    <TextView
+        android:background="@mipmap/shadow_134239"
+        android:layout_width="match_parent"
+        android:text="12312321"
+        android:layout_height="200dp" />
+
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
