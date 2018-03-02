@@ -48,7 +48,7 @@ public class EasyFragmentAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getItemPosition(Object object) {
-        /*每此 notifyDataSetChanged的时候刷新**/
+        /*每次 notifyDataSetChanged的时候刷新**/
         return PagerAdapter.POSITION_NONE;
     }
 
