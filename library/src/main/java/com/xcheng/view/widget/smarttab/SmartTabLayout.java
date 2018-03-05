@@ -184,25 +184,23 @@ public class SmartTabLayout extends HorizontalScrollView {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (tabStrip.isIndicatorAlwaysInCenter() && tabStrip.getChildCount() > 0) {
-            View firstTab = tabStrip.getChildAt(0);
-            View lastTab = tabStrip.getChildAt(tabStrip.getChildCount() - 1);
-            int start = (w - Utils.getMeasuredWidth(firstTab)) / 2 - Utils.getMarginStart(firstTab);
-            int end = (w - Utils.getMeasuredWidth(lastTab)) / 2 - Utils.getMarginEnd(lastTab);
-            tabStrip.setMinimumWidth(tabStrip.getMeasuredWidth());
-            ViewCompat.setPaddingRelative(this, start, getPaddingTop(), end, getPaddingBottom());
-            setClipToPadding(false);
-        }
-    }
-
-    @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         // Ensure first scroll
         if (changed && viewPager != null) {
             scrollToTab(viewPager.getCurrentItem(), 0);
+        }
+
+        if (tabStrip.isIndicatorAlwaysInCenter() && tabStrip.getChildCount() > 0) {
+            View firstTab = tabStrip.getChildAt(0);
+            View lastTab = tabStrip.getChildAt(tabStrip.getChildCount() - 1);
+            int start = (getMeasuredWidth() - Utils.getMeasuredWidth(firstTab)) / 2 - Utils.getMarginStart(firstTab);
+            int end = (getMeasuredWidth() - Utils.getMeasuredWidth(lastTab)) / 2 - Utils.getMarginEnd(lastTab);
+            if (ViewCompat.getPaddingStart(this) != start || ViewCompat.getPaddingEnd(this) != end) {
+                tabStrip.requestLayout();
+                ViewCompat.setPaddingRelative(this, start, getPaddingTop(), end, getPaddingBottom());
+            }
+            setClipToPadding(false);
         }
     }
 
