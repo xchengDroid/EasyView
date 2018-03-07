@@ -314,11 +314,8 @@ public class CommonView extends DividerLayout {
      * @param text 绑定的内容
      */
     public void setText(CharSequence text) {
-        if (mMode == INPUT) {
-            mInputView.setText(text);
-        } else {
-            mDisplayView.setText(text);
-        }
+        mInputView.setText(text);
+        mDisplayView.setText(text);
     }
 
     public void setTextColor(@ColorInt int color) {
