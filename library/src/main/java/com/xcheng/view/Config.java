@@ -83,11 +83,17 @@ public class Config {
      * 创建LoadingDialog的工厂类
      */
     public interface LoadingFactory {
+        /**
+         * 创建加载的Dialog
+         */
         @NonNull
         Dialog create(Context context, String fromClazz);
     }
 
     public interface MessageDispatcher {
+        /**
+         * 显示消息
+         */
         void dispatch(Context context, String fromClazz, CharSequence message);
     }
 }
