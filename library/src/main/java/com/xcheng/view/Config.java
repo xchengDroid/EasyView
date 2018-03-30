@@ -35,6 +35,7 @@ public class Config {
     private Config(Builder builder) {
         context = builder.context;
         factory = builder.factory;
+        dispatcher = builder.dispatcher;
     }
 
     public Context context() {
