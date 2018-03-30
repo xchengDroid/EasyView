@@ -17,13 +17,13 @@ public class Config {
     private static final LoadingFactory LOADING_FACTORY = new LoadingFactory() {
         @NonNull
         @Override
-        public Dialog newDialog(Context context, String fromClazz) {
+        public Dialog create(Context context, String fromClazz) {
             return new LoadingDialog(context);
         }
     };
     private static final MessageDispatcher MESSAGE_DISPATCHER = new MessageDispatcher() {
         @Override
-        public void showMessage(Context context, String fromClazz, CharSequence message) {
+        public void dispatch(Context context, String fromClazz, CharSequence message) {
             ToastLess.showToast(message);
         }
     };
@@ -45,23 +45,21 @@ public class Config {
         return factory;
     }
 
-    private MessageDispatcher messageDispatcher() {
+    public MessageDispatcher messageDispatcher() {
         return dispatcher;
     }
 
 
-    //后续扩张属性
-    public class Builder {
+    //后续扩展属性
+    public static class Builder {
         private Context context;
         private LoadingFactory factory;
         private MessageDispatcher dispatcher;
-
 
         public Builder(Context context) {
             this.context = context.getApplicationContext();
             this.factory = LOADING_FACTORY;
             this.dispatcher = MESSAGE_DISPATCHER;
-
         }
 
         public Builder loadingFactory(LoadingFactory factory) {
@@ -86,10 +84,10 @@ public class Config {
      */
     public interface LoadingFactory {
         @NonNull
-        Dialog newDialog(Context context, String fromClazz);
+        Dialog create(Context context, String fromClazz);
     }
 
     public interface MessageDispatcher {
-        void showMessage(Context context, String fromClazz, CharSequence message);
+        void dispatch(Context context, String fromClazz, CharSequence message);
     }
 }

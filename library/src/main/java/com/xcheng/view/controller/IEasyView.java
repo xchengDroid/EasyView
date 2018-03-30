@@ -2,7 +2,6 @@ package com.xcheng.view.controller;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
-import android.support.annotation.StringRes;
 import android.view.View;
 
 /**
@@ -41,7 +40,5 @@ public interface IEasyView extends View.OnClickListener, ILoadingView {
      * @param text 消息内容
      */
     void showMessage(CharSequence text);
-
-    void showMessage(@StringRes int stringId);
-
+    
 }

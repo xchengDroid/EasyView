@@ -7,7 +7,6 @@ import android.content.ContextWrapper;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.annotation.StyleRes;
 import android.view.View;
 
@@ -99,10 +98,5 @@ public abstract class EasyDialog extends Dialog implements IEasyView {
     @Override
     public void showMessage(CharSequence text) {
         ToastLess.showToast(text);
-    }
-
-    @Override
-    public void showMessage(@StringRes int stringId) {
-        ToastLess.showToast(stringId);
     }
 }

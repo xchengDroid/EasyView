@@ -3,7 +3,6 @@ package com.xcheng.view;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.StringRes;
 
 import com.xcheng.view.util.LocalDisplay;
@@ -13,21 +12,12 @@ import com.xcheng.view.util.LocalDisplay;
  * Created by chengxin on 2017/8/24.
  */
 public class EasyView {
-    private static Context sAppContext;
-    private static int sLoadingLayout;
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
-
-    public static void init(Context context) {
-        init(context, 0);
-    }
-
-    /**
-     * 初始化全局Context 和loadingLayout
-     */
-    public static void init(Context context, @LayoutRes int loadingLayout) {
-        sAppContext = context.getApplicationContext();
-        LocalDisplay.init(sAppContext);
-        sLoadingLayout = loadingLayout;
+    private static Config sConfig;
+    
+    public static void init(Config config) {
+        sConfig = config;
+        LocalDisplay.init(getContext());
     }
 
     /**
@@ -36,22 +26,20 @@ public class EasyView {
      * @return applicationContext 对象
      */
     public static Context getContext() {
-        return sAppContext;
+        return sConfig.context();
     }
 
-    public static int getLoadingLayout() {
-        if (sLoadingLayout != 0) {
-            return sLoadingLayout;
-        }
-        return R.layout.ev_dialog_loading;
+    public static Config getConfig() {
+        return sConfig;
     }
+
 
     public static String getString(@StringRes int stringId) {
-        return sAppContext.getString(stringId);
+        return getContext().getString(stringId);
     }
 
     public static CharSequence getText(@StringRes int stringId) {
-        return sAppContext.getText(stringId);
+        return getContext().getText(stringId);
     }
 
     /**

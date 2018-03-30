@@ -1,19 +1,17 @@
 package com.xcheng.view.controller;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.xcheng.view.EasyView;
-import com.xcheng.view.controller.dialog.LoadingDialog;
-import com.xcheng.view.util.ToastLess;
 
 /**
  * 基础Fragment，提供公有方法
@@ -33,7 +31,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      */
     private boolean mHasInitView;
 
-    private LoadingDialog mLoadingDialog;
+    private Dialog mLoadingDialog;
 
     @Nullable
     @Override
@@ -97,7 +95,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
 
     protected void onLazyLoad() {
-        
+
     }
 
     /**
@@ -152,7 +150,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
     public void showLoading() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = new LoadingDialog(getContext());
+            mLoadingDialog = EasyView.getConfig().loadingFactory().create(getContext(), getClass().getName());
         }
         mLoadingDialog.show();
     }
@@ -165,12 +163,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
     @Override
     public void showMessage(CharSequence text) {
-        ToastLess.showToast(text);
-    }
-
-    @Override
-    public void showMessage(@StringRes int stringId) {
-        ToastLess.showToast(stringId);
+        EasyView.getConfig().messageDispatcher().dispatch(getContext(), getClass().getName(), text);
     }
 
     @Override

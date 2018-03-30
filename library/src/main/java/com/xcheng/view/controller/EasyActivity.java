@@ -1,5 +1,6 @@
 package com.xcheng.view.controller;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,12 +8,10 @@ import android.os.Parcelable;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.view.View;
 
-import com.xcheng.view.controller.dialog.LoadingDialog;
+import com.xcheng.view.EasyView;
 import com.xcheng.view.util.JumpUtil;
-import com.xcheng.view.util.ToastLess;
 
 import java.io.Serializable;
 
@@ -24,7 +23,7 @@ import java.io.Serializable;
 public abstract class EasyActivity extends TopBarSupportActivity implements IEasyView {
     public static final String TAG = "EasyActivity";
 
-    private LoadingDialog mLoadingDialog;
+    private Dialog mLoadingDialog;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,7 +100,7 @@ public abstract class EasyActivity extends TopBarSupportActivity implements IEas
 
     public void showLoading() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = new LoadingDialog(getContext());
+            mLoadingDialog = EasyView.getConfig().loadingFactory().create(this, getClass().getName());
         }
         mLoadingDialog.show();
     }
@@ -114,14 +113,8 @@ public abstract class EasyActivity extends TopBarSupportActivity implements IEas
 
     @Override
     public void showMessage(CharSequence text) {
-        ToastLess.showToast(text);
+        EasyView.getConfig().messageDispatcher().dispatch(this, getClass().getName(), text);
     }
-
-    @Override
-    public void showMessage(@StringRes int stringId) {
-        ToastLess.showToast(stringId);
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
