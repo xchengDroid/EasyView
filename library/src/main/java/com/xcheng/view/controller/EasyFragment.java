@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.xcheng.view.EasyView;
+import com.xcheng.view.util.ToastLess;
 
 /**
  * 基础Fragment，提供公有方法
@@ -150,7 +151,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
     public void showLoading() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = EasyView.getConfig().loadingFactory().create(getContext(), getClass().getName());
+            mLoadingDialog = EasyView.getConfig().factory().createLoadingDialog(getContext(), getClass().getName());
         }
         mLoadingDialog.show();
     }
@@ -163,7 +164,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
     @Override
     public void showMessage(CharSequence text) {
-        EasyView.getConfig().messageDispatcher().dispatch(getContext(), getClass().getName(), text);
+        ToastLess.showToast(text);
     }
 
     @Override

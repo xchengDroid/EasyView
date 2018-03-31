@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.xcheng.view.EasyView;
 import com.xcheng.view.util.JumpUtil;
+import com.xcheng.view.util.ToastLess;
 
 import java.io.Serializable;
 
@@ -100,7 +101,7 @@ public abstract class EasyActivity extends TopBarSupportActivity implements IEas
 
     public void showLoading() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = EasyView.getConfig().loadingFactory().create(this, getClass().getName());
+            mLoadingDialog = EasyView.getConfig().factory().createLoadingDialog(this, getClass().getName());
         }
         mLoadingDialog.show();
     }
@@ -113,7 +114,7 @@ public abstract class EasyActivity extends TopBarSupportActivity implements IEas
 
     @Override
     public void showMessage(CharSequence text) {
-        EasyView.getConfig().messageDispatcher().dispatch(this, getClass().getName(), text);
+        ToastLess.showToast(text);
     }
 
     @Override

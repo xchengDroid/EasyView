@@ -15,7 +15,7 @@ public final class ToastLess {
     @UiThread
     private static void show(CharSequence text, boolean isLong) {
         if (sToast == null) {
-            sToast = Toast.makeText(EasyView.getContext(), null, Toast.LENGTH_SHORT);
+            sToast = EasyView.getConfig().factory().createGlobalToast(EasyView.getContext());
         }
         if (text != null) {
             sToast.setDuration(isLong ? Toast.LENGTH_LONG : Toast.LENGTH_SHORT);
