@@ -14,7 +14,7 @@ import com.xcheng.view.util.EasyPreconditions;
  * 功能描述：EasyView全局参数配置类
  */
 public class Config {
-    public static final Factory DEFAULT_FACTORY = new Factory() {
+    static final Factory DEFAULT_FACTORY = new Factory() {
         @NonNull
         @Override
         public Dialog createLoadingDialog(Context context, String fromClazz) {
