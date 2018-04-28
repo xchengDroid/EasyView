@@ -21,16 +21,12 @@
         <item name="navigationContentDescription">Navigation</item>
     </style>
 
-    <style name="ev_ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="ev_ToolbarTheme" parent="ev_AppTheme">
         <!--显示在Toolbar上menu字体颜色-->
         <item name="actionMenuTextColor">@color/ev_white</item>
         <!--Toolbar内控件字体大小-->
         <item name="android:textSize">@dimen/ev_smallSize</item>
         <!--Toolbar内控件字体颜色-->
         <item name="android:textColor">@color/ev_white</item>
-        <!--当前主题所在View的父容器之外或Activity的主题-->
-        <item name="colorPrimary">?colorPrimary</item>
-        <item name="colorPrimaryDark">?colorPrimaryDark</item>
-        <item name="colorAccent">?colorAccent</item>
     </style>
 </resources>
