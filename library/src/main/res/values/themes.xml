@@ -16,12 +16,12 @@
         <item name="android:minHeight">@dimen/ev_toolbar_height</item>
         <item name="android:background">?attr/colorPrimary</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="theme">@style/ev_ToolbarTheme</item>
         <item name="navigationIcon">@drawable/ev_nav_back_arrow</item>
         <item name="navigationContentDescription">Navigation</item>
     </style>
-
-    <style name="ev_ToolbarTheme" parent="ev_AppTheme">
+    
+    <!--Toolbar主题-->
+    <style name="ev_ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
         <!--显示在Toolbar上menu字体颜色-->
         <item name="actionMenuTextColor">@color/ev_white</item>
         <!--Toolbar内控件字体大小-->
