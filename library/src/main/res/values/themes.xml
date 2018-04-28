@@ -15,7 +15,6 @@
         <item name="android:layout_height">@dimen/ev_toolbar_height</item>
         <item name="android:minHeight">@dimen/ev_toolbar_height</item>
         <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:textSize">@dimen/ev_normalSize</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ev_ToolbarTheme</item>
         <item name="navigationIcon">@drawable/ev_nav_back_arrow</item>
@@ -23,7 +22,15 @@
     </style>
 
     <style name="ev_ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--显示在Toolbar上menu字体颜色-->
         <item name="actionMenuTextColor">@color/ev_white</item>
+        <!--Toolbar内控件字体大小-->
         <item name="android:textSize">@dimen/ev_smallSize</item>
+        <!--Toolbar内控件字体颜色-->
+        <item name="android:textColor">@color/ev_white</item>
+        <!--当前主题所在View的父容器之外或Activity的主题-->
+        <item name="colorPrimary">?colorPrimary</item>
+        <item name="colorPrimaryDark">?colorPrimaryDark</item>
+        <item name="colorAccent">?colorAccent</item>
     </style>
 </resources>
