@@ -24,6 +24,6 @@
 
     <style name="ev_ToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionMenuTextColor">@color/ev_white</item>
-        <item name="android:textSize">@dimen/ev_normalSize</item>
+        <item name="android:textSize">@dimen/ev_smallSize</item>
     </style>
 </resources>
