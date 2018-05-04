@@ -14,7 +14,7 @@ import com.xcheng.view.R;
  * 标题TextView id为ev_id_titleView
  * Created by chengxin on 2017/5/2.
  */
-public abstract class TopBarSupportActivity extends AppCompatActivity {
+public abstract class ActionBarSupportActivity extends AppCompatActivity {
     protected Toolbar mToolbar;
     protected TextView mTitleView;
 
