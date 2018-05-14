@@ -47,7 +47,7 @@ public final class Router {
     private static final NavigationCallback LOG_CALLBACK = new NavigationCallback() {
         @Override
         public void onLost(Router router, ActivityNotFoundException e) {
-            Log.d("Router", e.getMessage());
+            e.printStackTrace();
         }
 
         @Override
@@ -206,20 +206,15 @@ public final class Router {
 
     @Override
     public String toString() {
-        String result = "Router{";
-        if (mClazz != null) {
-            result += "clazz=" + mClazz;
-        }
-        if (mClassName != null) {
-            result += ", className" + mClassName;
-        }
-        if (mAction != null) {
-            result += ", action" + mAction;
-        }
-        if (mUri != null) {
-            result += ", uri" + mUri;
-        }
-        return result + '}';
+        return "Router{clazz="
+                + mClazz.getName()
+                + ", className="
+                + mClassName
+                + ", action="
+                + mAction
+                + ", uri="
+                + mUri
+                + '}';
     }
 
     public void navigation(@NonNull final Context context, final int requestCode) {
