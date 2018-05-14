@@ -112,6 +112,33 @@ public final class Router {
         return this;
     }
 
+    public Router clearTop() {
+        mFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP// 注意本行的FLAG设置
+                | Intent.FLAG_ACTIVITY_NO_ANIMATION;//设置NO_ANIMATION在set之后才有效
+        return this;
+    }
+
+    // 多个Activity的值传递。ActivityA到达ActivityB再到达ActivityC，
+    // 但ActivityB为过渡页可以finish了，此时ActivityC将值透传至ActivityA。
+    public Router forwardResult() {
+        mFlags = Intent.FLAG_ACTIVITY_FORWARD_RESULT;
+        mFinishAfterNav = true;
+        return this;
+    }
+
+    public Router clearTopWithState() {
+        mFlags = Intent.FLAG_ACTIVITY_CLEAR_TOP// 注意本行的FLAG设置
+                | Intent.FLAG_ACTIVITY_SINGLE_TOP;
+        return this;
+    }
+
+    public Router beRoot() {
+        mFlags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NEW_TASK;
+        return this;
+    }
+
+
     public Router finishAfterNav() {
         mFinishAfterNav = true;
         return this;
