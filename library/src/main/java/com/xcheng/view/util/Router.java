@@ -24,6 +24,24 @@ import java.util.ArrayList;
  * 功能描述：路由器
  */
 public final class Router {
+    /**
+     * Callback after navigation.
+     */
+    public interface Callback {
+        /**
+         * Callback after lose your way.
+         */
+        void onLost(String message);
+
+        /**
+         * Callback after navigation.
+         *
+         * @param message router
+         */
+        void onArrival(String message);
+
+    }
+
     private Class<?> mClazz;
     private String mClassName;
     private String mAction;  // action of route
@@ -168,13 +186,19 @@ public final class Router {
             intent.setFlags(flags);
         }
         intent.putExtras(mBundle);
+        try {
+            if (requestCode >= 0) {  // Need start for result
+                //noinspection ConstantConditions
+                ActivityCompat.startActivityForResult((Activity) context, intent, requestCode, mOptionsCompat);
+            } else {
+                ActivityCompat.startActivity(context, intent, mOptionsCompat);
+            }
 
-        if (requestCode >= 0) {  // Need start for result
-            //noinspection ConstantConditions
-            ActivityCompat.startActivityForResult((Activity) context, intent, requestCode, mOptionsCompat);
-        } else {
-            ActivityCompat.startActivity(context, intent, mOptionsCompat);
+        } catch (Exception e) {
+
+            return;
         }
+
         if (context instanceof Activity) {
             Activity activity = (Activity) context;
             if (mFinishAfterNav) {
