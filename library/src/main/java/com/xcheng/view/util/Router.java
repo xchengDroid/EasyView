@@ -191,6 +191,24 @@ public final class Router {
         return this;
     }
 
+    @Override
+    public String toString() {
+        String result = "Router{";
+        if (mClazz != null) {
+            result += "clazz=" + mClazz;
+        }
+        if (mClassName != null) {
+            result += ", className" + mClassName;
+        }
+        if (mAction != null) {
+            result += ", action" + mAction;
+        }
+        if (mUri != null) {
+            result += ", uri" + mUri;
+        }
+        return result + '}';
+    }
+
     public void navigation(@NonNull final Context context, final int requestCode) {
         // Build intent
         Intent intent = new Intent(mAction/*ignore null*/, mUri/*ignore null*/);
