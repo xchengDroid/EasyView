@@ -1,7 +1,6 @@
 package com.simple.view;
 
 import android.app.ListActivity;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +11,7 @@ import android.widget.ListView;
 import com.xcheng.view.Config;
 import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
-import com.xcheng.view.util.JumpUtil;
+import com.xcheng.view.util.Router;
 
 public class MainActivity extends ListActivity {
 
@@ -75,35 +74,36 @@ public class MainActivity extends ListActivity {
                 startTabActivity();
                 break;
             case 6:
-                 JumpUtil.toActivity(this, RefreshActivity.class);
+                Router.build(RefreshActivity.class).navigation(this);
                 break;
             case 7:
-                JumpUtil.toActivity(this, CardActivity.class);
+                Router.build(CardActivity.class).navigation(this);
+
                 break;
             case 8:
-                JumpUtil.toActivity(this, HFActivity.class);
+                Router.build(HFActivity.class).navigation(this);
                 break;
         }
     }
 
     private void startStateSampleActivity() {
-        Intent intent = new Intent(this, StateSampleActivity.class);
-        startActivity(intent);
+        Router.build(StateSampleActivity.class).navigation(this);
     }
 
     private void startUploadActivity() {
-        Intent intent = new Intent(this, UploadActivity.class);
-        startActivity(intent);
+        Router.build(UploadActivity.class).navigation(this);
+
     }
 
 
     private void startMessageActivity() {
-        Intent intent = new Intent(this, MessageActivity.class);
-        startActivity(intent);
+        Router.build(MessageActivity.class).navigation(this);
+
     }
 
     private void startTabActivity() {
-        Intent intent = new Intent(this, TabSmartActivity.class);
-        startActivity(intent);
+        Router.build(TabSmartActivity.class).finishAfterNav().navigation(this);
+//        Intent intent = new Intent(this, TabSmartActivity.class);
+//        startActivity(intent);
     }
 }
