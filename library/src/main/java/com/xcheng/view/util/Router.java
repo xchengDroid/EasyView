@@ -139,9 +139,7 @@ public final class Router {
         if (flags != -1) {
             intent.setFlags(flags);
         }
-        if (mBundle != null) {
-            intent.putExtras(mBundle);
-        }
+        intent.putExtras(mBundle);
 
         if (requestCode >= 0) {  // Need start for result
             //noinspection ConstantConditions
@@ -172,9 +170,7 @@ public final class Router {
         if (mFlags != -1) {
             intent.setFlags(mFlags);
         }
-        if (mBundle != null) {
-            intent.putExtras(mBundle);
-        }
+        intent.putExtras(mBundle);
 
         if (requestCode >= 0) {  // Need start for result
             fragment.startActivityForResult(intent, requestCode, mOptionsCompat);
