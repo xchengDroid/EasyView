@@ -11,7 +11,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.xcheng.view.EasyView;
-import com.xcheng.view.util.JumpUtil;
+import com.xcheng.view.util.Router;
 import com.xcheng.view.util.ToastLess;
 
 import java.io.Serializable;
@@ -80,7 +80,7 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     @CheckResult
     protected <T extends Serializable> T getSerializable(@NonNull Intent intent, String bundleKey) {
-        return JumpUtil.getSerializable(intent, bundleKey);
+        return Router.getSerializable(intent, bundleKey);
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     @CheckResult
     protected <T extends Parcelable> T getParcelable(@NonNull Intent intent, String bundleKey) {
-        return JumpUtil.getParcelable(intent, bundleKey);
+        return Router.getParcelable(intent, bundleKey);
     }
 
 

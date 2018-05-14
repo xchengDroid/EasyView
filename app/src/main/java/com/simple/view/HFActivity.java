@@ -13,6 +13,7 @@ import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.controller.EasyActivity;
+import com.xcheng.view.util.Router;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,8 @@ public class HFActivity extends EasyActivity {
             }
         });
         mRecyclerView.setAdapter(adapter);
+//        ARouter.getInstance().build("");
+        Router.build("").navigation(this);
     }
 
     private EasyAdapter<String> getEasyAdapter() {
