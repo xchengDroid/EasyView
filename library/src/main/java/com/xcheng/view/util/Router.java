@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -342,6 +343,17 @@ public final class Router {
     public Router withBundle(@Nullable String key, @Nullable Bundle value) {
         mBundle.putBundle(key, value);
         return this;
+    }
+
+    @SuppressWarnings("unchecked")
+    @CheckResult
+    public static <T extends Serializable> T getSerializable(@NonNull Intent intent, String bundleKey) {
+        return (T) intent.getSerializableExtra(bundleKey);
+    }
+
+    @CheckResult
+    public static <T extends Parcelable> T getParcelable(@NonNull Intent intent, String bundleKey) {
+        return intent.getParcelableExtra(bundleKey);
     }
 
 }
