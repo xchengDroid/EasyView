@@ -14,6 +14,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.SparseArray;
 
 import java.io.Serializable;
@@ -43,11 +44,23 @@ public final class Router {
 
     }
 
+    private static final NavigationCallback LOG_CALLBACK = new NavigationCallback() {
+        @Override
+        public void onLost(Router router, ActivityNotFoundException e) {
+            Log.d("Router", e.getMessage());
+        }
+
+        @Override
+        public void onArrival(Router router) {
+            Log.d("Router", router.toString());
+        }
+    };
+
     private Class<?> mClazz;
     private String mClassName;
     private String mAction;  // action of route
     private Uri mUri; // data of route
-    private NavigationCallback mCallback;
+    private NavigationCallback mCallback = LOG_CALLBACK;
 
     private int mFlags = -1; // Flags of route
     @NonNull
