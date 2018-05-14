@@ -29,7 +29,8 @@ public final class Router {
     private Uri mUri; // data of route
 
     private int mFlags = -1; // Flags of route
-    private Bundle mBundle;   // Data to transform
+    @NonNull
+    private Bundle mBundle = new Bundle();   // Data to transform
     // Animation
     private Bundle mOptionsCompat; // The transition animation of activity
     private int mEnterAnim;
@@ -142,7 +143,7 @@ public final class Router {
             intent.putExtras(mBundle);
         }
 
-        if (requestCode > 0) {  // Need start for result
+        if (requestCode >= 0) {  // Need start for result
             //noinspection ConstantConditions
             ActivityCompat.startActivityForResult((Activity) context, intent, requestCode, mOptionsCompat);
         } else {
@@ -175,8 +176,7 @@ public final class Router {
             intent.putExtras(mBundle);
         }
 
-        if (requestCode > 0) {  // Need start for result
-            //noinspection ConstantConditions
+        if (requestCode >= 0) {  // Need start for result
             fragment.startActivityForResult(intent, requestCode, mOptionsCompat);
         } else {
             fragment.startActivity(intent, mOptionsCompat);
@@ -191,7 +191,6 @@ public final class Router {
     }
 
     public void navigation(Context context) {
-        // Build intent
         navigation(context, -1);
     }
 
