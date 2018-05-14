@@ -1,6 +1,7 @@
 package com.xcheng.view.util;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -27,18 +28,18 @@ public final class Router {
     /**
      * Callback after navigation.
      */
-    public interface Callback {
+    public interface NavigationCallback {
         /**
          * Callback after lose your way.
          */
-        void onLost(String message);
+        void onLost(Router router, ActivityNotFoundException e);
 
         /**
          * Callback after navigation.
          *
-         * @param message router
+         * @param router current rooter
          */
-        void onArrival(String message);
+        void onArrival(Router router);
 
     }
 
@@ -46,6 +47,7 @@ public final class Router {
     private String mClassName;
     private String mAction;  // action of route
     private Uri mUri; // data of route
+    private NavigationCallback mCallback;
 
     private int mFlags = -1; // Flags of route
     @NonNull
@@ -69,26 +71,6 @@ public final class Router {
         return new Router();
     }
 
-    public Router setClassName(String className) {
-        this.mClassName = className;
-        return this;
-    }
-
-    public Router setClass(Class<?> clazz) {
-        this.mClazz = clazz;
-        return this;
-    }
-
-    public Router setAction(String action) {
-        this.mAction = action;
-        return this;
-    }
-
-    public Router setUri(Uri uri) {
-        this.mUri = uri;
-        return this;
-    }
-
     private Router(Class<?> clazz) {
         this.mClazz = clazz;
     }
@@ -100,11 +82,51 @@ public final class Router {
     private Router() {
     }
 
+    public Router setClassName(String className) {
+        this.mClassName = className;
+        return this;
+    }
+
+    public String getClassName() {
+        return mClassName;
+    }
+
+    public Router setClazz(Class<?> clazz) {
+        this.mClazz = clazz;
+        return this;
+    }
+
+    public Class<?> getClazz() {
+        return mClazz;
+    }
+
+    public Router setAction(String action) {
+        this.mAction = action;
+        return this;
+    }
+
+    public String getAction() {
+        return mAction;
+    }
+
+    public Router setUri(Uri uri) {
+        this.mUri = uri;
+        return this;
+    }
+
+    public Uri getUri() {
+        return mUri;
+    }
+
     public Router setBundle(Bundle bundle) {
         if (bundle != null) {
             mBundle = bundle;
         }
         return this;
+    }
+
+    public void setCallback(NavigationCallback callback) {
+        this.mCallback = callback;
     }
 
     /**
@@ -193,9 +215,13 @@ public final class Router {
             } else {
                 ActivityCompat.startActivity(context, intent, mOptionsCompat);
             }
-
-        } catch (Exception e) {
-
+            if (mCallback != null) {
+                mCallback.onArrival(this);
+            }
+        } catch (ActivityNotFoundException e) {
+            if (mCallback != null) {
+                mCallback.onLost(this, e);
+            }
             return;
         }
 
@@ -223,12 +249,22 @@ public final class Router {
             intent.setFlags(mFlags);
         }
         intent.putExtras(mBundle);
-
-        if (requestCode >= 0) {  // Need start for result
-            fragment.startActivityForResult(intent, requestCode, mOptionsCompat);
-        } else {
-            fragment.startActivity(intent, mOptionsCompat);
+        try {
+            if (requestCode >= 0) {  // Need start for result
+                fragment.startActivityForResult(intent, requestCode, mOptionsCompat);
+            } else {
+                fragment.startActivity(intent, mOptionsCompat);
+            }
+            if (mCallback != null) {
+                mCallback.onArrival(this);
+            }
+        } catch (ActivityNotFoundException e) {
+            if (mCallback != null) {
+                mCallback.onLost(this, e);
+            }
+            return;
         }
+
         Activity activity = fragment.getActivity();
         if (mFinishAfterNav) {
             activity.finish();
