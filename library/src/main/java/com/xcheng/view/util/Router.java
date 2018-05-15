@@ -47,7 +47,7 @@ public final class Router {
     private static final NavigationCallback LOG_CALLBACK = new NavigationCallback() {
         @Override
         public void onLost(Router router, ActivityNotFoundException e) {
-            e.printStackTrace();
+            Log.w("Router", e);
         }
 
         @Override
@@ -138,8 +138,9 @@ public final class Router {
         return this;
     }
 
-    public void setCallback(@Nullable NavigationCallback callback) {
+    public Router setCallback(@Nullable NavigationCallback callback) {
         this.mCallback = callback;
+        return this;
     }
 
     /**
