@@ -131,14 +131,14 @@ public final class Router {
         return mUri;
     }
 
-    public Router setBundle(Bundle bundle) {
+    public Router setBundle(@Nullable Bundle bundle) {
         if (bundle != null) {
             mBundle = bundle;
         }
         return this;
     }
 
-    public void setCallback(NavigationCallback callback) {
+    public void setCallback(@Nullable NavigationCallback callback) {
         this.mCallback = callback;
     }
 
@@ -149,7 +149,7 @@ public final class Router {
      * @return this
      */
     @RequiresApi(16)
-    public Router setOptionsCompat(ActivityOptionsCompat compat) {
+    public Router setOptionsCompat(@Nullable ActivityOptionsCompat compat) {
         if (null != compat) {
             this.mOptionsCompat = compat.toBundle();
         }
