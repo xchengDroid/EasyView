@@ -207,7 +207,7 @@ public final class Router {
     @Override
     public String toString() {
         return "Router{clazz="
-                + mClazz.getName()
+                + (mClazz != null ? mClazz.getName() : "null")
                 + ", className="
                 + mClassName
                 + ", action="
