@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -109,8 +110,9 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * 如果需要覆盖此方法，请重写{@link #getDelegateView(ViewGroup, int)},
      * holder 在onCreateViewHolder 和 onBindViewHolder时 holder.itemView no parent
      */
+    @NonNull
     @Override
-    public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EasyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = getDelegateView(parent, viewType);
         EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getDelegateView(parent,viewType) and return a NonNull itemView");
         EasyHolder holder = new EasyHolder(itemView);
@@ -122,7 +124,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * 如果需要覆盖此方法，请重写{@link #convert(RecyclerView.ViewHolder, T, int)}}
      */
     @Override
-    public void onBindViewHolder(EasyHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EasyHolder holder, int position) {
         convert(holder, getItem(position), position);
     }
 

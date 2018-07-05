@@ -3,6 +3,7 @@ package com.xcheng.view.adapter;
 import android.content.Context;
 import android.support.annotation.IntRange;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -157,7 +158,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     }
 
     @Override
-    public EasyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public EasyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEADER:
                 EasyHolder headerHolder = new EasyHolder(inflater(mHeaderId, parent));
