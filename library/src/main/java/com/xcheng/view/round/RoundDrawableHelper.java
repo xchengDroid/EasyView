@@ -32,6 +32,7 @@ public class RoundDrawableHelper {
 
     /**
      * 先调用此方法
+     * 解析AttributeSet里面的属性信息
      */
     public void loadAttributeSet(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundButton, defStyleAttr, 0);
@@ -67,21 +68,23 @@ public class RoundDrawableHelper {
         }
     }
 
-
     /**
      * 设置圆角背景
      */
     public void setRoundDrawable() {
         Drawable drawable;
         if (mHasState) {
-            drawable = getStateListDrawable();
+            drawable = createStateListDrawable();
         } else {
             drawable = createDrawable(mFillColor, mStrokeColor);
         }
         setBackgroundKeepingPadding(mView, drawable);
     }
 
-    public StateListDrawable getStateListDrawable() {
+    /**
+     * 创建一个stateListDrawable
+     */
+    public StateListDrawable createStateListDrawable() {
         StateListDrawable stateListDrawable = new StateListDrawable();
         addState(ColorUtil.pressed(mFillColor), ColorUtil.pressed(mStrokeColor),
                 stateListDrawable, android.R.attr.state_pressed);
@@ -93,12 +96,27 @@ public class RoundDrawableHelper {
         return stateListDrawable;
     }
 
+    /**
+     * 添加状态
+     *
+     * @param fillColor         填充颜色
+     * @param strokeColor       边框颜色
+     * @param stateListDrawable 状态Drawable
+     * @param state             对应状态
+     */
     private void addState(@ColorInt int fillColor, @ColorInt int strokeColor,
                           StateListDrawable stateListDrawable, @AttrRes int state) {
         GradientDrawable drawable = createDrawable(fillColor, strokeColor);
         stateListDrawable.addState(state != 0 ? new int[]{state} : StateSet.WILD_CARD, drawable);
     }
 
+    /**
+     * 创建一个GradientDrawable
+     *
+     * @param fillColor   填充颜色
+     * @param strokeColor 边框颜色
+     * @return
+     */
     public GradientDrawable createDrawable(@ColorInt int fillColor, @ColorInt int strokeColor) {
         RoundDrawable drawable = new RoundDrawable(mRadiusAdjustBounds);
         if (mRadiusAdjustBounds) {
