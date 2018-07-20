@@ -1,11 +1,13 @@
 package com.xcheng.view.round;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
@@ -30,10 +32,6 @@ public class RoundDrawableHelper {
 
     /**
      * 先调用此方法
-     *
-     * @param context
-     * @param attrs
-     * @param defStyleAttr
      */
     public void loadAttributeSet(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundButton, defStyleAttr, 0);
@@ -69,7 +67,10 @@ public class RoundDrawableHelper {
         }
     }
 
-    //设置圆角背景
+
+    /**
+     * 设置圆角背景
+     */
     public void setRoundDrawable() {
         Drawable drawable;
         if (mHasState) {
@@ -77,6 +78,7 @@ public class RoundDrawableHelper {
         } else {
             drawable = createDrawable(mFillColor, mStrokeColor);
         }
+        setBackgroundKeepingPadding(mView, drawable);
     }
 
     public StateListDrawable getStateListDrawable() {
@@ -103,11 +105,34 @@ public class RoundDrawableHelper {
             drawable.setCornerRadii(mRadii);
         }
         drawable.setColor(fillColor);
-        //边框颜色做简单处理吧
+
         if (mStrokeWidth > 0) {
             drawable.setStroke(strokeColor, mStrokeColor);
         }
         return drawable;
+    }
+
+    @SuppressWarnings("deprecation")
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public static void setBackgroundKeepingPadding(View view, Drawable drawable) {
+        int[] padding = new int[]{view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom()};
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(drawable);
+        } else {
+            view.setBackgroundDrawable(drawable);
+        }
+        view.setPadding(padding[0], padding[1], padding[2], padding[3]);
+    }
+
+    @SuppressWarnings("deprecation")
+    public static void setBackgroundKeepingPadding(View view, int backgroundResId) {
+        setBackgroundKeepingPadding(view, view.getResources().getDrawable(backgroundResId));
+    }
+
+    public static void setBackgroundColorKeepPadding(View view, @ColorInt int color) {
+        int[] padding = new int[]{view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom()};
+        view.setBackgroundColor(color);
+        view.setPadding(padding[0], padding[1], padding[2], padding[3]);
     }
 
     static class RoundDrawable extends GradientDrawable {
