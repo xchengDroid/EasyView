@@ -23,6 +23,7 @@ import static android.graphics.drawable.GradientDrawable.LINE;
 import static android.graphics.drawable.GradientDrawable.OVAL;
 import static android.graphics.drawable.GradientDrawable.RECTANGLE;
 import static android.graphics.drawable.GradientDrawable.RING;
+
 /**
  * 动态生成Shape工具类
  * Created by chengxin on 2017/3/13.

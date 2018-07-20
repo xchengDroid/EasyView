@@ -20,8 +20,8 @@ import com.xcheng.view.util.ColorUtil;
 public class RoundDrawableHelper {
     private final View mView;
     private int mFillColor;
-    private int mStrokeColor;
-    private int mStrokeWidth;
+    private int mBorderColor;
+    private int mBorderWidth;
     private float[] mRadii;
     private boolean mRadiusAdjustBounds;
     private boolean mHasState;
@@ -37,8 +37,8 @@ public class RoundDrawableHelper {
     public void loadAttributeSet(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundButton, defStyleAttr, 0);
         mFillColor = typedArray.getColor(R.styleable.RoundButton_ev_fillColor, 0);
-        mStrokeColor = typedArray.getColor(R.styleable.RoundButton_ev_strokeColor, 0);
-        mStrokeWidth = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_strokeWidth, 0);
+        mBorderColor = typedArray.getColor(R.styleable.RoundButton_ev_borderColor, 0);
+        mBorderWidth = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_borderWidth, 0);
         mRadiusAdjustBounds = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, true);
         mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, mView.isClickable());
         int mRadius = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radius, 0);
@@ -76,7 +76,7 @@ public class RoundDrawableHelper {
         if (mHasState) {
             drawable = createStateListDrawable();
         } else {
-            drawable = createDrawable(mFillColor, mStrokeColor);
+            drawable = createDrawable(mFillColor, mBorderColor);
         }
         setBackgroundKeepingPadding(mView, drawable);
     }
@@ -86,12 +86,12 @@ public class RoundDrawableHelper {
      */
     public StateListDrawable createStateListDrawable() {
         StateListDrawable stateListDrawable = new StateListDrawable();
-        addState(ColorUtil.pressed(mFillColor), ColorUtil.pressed(mStrokeColor),
+        addState(ColorUtil.pressed(mFillColor), ColorUtil.pressed(mBorderColor),
                 stateListDrawable, android.R.attr.state_pressed);
 
-        addState(ColorUtil.disabled(mFillColor), ColorUtil.disabled(mStrokeColor),
+        addState(ColorUtil.disabled(mFillColor), ColorUtil.disabled(mBorderColor),
                 stateListDrawable, -android.R.attr.state_enabled);
-        addState(mFillColor, mStrokeColor,
+        addState(mFillColor, mBorderColor,
                 stateListDrawable, 0);
         return stateListDrawable;
     }
@@ -100,13 +100,13 @@ public class RoundDrawableHelper {
      * 添加状态
      *
      * @param fillColor         填充颜色
-     * @param strokeColor       边框颜色
+     * @param borderColor       边框颜色
      * @param stateListDrawable 状态Drawable
      * @param state             对应状态
      */
-    private void addState(@ColorInt int fillColor, @ColorInt int strokeColor,
+    private void addState(@ColorInt int fillColor, @ColorInt int borderColor,
                           StateListDrawable stateListDrawable, @AttrRes int state) {
-        GradientDrawable drawable = createDrawable(fillColor, strokeColor);
+        GradientDrawable drawable = createDrawable(fillColor, borderColor);
         stateListDrawable.addState(state != 0 ? new int[]{state} : StateSet.WILD_CARD, drawable);
     }
 
@@ -114,18 +114,18 @@ public class RoundDrawableHelper {
      * 创建一个GradientDrawable
      *
      * @param fillColor   填充颜色
-     * @param strokeColor 边框颜色
+     * @param borderColor 边框颜色
      * @return
      */
-    public GradientDrawable createDrawable(@ColorInt int fillColor, @ColorInt int strokeColor) {
+    public GradientDrawable createDrawable(@ColorInt int fillColor, @ColorInt int borderColor) {
         RoundDrawable drawable = new RoundDrawable(mRadiusAdjustBounds);
         if (mRadiusAdjustBounds) {
             drawable.setCornerRadii(mRadii);
         }
         drawable.setColor(fillColor);
 
-        if (mStrokeWidth > 0) {
-            drawable.setStroke(strokeColor, mStrokeColor);
+        if (mBorderWidth > 0) {
+            drawable.setStroke(mBorderWidth, borderColor);
         }
         return drawable;
     }

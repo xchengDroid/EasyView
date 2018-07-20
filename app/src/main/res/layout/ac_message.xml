@@ -2,15 +2,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <EditText
         android:id="@+id/editMessage"
-        android:layout_width="0dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-        android:layout_weight="1.0"
         android:inputType="textShortMessage"
         android:text="@string/Question" />
 
@@ -25,4 +24,29 @@
         app:ev_pb_textComplete="@string/Done"
         app:ev_pb_textProgress="@string/Loading" />
 
+    <com.xcheng.view.round.RoundButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="123213" />
+
+    <com.xcheng.view.round.RoundButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp"
+        android:padding="10dp"
+        android:text="123213" />
+
+    <com.xcheng.view.round.RoundButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="15dp"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="123213" />
 </LinearLayout>

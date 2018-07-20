@@ -173,4 +173,89 @@
         <attr name="stl_drawDecorationAfterTab" format="boolean" />
     </declare-styleable>
 
+    <!--圆角实现开始===================================================-->
+    <!--默认主题中的样式-->
+    <attr name="EVRoundButtonStyle" format="reference" />
+
+    <attr name="ev_fillColor" format="color" />
+    <attr name="ev_borderColor" format="color" />
+    <attr name="ev_borderWidth" format="dimension" />
+    <!-- 圆角是否要自适应为 View 高度的一半 -->
+    <attr name="ev_isRadiusAdjustBounds" format="boolean" />
+    <!-- 是否有按下状态 -->
+    <attr name="ev_hasState" format="boolean" />
+
+    <!-- 同时指定四个方向的圆角大小 -->
+    <attr name="ev_radius" format="dimension" />
+    <!-- 指定左上方圆角的大小 -->
+    <attr name="ev_radiusTopLeft" format="dimension" />
+    <!-- 指定右上方圆角的大小 -->
+    <attr name="ev_radiusTopRight" format="dimension" />
+    <!-- 指定左下方圆角的大小 -->
+    <attr name="ev_radiusBottomLeft" format="dimension" />
+    <!-- 指定右下方圆角的大小 -->
+    <attr name="ev_radiusBottomRight" format="dimension" />
+
+    <declare-styleable name="RoundButton">
+        <attr name="ev_fillColor" />
+        <attr name="ev_borderColor" />
+        <attr name="ev_borderWidth" />
+        <attr name="ev_isRadiusAdjustBounds" />
+        <attr name="ev_hasState" />
+        <attr name="ev_radius" />
+        <attr name="ev_radiusTopLeft" />
+        <attr name="ev_radiusTopRight" />
+        <attr name="ev_radiusBottomLeft" />
+        <attr name="ev_radiusBottomRight" />
+    </declare-styleable>
+    <declare-styleable name="RoundTextView">
+        <attr name="ev_fillColor" />
+        <attr name="ev_borderColor" />
+        <attr name="ev_borderWidth" />
+        <attr name="ev_isRadiusAdjustBounds" />
+        <attr name="ev_hasState" />
+        <attr name="ev_radius" />
+        <attr name="ev_radiusTopLeft" />
+        <attr name="ev_radiusTopRight" />
+        <attr name="ev_radiusBottomLeft" />
+        <attr name="ev_radiusBottomRight" />
+    </declare-styleable>
+    <declare-styleable name="RoundFrameLayout">
+        <attr name="ev_fillColor" />
+        <attr name="ev_borderColor" />
+        <attr name="ev_borderWidth" />
+        <attr name="ev_isRadiusAdjustBounds" />
+        <attr name="ev_hasState" />
+        <attr name="ev_radius" />
+        <attr name="ev_radiusTopLeft" />
+        <attr name="ev_radiusTopRight" />
+        <attr name="ev_radiusBottomLeft" />
+        <attr name="ev_radiusBottomRight" />
+    </declare-styleable>
+    <declare-styleable name="RoundLinearLayout">
+        <attr name="ev_fillColor" />
+        <attr name="ev_borderColor" />
+        <attr name="ev_borderWidth" />
+        <attr name="ev_isRadiusAdjustBounds" />
+        <attr name="ev_hasState" />
+        <attr name="ev_radius" />
+        <attr name="ev_radiusTopLeft" />
+        <attr name="ev_radiusTopRight" />
+        <attr name="ev_radiusBottomLeft" />
+        <attr name="ev_radiusBottomRight" />
+    </declare-styleable>
+    <declare-styleable name="RoundRelativeLayout">
+        <attr name="ev_fillColor" />
+        <attr name="ev_borderColor" />
+        <attr name="ev_borderWidth" />
+        <attr name="ev_isRadiusAdjustBounds" />
+        <attr name="ev_hasState" />
+        <attr name="ev_radius" />
+        <attr name="ev_radiusTopLeft" />
+        <attr name="ev_radiusTopRight" />
+        <attr name="ev_radiusBottomLeft" />
+        <attr name="ev_radiusBottomRight" />
+    </declare-styleable>
+    <!--圆角实现结束===================================================-->
+
 </resources>
