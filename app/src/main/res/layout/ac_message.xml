@@ -35,17 +35,21 @@
         android:padding="10dp"
         android:text="123213" />
 
-    <com.xcheng.view.round.RoundButton
+    <com.xcheng.view.round.RoundFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="15dp"
         android:padding="10dp"
         android:text="123213"
+
         app:ev_borderColor="@color/ev_green"
         app:ev_borderWidth="3dp"
         app:ev_fillColor="@color/ev_red_error"
         app:ev_radius="10dp"
+        app:ev_radiusTopLeft="10dp"
+        app:ev_radiusTopRight="3dp"
+        app:ev_radiusBottomRight="30dp"
         app:ev_radiusBottomLeft="20dp" />
 
     <com.xcheng.view.round.RoundTextView
