@@ -170,9 +170,9 @@ public class RoundDrawableHelper {
         /**
          * 圆角大小是否自适应为 View 的高度的一般
          */
-        private boolean mRadiusAdjustBounds;
+        private final boolean mRadiusAdjustBounds;
 
-        public RoundDrawable(boolean radiusAdjustBounds) {
+        RoundDrawable(boolean radiusAdjustBounds) {
             this.mRadiusAdjustBounds = radiusAdjustBounds;
         }
 
