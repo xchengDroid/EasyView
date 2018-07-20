@@ -36,10 +36,9 @@ public class MainActivity extends ListActivity {
                 startMessageActivity();
                 break;
             case 2:
-                startUploadActivity();
                 break;
             case 3:
-                startStateSampleActivity();
+               // startStateSampleActivity();
                 break;
             case 4:
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
@@ -85,17 +84,6 @@ public class MainActivity extends ListActivity {
                 break;
         }
     }
-
-    private void startStateSampleActivity() {
-        Router.build(StateSampleActivity.class).navigation(this);
-    }
-
-    private void startUploadActivity() {
-        Router.build(UploadActivity.class).navigation(this);
-
-    }
-
-
     private void startMessageActivity() {
         Router.build(MessageActivity.class).navigation(this);
 

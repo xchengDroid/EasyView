@@ -15,14 +15,5 @@
         android:textColor="@android:color/white"
         android:textSize="24sp" />
 
-    <com.xcheng.view.processbtn.GenerateProcessButton
-        android:id="@+id/btnUpload"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="@string/Upload"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:ev_pb_textComplete="@string/Done"
-        app:ev_pb_textProgress="@string/Uploading" />
 
 </LinearLayout>

@@ -28,13 +28,6 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".UploadActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".StateSampleActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".RefreshActivity"
             android:screenOrientation="portrait" />
         <activity

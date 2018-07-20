@@ -1,15 +1,12 @@
 package com.simple.view;
 
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.xcheng.view.controller.EasyActivity;
-import com.xcheng.view.processbtn.SubmitProcessButton;
 
 
-public class MessageActivity extends EasyActivity implements ProgressGenerator.OnCompleteListener {
+public class MessageActivity extends EasyActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,21 +15,6 @@ public class MessageActivity extends EasyActivity implements ProgressGenerator.O
 
         final EditText editMessage = (EditText) findViewById(R.id.editMessage);
 
-        final ProgressGenerator progressGenerator = new ProgressGenerator(this);
-        final SubmitProcessButton btnSend = (SubmitProcessButton) findViewById(R.id.btnSend);
-        btnSend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                progressGenerator.start(btnSend);
-                btnSend.setEnabled(false);
-                editMessage.setEnabled(false);
-            }
-        });
-    }
-
-    @Override
-    public void onComplete() {
-        Toast.makeText(this, R.string.Loading_Complete, Toast.LENGTH_LONG).show();
     }
 
     @Override

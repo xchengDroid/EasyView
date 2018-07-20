@@ -13,18 +13,6 @@
         android:inputType="textShortMessage"
         android:text="@string/Question" />
 
-    <com.xcheng.view.processbtn.SubmitProcessButton
-        android:id="@+id/btnSend"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:minWidth="100dp"
-        android:text="@string/Send"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:ev_pb_cornerRadius="20dp"
-        app:ev_pb_textComplete="@string/Done"
-        app:ev_pb_textProgress="@string/Loading" />
-
     <com.xcheng.view.round.RoundButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
