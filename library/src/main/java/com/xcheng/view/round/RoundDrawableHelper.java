@@ -13,6 +13,7 @@ import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.StateSet;
 import android.view.View;
+import android.widget.Button;
 
 import com.xcheng.view.R;
 import com.xcheng.view.util.ColorUtil;
@@ -53,7 +54,8 @@ public class RoundDrawableHelper {
         mBorderColor = typedArray.getColor(R.styleable.RoundButton_ev_borderColor, 0);
         mBorderWidth = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_borderWidth, 0);
         mRadiusAdjustBounds = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, true);
-        mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_hasState, mView.isClickable());
+        mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_hasState,
+                mView instanceof Button && mView.isClickable());
         int mRadius = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radius, 0);
         int mRadiusTopLeft = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopLeft, 0);
         int mRadiusTopRight = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopRight, 0);

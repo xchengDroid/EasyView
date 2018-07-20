@@ -30,7 +30,6 @@
         android:layout_margin="15dp"
         android:padding="10dp"
         android:text="123213"
-
         app:ev_borderColor="@color/ev_green"
         app:ev_borderWidth="3dp"
         app:ev_fillColor="@color/ev_red_error"
@@ -46,7 +45,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="15dp"
-        app:ev_hasState="false"
         android:layout_marginTop="20dp"
         android:padding="10dp"
         android:text="123213" />
