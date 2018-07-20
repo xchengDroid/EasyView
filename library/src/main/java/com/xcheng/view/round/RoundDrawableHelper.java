@@ -17,6 +17,19 @@ import android.view.View;
 import com.xcheng.view.R;
 import com.xcheng.view.util.ColorUtil;
 
+/**
+ * 使按钮能方便地指定圆角、边框颜色、边框粗细、背景色
+ * <p>
+ * 注意: 因为该控件的圆角采用 View 的 background 实现, 所以与原生的 <code>android:background</code> 有冲突。
+ * <ul>
+ * <li>如果在 xml 中用 <code>android:background</code> 指定 background, 该 background 不会生效。</li>
+ * <li>如果在该 View 构造完后用 {@link View#setBackgroundResource(int)} 等方法设置背景, 该背景将覆盖圆角效果。</li>
+ * </ul>
+ * </p>
+ * <p>
+ * 如需在 xml 中指定圆角、边框颜色、边框粗细、背景色等值,采用 xml 属性 {@link com.xcheng.view.R.styleable#RoundButton}
+ * </p>
+ */
 public class RoundDrawableHelper {
     private final View mView;
     private int mFillColor;
@@ -40,7 +53,7 @@ public class RoundDrawableHelper {
         mBorderColor = typedArray.getColor(R.styleable.RoundButton_ev_borderColor, 0);
         mBorderWidth = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_borderWidth, 0);
         mRadiusAdjustBounds = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, true);
-        mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, mView.isClickable());
+        mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_hasState, mView.isClickable());
         int mRadius = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radius, 0);
         int mRadiusTopLeft = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopLeft, 0);
         int mRadiusTopRight = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopRight, 0);
@@ -119,7 +132,7 @@ public class RoundDrawableHelper {
      */
     public GradientDrawable createDrawable(@ColorInt int fillColor, @ColorInt int borderColor) {
         RoundDrawable drawable = new RoundDrawable(mRadiusAdjustBounds);
-        if (mRadiusAdjustBounds) {
+        if (!mRadiusAdjustBounds) {
             drawable.setCornerRadii(mRadii);
         }
         drawable.setColor(fillColor);
