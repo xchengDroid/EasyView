@@ -62,6 +62,7 @@ public class RoundDrawableHelper {
         int mRadiusBottomLeft = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusBottomLeft, 0);
         int mRadiusBottomRight = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusBottomRight, 0);
         typedArray.recycle();
+        //优先级高于ev_radius
         if (mRadiusTopLeft > 0 || mRadiusTopRight > 0 || mRadiusBottomLeft > 0 || mRadiusBottomRight > 0) {
             mRadii = new float[]{
                     mRadiusTopLeft, mRadiusTopLeft,
