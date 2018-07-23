@@ -1,20 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.xcheng.view.round.RoundFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:background="@drawable/ev_shape_bg_dialog_loading"
-    android:orientation="horizontal"
-    android:padding="6dp">
+    android:padding="12dp"
+    app:ev_fillColor="@color/ev_dialog_bg_color"
+    app:ev_radius="6dp">
 
-    <com.wang.avi.AVLoadingIndicatorView
+    <com.xcheng.view.widget.LoadingView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:indicatorColor="@color/ev_text_hint"
-        app:indicatorName="LineSpinFadeLoaderIndicator"
-        app:maxHeight="24dp"
-        app:maxWidth="24dp"
-        app:minHeight="24dp"
-        app:minWidth="24dp" />
-</LinearLayout>
+        android:layout_height="wrap_content" />
+</com.xcheng.view.round.RoundFrameLayout>

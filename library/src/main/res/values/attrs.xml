@@ -257,5 +257,9 @@
         <attr name="ev_radiusBottomRight" />
     </declare-styleable>
     <!--圆角实现结束===================================================-->
-
+    <!--************ Loading ***********-->
+    <declare-styleable name="LoadingView">
+        <attr name="ev_loading_view_size" format="dimension" />
+        <attr name="android:color" />
+    </declare-styleable>
 </resources>
