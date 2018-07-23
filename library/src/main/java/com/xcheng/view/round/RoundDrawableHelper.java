@@ -6,7 +6,6 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.StateSet;
@@ -35,7 +34,6 @@ public class RoundDrawableHelper {
     private int mFillColor;
     private int mBorderColor;
     private int mBorderWidth;
-
     /**
      * 默认为null,为null标识没有圆角
      */
@@ -104,29 +102,21 @@ public class RoundDrawableHelper {
      * 创建一个stateListDrawable
      */
     public StateListDrawable createStateListDrawable() {
+        //构建各种状态的颜色数组，1-->状态 2-->填充颜色  3-->边框颜色
+        final int[] statesColor = new int[]{
+                android.R.attr.state_pressed, ColorUtil.pressed(mFillColor), ColorUtil.pressed(mBorderColor),
+                -android.R.attr.state_enabled, ColorUtil.disabled(mFillColor), ColorUtil.disabled(mBorderColor),
+                0, mFillColor, mBorderColor
+        };
         StateListDrawable stateListDrawable = new StateListDrawable();
-        addState(ColorUtil.pressed(mFillColor), ColorUtil.pressed(mBorderColor),
-                stateListDrawable, android.R.attr.state_pressed);
-
-        addState(ColorUtil.disabled(mFillColor), ColorUtil.disabled(mBorderColor),
-                stateListDrawable, -android.R.attr.state_enabled);
-        addState(mFillColor, mBorderColor,
-                stateListDrawable, 0);
+        for (int index = 0; index < statesColor.length / 3; index++) {
+            int state = statesColor[index * 3];
+            int fillColor = statesColor[index * 3 + 1];
+            int borderColor = statesColor[index * 3 + 2];
+            GradientDrawable drawable = createDrawable(fillColor, borderColor);
+            stateListDrawable.addState(state != 0 ? new int[]{state} : StateSet.WILD_CARD, drawable);
+        }
         return stateListDrawable;
-    }
-
-    /**
-     * 添加状态
-     *
-     * @param fillColor         填充颜色
-     * @param borderColor       边框颜色
-     * @param stateListDrawable 状态Drawable
-     * @param state             对应状态
-     */
-    private void addState(@ColorInt int fillColor, @ColorInt int borderColor,
-                          StateListDrawable stateListDrawable, @AttrRes int state) {
-        GradientDrawable drawable = createDrawable(fillColor, borderColor);
-        stateListDrawable.addState(state != 0 ? new int[]{state} : StateSet.WILD_CARD, drawable);
     }
 
     /**
