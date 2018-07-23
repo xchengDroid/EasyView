@@ -10,6 +10,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.util.StateSet;
 import android.view.View;
@@ -163,7 +164,7 @@ public class RoundDrawableHelper {
     }
 
     @SuppressWarnings("deprecation")
-    public static void setBackgroundKeepingPadding(View view, int backgroundResId) {
+    public static void setBackgroundKeepingPadding(View view, @DrawableRes int backgroundResId) {
         setBackgroundKeepingPadding(view, view.getResources().getDrawable(backgroundResId));
     }
 
