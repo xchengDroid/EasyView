@@ -16,13 +16,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.xcheng.view.R;
-import com.xcheng.view.adapter.SpaceDecoration;
-import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.EasyAdapter;
+import com.xcheng.view.adapter.EasyHolder;
+import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.divider.DividerTextView;
 import com.xcheng.view.util.EasyPreconditions;
 import com.xcheng.view.util.LocalDisplay;
-import com.xcheng.view.util.ShapeBinder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,8 +43,7 @@ public class BottomOptionDialog extends BottomDialog {
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-
-        TextView topTipTextView = (TextView) findViewById(R.id.ev_id_optionDialog_topTip);
+        TextView topTipTextView = findViewById(R.id.ev_id_optionDialog_topTip);
         if (mBuilder.tipText != null) {
             //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
             EasyPreconditions.checkState(topTipTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_topTip");
@@ -54,9 +52,9 @@ public class BottomOptionDialog extends BottomDialog {
             topTipTextView.setTextColor(mBuilder.tipTextColor);
             topTipTextView.setText(mBuilder.tipText);
             ViewGroup.LayoutParams lp = topTipTextView.getLayoutParams();
-            lp.height = mBuilder.optionHeight;
-            topTipTextView.setLayoutParams(lp);
-            ShapeBinder.with(mBuilder.solidColor).radii(new float[]{mBuilder.radius, mBuilder.radius, 0, 0}).drawableStateTo(topTipTextView);
+            //lp.height = mBuilder.optionHeight;
+            topTipTextView.setBackgroundColor(mBuilder.itemColor);
+            //topTipTextView.setLayoutParams(lp);
             //设置分割线的颜色
             if (topTipTextView instanceof DividerTextView) {
                 DividerTextView dividerTextView = (DividerTextView) topTipTextView;
@@ -71,21 +69,20 @@ public class BottomOptionDialog extends BottomDialog {
         TextView bottomTextView = (TextView) findViewById(R.id.ev_id_optionDialog_bottom);
         if (mBuilder.bottomText != null) {
             EasyPreconditions.checkState(bottomTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_bottom");
-
             bottomTextView.setTextSize(mBuilder.textSize);
             bottomTextView.setTextColor(mBuilder.bottomTextColor);
             bottomTextView.setText(mBuilder.bottomText);
             ViewGroup.LayoutParams lp = bottomTextView.getLayoutParams();
             lp.height = mBuilder.optionHeight;
             bottomTextView.setLayoutParams(lp);
-            ShapeBinder.with(mBuilder.solidColor).radius(mBuilder.radius).drawableStateTo(bottomTextView);
             bottomTextView.setOnClickListener(this);
+            bottomTextView.setBackgroundColor(mBuilder.itemColor);
         } else {
             if (bottomTextView != null) {
                 bottomTextView.setVisibility(View.GONE);
             }
         }
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.ev_id_recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.ev_id_recyclerView);
         EasyPreconditions.checkState(recyclerView != null, "layout res must have a RecyclerView with id named ev_id_recyclerView");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new SpaceDecoration(mBuilder.dividerColor, 1));
@@ -111,12 +108,11 @@ public class BottomOptionDialog extends BottomDialog {
         private int tipTextSize;
         private String bottomText;
         private OnSelectListener onSelectListener;
-        private int solidColor;
+        private int itemColor;
         private int dividerColor;
         private int textSize;
         private int bottomTextColor;
         private int optionTextColor;
-        private int radius;
         private int optionHeight;
 
         public Builder(Context context) {
@@ -125,12 +121,11 @@ public class BottomOptionDialog extends BottomDialog {
             this.tipTextSize = 14;
             this.tipTextColor = ContextCompat.getColor(context, R.color.ev_text_grey);
             this.bottomText = "取消";
-            this.solidColor = Color.WHITE;
+            this.itemColor = Color.WHITE;
             this.bottomTextColor = ContextCompat.getColor(context, R.color.ev_text_grey);
             this.optionTextColor = ContextCompat.getColor(context, R.color.ev_light_blue);
             this.dividerColor = ContextCompat.getColor(context, R.color.ev_divider_color);
             this.textSize = 18;
-            this.radius = LocalDisplay.dp2px(8);
             this.optionHeight = LocalDisplay.dp2px(45);
         }
 
@@ -155,11 +150,6 @@ public class BottomOptionDialog extends BottomDialog {
 
         public Builder tipTextSize(int tipTextSize) {
             this.tipTextSize = tipTextSize;
-            return this;
-        }
-
-        public Builder radius(int radius) {
-            this.radius = radius;
             return this;
         }
 
@@ -197,8 +187,8 @@ public class BottomOptionDialog extends BottomDialog {
             return this;
         }
 
-        public Builder solidColor(@ColorInt int solidColor) {
-            this.solidColor = solidColor;
+        public Builder itemColor(@ColorInt int itemColor) {
+            this.itemColor = itemColor;
             return this;
         }
 
@@ -241,13 +231,13 @@ public class BottomOptionDialog extends BottomDialog {
             optionText.setTextColor(mBuilder.optionTextColor);
             optionText.setTextSize(mBuilder.textSize);
             optionText.setLayoutParams(lp);
+            optionText.setBackgroundColor(mBuilder.itemColor);
             return optionText;
         }
 
         @Override
         public void convert(final EasyHolder holder, String s, int position) {
             TextView optionText = (TextView) holder.itemView;
-            ShapeBinder.with(mBuilder.solidColor).radii(getRadii(position)).drawableStateTo(optionText);
             optionText.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -258,28 +248,6 @@ public class BottomOptionDialog extends BottomDialog {
                 }
             });
             optionText.setText(mBuilder.optionTexts[position]);
-        }
-
-        private float[] getRadii(int position) {
-            int radius = mBuilder.radius;
-            boolean hasTip = mBuilder.tipText != null;
-            int count = getItemCount();
-            if (hasTip) {
-                boolean isLastItem = (position == count - 1);
-                return new float[]{0, 0, isLastItem ? radius : 0, isLastItem ? radius : 0};
-            } else {
-                if (count == 1) {
-                    return new float[]{radius, radius, radius, radius};
-                } else {
-                    if (position == 0) {
-                        return new float[]{radius, radius, 0, 0};
-                    } else if (position == count - 1) {
-                        return new float[]{0, 0, radius, radius};
-                    } else {
-                        return new float[]{0, 0, 0, 0};
-                    }
-                }
-            }
         }
     }
 
