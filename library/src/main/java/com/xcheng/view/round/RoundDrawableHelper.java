@@ -36,6 +36,10 @@ public class RoundDrawableHelper {
     private int mFillColor;
     private int mBorderColor;
     private int mBorderWidth;
+
+    /**
+     * 默认为null,为null标识没有圆角
+     */
     private float[] mRadii;
     private boolean mRadiusAdjustBounds;
     private boolean mHasState;
