@@ -1,16 +1,13 @@
 package com.xcheng.view.round;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.os.Build;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.util.StateSet;
 import android.view.View;
@@ -18,6 +15,7 @@ import android.widget.Button;
 
 import com.xcheng.view.R;
 import com.xcheng.view.util.ColorUtil;
+import com.xcheng.view.util.ViewHelper;
 
 /**
  * 使按钮能方便地指定圆角、边框颜色、边框粗细、背景色
@@ -99,7 +97,7 @@ public class RoundDrawableHelper {
         } else {
             drawable = createDrawable(mFillColor, mBorderColor);
         }
-        setBackgroundKeepingPadding(mView, drawable);
+        ViewHelper.setBackgroundKeepingPadding(mView, drawable);
     }
 
     /**
@@ -151,28 +149,6 @@ public class RoundDrawableHelper {
         return drawable;
     }
 
-    @SuppressWarnings("deprecation")
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static void setBackgroundKeepingPadding(View view, Drawable drawable) {
-        int[] padding = new int[]{view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom()};
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            view.setBackground(drawable);
-        } else {
-            view.setBackgroundDrawable(drawable);
-        }
-        view.setPadding(padding[0], padding[1], padding[2], padding[3]);
-    }
-
-    @SuppressWarnings("deprecation")
-    public static void setBackgroundKeepingPadding(View view, @DrawableRes int backgroundResId) {
-        setBackgroundKeepingPadding(view, view.getResources().getDrawable(backgroundResId));
-    }
-
-    public static void setBackgroundColorKeepPadding(View view, @ColorInt int color) {
-        int[] padding = new int[]{view.getPaddingLeft(), view.getPaddingTop(), view.getPaddingRight(), view.getPaddingBottom()};
-        view.setBackgroundColor(color);
-        view.setPadding(padding[0], padding[1], padding[2], padding[3]);
-    }
 
     static class RoundDrawable extends GradientDrawable {
         /**
