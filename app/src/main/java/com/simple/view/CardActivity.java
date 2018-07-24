@@ -6,11 +6,13 @@ import android.view.View;
 
 import com.xcheng.view.controller.EasyActivity;
 import com.xcheng.view.widget.CommonView;
+import com.xcheng.view.widget.ProgressView;
 
 
 public class CardActivity extends EasyActivity {
 
     public CommonView commonView;
+    public ProgressView progressView;
 
     @Override
     public int getLayoutId() {
@@ -20,7 +22,7 @@ public class CardActivity extends EasyActivity {
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        commonView = (CommonView) findViewById(R.id.cv);
+        commonView = findViewById(R.id.cv);
         commonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,6 +32,13 @@ public class CardActivity extends EasyActivity {
                 } else {
                     commonView.setMode(CommonView.INPUT);
                 }
+            }
+        });
+        progressView = findViewById(R.id.progressView);
+        progressView.setProgressViewTextGenerator(new ProgressView.ProgressViewTextGenerator() {
+            @Override
+            public String generateText(ProgressView progressBar, int value, int maxValue) {
+                return "测试text";
             }
         });
     }

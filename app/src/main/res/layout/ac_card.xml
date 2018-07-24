@@ -4,11 +4,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+
     <TextView
-        android:background="@mipmap/shadow_134239"
         android:layout_width="match_parent"
-        android:text="12312321"
-        android:layout_height="200dp" />
+        android:layout_height="200dp"
+        android:background="@mipmap/shadow_134239"
+        android:text="12312321" />
+
+    <com.xcheng.view.widget.ProgressView
+        android:id="@+id/progressView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:textColor="@color/ev_text_black"
+        android:textSize="30sp"
+
+        app:ev_background_color="@color/ev_red_error"
+        app:ev_progress_color="@color/ev_green"
+        app:ev_stroke_round_cap="true"
+        app:ev_stroke_width="10dp"
+        app:ev_type="circle"
+        app:ev_value="20" />
 
 
     <android.support.v7.widget.CardView
@@ -41,10 +56,10 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         app:ev_cv_hint="请输入账号"
-        app:ev_cv_labelSuffix="："
-        app:ev_cv_labelPrefix="*"
         app:ev_cv_label="账号"
+        app:ev_cv_labelPrefix="*"
         app:ev_cv_labelSize="16sp"
+        app:ev_cv_labelSuffix="："
         app:ev_cv_mode="input"
         app:ev_cv_suffixTextColor="@color/colorAccent"
         app:ev_cv_textColor="@color/ev_holo_red_light"
@@ -57,11 +72,11 @@
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         app:ev_cv_hint="请输入密码"
-        app:ev_cv_labelSuffix="："
-        app:ev_cv_labelPrefix="*  "
         app:ev_cv_inputType="numberPassword"
         app:ev_cv_label="密码"
+        app:ev_cv_labelPrefix="*  "
         app:ev_cv_labelSize="16sp"
+        app:ev_cv_labelSuffix="："
         app:ev_cv_mode="input"
         app:ev_cv_suffixTextColor="@color/colorAccent"
         app:ev_cv_textColor="@color/ev_holo_red_light"

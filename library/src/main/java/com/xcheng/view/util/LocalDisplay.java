@@ -16,7 +16,7 @@ public class LocalDisplay {
     private static int WIDTH_DP;
     private static int HEIGHT_DP;
     //default false
-    private static boolean sInitialized;
+    private static volatile boolean sInitialized;
 
     public static void init(Context context) {
         if (sInitialized) {
