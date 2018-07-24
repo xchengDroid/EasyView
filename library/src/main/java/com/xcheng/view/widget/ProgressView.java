@@ -37,7 +37,7 @@ public class ProgressView extends View {
     public static int DEFAULT_TEXT_COLOR = Color.BLACK;
     /*circle_progress member*/
     public static int DEFAULT_STROKE_WIDTH = LocalDisplay.dp2px(40);
-    QMUIProgressBarTextGenerator mQMUIProgressBarTextGenerator;
+    ProgressViewTextGenerator mProgressViewTextGenerator;
     /*rect_progress member*/
     RectF mBgRect;
     RectF mProgressRect;
@@ -141,7 +141,7 @@ public class ProgressView extends View {
      * 设置进度文案的文字大小
      *
      * @see #setTextColor(int)
-     * @see #setQMUIProgressBarTextGenerator(QMUIProgressBarTextGenerator)
+     * @see #setProgressViewTextGenerator(ProgressViewTextGenerator)
      */
     public void setTextSize(int textSize) {
         mTextPaint.setTextSize(textSize);
@@ -152,7 +152,7 @@ public class ProgressView extends View {
      * 设置进度文案的文字颜色
      *
      * @see #setTextSize(int)
-     * @see #setQMUIProgressBarTextGenerator(QMUIProgressBarTextGenerator)
+     * @see #setProgressViewTextGenerator(ProgressViewTextGenerator)
      */
     public void setTextColor(int textColor) {
         mTextPaint.setColor(textColor);
@@ -168,20 +168,20 @@ public class ProgressView extends View {
     }
 
     /**
-     * 通过 {@link QMUIProgressBarTextGenerator} 设置进度文案
+     * 通过 {@link ProgressViewTextGenerator} 设置进度文案
      */
-    public void setQMUIProgressBarTextGenerator(QMUIProgressBarTextGenerator QMUIProgressBarTextGenerator) {
-        mQMUIProgressBarTextGenerator = QMUIProgressBarTextGenerator;
+    public void setProgressViewTextGenerator(ProgressViewTextGenerator progressViewTextGenerator) {
+        mProgressViewTextGenerator = progressViewTextGenerator;
     }
 
-    public QMUIProgressBarTextGenerator getQMUIProgressBarTextGenerator() {
-        return mQMUIProgressBarTextGenerator;
+    public ProgressViewTextGenerator getProgressViewTextGenerator() {
+        return mProgressViewTextGenerator;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
-        if (mQMUIProgressBarTextGenerator != null) {
-            mText = mQMUIProgressBarTextGenerator.generateText(this, mValue, mMaxValue);
+        if (mProgressViewTextGenerator != null) {
+            mText = mProgressViewTextGenerator.generateText(this, mValue, mMaxValue);
         }
         if (mType == TYPE_RECT) {
             drawRect(canvas);
@@ -296,7 +296,7 @@ public class ProgressView extends View {
         mAnimator.start();
     }
 
-    public interface QMUIProgressBarTextGenerator {
+    public interface ProgressViewTextGenerator {
         /**
          * 设置进度文案, {@link ProgressView} 会在进度更新时调用该方法获取要显示的文案
          *

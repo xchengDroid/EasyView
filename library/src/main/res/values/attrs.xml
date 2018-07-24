@@ -265,8 +265,8 @@
     <!-- QMUIProgressBar start -->
     <declare-styleable name="ProgressView">
         <attr name="ev_type" format="enum">
-            <enum name="type_rect" value="0" />
-            <enum name="type_circle" value="1" />
+            <enum name="rect" value="0" />
+            <enum name="circle" value="1" />
         </attr>
         <attr name="ev_progress_color" format="color" />
         <attr name="ev_background_color" format="color" />
