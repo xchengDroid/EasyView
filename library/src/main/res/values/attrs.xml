@@ -262,4 +262,19 @@
         <attr name="ev_loading_view_size" format="dimension" />
         <attr name="android:color" />
     </declare-styleable>
+    <!-- QMUIProgressBar start -->
+    <declare-styleable name="ProgressView">
+        <attr name="ev_type" format="enum">
+            <enum name="type_rect" value="0" />
+            <enum name="type_circle" value="1" />
+        </attr>
+        <attr name="ev_progress_color" format="color" />
+        <attr name="ev_background_color" format="color" />
+        <attr name="ev_max_value" format="integer" />
+        <attr name="ev_value" format="integer" />
+        <attr name="ev_stroke_width" format="dimension" />
+        <attr name="ev_stroke_round_cap" format="boolean" />
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+    </declare-styleable>
 </resources>
