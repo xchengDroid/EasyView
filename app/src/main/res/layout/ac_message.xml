@@ -4,15 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
-
-    <EditText
-        android:id="@+id/editMessage"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
-        android:inputType="textShortMessage"
-        android:text="@string/Question" />
-
     <com.xcheng.view.round.RoundButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
