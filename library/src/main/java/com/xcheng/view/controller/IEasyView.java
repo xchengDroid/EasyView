@@ -33,4 +33,12 @@ public interface IEasyView extends View.OnClickListener, ILoadingView {
      * 设置监听
      */
     void setListener();
+
+    /**
+     * 显示消息提醒等，可以自己重写覆盖此方法
+     *
+     * @param text 消息内容
+     */
+    void showMessage(CharSequence text);
+
 }

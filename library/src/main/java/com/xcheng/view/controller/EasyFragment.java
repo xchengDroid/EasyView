@@ -162,6 +162,11 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     }
 
     @Override
+    public void showMessage(CharSequence text) {
+        EasyView.info(text);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == Activity.RESULT_OK)
             onActivityResultOk(requestCode, data);

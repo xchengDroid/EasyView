@@ -110,6 +110,12 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
             mLoadingDialog.dismiss();
         }
     }
+
+    @Override
+    public void showMessage(CharSequence text) {
+        EasyView.info(text);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
