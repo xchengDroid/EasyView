@@ -92,13 +92,13 @@ public class Config {
      */
     public interface MsgDispatcher {
 
-        void onError(String msg);
+        void onError(CharSequence msg);
 
-        void onWarning(String msg);
+        void onWarning(CharSequence msg);
 
-        void onSuccess(String msg);
+        void onSuccess(CharSequence msg);
 
-        void onInfo(String msg);
+        void onInfo(CharSequence msg);
 
     }
 }

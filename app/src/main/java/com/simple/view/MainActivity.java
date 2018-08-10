@@ -21,22 +21,22 @@ public class MainActivity extends ListActivity {
         EasyView.init(new Config.Builder(this)
                 .dispatcher(new Config.MsgDispatcher() {
                     @Override
-                    public void onError(String msg) {
+                    public void onError(CharSequence msg) {
                         Log.e("print", "onError:" + msg);
                     }
 
                     @Override
-                    public void onWarning(String msg) {
+                    public void onWarning(CharSequence msg) {
                         Log.e("print", "onWarning:" + msg);
                     }
 
                     @Override
-                    public void onSuccess(String msg) {
+                    public void onSuccess(CharSequence msg) {
                         Log.e("print", "onSuccess:" + msg);
                     }
 
                     @Override
-                    public void onInfo(String msg) {
+                    public void onInfo(CharSequence msg) {
                         Log.e("print", "onInfo:" + msg);
 
                     }

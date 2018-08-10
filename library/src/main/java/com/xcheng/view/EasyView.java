@@ -63,7 +63,7 @@ public class EasyView {
         return Looper.myLooper() == Looper.getMainLooper();
     }
 
-    public static void error(final String msg) {
+    public static void error(final CharSequence msg) {
         if (isOnMainThread()) {
             sConfig.dispatcher().onError(msg);
         } else {
@@ -76,7 +76,7 @@ public class EasyView {
         }
     }
 
-    public static void warning(final String msg) {
+    public static void warning(final CharSequence msg) {
         if (isOnMainThread()) {
             sConfig.dispatcher().onWarning(msg);
         } else {
@@ -89,7 +89,7 @@ public class EasyView {
         }
     }
 
-    public static void info(final String msg) {
+    public static void info(final CharSequence msg) {
         if (isOnMainThread()) {
             sConfig.dispatcher().onInfo(msg);
         } else {
@@ -102,7 +102,7 @@ public class EasyView {
         }
     }
 
-    public static void success(final String msg) {
+    public static void success(final CharSequence msg) {
         if (isOnMainThread()) {
             sConfig.dispatcher().onSuccess(msg);
         } else {
