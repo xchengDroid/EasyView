@@ -3,7 +3,6 @@ package com.xcheng.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 import com.xcheng.view.controller.dialog.LoadingDialog;
 import com.xcheng.view.util.EasyPreconditions;
@@ -14,53 +13,61 @@ import com.xcheng.view.util.EasyPreconditions;
  * 功能描述：EasyView全局参数配置类
  */
 public class Config {
-    static final Factory DEFAULT_FACTORY = new Factory() {
+    static final DialogFactory DEFAULT_FACTORY = new DialogFactory() {
         @NonNull
         @Override
-        public Dialog createLoadingDialog(Context context, String fromClazz) {
+        public Dialog create(Context context, String fromClazz) {
             return new LoadingDialog(context);
-        }
-
-        @NonNull
-        @Override
-        public Toast createGlobalToast(Context context) {
-            return Toast.makeText(context, null, Toast.LENGTH_SHORT);
         }
     };
 
-    private Context context;
-    private Factory factory;
+    private final Context context;
+    private final DialogFactory factory;
+    private final MsgDispatcher dispatcher;
 
     private Config(Builder builder) {
         context = builder.context;
         factory = builder.factory;
+        dispatcher = builder.dispatcher;
     }
 
     public Context context() {
         return context;
     }
 
-    public Factory factory() {
+    public DialogFactory factory() {
         return factory;
+    }
+
+    public MsgDispatcher dispatcher() {
+        return dispatcher;
     }
 
     //后续扩展属性
     public static class Builder {
         private Context context;
-        private Factory factory;
+        private DialogFactory factory;
+        private MsgDispatcher dispatcher;
+
 
         public Builder(Context context) {
             this.context = context.getApplicationContext();
             this.factory = DEFAULT_FACTORY;
         }
 
-        public Builder factory(Factory factory) {
+        public Builder factory(DialogFactory factory) {
             EasyPreconditions.checkNotNull(factory, "factory==null");
             this.factory = factory;
             return this;
         }
 
+        public Builder dispatcher(MsgDispatcher dispatcher) {
+            this.dispatcher = dispatcher;
+            return this;
+        }
+
         public Config build() {
+            EasyPreconditions.checkNotNull(dispatcher, "dispatcher==null");
             return new Config(this);
         }
     }
@@ -68,8 +75,7 @@ public class Config {
     /**
      * 创建LoadingDialog的工厂类
      */
-    public interface Factory {
-
+    public interface DialogFactory {
         /**
          * 为每隔需要记载的页面创建Dialog
          *
@@ -78,15 +84,21 @@ public class Config {
          * @return 加载的Dialog对象
          */
         @NonNull
-        Dialog createLoadingDialog(Context context, String fromClazz);
+        Dialog create(Context context, String fromClazz);
+    }
 
-        /**
-         * 创建全局的Toast
-         *
-         * @param context applicationContext
-         * @return Toast
-         */
-        @NonNull
-        Toast createGlobalToast(Context context);
+    /**
+     * 全局的消息分发
+     */
+    public interface MsgDispatcher {
+
+        void onError(String msg);
+
+        void onWarning(String msg);
+
+        void onSuccess(String msg);
+
+        void onInfo(String msg);
+
     }
 }

@@ -12,7 +12,6 @@ import android.view.View;
 
 import com.xcheng.view.EasyView;
 import com.xcheng.view.util.Router;
-import com.xcheng.view.util.ToastLess;
 
 import java.io.Serializable;
 
@@ -101,7 +100,7 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     public void showLoading() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = EasyView.getConfig().factory().createLoadingDialog(this, getClass().getName());
+            mLoadingDialog = EasyView.getConfig().factory().create(this, getClass().getName());
         }
         mLoadingDialog.show();
     }
@@ -111,12 +110,6 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
             mLoadingDialog.dismiss();
         }
     }
-
-    @Override
-    public void showMessage(CharSequence text) {
-        ToastLess.showToast(text);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

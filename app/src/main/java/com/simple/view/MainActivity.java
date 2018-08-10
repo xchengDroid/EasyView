@@ -18,7 +18,30 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EasyView.init(new Config.Builder(this).build());
+        EasyView.init(new Config.Builder(this)
+                .dispatcher(new Config.MsgDispatcher() {
+                    @Override
+                    public void onError(String msg) {
+                        Log.e("print", "onError:" + msg);
+                    }
+
+                    @Override
+                    public void onWarning(String msg) {
+                        Log.e("print", "onWarning:" + msg);
+                    }
+
+                    @Override
+                    public void onSuccess(String msg) {
+                        Log.e("print", "onSuccess:" + msg);
+                    }
+
+                    @Override
+                    public void onInfo(String msg) {
+                        Log.e("print", "onInfo:" + msg);
+
+                    }
+                })
+                .build());
         String[] items = getResources().getStringArray(R.array.sample_list);
 
         ArrayAdapter<String> adapter =
@@ -31,6 +54,10 @@ public class MainActivity extends ListActivity {
         switch (position) {
             case 0:
                 // startSignInActivity();
+                EasyView.success("123");
+                EasyView.error("456");
+                EasyView.info("789");
+                EasyView.warning("123");
                 break;
             case 1:
                 startMessageActivity();
@@ -38,7 +65,7 @@ public class MainActivity extends ListActivity {
             case 2:
                 break;
             case 3:
-               // startStateSampleActivity();
+                // startStateSampleActivity();
                 break;
             case 4:
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
@@ -84,6 +111,7 @@ public class MainActivity extends ListActivity {
                 break;
         }
     }
+
     private void startMessageActivity() {
         Router.build(MessageActivity.class).navigation(this);
 

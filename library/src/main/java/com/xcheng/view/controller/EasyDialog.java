@@ -10,8 +10,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
 import android.view.View;
 
-import com.xcheng.view.util.ToastLess;
-
 
 /**
  * 基础的Dialog
@@ -93,10 +91,5 @@ public abstract class EasyDialog extends Dialog implements IEasyView {
     @Override
     public void hideLoading() {
 
-    }
-
-    @Override
-    public void showMessage(CharSequence text) {
-        ToastLess.showToast(text);
     }
 }

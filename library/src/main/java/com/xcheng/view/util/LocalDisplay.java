@@ -15,7 +15,7 @@ public class LocalDisplay {
     private static float DENSITY;
     private static int WIDTH_DP;
     private static int HEIGHT_DP;
-    //default false
+    //default false volatile 保证同步刷新到内存即可见性
     private static volatile boolean sInitialized;
 
     public static void init(Context context) {

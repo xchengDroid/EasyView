@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.StringRes;
+import android.util.Log;
 
+import com.xcheng.view.util.EasyPreconditions;
 import com.xcheng.view.util.LocalDisplay;
 
 /**
@@ -12,12 +14,18 @@ import com.xcheng.view.util.LocalDisplay;
  * Created by chengxin on 2017/8/24.
  */
 public class EasyView {
+    static String TAG = EasyView.class.getName();
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
     private static Config sConfig;
-    
-    public static void init(Config config) {
-        sConfig = config;
-        LocalDisplay.init(getContext());
+
+    public synchronized static void init(Config config) {
+        EasyPreconditions.checkNotNull(config, "config==null");
+        if (sConfig == null) {
+            sConfig = config;
+            LocalDisplay.init(getContext());
+        } else {
+            Log.e(TAG, "sConfig has already been init");
+        }
     }
 
     /**
@@ -32,7 +40,6 @@ public class EasyView {
     public static Config getConfig() {
         return sConfig;
     }
-
 
     public static String getString(@StringRes int stringId) {
         return getContext().getString(stringId);
@@ -54,5 +61,57 @@ public class EasyView {
      */
     public static boolean isOnMainThread() {
         return Looper.myLooper() == Looper.getMainLooper();
+    }
+
+    public static void error(final String msg) {
+        if (isOnMainThread()) {
+            sConfig.dispatcher().onError(msg);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    error(msg);
+                }
+            });
+        }
+    }
+
+    public static void warning(final String msg) {
+        if (isOnMainThread()) {
+            sConfig.dispatcher().onWarning(msg);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    warning(msg);
+                }
+            });
+        }
+    }
+
+    public static void info(final String msg) {
+        if (isOnMainThread()) {
+            sConfig.dispatcher().onInfo(msg);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    info(msg);
+                }
+            });
+        }
+    }
+
+    public static void success(final String msg) {
+        if (isOnMainThread()) {
+            sConfig.dispatcher().onSuccess(msg);
+        } else {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    success(msg);
+                }
+            });
+        }
     }
 }
