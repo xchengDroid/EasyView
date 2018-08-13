@@ -45,10 +45,6 @@ public class EasyView {
         return getContext().getString(stringId);
     }
 
-    public static CharSequence getText(@StringRes int stringId) {
-        return getContext().getText(stringId);
-    }
-
     /**
      * @param action the action to run on the UI thread
      */
