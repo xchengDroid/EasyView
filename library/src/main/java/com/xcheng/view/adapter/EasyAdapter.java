@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xcheng.view.util.EasyPreconditions;
+import com.xcheng.view.util.Preconditions;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -114,7 +114,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
     @Override
     public EasyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = getDelegateView(parent, viewType);
-        EasyPreconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getDelegateView(parent,viewType) and return a NonNull itemView");
+        Preconditions.checkState(itemView != null, "you can set a layoutId in construct method or override getDelegateView(parent,viewType) and return a NonNull itemView");
         EasyHolder holder = new EasyHolder(itemView);
         bindClickListener(holder);
         return holder;

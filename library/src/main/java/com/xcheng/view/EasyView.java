@@ -6,8 +6,8 @@ import android.os.Looper;
 import android.support.annotation.StringRes;
 import android.util.Log;
 
-import com.xcheng.view.util.EasyPreconditions;
 import com.xcheng.view.util.LocalDisplay;
+import com.xcheng.view.util.Preconditions;
 
 /**
  * Easy工具类，引用全局Context ,提供子线程刷新UI方法等
@@ -19,7 +19,7 @@ public class EasyView {
     private static Config sConfig;
 
     public synchronized static void init(Config config) {
-        EasyPreconditions.checkNotNull(config, "config==null");
+        Preconditions.checkNotNull(config, "config==null");
         if (sConfig == null) {
             sConfig = config;
             LocalDisplay.init(getContext());

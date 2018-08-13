@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.xcheng.view.controller.dialog.LoadingDialog;
-import com.xcheng.view.util.EasyPreconditions;
+import com.xcheng.view.util.Preconditions;
 
 /**
  * 创建时间：2018/3/30
@@ -56,7 +56,7 @@ public class Config {
         }
 
         public Builder factory(DialogFactory factory) {
-            EasyPreconditions.checkNotNull(factory, "factory==null");
+            Preconditions.checkNotNull(factory, "factory==null");
             this.factory = factory;
             return this;
         }
@@ -67,7 +67,7 @@ public class Config {
         }
 
         public Config build() {
-            EasyPreconditions.checkNotNull(dispatcher, "dispatcher==null");
+            Preconditions.checkNotNull(dispatcher, "dispatcher==null");
             return new Config(this);
         }
     }

@@ -20,8 +20,8 @@ import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.divider.DividerTextView;
-import com.xcheng.view.util.EasyPreconditions;
 import com.xcheng.view.util.LocalDisplay;
+import com.xcheng.view.util.Preconditions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,7 +46,7 @@ public class BottomOptionDialog extends BottomDialog {
         TextView topTipTextView = findViewById(R.id.ev_id_optionDialog_topTip);
         if (mBuilder.tipText != null) {
             //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
-            EasyPreconditions.checkState(topTipTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_topTip");
+            Preconditions.checkState(topTipTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_topTip");
 
             topTipTextView.setTextSize(mBuilder.tipTextSize);
             topTipTextView.setTextColor(mBuilder.tipTextColor);
@@ -68,7 +68,7 @@ public class BottomOptionDialog extends BottomDialog {
 
         TextView bottomTextView = (TextView) findViewById(R.id.ev_id_optionDialog_bottom);
         if (mBuilder.bottomText != null) {
-            EasyPreconditions.checkState(bottomTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_bottom");
+            Preconditions.checkState(bottomTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_bottom");
             bottomTextView.setTextSize(mBuilder.textSize);
             bottomTextView.setTextColor(mBuilder.bottomTextColor);
             bottomTextView.setText(mBuilder.bottomText);
@@ -83,7 +83,7 @@ public class BottomOptionDialog extends BottomDialog {
             }
         }
         RecyclerView recyclerView = findViewById(R.id.ev_id_recyclerView);
-        EasyPreconditions.checkState(recyclerView != null, "layout res must have a RecyclerView with id named ev_id_recyclerView");
+        Preconditions.checkState(recyclerView != null, "layout res must have a RecyclerView with id named ev_id_recyclerView");
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.addItemDecoration(new SpaceDecoration(mBuilder.dividerColor, 1));
         recyclerView.setAdapter(new OptionAdapter(mBuilder.context, new ArrayList<>(Arrays.asList(mBuilder.optionTexts))));
@@ -207,7 +207,7 @@ public class BottomOptionDialog extends BottomDialog {
         }
 
         public BottomOptionDialog create() {
-            EasyPreconditions.checkState(optionTexts != null, "optionTexts has not been init");
+            Preconditions.checkState(optionTexts != null, "optionTexts has not been init");
             return new BottomOptionDialog(this);
         }
 

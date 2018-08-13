@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.ViewGroup;
 
-import com.xcheng.view.util.EasyPreconditions;
+import com.xcheng.view.util.Preconditions;
 
 import java.util.Collection;
 import java.util.List;
@@ -229,7 +229,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
      * @param headerId LayoutResId,如果为0则没有Header
      */
     public void setHeader(@LayoutRes int headerId) {
-        EasyPreconditions.checkState(mHeaderId == 0, "the mHeaderView already has been set");
+        Preconditions.checkState(mHeaderId == 0, "the mHeaderView already has been set");
         mHeaderId = headerId;
         if (mAttachToRecycler && hasHeader()) {
             notifyDataSetChanged();
@@ -240,7 +240,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
      * @param emptyId LayoutResId,如果为0则没有Empty
      */
     public void setEmpty(@LayoutRes int emptyId) {
-        EasyPreconditions.checkState(mEmptyId == 0, "the mEmptyView already has been set");
+        Preconditions.checkState(mEmptyId == 0, "the mEmptyView already has been set");
         mEmptyId = emptyId;
         if (mAttachToRecycler && hasEmpty()) {
             notifyDataSetChanged();
@@ -252,7 +252,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
      * @param hasFooterIfEmpty 如果为true,则表示 {@link #isEmpty()} 为true时也显示footer
      */
     public void setFooter(@LayoutRes int footerId, boolean hasFooterIfEmpty) {
-        EasyPreconditions.checkState(mFooterId == 0, "the mFooterView already has been set");
+        Preconditions.checkState(mFooterId == 0, "the mFooterView already has been set");
         mFooterId = footerId;
         mHasFooterIfEmpty = hasFooterIfEmpty;
         if (mAttachToRecycler && hasFooter()) {
