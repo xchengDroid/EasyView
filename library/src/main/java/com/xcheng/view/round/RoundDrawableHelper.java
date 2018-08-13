@@ -19,6 +19,12 @@ import com.xcheng.view.util.ViewHelper;
 /**
  * 使按钮能方便地指定圆角、边框颜色、边框粗细、背景色
  * <p>
+ * 优先级关系
+ * <li>1、ev_radius</li>
+ * <li>2、ev_radiusTopLeft、ev_radiusTopRight....</li>
+ * <li>3、ev_isRadiusAdjustBounds</li>
+ * </p>
+ * <p>
  * 注意: 因为该控件的圆角采用 View 的 background 实现, 所以与原生的 <code>android:background</code> 有冲突。
  * <ul>
  * <li>如果在 xml 中用 <code>android:background</code> 指定 background, 该 background 不会生效。</li>
@@ -38,6 +44,8 @@ public class RoundDrawableHelper {
      * 默认为null,为null标识没有圆角
      */
     private float[] mRadii;
+    private float mRadius;
+
     private boolean mRadiusAdjustBounds;
     private boolean mHasState;
 
@@ -57,30 +65,26 @@ public class RoundDrawableHelper {
         mRadiusAdjustBounds = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, true);
         mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_hasState,
                 mView instanceof Button && mView.isClickable());
-        int mRadius = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radius, 0);
-        int mRadiusTopLeft = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopLeft, 0);
-        int mRadiusTopRight = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopRight, 0);
-        int mRadiusBottomLeft = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusBottomLeft, 0);
-        int mRadiusBottomRight = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusBottomRight, 0);
+        int radius = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radius, 0);
+        int radiusTopLeft = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopLeft, 0);
+        int radiusTopRight = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusTopRight, 0);
+        int radiusBottomLeft = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusBottomLeft, 0);
+        int radiusBottomRight = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_radiusBottomRight, 0);
         typedArray.recycle();
-        //优先级高于ev_radius
-        if (mRadiusTopLeft > 0 || mRadiusTopRight > 0 || mRadiusBottomLeft > 0 || mRadiusBottomRight > 0) {
-            mRadii = new float[]{
-                    mRadiusTopLeft, mRadiusTopLeft,
-                    mRadiusTopRight, mRadiusTopRight,
-                    mRadiusBottomRight, mRadiusBottomRight,
-                    mRadiusBottomLeft, mRadiusBottomLeft
-            };
+        //ev_radius优先级高于ev_radiusTopLeft、ev_radiusTopRight
+        if (radius > 0) {
+            mRadius = radius;
             mRadiusAdjustBounds = false;
         } else {
-            if (mRadius > 0) {
-                mRadiusAdjustBounds = false;
+            //如果mBorderColor==1的情况下，这种设置方式边框会模糊
+            if (radiusTopLeft > 0 || radiusTopRight > 0 || radiusBottomLeft > 0 || radiusBottomRight > 0) {
                 mRadii = new float[]{
-                        mRadius, mRadius,
-                        mRadius, mRadius,
-                        mRadius, mRadius,
-                        mRadius, mRadius
+                        radiusTopLeft, radiusTopLeft,
+                        radiusTopRight, radiusTopRight,
+                        radiusBottomRight, radiusBottomRight,
+                        radiusBottomLeft, radiusBottomLeft
                 };
+                mRadiusAdjustBounds = false;
             }
         }
     }
@@ -129,7 +133,11 @@ public class RoundDrawableHelper {
     public GradientDrawable createDrawable(@ColorInt int fillColor, @ColorInt int borderColor) {
         RoundDrawable drawable = new RoundDrawable(mRadiusAdjustBounds);
         if (!mRadiusAdjustBounds) {
-            drawable.setCornerRadii(mRadii);
+            if (mRadius > 0) {
+                drawable.setCornerRadius(mRadius);
+            } else if (mRadii != null) {
+                drawable.setCornerRadii(mRadii);
+            }
         }
         drawable.setColor(fillColor);
 
