@@ -131,4 +131,10 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
     protected final Context getContext() {
         return this;
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        hideLoading();
+    }
 }
