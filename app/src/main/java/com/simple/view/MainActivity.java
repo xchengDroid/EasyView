@@ -1,19 +1,42 @@
 package com.simple.view;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.DefaultRefreshHeaderCreator;
+import com.scwang.smartrefresh.layout.api.RefreshHeader;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.xcheng.view.Config;
 import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
 import com.xcheng.view.util.Router;
 
 public class MainActivity extends ListActivity {
+    static {
+        //设置全局的Header构建器o
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator(new DefaultRefreshHeaderCreator() {
+            @NonNull
+            @Override
+            public RefreshHeader createRefreshHeader(@NonNull Context context, @NonNull RefreshLayout layout) {
+                ClassicsHeader header = new ClassicsHeader(context).setSpinnerStyle(SpinnerStyle.Translate);
+                header.setPrimaryColorId(R.color.ev_holo_red_light);
+                header.setTextSizeTitle(14);
+                header.setFinishDuration(200);
+                //header.setAccentColorId(android.R.color.white);
+                return header;//指定为经典Header，默认是 贝塞尔雷达Header
+            }
+        });
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

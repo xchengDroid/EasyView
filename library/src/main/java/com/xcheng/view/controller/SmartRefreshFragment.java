@@ -16,7 +16,7 @@ import com.scwang.smartrefresh.layout.api.RefreshFooter;
 import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.RefreshState;
-import com.scwang.smartrefresh.layout.listener.OnRefreshLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyAdapter;
@@ -54,7 +54,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
         mConfig = getConfig();
         mSmartRefreshLayout = findViewById(R.id.ev_id_smartRefreshLayout);
         if (mConfig.enableLoadMore != null) {
-            mSmartRefreshLayout.setEnableLoadmore(mConfig.enableLoadMore);
+            mSmartRefreshLayout.setEnableLoadMore(mConfig.enableLoadMore);
         }
 
         mRecyclerView = findViewById(R.id.ev_id_recyclerView);
@@ -94,14 +94,14 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     @Override
     public void setListener() {
         super.setListener();
-        mSmartRefreshLayout.setOnRefreshLoadmoreListener(new OnRefreshLoadmoreListener() {
+        mSmartRefreshLayout.setOnRefreshLoadMoreListener(new OnRefreshLoadMoreListener() {
             @Override
             public void onRefresh(RefreshLayout refreshlayout) {
                 requestData(true);
             }
 
             @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
+            public void onLoadMore(RefreshLayout refreshlayout) {
                 requestData(false);
             }
         });
@@ -117,7 +117,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
             }
 
             @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
+            public void onLoadMore(RefreshLayout refreshlayout) {
                 onSmartStateChanged(SmartState.LOADING_MORE);
 
             }
@@ -160,9 +160,9 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     public void complete(boolean isRefresh, boolean success, boolean noMoreData) {
         if (isRefresh) {
             mSmartRefreshLayout.finishRefresh(0, success);
-            mSmartRefreshLayout.setLoadmoreFinished(noMoreData);
+            mSmartRefreshLayout.setNoMoreData(noMoreData);
         } else {
-            mSmartRefreshLayout.finishLoadmore(0, success, noMoreData);
+            mSmartRefreshLayout.finishLoadMore(0, success, noMoreData);
         }
     }
 
