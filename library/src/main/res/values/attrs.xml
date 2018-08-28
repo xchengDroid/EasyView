@@ -6,26 +6,6 @@
         <attr name="ev_topBarTitle" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="ProcessButton">
-        <attr name="ev_pb_textProgress" format="string" />
-        <attr name="ev_pb_textComplete" format="string" />
-        <attr name="ev_pb_textError" format="string" />
-        <attr name="ev_pb_colorProgress" format="color" />
-        <attr name="ev_pb_colorComplete" format="color" />
-        <attr name="ev_pb_colorError" format="color" />
-        <attr name="ev_pb_disableWhenProgress" format="boolean" />
-        <attr name="ev_pb_maskWhenProgress" format="boolean" />
-    </declare-styleable>
-
-    <declare-styleable name="FlatButton">
-        <attr name="ev_pb_colorNormal" format="color" />
-        <attr name="ev_pb_colorPressed" format="color" />
-        <attr name="ev_pb_colorDisable" format="color" />
-        <attr name="ev_pb_colorStroke" format="color" />
-        <attr name="ev_pb_strokeWidth" format="dimension" />
-        <attr name="ev_pb_cornerRadius" format="dimension" />
-    </declare-styleable>
-
     <declare-styleable name="DividerView">
         <attr name="ev_position">
             <flag name="none" value="0x00" />
@@ -178,6 +158,9 @@
     <attr name="EVRoundButtonStyle" format="reference" />
 
     <attr name="ev_fillColor" format="color" />
+    <attr name="ev_fillColorPressed" format="color" />
+    <attr name="ev_fillColorDisable" format="color" />
+
     <attr name="ev_borderColor" format="color" />
     <attr name="ev_borderWidth" format="dimension" />
     <!-- 圆角是否要自适应为 View 高度的一半 -->
@@ -198,6 +181,8 @@
 
     <declare-styleable name="RoundButton">
         <attr name="ev_fillColor" />
+        <attr name="ev_fillColorPressed" />
+        <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
@@ -210,6 +195,8 @@
     </declare-styleable>
     <declare-styleable name="RoundTextView">
         <attr name="ev_fillColor" />
+        <attr name="ev_fillColorPressed" />
+        <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
@@ -222,6 +209,8 @@
     </declare-styleable>
     <declare-styleable name="RoundFrameLayout">
         <attr name="ev_fillColor" />
+        <attr name="ev_fillColorPressed" />
+        <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
@@ -234,6 +223,8 @@
     </declare-styleable>
     <declare-styleable name="RoundLinearLayout">
         <attr name="ev_fillColor" />
+        <attr name="ev_fillColorPressed" />
+        <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
@@ -246,6 +237,8 @@
     </declare-styleable>
     <declare-styleable name="RoundRelativeLayout">
         <attr name="ev_fillColor" />
+        <attr name="ev_fillColorPressed" />
+        <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
