@@ -4,15 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
+
     <com.xcheng.view.round.RoundButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="2dp"
         android:layout_marginTop="20dp"
-        app:ev_borderWidth="5dp"
         android:padding="10dp"
-        android:text="123213" />
+        android:text="123213"
+        app:ev_borderWidth="5dp"
+
+        app:ev_fillColor="@color/ev_red_error"
+        app:ev_fillColorDisable="@color/colorPrimaryDark"
+        app:ev_fillColorPressed="@color/colorAccent" />
 
     <com.xcheng.view.round.RoundFrameLayout
         android:layout_width="match_parent"
@@ -25,18 +30,18 @@
         app:ev_borderWidth="3dp"
         app:ev_fillColor="@color/ev_red_error"
         app:ev_radius="10dp"
-        app:ev_radiusTopLeft="10dp"
-        app:ev_radiusTopRight="3dp"
+        app:ev_radiusBottomLeft="20dp"
         app:ev_radiusBottomRight="30dp"
-        app:ev_radiusBottomLeft="20dp" />
+        app:ev_radiusTopLeft="10dp"
+        app:ev_radiusTopRight="3dp" />
 
     <com.xcheng.view.round.RoundTextView
-        app:ev_fillColor="@color/colorAccent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_margin="15dp"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="123213" />
+        android:text="123213"
+        app:ev_fillColor="@color/colorAccent" />
 </LinearLayout>

@@ -38,6 +38,11 @@ import com.xcheng.view.util.ViewHelper;
 public class RoundDrawableHelper {
     private final View mView;
     private int mFillColor;
+    //enable为false的颜色
+    private int mFillColorDisable;
+    //按下的颜色
+    private int mFillColorPressed;
+
     private int mBorderColor;
     private int mBorderWidth;
     /**
@@ -60,6 +65,9 @@ public class RoundDrawableHelper {
     public void loadAttributeSet(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundButton, defStyleAttr, 0);
         mFillColor = typedArray.getColor(R.styleable.RoundButton_ev_fillColor, 0);
+        mFillColorPressed = typedArray.getColor(R.styleable.RoundButton_ev_fillColorPressed, ColorUtil.pressed(mFillColor));
+        mFillColorDisable = typedArray.getColor(R.styleable.RoundButton_ev_fillColorDisable, ColorUtil.disabled(mFillColor));
+
         mBorderColor = typedArray.getColor(R.styleable.RoundButton_ev_borderColor, 0);
         mBorderWidth = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_borderWidth, 0);
         mRadiusAdjustBounds = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, true);
@@ -108,8 +116,8 @@ public class RoundDrawableHelper {
     public StateListDrawable createStateListDrawable() {
         //构建各种状态的颜色数组，1-->状态 2-->填充颜色  3-->边框颜色
         final int[] statesColor = new int[]{
-                android.R.attr.state_pressed, ColorUtil.pressed(mFillColor), ColorUtil.pressed(mBorderColor),
-                -android.R.attr.state_enabled, ColorUtil.disabled(mFillColor), ColorUtil.disabled(mBorderColor),
+                android.R.attr.state_pressed, mFillColorPressed, ColorUtil.pressed(mBorderColor),
+                -android.R.attr.state_enabled, mFillColorDisable, ColorUtil.disabled(mBorderColor),
                 0, mFillColor, mBorderColor
         };
         StateListDrawable stateListDrawable = new StateListDrawable();
