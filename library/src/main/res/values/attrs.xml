@@ -162,6 +162,9 @@
     <attr name="ev_fillColorDisable" format="color" />
 
     <attr name="ev_borderColor" format="color" />
+    <attr name="ev_borderColorPressed" format="color" />
+    <attr name="ev_borderColorDisable" format="color" />
+
     <attr name="ev_borderWidth" format="dimension" />
     <!-- 圆角是否要自适应为 View 高度的一半 -->
     <attr name="ev_isRadiusAdjustBounds" format="boolean" />
@@ -184,6 +187,8 @@
         <attr name="ev_fillColorPressed" />
         <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
+        <attr name="ev_borderColorPressed" />
+        <attr name="ev_borderColorDisable" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
         <attr name="ev_hasState" />
@@ -198,6 +203,8 @@
         <attr name="ev_fillColorPressed" />
         <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
+        <attr name="ev_borderColorPressed" />
+        <attr name="ev_borderColorDisable" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
         <attr name="ev_hasState" />
@@ -212,6 +219,8 @@
         <attr name="ev_fillColorPressed" />
         <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
+        <attr name="ev_borderColorPressed" />
+        <attr name="ev_borderColorDisable" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
         <attr name="ev_hasState" />
@@ -226,6 +235,8 @@
         <attr name="ev_fillColorPressed" />
         <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
+        <attr name="ev_borderColorPressed" />
+        <attr name="ev_borderColorDisable" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
         <attr name="ev_hasState" />
@@ -240,6 +251,8 @@
         <attr name="ev_fillColorPressed" />
         <attr name="ev_fillColorDisable" />
         <attr name="ev_borderColor" />
+        <attr name="ev_borderColorPressed" />
+        <attr name="ev_borderColorDisable" />
         <attr name="ev_borderWidth" />
         <attr name="ev_isRadiusAdjustBounds" />
         <attr name="ev_hasState" />

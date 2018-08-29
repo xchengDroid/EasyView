@@ -44,6 +44,10 @@ public class RoundDrawableHelper {
     private int mFillColorPressed;
 
     private int mBorderColor;
+    //enable为false的颜色
+    private int mBorderColorDisable;
+    //按下的颜色
+    private int mBorderColorPressed;
     private int mBorderWidth;
     /**
      * 默认为null,为null标识没有圆角
@@ -69,6 +73,8 @@ public class RoundDrawableHelper {
         mFillColorDisable = typedArray.getColor(R.styleable.RoundButton_ev_fillColorDisable, ColorUtil.disabled(mFillColor));
 
         mBorderColor = typedArray.getColor(R.styleable.RoundButton_ev_borderColor, 0);
+        mBorderColorPressed = typedArray.getColor(R.styleable.RoundButton_ev_borderColorPressed, ColorUtil.pressed(mBorderColor));
+        mBorderColorDisable = typedArray.getColor(R.styleable.RoundButton_ev_borderColorDisable, ColorUtil.disabled(mBorderColor));
         mBorderWidth = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_borderWidth, 0);
         mRadiusAdjustBounds = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, true);
         mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_hasState,
@@ -116,8 +122,8 @@ public class RoundDrawableHelper {
     public StateListDrawable createStateListDrawable() {
         //构建各种状态的颜色数组，1-->状态 2-->填充颜色  3-->边框颜色
         final int[] statesColor = new int[]{
-                android.R.attr.state_pressed, mFillColorPressed, ColorUtil.pressed(mBorderColor),
-                -android.R.attr.state_enabled, mFillColorDisable, ColorUtil.disabled(mBorderColor),
+                android.R.attr.state_pressed, mFillColorPressed, mBorderColorPressed,
+                -android.R.attr.state_enabled, mFillColorDisable, mBorderColorDisable,
                 0, mFillColor, mBorderColor
         };
         StateListDrawable stateListDrawable = new StateListDrawable();
