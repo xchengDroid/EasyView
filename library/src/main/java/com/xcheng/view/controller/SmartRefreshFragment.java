@@ -58,7 +58,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
      */
     @NonNull
     protected Config getConfig() {
-        return new Config();
+        return Config.DEFAULT;
     }
 
     /**
@@ -151,6 +151,8 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     }
 
     public static class Config {
+        private static final Config DEFAULT = new Config();
+
         private final boolean autoRefresh;
         private final int autoRefreshDelayed;
         private final int limit;
