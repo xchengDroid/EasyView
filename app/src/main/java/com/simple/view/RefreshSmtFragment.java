@@ -9,7 +9,9 @@ import android.widget.TextView;
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.HFAdapter;
+import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.controller.SmartRefreshFragment;
+import com.xcheng.view.util.LocalDisplay;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,15 +46,13 @@ public class RefreshSmtFragment extends SmartRefreshFragment<String> {
                 Log.e("print", "afterLp:" + afterLp);
             }
         });
+        mRecyclerView.addItemDecoration(new SpaceDecoration(LocalDisplay.dp2px(10)));
     }
 
     @NonNull
     @Override
     protected Config getConfig() {
-        return super.getConfig().newBuilder()
-                .limit(8)
-                .autoRefresh(true)
-                .build();
+        return new Config(200, 8);
     }
 
     @Override

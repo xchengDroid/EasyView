@@ -1,15 +1,11 @@
 package com.xcheng.view.controller;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.ItemDecoration;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshFooter;
@@ -20,13 +16,9 @@ import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.SimpleMultiPurposeListener;
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyAdapter;
-import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.enums.SmartState;
 
 import java.util.List;
-
-import static android.support.v7.widget.RecyclerView.ItemAnimator;
-import static android.support.v7.widget.RecyclerView.LayoutManager;
 
 /**
  * 刷新列表Fragment
@@ -40,7 +32,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     protected SmartRefreshLayout mSmartRefreshLayout;
     protected RecyclerView mRecyclerView;
     protected EasyAdapter<T> mAdapter;
-    private Config mConfig;
+    protected Config mConfig;
 
     @Override
     public int getLayoutId() {
@@ -51,22 +43,22 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     @Override
     public void initView(Bundle savedInstanceState) {
         super.initView(savedInstanceState);
+        //TODO 重写此方法设置RecyclerView 和 SmartRefreshLayout的属性
         mConfig = getConfig();
         mSmartRefreshLayout = findViewById(R.id.ev_id_smartRefreshLayout);
-        if (mConfig.enableLoadMore != null) {
-            mSmartRefreshLayout.setEnableLoadMore(mConfig.enableLoadMore);
-        }
-
         mRecyclerView = findViewById(R.id.ev_id_recyclerView);
-        mRecyclerView.setLayoutManager(mConfig.layoutManager);
-        mRecyclerView.setItemAnimator(mConfig.itemAnimator);
-        ItemDecoration itemDecoration = mConfig.itemDecoration;
-        if (itemDecoration != null) {
-            mRecyclerView.addItemDecoration(itemDecoration);
-        }
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mAdapter = createAdapter();
         mRecyclerView.setAdapter(mAdapter);
         onSmartStateChanged(SmartState.NONE);
+    }
+
+    /**
+     * 子类重写修改配置
+     */
+    @NonNull
+    protected Config getConfig() {
+        return new Config();
     }
 
     /**
@@ -80,16 +72,8 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
      * 子类如果需要监听状态可以重写此函数
      */
     protected void onSmartStateChanged(SmartState smartState) {
-
     }
 
-    /**
-     * 子类重写修改配置
-     */
-    @NonNull
-    protected Config getConfig() {
-        return new Config.Builder(getContext()).build();
-    }
 
     @Override
     public void setListener() {
@@ -166,114 +150,23 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
         }
     }
 
-    /**
-     * 设置RecyclerView的配置，footerView headerView emptyView LayoutManager ItemAnimator ItemDecoration等
-     */
     public static class Config {
         private final boolean autoRefresh;
         private final int autoRefreshDelayed;
-        private final Boolean enableLoadMore;
-
         private final int limit;
-        private final LayoutManager layoutManager;
-        private final ItemAnimator itemAnimator;
-        private final ItemDecoration itemDecoration;
 
-        private Config(Builder builder) {
-            this.autoRefresh = builder.autoRefresh;
-            this.autoRefreshDelayed = builder.autoRefreshDelayed;
-            this.enableLoadMore = builder.enableLoadMore;
-            this.limit = builder.limit;
-            this.layoutManager = builder.layoutManager;
-            this.itemAnimator = builder.itemAnimator;
-            this.itemDecoration = builder.itemDecoration;
+        public Config(boolean autoRefresh, int autoRefreshDelayed, @IntRange(from = 1) int limit) {
+            this.autoRefresh = autoRefresh;
+            this.autoRefreshDelayed = autoRefreshDelayed;
+            this.limit = limit;
         }
 
-        public Builder newBuilder() {
-            return new Builder(this);
+        public Config(int autoRefreshDelayed, @IntRange(from = 1) int limit) {
+            this(true, autoRefreshDelayed, limit);
         }
 
-        public static class Builder {
-            private boolean autoRefresh = true;
-            //调用自动刷新方法延迟时间 毫秒数
-            private int autoRefreshDelayed = 200;
-            //如果没设置 不覆盖xml里面的内容或默认值,包装类能通过是否为空判断是否设置
-            private Boolean enableLoadMore;
-
-            private int limit = 10;
-            private LayoutManager layoutManager;
-            private ItemAnimator itemAnimator;
-            private ItemDecoration itemDecoration;
-
-            public Builder(Context context) {
-                this.layoutManager = new LinearLayoutManager(context);
-                DefaultItemAnimator defaultAnimator = new DefaultItemAnimator();
-                // 取消notifyItemChanged动画
-                defaultAnimator.setSupportsChangeAnimations(false);
-                this.itemAnimator = defaultAnimator;
-                this.itemDecoration = new SpaceDecoration(1);
-            }
-
-            private Builder(Config config) {
-                this.autoRefresh = config.autoRefresh;
-                this.autoRefreshDelayed = config.autoRefreshDelayed;
-                this.enableLoadMore = config.enableLoadMore;
-                this.limit = config.limit;
-                this.layoutManager = config.layoutManager;
-                this.itemAnimator = config.itemAnimator;
-                this.itemDecoration = config.itemDecoration;
-            }
-
-            /**
-             * 获取EmptyView 如果为0不设置
-             */
-            public Builder enableLoadMore(boolean enableLoadMore) {
-                this.enableLoadMore = enableLoadMore;
-                return this;
-            }
-
-            /**
-             * @param limit 分页长度
-             */
-            public Builder limit(@IntRange(from = 1) int limit) {
-                this.limit = limit;
-                return this;
-            }
-
-            public Builder layoutManager(@NonNull LayoutManager layoutManager) {
-                this.layoutManager = layoutManager;
-                return this;
-            }
-
-            /**
-             * 为null的情况下 没有ItemAnimator
-             **/
-            public Builder animator(@Nullable ItemAnimator animator) {
-                this.itemAnimator = animator;
-                return this;
-            }
-
-            /**
-             * 为null的情况下 不设置ItemDecoration
-             **/
-            public Builder decoration(@Nullable ItemDecoration decoration) {
-                this.itemDecoration = decoration;
-                return this;
-            }
-
-            public Builder autoRefresh(boolean autoRefresh) {
-                this.autoRefresh = autoRefresh;
-                return this;
-            }
-
-            public Builder autoRefreshDelayed(int delayed) {
-                this.autoRefreshDelayed = delayed;
-                return this;
-            }
-
-            public Config build() {
-                return new Config(this);
-            }
+        public Config() {
+            this(true, 200, 10);
         }
     }
 }

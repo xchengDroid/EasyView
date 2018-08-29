@@ -141,8 +141,6 @@ public class MainActivity extends ListActivity {
     }
 
     private void startTabActivity() {
-        Router.build(TabSmartActivity.class).finishAfterNav().navigation(this);
-//        Intent intent = new Intent(this, TabSmartActivity.class);
-//        startActivity(intent);
+        Router.build(TabSmartActivity.class).navigation(this);
     }
 }
