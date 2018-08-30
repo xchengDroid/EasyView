@@ -48,8 +48,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
         mSmartRefreshLayout = findViewById(R.id.ev_id_smartRefreshLayout);
         mRecyclerView = findViewById(R.id.ev_id_recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = createAdapter();
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mAdapter = createAdapter());
         onSmartStateChanged(SmartState.NONE);
     }
 
