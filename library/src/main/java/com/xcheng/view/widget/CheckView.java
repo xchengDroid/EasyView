@@ -52,9 +52,9 @@ public class CheckView extends View implements Checkable {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CheckView, defStyleAttr, 0);
         mSize = ta.getDimensionPixelSize(R.styleable.CheckView_ev_size, LocalDisplay.dp2px(18));
         mStrokeWidth = ta.getDimensionPixelSize(R.styleable.CheckView_ev_strokeWidth, LocalDisplay.dp2px(2));
-        mStrokeColor = ta.getColor(R.styleable.CheckView_ev_strokeColor, Color.GRAY);
-        mbgColor = ta.getColor(R.styleable.CheckView_ev_bgColor, 0);
-        mCheckedColor = ta.getColor(R.styleable.CheckView_ev_checkedColor, Color.GREEN);
+        mStrokeColor = ta.getColor(R.styleable.CheckView_ev_strokeColor, Color.parseColor("#c2c9cc"));
+        mbgColor = ta.getColor(R.styleable.CheckView_ev_bgColor, Color.TRANSPARENT);
+        mCheckedColor = ta.getColor(R.styleable.CheckView_ev_checkedColor, Color.parseColor("#0bd38a"));
         ta.recycle();
 
         mStrokePaint = new Paint();
