@@ -1,3 +1,4 @@
+//noinspection GradleDependency
 apply plugin: 'com.android.application'
 
 android {

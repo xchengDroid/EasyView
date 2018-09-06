@@ -5,49 +5,54 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
+    <com.xcheng.view.widget.CheckView
+        android:layout_width="wrap_content"
+        app:ev_size="28dp"
+        android:background="@color/colorAccent"
+        app:ev_strokeWidth="4dp"
+        android:layout_height="wrap_content" />
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:background="@mipmap/shadow_134239"
-        android:text="12312321" />
+        android:background="@color/ev_green"
+        android:clipChildren="false">
+
+        <Button
+            android:id="@+id/a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@color/ev_holo_red_light"
+            android:text="A"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintWidth_default="percent" />
+
+        <Button
+            android:id="@+id/b"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/ev_holo_red_light"
+            android:text="B"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintRight_toRightOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
 
     <com.xcheng.view.widget.ProgressView
+        android:padding="10dp"
+        android:layout_marginTop="10dp"
         android:id="@+id/progressView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="match_parent"
+        android:background="@color/ev_colorPrimaryDark"
+        android:layout_height="50dp"
         android:textColor="@color/ev_text_black"
         android:textSize="30sp"
-
         app:ev_background_color="@color/ev_red_error"
         app:ev_progress_color="@color/ev_green"
         app:ev_stroke_round_cap="true"
         app:ev_stroke_width="10dp"
-        app:ev_type="circle"
+        app:ev_type="rect"
         app:ev_value="20" />
-
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:layout_marginTop="10dp"
-        app:cardBackgroundColor="?colorAccent"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="40dp"
-        app:cardMaxElevation="40dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="false">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="@color/ev_blue_normal"
-            android:gravity="center"
-            android:text="卡片View"
-            android:textColor="@color/ev_white"
-            android:textSize="20sp" />
-    </android.support.v7.widget.CardView>
 
     <com.xcheng.view.widget.CommonView
         android:id="@+id/cv"
