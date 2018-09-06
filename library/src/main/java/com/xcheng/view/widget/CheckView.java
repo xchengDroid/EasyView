@@ -126,8 +126,10 @@ public class CheckView extends View implements Checkable {
     // rect for drawing checked number or mark
     private Rect getCheckRect() {
         if (mCheckRect == null) {
-            mCheckRect = new Rect(getPaddingLeft() + mStrokeWidth, getPaddingTop() + mStrokeWidth,
-                    mSize + mStrokeWidth, mSize + mStrokeWidth);
+            int centerX = getPaddingLeft() + mStrokeWidth + mSize / 2;
+            int centerY = getPaddingTop() + mStrokeWidth + mSize / 2;
+            mCheckRect = new Rect(centerX - mSize / 2, centerY - mSize / 2,
+                    centerX + mSize / 2, centerY + mSize / 2);
         }
         return mCheckRect;
     }
