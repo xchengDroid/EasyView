@@ -33,7 +33,6 @@ public class CheckView extends View implements Checkable {
     private Paint mBackgroundPaint;
     private Drawable mCheckDrawable;
     private Rect mCheckRect;
-    private boolean mEnabled = true;
 
     public CheckView(Context context) {
         this(context, null);
@@ -74,7 +73,8 @@ public class CheckView extends View implements Checkable {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        setMeasuredDimension(mSize + mStrokeWidth * 2 + getPaddingLeft() + getPaddingRight(), mSize + mStrokeWidth * 2 + getPaddingTop() + getPaddingBottom());
+        setMeasuredDimension(mSize + mStrokeWidth * 2 + getPaddingLeft() + getPaddingRight(),
+                mSize + mStrokeWidth * 2 + getPaddingTop() + getPaddingBottom());
     }
 
     @Override
@@ -91,14 +91,6 @@ public class CheckView extends View implements Checkable {
     @Override
     public void toggle() {
         setChecked(!mChecked);
-    }
-
-
-    public void setEnabled(boolean enabled) {
-        if (mEnabled != enabled) {
-            mEnabled = enabled;
-            invalidate();
-        }
     }
 
     @Override
@@ -125,14 +117,14 @@ public class CheckView extends View implements Checkable {
 
         }
         // enable hint
-        setAlpha(mEnabled ? 1.0f : 0.5f);
+        setAlpha(isEnabled() ? 1.0f : 0.5f);
     }
 
 
     // rect for drawing checked number or mark
     private Rect getCheckRect() {
         if (mCheckRect == null) {
-            mCheckRect = new Rect(getPaddingLeft() + mStrokeWidth, getPaddingTop() + mStrokeWidth,
+            mCheckRect = new Rect(getPaddingLeft() + 2 * mStrokeWidth, getPaddingTop() + 2 * mStrokeWidth,
                     mSize, mSize);
         }
         return mCheckRect;
