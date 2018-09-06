@@ -28,7 +28,7 @@ public class CheckView extends View implements Checkable {
     private int mbgColor;
     //选中的颜色
     private int mCheckedColor;
-    private boolean mChecked = true;
+    private boolean mChecked;
     private Paint mStrokePaint;
     private Paint mBackgroundPaint;
     private Drawable mCheckDrawable;

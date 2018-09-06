@@ -7,10 +7,10 @@
 
     <com.xcheng.view.widget.CheckView
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:ev_size="28dp"
-        android:background="@color/colorAccent"
-        app:ev_strokeWidth="4dp"
-        android:layout_height="wrap_content" />
+        app:ev_strokeColor="@color/ev_red_error"
+        app:ev_strokeWidth="4dp" />
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -39,12 +39,12 @@
 
 
     <com.xcheng.view.widget.ProgressView
-        android:padding="10dp"
-        android:layout_marginTop="10dp"
         android:id="@+id/progressView"
         android:layout_width="match_parent"
-        android:background="@color/ev_colorPrimaryDark"
         android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/ev_colorPrimaryDark"
+        android:padding="10dp"
         android:textColor="@color/ev_text_black"
         android:textSize="30sp"
         app:ev_background_color="@color/ev_red_error"
