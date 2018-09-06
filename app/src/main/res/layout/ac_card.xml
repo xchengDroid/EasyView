@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -12,6 +13,28 @@
         app:ev_strokeColor="@color/ev_red_error"
         app:ev_strokeWidth="4dp" />
 
+    <com.xcheng.view.widget.CheckView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        app:ev_size="38dp"
+        app:ev_strokeColor="@color/ev_red_error"
+        app:ev_strokeWidth="4dp" />
+
+    <com.xcheng.view.widget.CheckView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:ev_size="48dp"
+        app:ev_strokeColor="@color/ev_red_error"
+        app:ev_strokeWidth="4dp" />
+
+    <com.xcheng.view.widget.CheckView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:ev_size="58dp"
+        app:ev_strokeColor="@color/ev_red_error"
+        app:ev_strokeWidth="4dp" />
+
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
@@ -21,11 +44,12 @@
         <Button
             android:id="@+id/a"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:background="@color/ev_holo_red_light"
             android:text="A"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintWidth_default="percent" />
+            app:layout_constraintWidth_default="percent"
+            tools:layout_editor_absoluteY="-2dp" />
 
         <Button
             android:id="@+id/b"

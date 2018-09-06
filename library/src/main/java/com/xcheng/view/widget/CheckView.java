@@ -55,6 +55,7 @@ public class CheckView extends View implements Checkable {
         mStrokeColor = ta.getColor(R.styleable.CheckView_ev_strokeColor, Color.parseColor("#c2c9cc"));
         mbgColor = ta.getColor(R.styleable.CheckView_ev_bgColor, Color.TRANSPARENT);
         mCheckedColor = ta.getColor(R.styleable.CheckView_ev_checkedColor, Color.parseColor("#0bd38a"));
+        mChecked = ta.getBoolean(R.styleable.CheckView_android_checked, false);
         ta.recycle();
 
         mStrokePaint = new Paint();
