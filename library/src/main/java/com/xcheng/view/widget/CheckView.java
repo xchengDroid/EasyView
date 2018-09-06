@@ -28,7 +28,7 @@ public class CheckView extends View implements Checkable {
     private int mbgColor;
     //选中的颜色
     private int mCheckedColor;
-    private boolean mChecked = false;
+    private boolean mChecked = true;
     private Paint mStrokePaint;
     private Paint mBackgroundPaint;
     private Drawable mCheckDrawable;
@@ -51,7 +51,7 @@ public class CheckView extends View implements Checkable {
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CheckView, defStyleAttr, 0);
-        mSize = ta.getDimensionPixelSize(R.styleable.CheckView_ev_size, LocalDisplay.dp2px(32));
+        mSize = ta.getDimensionPixelSize(R.styleable.CheckView_ev_size, LocalDisplay.dp2px(18));
         mStrokeWidth = ta.getDimensionPixelSize(R.styleable.CheckView_ev_strokeWidth, LocalDisplay.dp2px(2));
         mStrokeColor = ta.getColor(R.styleable.CheckView_ev_strokeColor, Color.GRAY);
         mbgColor = ta.getColor(R.styleable.CheckView_ev_bgColor, 0);
@@ -108,7 +108,7 @@ public class CheckView extends View implements Checkable {
             mBackgroundPaint.setColor(mCheckedColor);
             canvas.drawCircle(getPaddingLeft() + mStrokeWidth + mSize / 2,
                     getPaddingTop() + mStrokeWidth + mSize / 2,
-                    mStrokeWidth + mSize / 2, mBackgroundPaint);
+                    (mStrokeWidth + mSize) / 2, mBackgroundPaint);
 
             mCheckDrawable.setBounds(getCheckRect());
             mCheckDrawable.draw(canvas);
@@ -116,7 +116,7 @@ public class CheckView extends View implements Checkable {
             // draw white stroke
             canvas.drawCircle(getPaddingLeft() + mStrokeWidth + mSize / 2,
                     getPaddingTop() + mStrokeWidth + mSize / 2,
-                    mStrokeWidth + mSize / 2, mStrokePaint);
+                    (mStrokeWidth + mSize) / 2, mStrokePaint);
 
             mBackgroundPaint.setColor(mbgColor);
             canvas.drawCircle(getPaddingLeft() + mStrokeWidth + mSize / 2,
@@ -133,7 +133,7 @@ public class CheckView extends View implements Checkable {
     private Rect getCheckRect() {
         if (mCheckRect == null) {
             mCheckRect = new Rect(getPaddingLeft(), getPaddingTop(),
-                    mSize + mStrokeWidth, mSize + mStrokeWidth);
+                    mSize + 2 * mStrokeWidth, mSize + 2 * mStrokeWidth);
         }
         return mCheckRect;
     }
