@@ -1,7 +1,9 @@
 package com.xcheng.view.widget;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -13,14 +15,20 @@ import android.view.View;
 import android.widget.Checkable;
 
 import com.xcheng.view.R;
+import com.xcheng.view.util.LocalDisplay;
 
 public class CheckView extends View implements Checkable {
-    private static final float STROKE_WIDTH = 2.0f; // dp
-    private static final int SIZE = 32; // dp
-    private static final float STROKE_RADIUS = 10.5f; // dp
-    private static final float BG_RADIUS = 10f; // dp
-    private static final int CONTENT_SIZE = 16; // dp
-    private boolean mChecked;
+    //圆框的颜色
+    private int mStrokeWidth; // dp
+    //圆框的尺寸
+    private int mSize; // dp
+    //圆框的颜色
+    private int mStrokeColor;
+    //圆框内填充的颜色
+    private int mbgColor;
+    //选中的颜色
+    private int mCheckedColor;
+    private boolean mChecked = false;
     private Paint mStrokePaint;
     private Paint mBackgroundPaint;
     private Drawable mCheckDrawable;
@@ -28,39 +36,45 @@ public class CheckView extends View implements Checkable {
     private boolean mEnabled = true;
 
     public CheckView(Context context) {
-        super(context);
-        init(context);
+        this(context, null);
     }
 
     public CheckView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
+        this(context, attrs, 0);
     }
 
     public CheckView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(context);
+        init(context, attrs, defStyleAttr);
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // fixed size 48dp x 48dp
-        int sizeSpec = MeasureSpec.makeMeasureSpec(SIZE, MeasureSpec.EXACTLY);
-        super.onMeasure(sizeSpec, sizeSpec);
 
-    }
+    private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.CheckView, defStyleAttr, 0);
+        mSize = ta.getDimensionPixelSize(R.styleable.CheckView_ev_size, LocalDisplay.dp2px(32));
+        mStrokeWidth = ta.getDimensionPixelSize(R.styleable.CheckView_ev_strokeWidth, LocalDisplay.dp2px(2));
+        mStrokeColor = ta.getColor(R.styleable.CheckView_ev_strokeColor, Color.GRAY);
+        mbgColor = ta.getColor(R.styleable.CheckView_ev_bgColor, 0);
+        mCheckedColor = ta.getColor(R.styleable.CheckView_ev_checkedColor, Color.GREEN);
+        ta.recycle();
 
-    private void init(Context context) {
         mStrokePaint = new Paint();
         mStrokePaint.setAntiAlias(true);
         mStrokePaint.setStyle(Paint.Style.STROKE);
         mStrokePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_OVER));
-        mStrokePaint.setStrokeWidth(STROKE_WIDTH);
-        int color = 1;//ta.getColor(0, defaultColor);
-        mStrokePaint.setColor(color);
-
+        mStrokePaint.setStrokeWidth(mStrokeWidth);
+        mStrokePaint.setColor(mStrokeColor);
         mCheckDrawable = ResourcesCompat.getDrawable(context.getResources(),
                 R.drawable.ic_check_white_18dp, context.getTheme());
+
+        mBackgroundPaint = new Paint();
+        mBackgroundPaint.setAntiAlias(true);
+        mBackgroundPaint.setStyle(Paint.Style.FILL);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        setMeasuredDimension(mSize + mStrokeWidth * 2 + getPaddingLeft() + getPaddingRight(), mSize + mStrokeWidth * 2 + getPaddingTop() + getPaddingBottom());
     }
 
     @Override
@@ -90,40 +104,37 @@ public class CheckView extends View implements Checkable {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        // draw white stroke
-        canvas.drawCircle((float) SIZE / 2, (float) SIZE / 2,
-                STROKE_RADIUS, mStrokePaint);
         if (mChecked) {
-            initBackgroundPaint();
-            canvas.drawCircle((float) SIZE / 2, (float) SIZE / 2,
-                    BG_RADIUS, mBackgroundPaint);
+            mBackgroundPaint.setColor(mCheckedColor);
+            canvas.drawCircle(getPaddingLeft() + mStrokeWidth + mSize / 2,
+                    getPaddingTop() + mStrokeWidth + mSize / 2,
+                    mStrokeWidth + mSize / 2, mBackgroundPaint);
 
             mCheckDrawable.setBounds(getCheckRect());
             mCheckDrawable.draw(canvas);
+        } else {
+            // draw white stroke
+            canvas.drawCircle(getPaddingLeft() + mStrokeWidth + mSize / 2,
+                    getPaddingTop() + mStrokeWidth + mSize / 2,
+                    mStrokeWidth + mSize / 2, mStrokePaint);
+
+            mBackgroundPaint.setColor(mbgColor);
+            canvas.drawCircle(getPaddingLeft() + mStrokeWidth + mSize / 2,
+                    getPaddingTop() + mStrokeWidth + mSize / 2,
+                    mSize / 2, mBackgroundPaint);
+
         }
         // enable hint
         setAlpha(mEnabled ? 1.0f : 0.5f);
     }
 
-    private void initBackgroundPaint() {
-        if (mBackgroundPaint == null) {
-            mBackgroundPaint = new Paint();
-            mBackgroundPaint.setAntiAlias(true);
-            mBackgroundPaint.setStyle(Paint.Style.FILL);
-            int color = 1;// ta.getColor(0, defaultColor);
-            mBackgroundPaint.setColor(color);
-        }
-    }
 
     // rect for drawing checked number or mark
     private Rect getCheckRect() {
         if (mCheckRect == null) {
-            int rectPadding = (SIZE / 2 - CONTENT_SIZE / 2);
-            mCheckRect = new Rect(rectPadding, rectPadding,
-                    (SIZE - rectPadding), (SIZE - rectPadding));
+            mCheckRect = new Rect(getPaddingLeft(), getPaddingTop(),
+                    mSize + mStrokeWidth, mSize + mStrokeWidth);
         }
-
         return mCheckRect;
     }
 }

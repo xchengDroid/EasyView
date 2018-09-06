@@ -283,4 +283,11 @@
         <attr name="android:textSize" />
         <attr name="android:textColor" />
     </declare-styleable>
+    <declare-styleable name="CheckView">
+        <attr name="ev_strokeColor" format="color" />
+        <attr name="ev_bgColor" format="color" />
+        <attr name="ev_checkedColor" format="color" />
+        <attr name="ev_size" format="dimension" />
+        <attr name="ev_strokeWidth" format="dimension" />
+    </declare-styleable>
 </resources>
