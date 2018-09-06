@@ -108,7 +108,7 @@ public class CheckView extends View implements Checkable {
             mBackgroundPaint.setColor(mCheckedColor);
             canvas.drawCircle(getPaddingLeft() + mStrokeWidth + mSize / 2,
                     getPaddingTop() + mStrokeWidth + mSize / 2,
-                    (mStrokeWidth + mSize) / 2, mBackgroundPaint);
+                    mStrokeWidth + mSize / 2, mBackgroundPaint);
 
             mCheckDrawable.setBounds(getCheckRect());
             mCheckDrawable.draw(canvas);
@@ -132,8 +132,8 @@ public class CheckView extends View implements Checkable {
     // rect for drawing checked number or mark
     private Rect getCheckRect() {
         if (mCheckRect == null) {
-            mCheckRect = new Rect(getPaddingLeft(), getPaddingTop(),
-                    mSize + 2 * mStrokeWidth, mSize + 2 * mStrokeWidth);
+            mCheckRect = new Rect(getPaddingLeft() + mStrokeWidth, getPaddingTop() + mStrokeWidth,
+                    mSize, mSize);
         }
         return mCheckRect;
     }
