@@ -8,9 +8,11 @@ import android.os.Parcelable;
 import android.support.annotation.CheckResult;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.xcheng.view.EasyView;
+import com.xcheng.view.util.KeyboardHelper;
 import com.xcheng.view.util.Router;
 
 import java.io.Serializable;
@@ -57,6 +59,27 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
     public void onClick(View v) {
         // TODO Auto-generated method stub
 
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (isHideKeyboardIfTouchOutSide()) {
+            switch (ev.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    View view = getCurrentFocus();
+                    if (KeyboardHelper.isHideInput(view, ev)) {
+                        KeyboardHelper.hide(view);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
+    protected boolean isHideKeyboardIfTouchOutSide() {
+        return false;
     }
 
     /**
