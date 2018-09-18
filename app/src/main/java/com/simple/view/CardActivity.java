@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.xcheng.view.controller.EasyActivity;
+import com.xcheng.view.widget.CheckView;
 import com.xcheng.view.widget.CommonView;
 import com.xcheng.view.widget.ProgressView;
 
@@ -39,6 +40,20 @@ public class CardActivity extends EasyActivity {
             @Override
             public String generateText(ProgressView progressBar, int value, int maxValue) {
                 return "测试text";
+            }
+        });
+        final CheckView checkView=findViewById(R.id.tv_uncheck);
+        checkView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkView.toggle();
+            }
+        });
+        final CheckView checkView1=findViewById(R.id.tv_uncheck1);
+        checkView1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkView1.toggle();
             }
         });
     }

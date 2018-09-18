@@ -7,6 +7,7 @@
     android:padding="16dp">
 
     <com.xcheng.view.widget.CheckView
+        android:id="@+id/tv_uncheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:ev_size="28dp"
@@ -14,22 +15,22 @@
         app:ev_strokeWidth="4dp" />
 
     <com.xcheng.view.widget.CheckView
-        android:background="@color/ev_red_error"
+        android:id="@+id/tv_uncheck1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:paddingLeft="30dp"
         app:ev_size="38dp"
         app:ev_strokeColor="@color/colorAccent"
         app:ev_strokeWidth="30dp" />
+
     <com.xcheng.view.widget.CheckView
-        android:background="@color/ev_red_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
         app:ev_size="38dp"
         app:ev_strokeColor="@color/colorAccent"
         app:ev_strokeWidth="4dp" />
+
     <com.xcheng.view.widget.CheckView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
