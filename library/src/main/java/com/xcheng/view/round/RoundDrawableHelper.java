@@ -69,12 +69,15 @@ public class RoundDrawableHelper {
     public void loadAttributeSet(Context context, AttributeSet attrs, int defStyleAttr) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.RoundButton, defStyleAttr, 0);
         mFillColor = typedArray.getColor(R.styleable.RoundButton_ev_fillColor, 0);
-        mFillColorPressed = typedArray.getColor(R.styleable.RoundButton_ev_fillColorPressed, ColorUtil.pressed(mFillColor));
-        mFillColorDisable = typedArray.getColor(R.styleable.RoundButton_ev_fillColorDisable, ColorUtil.disabled(mFillColor));
-
+        mFillColorPressed = typedArray.getColor(R.styleable.RoundButton_ev_fillColorPressed,
+                mFillColor == 0 ? 0 : ColorUtil.pressed(mFillColor));
+        mFillColorDisable = typedArray.getColor(R.styleable.RoundButton_ev_fillColorDisable,
+                mFillColor == 0 ? 0 : ColorUtil.disabled(mFillColor));
         mBorderColor = typedArray.getColor(R.styleable.RoundButton_ev_borderColor, 0);
-        mBorderColorPressed = typedArray.getColor(R.styleable.RoundButton_ev_borderColorPressed, ColorUtil.pressed(mBorderColor));
-        mBorderColorDisable = typedArray.getColor(R.styleable.RoundButton_ev_borderColorDisable, ColorUtil.disabled(mBorderColor));
+        mBorderColorPressed = typedArray.getColor(R.styleable.RoundButton_ev_borderColorPressed,
+                mBorderColor == 0 ? 0 : ColorUtil.pressed(mBorderColor));
+        mBorderColorDisable = typedArray.getColor(R.styleable.RoundButton_ev_borderColorDisable,
+                mBorderColor == 0 ? 0 : ColorUtil.disabled(mBorderColor));
         mBorderWidth = typedArray.getDimensionPixelSize(R.styleable.RoundButton_ev_borderWidth, 0);
         mRadiusAdjustBounds = typedArray.getBoolean(R.styleable.RoundButton_ev_isRadiusAdjustBounds, true);
         mHasState = typedArray.getBoolean(R.styleable.RoundButton_ev_hasState,
