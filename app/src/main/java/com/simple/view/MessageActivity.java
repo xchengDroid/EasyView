@@ -17,6 +17,7 @@ public class MessageActivity extends EasyActivity {
         Toasty.Config.getInstance().setWarningColor(Color.RED).apply();
         Toasty.info(this, "测试一般信息", 1, false).show();
         EasyView.success("登录成功");
+        findViewById(R.id.tv_uncheck).setEnabled(true);
     }
 
     @Override

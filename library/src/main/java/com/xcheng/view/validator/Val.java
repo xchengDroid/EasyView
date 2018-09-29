@@ -20,14 +20,14 @@ public @interface Val {
     //最小长度
     int max() default Integer.MAX_VALUE;
 
-    //最大程度
+    //顺序
     int order() default -1;
 
     int messageResId() default -1;
 
     String message() default "This field is required";
 
-    String schene() default "ANY";
+    Scheme scheme() default Scheme.ANY;
 
     enum Scheme {
         ANY, ALPHA, ALPHA_MIXED_CASE,

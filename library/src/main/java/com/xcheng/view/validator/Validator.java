@@ -1,8 +1,5 @@
 package com.xcheng.view.validator;
 
-import android.util.Pair;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +10,7 @@ import java.util.List;
  */
 public class Validator {
     private Object mController;
-    private final List<Pair<TextView, Val>> mViewValsCache = new ArrayList<>();
+    private final List<Passer> mPassersCache = new ArrayList<>();
     // true will validate all View
     private boolean mImmediate;
 
