@@ -5,7 +5,7 @@ import android.widget.TextView;
 /**
  * 创建时间：2018/9/29
  * 编写人： chengxin
- * 功能描述：
+ * 功能描述： 保存View和注解
  */
 public class Passer {
     public final TextView textView;

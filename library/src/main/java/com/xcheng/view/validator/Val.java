@@ -14,13 +14,19 @@ import java.lang.annotation.Target;
 public @interface Val {
     String name() default "";
 
-    //最小长度
+    /**
+     * 最小长度
+     */
     int min() default 1;
 
-    //最小长度
+    /**
+     * 最大长度
+     */
     int max() default Integer.MAX_VALUE;
 
-    //顺序
+    /**
+     * 验证顺序
+     */
     int order() default -1;
 
     int messageResId() default -1;
