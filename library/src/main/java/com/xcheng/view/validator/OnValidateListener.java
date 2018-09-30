@@ -10,12 +10,12 @@ public interface OnValidateListener {
     void onValidateSucceeded(List<Passer> passers);
 
     /**
-     * 验证为空
+     * 验证为空 true代表成功
      */
     boolean isNotEmpty(Passer passer);
 
     /**
-     * 验证 true代表成功
+     * 验证规则 true代表成功
      */
     boolean isValidRule(Passer passer);
 }
