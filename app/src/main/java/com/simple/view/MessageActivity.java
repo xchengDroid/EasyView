@@ -18,7 +18,7 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 
 public class MessageActivity extends EasyActivity {
-    @Val(label = "用户名", order = 3, min = -1)
+    @Val(labelResId = -1, order = 1)
     EditText loginName;
     @Val(label = "密码", order = 2, min = 3)
     EditText password;
@@ -48,20 +48,12 @@ public class MessageActivity extends EasyActivity {
             }
 
             @Override
-            public boolean isNotEmpty(Passer passer) {
-                Log.e("print", "isNotEmpty:" + passer.label() + "====" + passer.getText());
-
-                if (passer.isEmpty(true)) {
+            public boolean isValidRule(Passer passer) {
+                Log.e("print", "isValidRule:" + passer.label() + "====" + passer.getText());
+                if (passer.isEmpty()) {
                     Toasty.warning(getContext(), passer.label() + "不能为空").show();
                     return false;
                 }
-                return true;
-            }
-
-            @Override
-            public boolean isValidRule(Passer passer) {
-                Log.e("print", "isValidRule:" + passer.label() + "====" + passer.getText());
-
                 if (passer.isLessThanMin()) {
                     Toasty.warning(getContext(), passer.label() + "长度不能小于" + passer.min()).show();
                     return false;

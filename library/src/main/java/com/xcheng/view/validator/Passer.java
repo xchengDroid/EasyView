@@ -33,7 +33,7 @@ public class Passer {
     public String label() {
         int labelResId = val.labelResId();
         return labelResId != -1 ?
-                textView.getResources().getString(val.labelResId())
+                textView.getResources().getString(labelResId)
                 : val.label();
     }
 
