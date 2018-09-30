@@ -18,15 +18,12 @@ public class Passer {
     }
 
     public String getText() {
-        return textView.getText().toString();
-    }
-
-    public boolean isEmpty(boolean trim) {
-        return TextUtils.isEmpty(getText());
+        String text = textView.getText().toString();
+        return val.trim() ? text.trim() : text;
     }
 
     public boolean isEmpty() {
-        return isEmpty(true);
+        return min() > 0 && TextUtils.isEmpty(getText());
     }
 
     public boolean isLessThanMin() {
@@ -34,7 +31,10 @@ public class Passer {
     }
 
     public String label() {
-        return val.label();
+        int labelResId = val.labelResId();
+        return labelResId != -1 ?
+                textView.getResources().getString(val.labelResId())
+                : val.label();
     }
 
     public String key() {

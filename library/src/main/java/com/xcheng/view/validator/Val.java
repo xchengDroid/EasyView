@@ -1,5 +1,7 @@
 package com.xcheng.view.validator;
 
+import android.support.annotation.StringRes;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -17,6 +19,14 @@ public @interface Val {
      * 如用户名 密码等 用于拼装错误信息
      */
     String label() default "";
+
+    @StringRes
+    int labelResId() default -1;
+
+    /**
+     * 是否需要去除空格
+     */
+    boolean trim() default false;
 
     /**
      * 如 loginName password 等用于http提交保存等

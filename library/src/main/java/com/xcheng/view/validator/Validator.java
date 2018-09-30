@@ -36,12 +36,6 @@ public class Validator {
         Preconditions.checkNotNull(mOnValidateListener);
         boolean hasFailed = false;
         for (Passer passer : mPassersCache) {
-            if (passer.min() > 0 && !mOnValidateListener.isNotEmpty(passer)) {
-                hasFailed = true;
-                if (!isAll) {
-                    break;
-                }
-            }
             if (!mOnValidateListener.isValidRule(passer)) {
                 hasFailed = true;
                 if (!isAll) {
