@@ -55,6 +55,26 @@ public class Validator {
         }
     }
 
+    public Passer findPasserByKey(String key) {
+        createPassersAndLazily();
+        for (Passer passer : mPassersCache) {
+            if (passer.key().equals(key)) {
+                return passer;
+            }
+        }
+        return null;
+    }
+
+    public Passer findPasserByOrder(int order) {
+        createPassersAndLazily();
+        for (Passer passer : mPassersCache) {
+            if (passer.order() == order) {
+                return passer;
+            }
+        }
+        return null;
+    }
+
     private void createPassersAndLazily() {
         if (mPassersCache == null) {
             mPassersCache = getValAnnotatedFields(mController.getClass());

@@ -44,4 +44,8 @@ public class Passer {
     public int min() {
         return val.min();
     }
+
+    public int order() {
+        return val.order();
+    }
 }
