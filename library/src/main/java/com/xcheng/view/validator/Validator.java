@@ -2,6 +2,8 @@ package com.xcheng.view.validator;
 
 import android.widget.TextView;
 
+import com.xcheng.view.util.Preconditions;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +12,7 @@ import java.util.List;
 /**
  * 创建时间：2018/9/29
  * 编写人： chengxin
- * 功能描述：
+ * 功能描述：验证表单信息
  */
 public class Validator {
     private Object mController;
@@ -31,6 +33,25 @@ public class Validator {
 
     public void validate(boolean isAll) {
         createPassersAndLazily();
+        Preconditions.checkNotNull(mOnValidateListener);
+        boolean hasFailed = false;
+        for (Passer passer : mPassersCache) {
+            if (!mOnValidateListener.isNotEmpty(passer)) {
+                hasFailed = true;
+                if (!isAll) {
+                    break;
+                }
+            }
+            if (!mOnValidateListener.isValidRule(passer)) {
+                hasFailed = true;
+                if (!isAll) {
+                    break;
+                }
+            }
+        }
+        if (!hasFailed) {
+            mOnValidateListener.onValidateSucceeded(mPassersCache);
+        }
     }
 
     private void createPassersAndLazily() {
