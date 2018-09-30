@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 public @interface Val {
 
     /**
-     * 如用户名 密码等
+     * 如用户名 密码等 用于拼装错误信息
      */
     String label() default "";
 
