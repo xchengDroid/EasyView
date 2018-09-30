@@ -52,7 +52,7 @@ public class Validator {
     public Passer findPasserByKey(String key) {
         createPassersAndLazily();
         for (Passer passer : mPassersCache) {
-            if (passer.key().equals(key)) {
+            if (passer.key.equals(key)) {
                 return passer;
             }
         }
@@ -62,7 +62,7 @@ public class Validator {
     public Passer findPasserByOrder(int order) {
         createPassersAndLazily();
         for (Passer passer : mPassersCache) {
-            if (passer.order() == order) {
+            if (passer.order == order) {
                 return passer;
             }
         }

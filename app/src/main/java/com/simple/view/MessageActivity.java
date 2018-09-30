@@ -44,18 +44,17 @@ public class MessageActivity extends EasyActivity {
             @Override
             public void onValidateSucceeded(List<Passer> passers) {
                 Log.e("print", "onValidateSucceeded:");
-
             }
 
             @Override
             public boolean isValidRule(Passer passer) {
-                Log.e("print", "isValidRule:" + passer.label() + "====" + passer.getText());
+                Log.e("print", "isValidRule:" + passer.label + "====" + passer.getText());
                 if (passer.isEmpty()) {
-                    Toasty.warning(getContext(), passer.label() + "不能为空").show();
+                    Toasty.warning(getContext(), passer.label + "不能为空").show();
                     return false;
                 }
                 if (passer.isLessThanMin()) {
-                    Toasty.warning(getContext(), passer.label() + "长度不能小于" + passer.min()).show();
+                    Toasty.warning(getContext(), passer.label + "长度不能小于" + passer.min).show();
                     return false;
                 }
                 return true;

@@ -11,13 +11,20 @@ import android.widget.TextView;
 public class Passer {
     public final TextView textView;
     public final Val val;
-    private String label;
-    private final String fieldName;
+    public final String label;
+    public final int order;
+    public final String key;
+    public final int min;
+    public final String fieldName;
 
     public Passer(TextView textView, Val val, String fieldName) {
         this.textView = textView;
         this.val = val;
         this.fieldName = fieldName;
+        this.order = val.order();
+        this.key = val.key();
+        this.min = val.min();
+        this.label = createLabel();
     }
 
     public String getText() {
@@ -26,36 +33,21 @@ public class Passer {
     }
 
     public boolean isEmpty() {
-        return min() > 0 && TextUtils.isEmpty(getText());
+        return min > 0 && TextUtils.isEmpty(getText());
     }
 
     public boolean isLessThanMin() {
-        return getText().length() < min();
+        return getText().length() < min;
     }
 
-    //lazy
-    public String label() {
-        if (label == null) {
-            int labelResId = val.labelResId();
-            label = labelResId != -1 ?
-                    textView.getResources().getString(labelResId)
-                    : val.label();
-            if (TextUtils.isEmpty(label)) {
-                label = fieldName;
-            }
+    private String createLabel() {
+        int labelResId = val.labelResId();
+        String label = labelResId != -1 ?
+                textView.getResources().getString(labelResId)
+                : val.label();
+        if (TextUtils.isEmpty(label)) {
+            label = fieldName;
         }
         return label;
-    }
-
-    public String key() {
-        return val.key();
-    }
-
-    public int min() {
-        return val.min();
-    }
-
-    public int order() {
-        return val.order();
     }
 }
