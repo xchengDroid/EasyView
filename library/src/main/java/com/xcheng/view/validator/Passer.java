@@ -20,9 +20,13 @@ public class Passer {
     public String getText() {
         return textView.getText().toString();
     }
-    
-    public boolean isEmpty() {
+
+    public boolean isEmpty(boolean trim) {
         return TextUtils.isEmpty(getText());
+    }
+
+    public boolean isEmpty() {
+        return isEmpty(true);
     }
 
     public boolean isLessThanMin() {
