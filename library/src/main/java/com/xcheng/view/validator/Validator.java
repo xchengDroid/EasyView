@@ -36,7 +36,7 @@ public class Validator {
         Preconditions.checkNotNull(mOnValidateListener);
         boolean hasFailed = false;
         for (Passer passer : mPassersCache) {
-            if (!mOnValidateListener.isNotEmpty(passer)) {
+            if (passer.min() > 0 && !mOnValidateListener.isNotEmpty(passer)) {
                 hasFailed = true;
                 if (!isAll) {
                     break;
@@ -50,7 +50,8 @@ public class Validator {
             }
         }
         if (!hasFailed) {
-            mOnValidateListener.onValidateSucceeded(mPassersCache);
+            List<Passer> unmodifiedPassers = Collections.unmodifiableList(mPassersCache);
+            mOnValidateListener.onValidateSucceeded(unmodifiedPassers);
         }
     }
 

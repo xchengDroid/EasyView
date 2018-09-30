@@ -30,6 +30,18 @@ public class Passer {
     }
 
     public boolean isLessThanMin() {
-        return getText().length() < val.min();
+        return getText().length() < min();
+    }
+
+    public String label() {
+        return val.label();
+    }
+
+    public String key() {
+        return val.key();
+    }
+
+    public int min() {
+        return val.min();
     }
 }
