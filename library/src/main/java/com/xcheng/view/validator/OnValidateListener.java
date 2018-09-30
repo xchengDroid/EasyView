@@ -3,14 +3,19 @@ package com.xcheng.view.validator;
 import java.util.List;
 
 public interface OnValidateListener {
-    void onValidateSucceeded();
-
 
     /**
-     * @param passer
-     * @return true 代表已经被拦截 无需后续验证，false 表示会被后续验证
+     * 验证成功
      */
-    boolean onValidateInterceptor(Passer passer);
+    void onValidateSucceeded(List<Passer> passers);
 
-    void onValidateFailed(List<Passer> passers);
+    /**
+     * 验证为空
+     */
+    boolean isNotEmpty(Passer passer);
+
+    /**
+     * 验证 true代表成功
+     */
+    boolean isValidRule(Passer passer);
 }

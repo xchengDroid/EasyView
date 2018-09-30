@@ -12,32 +12,24 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Val {
-    String name() default "";
 
     /**
-     * 最小长度
+     * 如用户名 密码等
+     */
+    String label() default "";
+
+    /**
+     * 如 loginName password 等用于http提交保存等
+     */
+    String key() default "";
+
+    /**
+     * 最小长度,为0 表示可以为空
      */
     int min() default 1;
-
-    /**
-     * 最大长度
-     */
-    int max() default Integer.MAX_VALUE;
 
     /**
      * 验证顺序
      */
     int order() default -1;
-
-    int messageResId() default -1;
-
-    String message() default "This field is required";
-
-    Scheme scheme() default Scheme.ANY;
-
-    enum Scheme {
-        ANY, ALPHA, ALPHA_MIXED_CASE,
-        NUMERIC, ALPHA_NUMERIC, ALPHA_NUMERIC_MIXED_CASE,
-        ALPHA_NUMERIC_SYMBOLS, ALPHA_NUMERIC_MIXED_CASE_SYMBOLS
-    }
 }

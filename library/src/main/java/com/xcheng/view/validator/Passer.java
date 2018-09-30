@@ -1,5 +1,6 @@
 package com.xcheng.view.validator;
 
+import android.text.TextUtils;
 import android.widget.TextView;
 
 /**
@@ -19,8 +20,12 @@ public class Passer {
     public String getText() {
         return textView.getText().toString();
     }
+    
+    public boolean isEmpty() {
+        return TextUtils.isEmpty(getText());
+    }
 
-    public int getInt() {
-        return Integer.parseInt(getText());
+    public boolean isLessThanMin() {
+        return getText().length() < val.min();
     }
 }
