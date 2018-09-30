@@ -11,10 +11,13 @@ import android.widget.TextView;
 public class Passer {
     public final TextView textView;
     public final Val val;
+    private String label;
+    private final String fieldName;
 
-    public Passer(TextView textView, Val val) {
+    public Passer(TextView textView, Val val, String fieldName) {
         this.textView = textView;
         this.val = val;
+        this.fieldName = fieldName;
     }
 
     public String getText() {
@@ -30,11 +33,18 @@ public class Passer {
         return getText().length() < min();
     }
 
+    //lazy
     public String label() {
-        int labelResId = val.labelResId();
-        return labelResId != -1 ?
-                textView.getResources().getString(labelResId)
-                : val.label();
+        if (label == null) {
+            int labelResId = val.labelResId();
+            label = labelResId != -1 ?
+                    textView.getResources().getString(labelResId)
+                    : val.label();
+            if (TextUtils.isEmpty(label)) {
+                label = fieldName;
+            }
+        }
+        return label;
     }
 
     public String key() {

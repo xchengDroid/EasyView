@@ -88,7 +88,7 @@ public class Validator {
             if (val == null)
                 continue;
             TextView textView = getView(field);
-            passers.add(new Passer(textView, val));
+            passers.add(new Passer(textView, val, field.getName()));
         }
         // Sort
         PassersComparator comparator = new PassersComparator();
