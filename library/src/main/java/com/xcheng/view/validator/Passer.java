@@ -17,7 +17,7 @@ public class Passer {
     public final int min;
     public final String fieldName;
 
-    public Passer(TextView textView, Val val, String fieldName) {
+    Passer(TextView textView, Val val, String fieldName) {
         this.textView = textView;
         this.val = val;
         this.fieldName = fieldName;
