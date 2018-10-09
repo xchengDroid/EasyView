@@ -24,7 +24,6 @@ public @interface Valid {
     @StringRes
     int labelResId() default -1;
 
-
     /**
      * View所包含的TextView的ID
      */
