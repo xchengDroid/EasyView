@@ -75,7 +75,7 @@ public class Validator {
             mPassersCache = getValidAnnotatedFields(mController.getClass());
         }
         if (mPassersCache.size() == 0) {
-            String message = "No Val annotation found. You must have at least one Val annotation to validate.";
+            String message = "No Valid annotation found. You must have at least one Val annotation to validate.";
             throw new IllegalStateException(message);
         }
     }
