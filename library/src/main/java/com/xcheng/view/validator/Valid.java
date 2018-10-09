@@ -1,5 +1,6 @@
 package com.xcheng.view.validator;
 
+import android.support.annotation.IdRes;
 import android.support.annotation.StringRes;
 
 import java.lang.annotation.ElementType;
@@ -22,6 +23,13 @@ public @interface Valid {
 
     @StringRes
     int labelResId() default -1;
+
+
+    /**
+     * @return View所包含的TextView的ID
+     */
+    @IdRes
+    int textViewId() default -1;
 
     /**
      * 是否需要去除空格

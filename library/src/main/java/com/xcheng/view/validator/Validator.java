@@ -1,5 +1,6 @@
 package com.xcheng.view.validator;
 
+import android.view.View;
 import android.widget.TextView;
 
 import com.xcheng.view.util.Preconditions;
@@ -71,7 +72,7 @@ public class Validator {
 
     private void createPassersAndLazily() {
         if (mPassersCache == null) {
-            mPassersCache = getValAnnotatedFields(mController.getClass());
+            mPassersCache = getValidAnnotatedFields(mController.getClass());
         }
         if (mPassersCache.size() == 0) {
             String message = "No Val annotation found. You must have at least one Val annotation to validate.";
@@ -80,16 +81,28 @@ public class Validator {
     }
 
 
-    private List<Passer> getValAnnotatedFields(final Class<?> controllerClass) {
+    private List<Passer> getValidAnnotatedFields(final Class<?> controllerClass) {
         List<Passer> passers = new ArrayList<>();
         List<Field> controllerViewFields = getControllerViewFields(controllerClass);
         for (Field field : controllerViewFields) {
             Valid val = field.getAnnotation(Valid.class);
             if (val == null)
                 continue;
-            TextView textView = getView(field);
+
+            View view = getView(field);
+            //找到对应的TextView
+            /*1、判断当前的view是不是一个TextView;2、判断获取textViewId获取对应的TextView*/
+            TextView textView;
+            if (view instanceof TextView) {
+                textView = (TextView) view;
+            } else if (val.textViewId() != -1) {
+                textView = view.findViewById(val.textViewId());
+            } else {
+                throw new IllegalStateException(field.getName() + " must be a TextView or Valid annotation must have a textViewId.");
+            }
             passers.add(new Passer(textView, val, field.getName()));
         }
+
         // Sort
         PassersComparator comparator = new PassersComparator();
         Collections.sort(passers, comparator);
@@ -117,19 +130,18 @@ public class Validator {
         List<Field> viewFields = new ArrayList<>();
         Field[] declaredFields = clazz.getDeclaredFields();
         for (Field field : declaredFields) {
-            if (TextView.class.isAssignableFrom(field.getType())) {
+            if (View.class.isAssignableFrom(field.getType())) {
                 viewFields.add(field);
             }
         }
         return viewFields;
     }
 
-    private TextView getView(final Field field) {
-        TextView view = null;
+    private View getView(final Field field) {
+        View view = null;
         try {
             field.setAccessible(true);
-            view = (TextView) field.get(mController);
-
+            view = (View) field.get(mController);
             if (view == null) {
                 String message = String.format("'%s %s' is null.",
                         field.getType().getSimpleName(), field.getName());
@@ -140,7 +152,6 @@ public class Validator {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
         return view;
     }
 }
