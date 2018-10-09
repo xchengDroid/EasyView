@@ -13,8 +13,6 @@ import com.xcheng.view.validator.Passer;
 import com.xcheng.view.validator.Val;
 import com.xcheng.view.validator.Validator;
 
-import java.util.List;
-
 import es.dmoral.toasty.Toasty;
 
 public class MessageActivity extends EasyActivity {
@@ -42,8 +40,7 @@ public class MessageActivity extends EasyActivity {
         validator = new Validator(this);
         validator.setOnValidateListener(new OnValidateListener() {
             @Override
-            public void onValidateSucceeded(List<Passer> passers) {
-
+            public void onValidateSucceeded(Passer[] passers) {
             }
 
             @Override

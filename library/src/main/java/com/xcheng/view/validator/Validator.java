@@ -44,8 +44,8 @@ public class Validator {
             }
         }
         if (!hasFailed) {
-            List<Passer> unmodifiedPassers = Collections.unmodifiableList(mPassersCache);
-            mOnValidateListener.onValidateSucceeded(unmodifiedPassers);
+            Passer[] passers = new Passer[mPassersCache.size()];
+            mOnValidateListener.onValidateSucceeded(mPassersCache.toArray(passers));
         }
     }
 
