@@ -18,7 +18,7 @@ import java.util.List;
 import es.dmoral.toasty.Toasty;
 
 public class MessageActivity extends EasyActivity {
-    @Val(labelResId = -1, order = 1)
+    @Val(order = 1)
     EditText loginName;
     @Val(label = "密码", order = 2, min = 3)
     EditText password;
@@ -43,7 +43,7 @@ public class MessageActivity extends EasyActivity {
         validator.setOnValidateListener(new OnValidateListener() {
             @Override
             public void onValidateSucceeded(List<Passer> passers) {
-                Log.e("print", "onValidateSucceeded:");
+
             }
 
             @Override

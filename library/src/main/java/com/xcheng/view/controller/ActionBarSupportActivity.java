@@ -48,7 +48,7 @@ public abstract class ActionBarSupportActivity extends AppCompatActivity {
      * 所以在initView里面执行  mToolbar.inflateMenu后又被清除
      * 故添加是否设置支持ActionBar供子类动态去执行
      */
-    public boolean isSupportActionBar() {
+    protected boolean isSupportActionBar() {
         return true;
     }
 }
