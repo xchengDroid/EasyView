@@ -84,7 +84,7 @@ public class Validator {
         List<Passer> passers = new ArrayList<>();
         List<Field> controllerViewFields = getControllerViewFields(controllerClass);
         for (Field field : controllerViewFields) {
-            Val val = field.getAnnotation(Val.class);
+            Valid val = field.getAnnotation(Valid.class);
             if (val == null)
                 continue;
             TextView textView = getView(field);

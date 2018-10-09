@@ -10,15 +10,15 @@ import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.EasyActivity;
 import com.xcheng.view.validator.OnValidateListener;
 import com.xcheng.view.validator.Passer;
-import com.xcheng.view.validator.Val;
+import com.xcheng.view.validator.Valid;
 import com.xcheng.view.validator.Validator;
 
 import es.dmoral.toasty.Toasty;
 
 public class MessageActivity extends EasyActivity {
-    @Val(order = 1)
+    @Valid(order = 1)
     EditText loginName;
-    @Val(label = "密码", order = 2, min = 3)
+    @Valid(label = "密码", order = 2, min = 3)
     EditText password;
     Validator validator;
 

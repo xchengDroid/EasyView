@@ -10,26 +10,26 @@ import android.widget.TextView;
  */
 public class Passer {
     public final TextView textView;
-    public final Val val;
+    public final Valid valid;
     public final String label;
     public final int order;
     public final String key;
     public final int min;
     public final String fieldName;
 
-    Passer(TextView textView, Val val, String fieldName) {
+    Passer(TextView textView, Valid valid, String fieldName) {
         this.textView = textView;
-        this.val = val;
+        this.valid = valid;
         this.fieldName = fieldName;
-        this.order = val.order();
-        this.key = val.key();
-        this.min = val.min();
+        this.order = valid.order();
+        this.key = valid.key();
+        this.min = valid.min();
         this.label = createLabel();
     }
 
     public String getText() {
         String text = textView.getText().toString();
-        return val.trim() ? text.trim() : text;
+        return valid.trim() ? text.trim() : text;
     }
 
     public boolean isEmpty() {
@@ -41,10 +41,10 @@ public class Passer {
     }
 
     private String createLabel() {
-        int labelResId = val.labelResId();
+        int labelResId = valid.labelResId();
         String label = labelResId != -1 ?
                 textView.getResources().getString(labelResId)
-                : val.label();
+                : valid.label();
         if (TextUtils.isEmpty(label)) {
             label = fieldName;
         }

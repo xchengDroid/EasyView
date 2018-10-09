@@ -13,7 +13,7 @@ import java.lang.annotation.Target;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Val {
+public @interface Valid {
 
     /**
      * 如用户名 密码等 用于拼装错误信息
