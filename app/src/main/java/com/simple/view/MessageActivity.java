@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.EasyActivity;
@@ -21,6 +22,9 @@ public class MessageActivity extends EasyActivity {
     @Valid(label = "密码", order = 2, min = 3)
     EditText password;
     Validator validator;
+    @Valid(label = "名字呢", textViewId = R.id.tvName, min = 20)
+    FrameLayout frameLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class MessageActivity extends EasyActivity {
         });
         loginName = findViewById(R.id.userName);
         password = findViewById(R.id.password);
+        frameLayout = findViewById(R.id.frameLayout);
         validator = new Validator(this);
         validator.setOnValidateListener(new OnValidateListener() {
             @Override

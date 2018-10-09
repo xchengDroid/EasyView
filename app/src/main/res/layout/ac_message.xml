@@ -30,6 +30,7 @@
         app:ev_fillColor="@color/ev_transparent" />
 
     <com.xcheng.view.round.RoundFrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_gravity="center_horizontal"
@@ -44,7 +45,14 @@
         app:ev_radiusBottomLeft="20dp"
         app:ev_radiusBottomRight="30dp"
         app:ev_radiusTopLeft="10dp"
-        app:ev_radiusTopRight="3dp" />
+        app:ev_radiusTopRight="3dp">
+
+        <TextView
+            android:id="@+id/tvName"
+            android:text="123123"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.xcheng.view.round.RoundFrameLayout>
 
     <com.xcheng.view.round.RoundTextView
         android:layout_width="match_parent"

@@ -26,7 +26,7 @@ public @interface Valid {
 
 
     /**
-     * @return View所包含的TextView的ID
+     * View所包含的TextView的ID
      */
     @IdRes
     int textViewId() default -1;
