@@ -90,7 +90,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      *
      * @return
      */
-    public boolean cacheView() {
+    protected boolean cacheView() {
         return true;
     }
 
