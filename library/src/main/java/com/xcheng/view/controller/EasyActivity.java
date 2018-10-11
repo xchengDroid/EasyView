@@ -25,6 +25,13 @@ import java.io.Serializable;
 public abstract class EasyActivity extends ActionBarSupportActivity implements IEasyView {
     public static final String TAG = "EasyActivity";
 
+    private final int mLayoutResId;
+
+    {
+        ViewLayout viewLayout = getClass().getAnnotation(ViewLayout.class);
+        mLayoutResId = viewLayout != null ? viewLayout.value() : 0;
+    }
+
     private Dialog mLoadingDialog;
 
     @Override
@@ -37,6 +44,11 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
             initView(savedInstanceState);
             setListener();
         }
+    }
+
+    @Override
+    public int getLayoutId() {
+        return mLayoutResId;
     }
 
     @Override

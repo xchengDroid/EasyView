@@ -5,20 +5,16 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.xcheng.view.controller.EasyActivity;
+import com.xcheng.view.controller.ViewLayout;
 import com.xcheng.view.widget.CheckView;
 import com.xcheng.view.widget.CommonView;
 import com.xcheng.view.widget.ProgressView;
 
-
+@ViewLayout(R.layout.ac_card)
 public class CardActivity extends EasyActivity {
 
     public CommonView commonView;
     public ProgressView progressView;
-
-    @Override
-    public int getLayoutId() {
-        return R.layout.ac_card;
-    }
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
@@ -42,14 +38,14 @@ public class CardActivity extends EasyActivity {
                 return "测试text";
             }
         });
-        final CheckView checkView=findViewById(R.id.tv_uncheck);
+        final CheckView checkView = findViewById(R.id.tv_uncheck);
         checkView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkView.toggle();
             }
         });
-        final CheckView checkView1=findViewById(R.id.tv_uncheck1);
+        final CheckView checkView1 = findViewById(R.id.tv_uncheck1);
         checkView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -22,6 +22,14 @@ import com.xcheng.view.EasyView;
  */
 public abstract class EasyFragment extends Fragment implements IEasyView {
     public static final String TAG = "EasyFragment";
+
+    private final int mLayoutResId;
+
+    {
+        ViewLayout viewLayout = getClass().getAnnotation(ViewLayout.class);
+        mLayoutResId = viewLayout != null ? viewLayout.value() : 0;
+    }
+
     /**
      * 需要缓存的RootView;
      */
@@ -64,6 +72,11 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
                 }
             }
         });
+    }
+
+    @Override
+    public int getLayoutId() {
+        return mLayoutResId;
     }
 
     @Override
