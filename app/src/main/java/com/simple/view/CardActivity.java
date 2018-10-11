@@ -5,16 +5,19 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.xcheng.view.controller.EasyActivity;
-import com.xcheng.view.controller.ViewLayout;
 import com.xcheng.view.widget.CheckView;
 import com.xcheng.view.widget.CommonView;
 import com.xcheng.view.widget.ProgressView;
 
-@ViewLayout(R.layout.ac_card)
 public class CardActivity extends EasyActivity {
 
     public CommonView commonView;
     public ProgressView progressView;
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.ac_card;
+    }
 
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {

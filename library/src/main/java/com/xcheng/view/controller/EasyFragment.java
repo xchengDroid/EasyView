@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,14 +23,6 @@ import com.xcheng.view.EasyView;
  */
 public abstract class EasyFragment extends Fragment implements IEasyView {
     public static final String TAG = "EasyFragment";
-
-    private final int mLayoutResId;
-
-    {
-        ViewLayout viewLayout = getClass().getAnnotation(ViewLayout.class);
-        mLayoutResId = viewLayout != null ? viewLayout.value() : 0;
-    }
-
     /**
      * 需要缓存的RootView;
      */
@@ -43,7 +36,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         boolean needInflater = !cacheView() || mRootView == null;
         if (needInflater) {
             mRootView = inflater.inflate(getLayoutId(), container, false);
@@ -60,7 +53,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mHasInitView = true;
         //防止在onViewCreate中初始化View，但是在onLazyLoad中需要使用此view导致空指针，故延迟执行
@@ -72,11 +65,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
                 }
             }
         });
-    }
-
-    @Override
-    public int getLayoutId() {
-        return mLayoutResId;
     }
 
     @Override
