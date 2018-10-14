@@ -36,7 +36,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        boolean needInflater = !cacheView() || mRootView == null;
+        boolean needInflater = !isCacheView() || mRootView == null;
         if (needInflater) {
             mRootView = inflater.inflate(getLayoutId(), container, false);
             initData();
@@ -89,7 +89,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      *
      * @return
      */
-    protected boolean cacheView() {
+    public boolean isCacheView() {
         return true;
     }
 
@@ -117,7 +117,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     public void onDestroyView() {
         super.onDestroyView();
         mHasInitView = false;
-        if (!cacheView()) {
+        if (!isCacheView()) {
             mRootView = null;
         }
     }
