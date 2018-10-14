@@ -110,9 +110,9 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mHasInitView = false;
         if (!isCacheView()) {
             mRootView = null;
+            mHasInitView = false;
         }
     }
 
@@ -123,6 +123,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
         hideLoading();
         //页面销毁的时候，防止外部引用Fragment，导致mRootView一直被引用,并且只支持FragmentPagerAdapter的页面缓存
         mRootView = null;
+        mHasInitView = false;
 
     }
 
