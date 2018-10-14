@@ -22,7 +22,6 @@ import com.xcheng.view.EasyView;
  * @author xincheng @date:2014-8-4
  */
 public abstract class EasyFragment extends Fragment implements IEasyView {
-    public static final String TAG = "EasyFragment";
     /**
      * 需要缓存的RootView;
      */
