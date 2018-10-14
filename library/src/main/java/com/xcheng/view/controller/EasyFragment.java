@@ -26,11 +26,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      * 需要缓存的RootView;
      */
     private View mRootView;
-    /**
-     * view是否已经初始化
-     */
-    private boolean mHasInitView;
-
     private Dialog mLoadingDialog;
 
     @Nullable
@@ -54,7 +49,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mHasInitView = true;
         if (canLazyLoad()) {
             onLazyLoad();
         }
@@ -96,7 +90,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      * @return true 视图已经初始化并对用户可见，满足此条件才会调用{@link #onLazyLoad()}
      */
     protected boolean canLazyLoad() {
-        return mHasInitView && getUserVisibleHint();
+        return getView() != null && getUserVisibleHint();
     }
 
     @Override
@@ -112,7 +106,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
         super.onDestroyView();
         if (!isCacheView()) {
             mRootView = null;
-            mHasInitView = false;
         }
     }
 
@@ -123,8 +116,6 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
         hideLoading();
         //页面销毁的时候，防止外部引用Fragment，导致mRootView一直被引用,并且只支持FragmentPagerAdapter的页面缓存
         mRootView = null;
-        mHasInitView = false;
-
     }
 
     public <T extends View> T findViewById(@IdRes int id) {
