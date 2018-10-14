@@ -55,15 +55,9 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mHasInitView = true;
-        //防止在onViewCreate中初始化View，但是在onLazyLoad中需要使用此view导致空指针，故延迟执行
-        EasyView.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (canLazyLoad()) {
-                    onLazyLoad();
-                }
-            }
-        });
+        if (canLazyLoad()) {
+            onLazyLoad();
+        }
     }
 
     @Override
