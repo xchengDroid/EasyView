@@ -93,9 +93,9 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
     }
 
     /**
-     * @return true 视图已经初始化并对用户可见
+     * @return true 视图已经初始化并对用户可见，满足此条件才会调用{@link #onLazyLoad()}
      */
-    private boolean canLazyLoad() {
+    protected boolean canLazyLoad() {
         return mHasInitView && getUserVisibleHint();
     }
 
