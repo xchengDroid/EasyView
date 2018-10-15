@@ -1,11 +1,14 @@
 package com.xcheng.view;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.util.Log;
 
+import com.xcheng.view.controller.dialog.LoadingDialog;
 import com.xcheng.view.util.LocalDisplay;
 import com.xcheng.view.util.Preconditions;
 
@@ -16,16 +19,45 @@ import com.xcheng.view.util.Preconditions;
 public class EasyView {
     static String TAG = EasyView.class.getName();
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
-    private static Config sConfig;
-
-    public synchronized static void init(Config config) {
-        Preconditions.checkNotNull(config, "config==null");
-        if (sConfig == null) {
-            sConfig = config;
-            LocalDisplay.init(getContext());
-        } else {
-            Log.e(TAG, "sConfig has already been init");
+    // by default
+    public static DialogFactory FACTORY = new DialogFactory() {
+        @NonNull
+        @Override
+        public Dialog create(Context context, String fromClazz) {
+            return new LoadingDialog(context);
         }
+    };
+
+    public static MsgDispatcher DISPATCHER = new MsgDispatcher() {
+        static final String TAG = "Msg";
+
+        @Override
+        public void onError(CharSequence msg) {
+            Log.e(TAG, msg.toString());
+        }
+
+        @Override
+        public void onWarning(CharSequence msg) {
+            Log.w(TAG, msg.toString());
+        }
+
+        @Override
+        public void onSuccess(CharSequence msg) {
+            Log.d(TAG, msg.toString());
+        }
+
+        @Override
+        public void onInfo(CharSequence msg) {
+            Log.d(TAG, msg.toString());
+        }
+    };
+
+    private static Context appContext;
+
+    public static void init(Context context) {
+        Preconditions.checkNotNull(context, "context==null");
+        appContext = context.getApplicationContext();
+        LocalDisplay.init(getContext());
     }
 
     /**
@@ -34,15 +66,11 @@ public class EasyView {
      * @return applicationContext 对象
      */
     public static Context getContext() {
-        return sConfig.context();
-    }
-
-    public static Config getConfig() {
-        return sConfig;
+        return appContext;
     }
 
     public static String getString(@StringRes int stringId) {
-        return getContext().getString(stringId);
+        return appContext.getString(stringId);
     }
 
     /**
@@ -61,7 +89,7 @@ public class EasyView {
 
     public static void error(final CharSequence msg) {
         if (isOnMainThread()) {
-            sConfig.dispatcher().onError(msg);
+            DISPATCHER.onError(msg);
         } else {
             runOnUiThread(new Runnable() {
                 @Override
@@ -74,7 +102,7 @@ public class EasyView {
 
     public static void warning(final CharSequence msg) {
         if (isOnMainThread()) {
-            sConfig.dispatcher().onWarning(msg);
+            DISPATCHER.onWarning(msg);
         } else {
             runOnUiThread(new Runnable() {
                 @Override
@@ -87,7 +115,7 @@ public class EasyView {
 
     public static void info(final CharSequence msg) {
         if (isOnMainThread()) {
-            sConfig.dispatcher().onInfo(msg);
+            DISPATCHER.onInfo(msg);
         } else {
             runOnUiThread(new Runnable() {
                 @Override
@@ -100,7 +128,7 @@ public class EasyView {
 
     public static void success(final CharSequence msg) {
         if (isOnMainThread()) {
-            sConfig.dispatcher().onSuccess(msg);
+            DISPATCHER.onSuccess(msg);
         } else {
             runOnUiThread(new Runnable() {
                 @Override
@@ -109,5 +137,34 @@ public class EasyView {
                 }
             });
         }
+    }
+
+    /**
+     * 创建LoadingDialog的工厂类
+     */
+    public interface DialogFactory {
+        /**
+         * 为每隔需要记载的页面创建Dialog
+         *
+         * @param context   当前的Context对象
+         * @param fromClazz 哪个页面需要创建
+         * @return 加载的Dialog对象
+         */
+        @NonNull
+        Dialog create(Context context, String fromClazz);
+    }
+
+    /**
+     * 全局的消息分发
+     */
+    public interface MsgDispatcher {
+
+        void onError(CharSequence msg);
+
+        void onWarning(CharSequence msg);
+
+        void onSuccess(CharSequence msg);
+
+        void onInfo(CharSequence msg);
     }
 }

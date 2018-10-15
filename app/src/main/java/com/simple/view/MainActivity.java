@@ -16,7 +16,6 @@ import com.scwang.smartrefresh.layout.api.RefreshHeader;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
-import com.xcheng.view.Config;
 import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
 import com.xcheng.view.util.Router;
@@ -41,30 +40,7 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EasyView.init(new Config.Builder(this)
-                .dispatcher(new Config.MsgDispatcher() {
-                    @Override
-                    public void onError(CharSequence msg) {
-                        Log.e("print", "onError:" + msg);
-                    }
-
-                    @Override
-                    public void onWarning(CharSequence msg) {
-                        Log.e("print", "onWarning:" + msg);
-                    }
-
-                    @Override
-                    public void onSuccess(CharSequence msg) {
-                        Log.e("print", "onSuccess:" + msg);
-                    }
-
-                    @Override
-                    public void onInfo(CharSequence msg) {
-                        Log.e("print", "onInfo:" + msg);
-
-                    }
-                })
-                .build());
+        EasyView.init(this);
         String[] items = getResources().getStringArray(R.array.sample_list);
 
         ArrayAdapter<String> adapter =

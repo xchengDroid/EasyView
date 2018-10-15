@@ -138,7 +138,7 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
 
     public void showLoading() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = EasyView.getConfig().factory().create(getContext(), getClass().getName());
+            mLoadingDialog = EasyView.FACTORY.create(getContext(), getClass().getName());
         }
         mLoadingDialog.show();
     }

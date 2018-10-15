@@ -122,7 +122,7 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     public void showLoading() {
         if (mLoadingDialog == null) {
-            mLoadingDialog = EasyView.getConfig().factory().create(this, getClass().getName());
+            mLoadingDialog = EasyView.FACTORY.create(this, getClass().getName());
         }
         mLoadingDialog.show();
     }
