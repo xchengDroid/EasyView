@@ -57,7 +57,7 @@ public class EasyView {
     public static void init(Context context) {
         Preconditions.checkNotNull(context, "context==null");
         appContext = context.getApplicationContext();
-        LocalDisplay.init(getContext());
+        LocalDisplay.init(appContext);
     }
 
     /**
