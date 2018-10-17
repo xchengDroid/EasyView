@@ -18,7 +18,7 @@ public interface IPullRefreshView<T> {
     void requestData(boolean isRefresh);
 
     @UiThread
-    void refreshView(boolean isRefresh, List<T> data);
+    void refreshView(boolean isRefresh, List<? extends T> data);
 
     /**
      * @param isRefresh  是否为刷新

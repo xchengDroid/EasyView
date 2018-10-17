@@ -129,7 +129,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     }
 
     @Override
-    public void refreshView(boolean isRefresh, List<T> data) {
+    public void refreshView(boolean isRefresh, List<? extends T> data) {
         if (isRefresh) {
             mAdapter.refresh(data);
         } else {
