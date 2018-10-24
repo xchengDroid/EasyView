@@ -10,11 +10,11 @@ import android.view.WindowManager;
  */
 public class LocalDisplay {
 
-    private static int WIDTH_PIXEL;
-    private static int HEIGHT_PIXEL;
-    private static float DENSITY;
-    private static int WIDTH_DP;
-    private static int HEIGHT_DP;
+    public static int WIDTH_PIXEL;
+    public static int HEIGHT_PIXEL;
+    public static float DENSITY;
+    public static int WIDTH_DP;
+    public static int HEIGHT_DP;
     //default false volatile 保证同步刷新到内存即可见性
     private static volatile boolean sInitialized;
 
@@ -32,41 +32,6 @@ public class LocalDisplay {
         WIDTH_DP = (int) (WIDTH_PIXEL / DENSITY);
         HEIGHT_DP = (int) (HEIGHT_PIXEL / DENSITY);
         sInitialized = true;
-    }
-
-    /**
-     * 获取屏幕较窄的一边
-     *
-     * @return WIDTH_PIXEL
-     */
-    public static int widthPixel() {
-        checkInit();
-        return WIDTH_PIXEL;
-    }
-
-    /**
-     * 获取屏幕较宽的一边
-     *
-     * @return HEIGHT_PIXEL
-     */
-    public static int heightPixel() {
-        checkInit();
-        return HEIGHT_PIXEL;
-    }
-
-    public static int widthDp() {
-        checkInit();
-        return WIDTH_DP;
-    }
-
-    public static int heightDp() {
-        checkInit();
-        return HEIGHT_DP;
-    }
-
-    public static float density() {
-        checkInit();
-        return DENSITY;
     }
 
     /**

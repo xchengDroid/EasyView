@@ -23,7 +23,7 @@ public abstract class BottomDialog extends EasyDialog {
     protected void initLocation() {
         super.initLocation();
         getWindow().setGravity(Gravity.BOTTOM);
-        getWindow().setLayout(LocalDisplay.widthPixel(), WindowManager.LayoutParams.WRAP_CONTENT);
+        getWindow().setLayout(LocalDisplay.WIDTH_PIXEL, WindowManager.LayoutParams.WRAP_CONTENT);
 //        WindowManager m = getWindow().getWindowManager();
 //        Display d = m.getDefaultDisplay();
 //        WindowManager.LayoutParams p = getWindow().getAttributes();
