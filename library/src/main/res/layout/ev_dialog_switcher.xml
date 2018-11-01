@@ -36,6 +36,5 @@
         android:textColor="@color/ev_white"
         android:textSize="20sp"
         app:ev_fillColor="@color/ev_blue_normal"
-        app:ev_hasState="true"
         app:ev_radius="5dp" />
 </com.xcheng.view.round.RoundLinearLayout>
