@@ -18,13 +18,21 @@
         android:hint="密码" />
 
     <com.xcheng.view.round.RoundButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"
+        android:text="测试默认显示" />
+
+    <com.xcheng.view.round.RoundButton
         android:id="@+id/tv_uncheck"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
         android:padding="10dp"
-        android:text="123213"
+        android:text="12321"
         app:ev_borderColor="@color/ev_green"
         app:ev_borderWidth="15dp"
         app:ev_fillColor="@color/ev_transparent" />
@@ -49,9 +57,9 @@
 
         <TextView
             android:id="@+id/tvName"
-            android:text="123123"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="123123" />
     </com.xcheng.view.round.RoundFrameLayout>
 
     <com.xcheng.view.round.RoundTextView

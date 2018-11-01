@@ -4,8 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.xcheng.view.R;
-
 /**
  * 创建时间：2018/7/20
  * 编写人： chengxin
@@ -18,13 +16,9 @@ public class RoundLinearLayout extends LinearLayout {
     }
 
     public RoundLinearLayout(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.EVRoundButtonStyle);
-    }
-
-    public RoundLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(context, attrs);
         RoundDrawableHelper roundDrawableHelper = new RoundDrawableHelper(this);
-        roundDrawableHelper.loadAttributeSet(context, attrs, defStyleAttr);
+        roundDrawableHelper.loadAttributeSet(context, attrs, 0);
         roundDrawableHelper.setRoundDrawable();
     }
 }

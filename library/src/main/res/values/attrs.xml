@@ -155,7 +155,7 @@
 
     <!--圆角实现开始===================================================-->
     <!--默认主题中的样式-->
-    <attr name="EVRoundButtonStyle" format="reference" />
+    <!--<attr name="EVRoundButtonStyle" format="reference" />-->
 
     <attr name="ev_fillColor" format="color" />
     <attr name="ev_fillColorPressed" format="color" />

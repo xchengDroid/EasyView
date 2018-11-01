@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="ev_Translucent_NoTitle" parent="android:style/Theme.Dialog">
         <item name="android:background">@android:color/transparent</item> <!-- 设置自定义布局的背景透明 -->
@@ -25,29 +25,29 @@
         <item name="android:windowEnterAnimation">@anim/ev_dialog_bottom_enter</item>
         <item name="android:windowExitAnimation">@anim/ev_dialog_bottom_exit</item>
     </style>
-    <!--********************* Button *********************-->
-    <style name="EV.RoundButton" parent="android:Widget.Holo.Light.Button">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <!--<item name="android:padding">0dp</item>--><!-- 不用 android:padding，而用各个方向分别指定 padding，方便子类覆盖 -->
-        <item name="android:paddingLeft">0dp</item>
-        <item name="android:paddingRight">0dp</item>
-        <item name="android:paddingTop">0dp</item>
-        <item name="android:paddingBottom">0dp</item>
-        <item name="android:minWidth">0dp</item>
-        <item name="android:minHeight">0dp</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:gravity">center</item>
-        <item name="android:ellipsize">end</item>
-        <item name="ev_isRadiusAdjustBounds">true</item>
-        <item name="ev_fillColor">#00000000</item>
-        <item name="ev_borderWidth">1dp</item>
-        <item name="ev_borderColor">#1B88EE</item>
-        <item name="android:textColor">#1B88EE</item>
-        <!-- 去掉5.0上Button点击的阴影动画效果 -->
-        <item name="android:stateListAnimator" tools:ignore="NewApi">@null</item>
-        <!-- 取消5.0下Button字符默认大写的功能（会导致 Spannable 失效） -->
-        <!-- http://stackoverflow.com/questions/29007746/button-settext-with-spannable-dosent-work-for-android-5-0-lollipop -->
-        <item name="android:textAllCaps">false</item>
-    </style>
+    <!--&lt;!&ndash;********************* Button *********************&ndash;&gt;-->
+    <!--<style name="EV.RoundButton" parent="android:Widget.Holo.Light.Button">-->
+    <!--<item name="android:layout_width">wrap_content</item>-->
+    <!--<item name="android:layout_height">wrap_content</item>-->
+    <!--&lt;!&ndash;<item name="android:padding">0dp</item>&ndash;&gt;&lt;!&ndash; 不用 android:padding，而用各个方向分别指定 padding，方便子类覆盖 &ndash;&gt;-->
+    <!--<item name="android:paddingLeft">0dp</item>-->
+    <!--<item name="android:paddingRight">0dp</item>-->
+    <!--<item name="android:paddingTop">0dp</item>-->
+    <!--<item name="android:paddingBottom">0dp</item>-->
+    <!--<item name="android:minWidth">0dp</item>-->
+    <!--<item name="android:minHeight">0dp</item>-->
+    <!--<item name="android:singleLine">true</item>-->
+    <!--<item name="android:gravity">center</item>-->
+    <!--<item name="android:ellipsize">end</item>-->
+    <!--<item name="ev_isRadiusAdjustBounds">true</item>-->
+    <!--<item name="ev_fillColor">#00000000</item>-->
+    <!--<item name="ev_borderWidth">1dp</item>-->
+    <!--<item name="ev_borderColor">#1B88EE</item>-->
+    <!--<item name="android:textColor">#1B88EE</item>-->
+    <!--&lt;!&ndash; 去掉5.0上Button点击的阴影动画效果 &ndash;&gt;-->
+    <!--<item name="android:stateListAnimator" tools:ignore="NewApi">@null</item>-->
+    <!--&lt;!&ndash; 取消5.0下Button字符默认大写的功能（会导致 Spannable 失效） &ndash;&gt;-->
+    <!--&lt;!&ndash; http://stackoverflow.com/questions/29007746/button-settext-with-spannable-dosent-work-for-android-5-0-lollipop &ndash;&gt;-->
+    <!--<item name="android:textAllCaps">false</item>-->
+    <!--</style>-->
 </resources>

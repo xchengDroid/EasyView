@@ -7,7 +7,6 @@
         <item name="colorPrimaryDark">@color/ev_colorPrimaryDark</item>
         <item name="colorAccent">@color/ev_colorAccent</item>
         <item name="android:windowBackground">@color/ev_bgColor</item>
-        <item name="EVRoundButtonStyle">@style/EV.RoundButton</item>
     </style>
 
     <style name="ev_ToolbarStyle">

@@ -4,8 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 
-import com.xcheng.view.R;
-
 /**
  * 创建时间：2018/7/20
  * 编写人： chengxin
@@ -18,13 +16,9 @@ public class RoundTextView extends AppCompatTextView {
     }
 
     public RoundTextView(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.EVRoundButtonStyle);
-    }
-
-    public RoundTextView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        super(context, attrs);
         RoundDrawableHelper roundDrawableHelper = new RoundDrawableHelper(this);
-        roundDrawableHelper.loadAttributeSet(context, attrs, defStyleAttr);
+        roundDrawableHelper.loadAttributeSet(context, attrs, 0);
         roundDrawableHelper.setRoundDrawable();
     }
 }
