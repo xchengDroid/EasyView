@@ -19,6 +19,10 @@ import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.xcheng.view.EasyView;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
 import com.xcheng.view.util.Router;
+import com.xcheng.view.util.SwitcherDialog;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends ListActivity {
     static {
@@ -35,6 +39,8 @@ public class MainActivity extends ListActivity {
                 return header;//指定为经典Header，默认是 贝塞尔雷达Header
             }
         });
+        SwitcherDialog.addModule("医院", "1", "2", "3");
+        SwitcherDialog.addModule("家庭", "3", "4", "5");
     }
 
     @Override
@@ -46,10 +52,15 @@ public class MainActivity extends ListActivity {
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
         setListAdapter(adapter);
+
     }
+
+    private Map<String, String> values = new HashMap<>();
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
+
+
         switch (position) {
             case 0:
                 // startSignInActivity();
@@ -62,9 +73,28 @@ public class MainActivity extends ListActivity {
                 startMessageActivity();
                 break;
             case 2:
+                SwitcherDialog switcherDialog = new SwitcherDialog(this);
+                switcherDialog.setOnSwitcherListener(new SwitcherDialog.OnSwitcherListener() {
+                    @Override
+                    public void onSwitcher(String name, String environment) {
+                        values.put(name, environment);
+                        EasyView.success(name + "==" + environment);
+                    }
+
+                    @Override
+                    public String getCurrentEnvironment(String name) {
+                        return values.get(name);
+                    }
+
+                    @Override
+                    public void onSure() {
+                        EasyView.success("onSure");
+                    }
+                });
+                switcherDialog.show();
                 break;
             case 3:
-                // startStateSampleActivity();
+                SwitcherDialog.removeModule("家庭");
                 break;
             case 4:
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
@@ -107,7 +137,7 @@ public class MainActivity extends ListActivity {
                 break;
             case 8:
                 Router.build(HFActivity.class).navigation(this);
-                break;
+                break;/**/
         }
     }
 

@@ -27,7 +27,6 @@ import java.util.List;
 public class SwitcherDialog extends EasyDialog {
     private static final List<Module> MODULES = new ArrayList<>();
     public static String TITLE = "请选择测试环境";
-
     private EasyAdapter<Module> mAdapter;
     private OnSwitcherListener mOnSwitcherListener;
 
@@ -38,8 +37,19 @@ public class SwitcherDialog extends EasyDialog {
         }
     }
 
+    public static void removeModule(String name) {
+        List<Module> temp = new ArrayList<>();
+        for (Module module : MODULES) {
+            if (module.name.equals(name)) {
+                temp.add(module);
+            }
+        }
+        MODULES.removeAll(temp);
+    }
+
     public SwitcherDialog(@NonNull Context context) {
         super(context, R.style.ev_dialog_commonStyle);
+        setCancelable(false);
         //如果有title会屏掉掉
         // getWindow().requestFeature(Window.FEATURE_NO_TITLE);
     }
@@ -92,6 +102,15 @@ public class SwitcherDialog extends EasyDialog {
     @Override
     public void setListener() {
         super.setListener();
+        findViewById(R.id.ev_id_submit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+                if (mOnSwitcherListener != null) {
+                    mOnSwitcherListener.onSure();
+                }
+            }
+        });
         mAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EasyHolder holder, int adapterPosition) {
@@ -111,6 +130,8 @@ public class SwitcherDialog extends EasyDialog {
         void onSwitcher(String name, String environment);
 
         String getCurrentEnvironment(String name);
+
+        void onSure();
     }
 
     public static class Module {

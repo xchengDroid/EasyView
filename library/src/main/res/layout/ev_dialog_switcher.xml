@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.xcheng.view.round.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@id/ev_id_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minWidth="400dp"
     android:orientation="vertical"
-    android:padding="20dp"
+    android:padding="15dp"
     app:ev_fillColor="@color/ev_white"
     app:ev_radius="10dp">
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@id/ev_id_titleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,11 +26,13 @@
         android:textSize="@dimen/ev_titleSize" />
 
     <com.xcheng.view.round.RoundButton
+        android:id="@id/ev_id_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:gravity="center"
         android:padding="10dp"
+        app:ev_hasState="true"
         android:text="确定"
         android:textColor="@color/ev_white"
         android:textSize="20sp"
