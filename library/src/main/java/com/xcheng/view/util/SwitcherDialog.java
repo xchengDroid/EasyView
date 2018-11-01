@@ -69,7 +69,11 @@ public class SwitcherDialog extends EasyDialog {
         RecyclerView recyclerView = findViewById(R.id.ev_id_recyclerView);
         TextView title = findViewById(R.id.ev_id_titleView);
         title.setText(TITLE);
+        final int blueColor = ContextCompat.getColor(getContext(), R.color.ev_light_blue);
+        final int greyColor = ContextCompat.getColor(getContext(), R.color.ev_text_grey);
+
         mAdapter = new EasyAdapter<Module>(getContext(), MODULES, R.layout.ev_item_module) {
+
             @Override
             public void convert(EasyHolder holder, Module module, int position) {
                 TextView tvNameOrEnvironment = holder.getView(R.id.tv_id_name_or_environment);
@@ -78,10 +82,10 @@ public class SwitcherDialog extends EasyDialog {
                     tvNameOrEnvironment.setText(module.name);
                     tvNameOrEnvironment.setTextSize(26);
                     checkView.setVisibility(View.GONE);
-                    tvNameOrEnvironment.setTextColor(ContextCompat.getColor(getContext(), R.color.ev_light_blue));
+                    tvNameOrEnvironment.setTextColor(blueColor);
                 } else {
                     tvNameOrEnvironment.setTextSize(24);
-                    tvNameOrEnvironment.setTextColor(ContextCompat.getColor(getContext(), R.color.ev_text_grey));
+                    tvNameOrEnvironment.setTextColor(greyColor);
                     tvNameOrEnvironment.setText(module.environment);
                     checkView.setVisibility(View.VISIBLE);
                     checkView.setChecked(false);
@@ -89,7 +93,7 @@ public class SwitcherDialog extends EasyDialog {
                         String environment = mOnSwitcherListener.getCurrentEnvironment(module.name);
                         if (environment != null && environment.equals(module.environment)) {
                             checkView.setChecked(true);
-                            tvNameOrEnvironment.setTextColor(ContextCompat.getColor(getContext(), R.color.ev_green));
+                            tvNameOrEnvironment.setTextColor(blueColor);
                         }
                     }
                 }
