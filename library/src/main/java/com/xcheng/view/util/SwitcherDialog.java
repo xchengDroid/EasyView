@@ -66,7 +66,7 @@ public class SwitcherDialog extends EasyDialog {
                 CheckView checkView = holder.getView(R.id.cv_isChecked);
                 if (module.environment == null) {
                     tvNameOrEnvironment.setText(module.name);
-                    tvNameOrEnvironment.setTextSize(28);
+                    tvNameOrEnvironment.setTextSize(26);
                     checkView.setVisibility(View.GONE);
                     tvNameOrEnvironment.setTextColor(ContextCompat.getColor(getContext(), R.color.ev_light_blue));
                 } else {
