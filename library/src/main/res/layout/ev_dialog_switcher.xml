@@ -7,13 +7,13 @@
     android:orientation="vertical"
     android:padding="15dp"
     app:ev_fillColor="@color/ev_white"
-    app:ev_radius="10dp">
+    app:ev_radius="6dp">
 
     <TextView
-        android:layout_marginTop="10dp"
         android:id="@id/ev_id_titleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textColor="@color/ev_text_black"
         android:textSize="26sp" />
 
@@ -32,10 +32,10 @@
         android:layout_marginTop="15dp"
         android:gravity="center"
         android:padding="10dp"
-        app:ev_hasState="true"
-        android:text="确定"
+        android:text="@string/ev_sure"
         android:textColor="@color/ev_white"
         android:textSize="20sp"
         app:ev_fillColor="@color/ev_blue_normal"
+        app:ev_hasState="true"
         app:ev_radius="5dp" />
 </com.xcheng.view.round.RoundLinearLayout>
