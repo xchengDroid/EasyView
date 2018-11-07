@@ -150,11 +150,10 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     }
 
     public static class Config {
-        private static final Config DEFAULT = new Config();
-
-        private final boolean autoRefresh;
-        private final int autoRefreshDelayed;
-        private final int limit;
+        public static final Config DEFAULT = new Config();
+        public final boolean autoRefresh;
+        public final int autoRefreshDelayed;
+        public final int limit;
 
         public Config(boolean autoRefresh, int autoRefreshDelayed, @IntRange(from = 1) int limit) {
             this.autoRefresh = autoRefresh;
