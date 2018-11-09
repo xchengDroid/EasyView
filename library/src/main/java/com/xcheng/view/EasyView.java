@@ -19,6 +19,8 @@ import com.xcheng.view.util.Preconditions;
 public class EasyView {
     static String TAG = EasyView.class.getName();
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
+    //默认的设计尺寸
+    public static int DESIGN_SIZE_IN_DP = 0;
     // by default
     public static DialogFactory FACTORY = new DialogFactory() {
         @NonNull

@@ -158,7 +158,7 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
      * @return designSizeInDp
      */
     protected int getDesignSizeInDp() {
-        return 0;
+        return EasyView.DESIGN_SIZE_IN_DP;
     }
 
     @Override
