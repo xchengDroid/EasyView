@@ -4,16 +4,18 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 /**
- * This extends Resources but delegates the calls to another Resources object. This enables
- * any customization done by some subclass of Resources to be also picked up.
+ * 今日头条的适配方案
  */
 public class ResourcesWrapper extends Resources {
     private float targetDensity;
     private float targetScaledDensity;
     private int targetDensityDpi;
+    private final float designSizeInDp;
 
-    public ResourcesWrapper(Resources resources) {
+    public ResourcesWrapper(Resources resources, int designSizeInDp) {
         super(resources.getAssets(), resources.getDisplayMetrics(), resources.getConfiguration());
+        Preconditions.checkArgument(designSizeInDp != 0, "designSizeInDp==0");
+        this.designSizeInDp = designSizeInDp;
     }
 
     @Override
@@ -22,7 +24,11 @@ public class ResourcesWrapper extends Resources {
         if (targetDensity == 0) {
             float nonCompatDensity = displayMetrics.density;
             float nonCompatScaledDensity = displayMetrics.scaledDensity;
-            targetDensity = displayMetrics.widthPixels / 1280f;
+            if (designSizeInDp > 0) {
+                targetDensity = displayMetrics.widthPixels / designSizeInDp;
+            } else {
+                targetDensity = displayMetrics.heightPixels / -designSizeInDp;
+            }
             targetScaledDensity = targetDensity * (nonCompatScaledDensity / nonCompatDensity);
             targetDensityDpi = (int) (160 * targetDensity);
         }

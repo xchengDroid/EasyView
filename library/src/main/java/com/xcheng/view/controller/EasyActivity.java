@@ -3,6 +3,7 @@ package com.xcheng.view.controller;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.CheckResult;
@@ -13,6 +14,7 @@ import android.view.View;
 
 import com.xcheng.view.EasyView;
 import com.xcheng.view.util.KeyboardHelper;
+import com.xcheng.view.util.ResourcesWrapper;
 import com.xcheng.view.util.Router;
 
 import java.io.Serializable;
@@ -25,6 +27,7 @@ import java.io.Serializable;
 public abstract class EasyActivity extends ActionBarSupportActivity implements IEasyView {
 
     private Dialog mLoadingDialog;
+    private Resources mResources;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,6 +134,31 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
         if (mLoadingDialog != null) {
             mLoadingDialog.dismiss();
         }
+    }
+
+    @Override
+    public Resources getResources() {
+        final int designSizeInDp = getDesignSizeInDp();
+        if (designSizeInDp == 0) {
+            return super.getResources();
+        } else {
+            if (mResources == null) {
+                mResources = new ResourcesWrapper(super.getResources(), designSizeInDp);
+            }
+            return mResources;
+        }
+    }
+
+    /**
+     * 获取设计的尺寸
+     * 0：不适配
+     * >0:适配宽度
+     * <0:适配高度
+     *
+     * @return designSizeInDp
+     */
+    protected int getDesignSizeInDp() {
+        return 0;
     }
 
     @Override
