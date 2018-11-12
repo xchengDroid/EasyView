@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.util.Log;
 
+import com.xcheng.view.autosize.AutoSize;
 import com.xcheng.view.controller.dialog.LoadingDialog;
 import com.xcheng.view.util.LocalDisplay;
 import com.xcheng.view.util.Preconditions;
@@ -17,10 +18,9 @@ import com.xcheng.view.util.Preconditions;
  * Created by chengxin on 2017/8/24.
  */
 public class EasyView {
-    static String TAG = EasyView.class.getName();
     private static final Handler HANDLER_UI = new Handler(Looper.getMainLooper());
-    //默认的设计尺寸
-    public static int DESIGN_SIZE_IN_DP = 0;
+    //默认不适配
+    public static AutoSize AUTOSIZE = null;
     // by default
     public static DialogFactory FACTORY = new DialogFactory() {
         @NonNull

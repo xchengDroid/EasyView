@@ -1,33 +1,37 @@
 package com.xcheng.view.autosize;
 
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
-
-import com.xcheng.view.util.Preconditions;
+import android.util.TypedValue;
 
 /**
  * 今日头条的适配方案
  */
 public class ResourcesWrapper extends Resources {
+    private final AutoSize autoSize;
     private float targetDensity;
     private float targetScaledDensity;
     private int targetDensityDpi;
-    private final float designSizeInDp;
+    private float targetXdpi;
 
-    public ResourcesWrapper(Resources resources, int designSizeInDp) {
+    public ResourcesWrapper(Resources resources, AutoSize autoSize) {
         super(resources.getAssets(), resources.getDisplayMetrics(), resources.getConfiguration());
-        Preconditions.checkArgument(designSizeInDp != 0, "designSizeInDp==0");
-        this.designSizeInDp = designSizeInDp;
+        this.autoSize = autoSize;
     }
 
     @Override
     public DisplayMetrics getDisplayMetrics() {
         DisplayMetrics displayMetrics = super.getDisplayMetrics();
+        initValue(displayMetrics);
+        autoSize(displayMetrics);
+        return displayMetrics;
+    }
+
+    private void initValue(DisplayMetrics displayMetrics) {
         if (targetDensity == 0) {
             float nonCompatDensity = displayMetrics.density;
             float nonCompatScaledDensity = displayMetrics.scaledDensity;
+            float designSizeInDp = autoSize.designSizeInDp;
             if (designSizeInDp > 0) {
                 targetDensity = displayMetrics.widthPixels / designSizeInDp;
             } else {
@@ -35,21 +39,32 @@ public class ResourcesWrapper extends Resources {
             }
             targetScaledDensity = targetDensity * (nonCompatScaledDensity / nonCompatDensity);
             targetDensityDpi = (int) (160 * targetDensity);
+            targetXdpi = targetDensity;
         }
-        displayMetrics.density = targetDensity;
-        displayMetrics.scaledDensity = targetScaledDensity;
-        displayMetrics.densityDpi = targetDensityDpi;
-        return displayMetrics;
     }
 
-    @Override
-    public Drawable getDrawableForDensity(int id, int density, @Nullable Theme theme) {
-        return super.getDrawableForDensity(id, density, theme);
-    }
-
-    @Override
-    public Drawable getDrawableForDensity(int id, int density) throws NotFoundException {
-        return super.getDrawableForDensity(id, density);
+    private void autoSize(DisplayMetrics displayMetrics) {
+        for (int unit : autoSize.displayUnits) {
+            switch (unit) {
+                case TypedValue.COMPLEX_UNIT_DIP:
+                    displayMetrics.density = targetDensity;
+                    displayMetrics.densityDpi = targetDensityDpi;
+                    break;
+                case TypedValue.COMPLEX_UNIT_SP:
+                    displayMetrics.scaledDensity = targetScaledDensity;
+                    break;
+                case TypedValue.COMPLEX_UNIT_PT:
+                    displayMetrics.xdpi = targetXdpi * 72f;
+                    break;
+                case TypedValue.COMPLEX_UNIT_IN:
+                    displayMetrics.xdpi = targetXdpi;
+                    break;
+                case TypedValue.COMPLEX_UNIT_MM:
+                    displayMetrics.xdpi = targetXdpi * 25.4f;
+                    break;
+                default:
+            }
+        }
     }
 }
 

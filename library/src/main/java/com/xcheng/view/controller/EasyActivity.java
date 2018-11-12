@@ -13,8 +13,9 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.xcheng.view.EasyView;
+import com.xcheng.view.autosize.AutoSize;
+import com.xcheng.view.autosize.ResourcesWrapper;
 import com.xcheng.view.util.KeyboardHelper;
-import com.xcheng.view.util.ResourcesWrapper;
 import com.xcheng.view.util.Router;
 
 import java.io.Serializable;
@@ -138,27 +139,23 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     @Override
     public Resources getResources() {
-        final int designSizeInDp = getDesignSizeInDp();
-        if (designSizeInDp == 0) {
+        final AutoSize autoSize = getAutoSize();
+        if (autoSize == null) {
             return super.getResources();
         } else {
             if (mResources == null) {
-                mResources = new ResourcesWrapper(super.getResources(), designSizeInDp);
+                mResources = new ResourcesWrapper(super.getResources(), autoSize);
             }
             return mResources;
         }
     }
 
     /**
-     * 获取设计的尺寸
-     * 0：不适配
-     * >0:适配宽度
-     * <0:适配高度
-     *
-     * @return designSizeInDp
-     */
-    protected int getDesignSizeInDp() {
-        return EasyView.DESIGN_SIZE_IN_DP;
+     * 子类可重写适配
+     **/
+    @Nullable
+    protected AutoSize getAutoSize() {
+        return EasyView.AUTOSIZE;
     }
 
     @Override

@@ -41,6 +41,7 @@ public class MainActivity extends ListActivity {
         });
         SwitcherDialog.addModule("医院", "1", "2", "3");
         SwitcherDialog.addModule("家庭", "3", "4", "5");
+       // EasyView.DESIGN_SIZE_IN_DP = 720;
     }
 
     @Override
