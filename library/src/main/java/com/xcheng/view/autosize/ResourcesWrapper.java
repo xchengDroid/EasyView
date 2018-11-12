@@ -44,26 +44,24 @@ public class ResourcesWrapper extends Resources {
     }
 
     private void autoSize(DisplayMetrics displayMetrics) {
-        for (int unit : autoSize.displayUnits) {
-            switch (unit) {
-                case TypedValue.COMPLEX_UNIT_DIP:
-                    displayMetrics.density = targetDensity;
-                    displayMetrics.densityDpi = targetDensityDpi;
-                    break;
-                case TypedValue.COMPLEX_UNIT_SP:
-                    displayMetrics.scaledDensity = targetScaledDensity;
-                    break;
-                case TypedValue.COMPLEX_UNIT_PT:
-                    displayMetrics.xdpi = targetXdpi * 72f;
-                    break;
-                case TypedValue.COMPLEX_UNIT_IN:
-                    displayMetrics.xdpi = targetXdpi;
-                    break;
-                case TypedValue.COMPLEX_UNIT_MM:
-                    displayMetrics.xdpi = targetXdpi * 25.4f;
-                    break;
-                default:
-            }
+        if (autoSize.isSupportDip) {
+            displayMetrics.density = targetDensity;
+            displayMetrics.densityDpi = targetDensityDpi;
+        }
+        if (autoSize.isSupportSp) {
+            displayMetrics.scaledDensity = targetScaledDensity;
+        }
+        switch (autoSize.subUnit) {
+            case TypedValue.COMPLEX_UNIT_PT:
+                displayMetrics.xdpi = targetXdpi * 72f;
+                break;
+            case TypedValue.COMPLEX_UNIT_IN:
+                displayMetrics.xdpi = targetXdpi;
+                break;
+            case TypedValue.COMPLEX_UNIT_MM:
+                displayMetrics.xdpi = targetXdpi * 25.4f;
+                break;
+            default:
         }
     }
 }

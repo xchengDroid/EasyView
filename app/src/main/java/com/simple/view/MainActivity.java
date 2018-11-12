@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -17,6 +18,7 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.xcheng.view.EasyView;
+import com.xcheng.view.autosize.AutoSize;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
 import com.xcheng.view.util.Router;
 import com.xcheng.view.util.SwitcherDialog;
@@ -41,7 +43,7 @@ public class MainActivity extends ListActivity {
         });
         SwitcherDialog.addModule("医院", "1", "2", "3");
         SwitcherDialog.addModule("家庭", "3", "4", "5");
-       // EasyView.DESIGN_SIZE_IN_DP = 720;
+        EasyView.AUTOSIZE = new AutoSize(740, true, true, TypedValue.COMPLEX_UNIT_PX);
     }
 
     @Override
