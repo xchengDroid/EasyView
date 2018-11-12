@@ -15,7 +15,7 @@ public class AutoSize {
     public final boolean isSupportDip;
     public final boolean isSupportSp;
     /**
-     * 默认支持的适配单位
+     * 支持的适配的副单位
      *
      * @see android.util.TypedValue#COMPLEX_UNIT_PT
      * @see android.util.TypedValue#COMPLEX_UNIT_IN
