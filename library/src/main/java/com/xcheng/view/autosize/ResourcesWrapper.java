@@ -1,7 +1,11 @@
-package com.xcheng.view.util;
+package com.xcheng.view.autosize;
 
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.Nullable;
 import android.util.DisplayMetrics;
+
+import com.xcheng.view.util.Preconditions;
 
 /**
  * 今日头条的适配方案
@@ -36,6 +40,16 @@ public class ResourcesWrapper extends Resources {
         displayMetrics.scaledDensity = targetScaledDensity;
         displayMetrics.densityDpi = targetDensityDpi;
         return displayMetrics;
+    }
+
+    @Override
+    public Drawable getDrawableForDensity(int id, int density, @Nullable Theme theme) {
+        return super.getDrawableForDensity(id, density, theme);
+    }
+
+    @Override
+    public Drawable getDrawableForDensity(int id, int density) throws NotFoundException {
+        return super.getDrawableForDensity(id, density);
     }
 }
 
