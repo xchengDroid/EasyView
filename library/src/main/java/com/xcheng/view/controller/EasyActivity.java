@@ -139,15 +139,13 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     @Override
     public Resources getResources() {
-        final AutoSize autoSize = getAutoSize();
-        if (autoSize == null) {
-            return super.getResources();
-        } else {
-            if (mResources == null) {
+        if (mResources == null) {
+            final AutoSize autoSize = getAutoSize();
+            if (autoSize != null) {
                 mResources = new ResourcesWrapper(super.getResources(), autoSize);
             }
-            return mResources;
         }
+        return mResources != null ? mResources : super.getResources();
     }
 
     /**
