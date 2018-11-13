@@ -123,7 +123,7 @@ public class SwitcherDialog extends EasyDialog {
                             break;
                         }
                     }
-                    mOnSwitcherListener.onSure(hasChanged, curEnvironments);
+                    mOnSwitcherListener.onSwitcher(hasChanged, curEnvironments);
                 }
             }
         });
@@ -140,7 +140,7 @@ public class SwitcherDialog extends EasyDialog {
     }
 
     public interface OnSwitcherListener {
-        void onSure(boolean hasChanged, Map<String, String> curEnvironments);
+        void onSwitcher(boolean hasChanged, Map<String, String> curEnvironments);
     }
 
     public static class Module {
