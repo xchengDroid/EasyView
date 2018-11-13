@@ -140,7 +140,7 @@ public class SwitcherDialog extends EasyDialog {
     }
 
     public interface OnSwitcherListener {
-        void onSure(boolean hasChanged, Map<String, String> curEnvironment);
+        void onSure(boolean hasChanged, Map<String, String> curEnvironments);
     }
 
     public static class Module {

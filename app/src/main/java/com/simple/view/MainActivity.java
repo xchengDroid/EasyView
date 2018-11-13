@@ -80,7 +80,13 @@ public class MainActivity extends ListActivity {
 
                 switcherDialog.setOnSwitcherListener(new SwitcherDialog.OnSwitcherListener() {
                     @Override
-                    public void onSure(boolean hasChanged, Map<String, String> curEnvironment) {
+                    public void onSure(boolean hasChanged, Map<String, String> curEnvironments) {
+                        for (Map.Entry<String, String> entry : curEnvironments.entrySet()) {
+                            String key = entry.getKey();
+                            String value = entry.getValue();
+                            Log.e("print", key + "=" + value);
+                        }
+                        Log.e("print", "hasChanged:" + hasChanged);
 
                     }
                 });
