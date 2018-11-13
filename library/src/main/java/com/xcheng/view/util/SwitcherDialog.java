@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.Size;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +18,9 @@ import com.xcheng.view.controller.EasyDialog;
 import com.xcheng.view.widget.CheckView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 创建时间：2018/10/31
@@ -25,26 +28,25 @@ import java.util.List;
  * 功能描述：切换环境使用
  */
 public class SwitcherDialog extends EasyDialog {
-    private static final List<Module> MODULES = new ArrayList<>();
+    private final List<Module> mModules = new ArrayList<>();
     public static String TITLE = "请选择测试环境";
     private EasyAdapter<Module> mAdapter;
     private OnSwitcherListener mOnSwitcherListener;
+    //保存当前模块的环境
+    private final Map<String, String> curEnvironments = new LinkedHashMap<>(2);
+    private final Map<String, String> originals = new LinkedHashMap<>(2);
 
-    public static void addModule(String name, String... environments) {
-        MODULES.add(new Module(name, null));
+    public void addModule(String name, @Nullable String curEnvironment, @Size(min = 1) String[] environments) {
+        Preconditions.checkNotNull(name, "name==null");
+        Preconditions.checkNotNull(environments, "environments==null");
+        if (curEnvironment != null) {
+            curEnvironments.put(name, curEnvironment);
+            originals.put(name, curEnvironment);
+        }
+        mModules.add(new Module(name, null));
         for (String environment : environments) {
-            MODULES.add(new Module(name, environment));
+            mModules.add(new Module(name, environment));
         }
-    }
-
-    public static void removeModule(String name) {
-        List<Module> temp = new ArrayList<>();
-        for (Module module : MODULES) {
-            if (module.name.equals(name)) {
-                temp.add(module);
-            }
-        }
-        MODULES.removeAll(temp);
     }
 
     public SwitcherDialog(@NonNull Context context) {
@@ -72,7 +74,7 @@ public class SwitcherDialog extends EasyDialog {
         final int blueColor = ContextCompat.getColor(getContext(), R.color.ev_light_blue);
         final int greyColor = ContextCompat.getColor(getContext(), R.color.ev_text_grey);
 
-        mAdapter = new EasyAdapter<Module>(getContext(), MODULES, R.layout.ev_item_module) {
+        mAdapter = new EasyAdapter<Module>(getContext(), mModules, R.layout.ev_item_module) {
 
             @Override
             public void convert(EasyHolder holder, Module module, int position) {
@@ -90,7 +92,7 @@ public class SwitcherDialog extends EasyDialog {
                     checkView.setVisibility(View.VISIBLE);
                     checkView.setChecked(false);
                     if (mOnSwitcherListener != null) {
-                        String environment = mOnSwitcherListener.getCurrentEnvironment(module.name);
+                        String environment = curEnvironments.get(module.name);
                         if (environment != null && environment.equals(module.environment)) {
                             checkView.setChecked(true);
                             tvNameOrEnvironment.setTextColor(blueColor);
@@ -111,31 +113,34 @@ public class SwitcherDialog extends EasyDialog {
             public void onClick(View v) {
                 dismiss();
                 if (mOnSwitcherListener != null) {
-                    mOnSwitcherListener.onSure();
+                    boolean hasChanged = false;
+                    for (Map.Entry<String, String> entry : curEnvironments.entrySet()) {
+                        String key = entry.getKey();
+                        String value = entry.getValue();
+                        String originalValue = originals.get(key);
+                        hasChanged = !originalValue.equals(value);
+                        if (hasChanged) {
+                            break;
+                        }
+                    }
+                    mOnSwitcherListener.onSure(hasChanged, curEnvironments);
                 }
             }
         });
         mAdapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(EasyHolder holder, int adapterPosition) {
-                Module module = MODULES.get(adapterPosition);
+                Module module = mModules.get(adapterPosition);
                 if (module.environment == null)
                     return;
-                if (mOnSwitcherListener != null) {
-                    mOnSwitcherListener.onSwitcher(module.name, module.environment);
-                    mAdapter.notifyDataSetChanged();
-                }
+                curEnvironments.put(module.name, module.environment);
+                mAdapter.notifyDataSetChanged();
             }
         });
     }
 
     public interface OnSwitcherListener {
-
-        void onSwitcher(String name, String environment);
-
-        String getCurrentEnvironment(String name);
-
-        void onSure();
+        void onSure(boolean hasChanged, Map<String, String> curEnvironment);
     }
 
     public static class Module {

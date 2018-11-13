@@ -40,8 +40,7 @@ public class MainActivity extends ListActivity {
                 return header;//指定为经典Header，默认是 贝塞尔雷达Header
             }
         });
-        SwitcherDialog.addModule("医院", "1", "2", "3");
-        SwitcherDialog.addModule("家庭", "3", "4", "5");
+
         EasyView.AUTOSIZE = new AutoSize(740, true);
     }
 
@@ -76,27 +75,18 @@ public class MainActivity extends ListActivity {
                 break;
             case 2:
                 SwitcherDialog switcherDialog = new SwitcherDialog(this);
+                switcherDialog.addModule("医院", "1", new String[]{"1", "2", "3"});
+                switcherDialog.addModule("家庭", "4", new String[]{"3", "4", "5"});
+
                 switcherDialog.setOnSwitcherListener(new SwitcherDialog.OnSwitcherListener() {
                     @Override
-                    public void onSwitcher(String name, String environment) {
-                        values.put(name, environment);
-                        EasyView.success(name + "==" + environment);
-                    }
+                    public void onSure(boolean hasChanged, Map<String, String> curEnvironment) {
 
-                    @Override
-                    public String getCurrentEnvironment(String name) {
-                        return values.get(name);
-                    }
-
-                    @Override
-                    public void onSure() {
-                        EasyView.success("onSure");
                     }
                 });
                 switcherDialog.show();
                 break;
             case 3:
-                SwitcherDialog.removeModule("家庭");
                 break;
             case 4:
                 BottomOptionDialog dialog = new BottomOptionDialog.Builder(this)
