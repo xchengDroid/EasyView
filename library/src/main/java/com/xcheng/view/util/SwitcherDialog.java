@@ -33,15 +33,15 @@ public class SwitcherDialog extends EasyDialog {
     private EasyAdapter<Module> mAdapter;
     private OnSwitcherListener mOnSwitcherListener;
     //保存当前模块的环境
-    private final Map<String, String> curEnvironments = new LinkedHashMap<>(2);
-    private final Map<String, String> originals = new LinkedHashMap<>(2);
+    private final Map<String, String> mCurEnvironments = new LinkedHashMap<>(2);
+    private final Map<String, String> mOriginals = new LinkedHashMap<>(2);
 
     public void addModule(String name, @Nullable String curEnvironment, @Size(min = 1) String[] environments) {
         Preconditions.checkNotNull(name, "name==null");
         Preconditions.checkNotNull(environments, "environments==null");
         if (curEnvironment != null) {
-            curEnvironments.put(name, curEnvironment);
-            originals.put(name, curEnvironment);
+            mCurEnvironments.put(name, curEnvironment);
+            mOriginals.put(name, curEnvironment);
         }
         mModules.add(new Module(name, null));
         for (String environment : environments) {
@@ -92,7 +92,7 @@ public class SwitcherDialog extends EasyDialog {
                     checkView.setVisibility(View.VISIBLE);
                     checkView.setChecked(false);
                     if (mOnSwitcherListener != null) {
-                        String environment = curEnvironments.get(module.name);
+                        String environment = mCurEnvironments.get(module.name);
                         if (environment != null && environment.equals(module.environment)) {
                             checkView.setChecked(true);
                             tvNameOrEnvironment.setTextColor(blueColor);
@@ -114,16 +114,16 @@ public class SwitcherDialog extends EasyDialog {
                 dismiss();
                 if (mOnSwitcherListener != null) {
                     boolean hasChanged = false;
-                    for (Map.Entry<String, String> entry : curEnvironments.entrySet()) {
+                    for (Map.Entry<String, String> entry : mCurEnvironments.entrySet()) {
                         String key = entry.getKey();
                         String value = entry.getValue();
-                        String originalValue = originals.get(key);
+                        String originalValue = mOriginals.get(key);
                         hasChanged = !originalValue.equals(value);
                         if (hasChanged) {
                             break;
                         }
                     }
-                    mOnSwitcherListener.onSwitcher(hasChanged, curEnvironments);
+                    mOnSwitcherListener.onSwitcher(hasChanged, mCurEnvironments);
                 }
             }
         });
@@ -133,7 +133,7 @@ public class SwitcherDialog extends EasyDialog {
                 Module module = mModules.get(adapterPosition);
                 if (module.environment == null)
                     return;
-                curEnvironments.put(module.name, module.environment);
+                mCurEnvironments.put(module.name, module.environment);
                 mAdapter.notifyDataSetChanged();
             }
         });
