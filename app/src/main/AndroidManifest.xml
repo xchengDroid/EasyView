@@ -39,6 +39,9 @@
         <activity
             android:name=".HFActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".CheckViewActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

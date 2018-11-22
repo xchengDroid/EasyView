@@ -16,7 +16,7 @@
 
     <array name="sample_list">
         <item>Action Button Progress/EndLess</item>
-        <item>Submit Button Progress sample</item>
+        <item>checkView sample</item>
         <item>Generate Button Progress sample</item>
         <item>Button State sample</item>
         <item>底部弹出Dialog</item>

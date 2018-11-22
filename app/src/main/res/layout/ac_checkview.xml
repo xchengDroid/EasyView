@@ -1,0 +1,382 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="26dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改Size"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom">
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:ev_size="20dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            app:ev_size="25dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            app:ev_size="35dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_size="40dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            app:ev_size="45dp"
+            app:ev_strokeWidth="4dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="修改strokeWidth"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom">
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="32dp"
+            app:ev_strokeWidth="6dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="34dp"
+            app:ev_strokeWidth="8dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="36dp"
+            app:ev_strokeWidth="10dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="38dp"
+            app:ev_strokeWidth="12dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="40dp"
+            app:ev_strokeWidth="14dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="修改strokeColor"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom">
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ev_size="30dp"
+            app:ev_strokeColor="@color/ev_holo_red_light"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="30dp"
+            app:ev_strokeColor="@color/ev_green"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="30dp"
+            app:ev_strokeColor="@color/ev_holo_orange_light"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="30dp"
+            app:ev_strokeColor="@color/ev_blue_normal"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="30dp"
+            app:ev_strokeColor="@color/colorAccent"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_size="30dp"
+            app:ev_strokeColor="@color/ev_purple_progress"
+            app:ev_strokeWidth="4dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="修改checkedColor"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom">
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:ev_checkedColor="@color/ev_holo_red_light"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_checkedColor="@color/ev_green"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_checkedColor="@color/ev_holo_orange_light"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_checkedColor="@color/ev_blue_normal"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_checkedColor="@color/colorAccent"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_checkedColor="@color/ev_purple_progress"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="修改bgColor"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom">
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ev_bgColor="@color/ev_holo_red_light"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_bgColor="@color/ev_green"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_bgColor="@color/ev_holo_orange_light"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_bgColor="@color/ev_blue_normal"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_bgColor="@color/colorAccent"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:ev_bgColor="@color/ev_purple_progress"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="4dp" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="修改为方形"
+        android:textSize="30sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="bottom">
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            app:ev_checkedColor="@color/ev_holo_red_light"
+            app:ev_size="30dp"
+            app:ev_type="rect"
+            app:ev_strokeWidth="6dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_type="rect"
+            app:ev_checkedColor="@color/ev_green"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="6dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            app:ev_type="rect"
+            app:ev_checkedColor="@color/ev_holo_orange_light"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="6dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_type="rect"
+            app:ev_checkedColor="@color/ev_blue_normal"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="6dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="false"
+            app:ev_type="rect"
+            app:ev_checkedColor="@color/colorAccent"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="6dp" />
+
+        <com.xcheng.view.widget.CheckView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:checked="true"
+            app:ev_type="rect"
+            app:ev_checkedColor="@color/ev_purple_progress"
+            app:ev_size="30dp"
+            app:ev_strokeWidth="6dp" />
+    </LinearLayout>
+</LinearLayout>

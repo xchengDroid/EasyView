@@ -71,7 +71,7 @@ public class MainActivity extends ListActivity {
                 EasyView.warning("123");
                 break;
             case 1:
-                startMessageActivity();
+                Router.build(CheckViewActivity.class).navigation(this);
                 break;
             case 2:
                 SwitcherDialog switcherDialog = new SwitcherDialog(this);
