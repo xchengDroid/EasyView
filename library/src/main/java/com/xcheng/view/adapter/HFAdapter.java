@@ -20,6 +20,7 @@ import java.util.List;
  *
  * @param <T>
  */
+@Deprecated
 public abstract class HFAdapter<T> extends EasyAdapter<T> {
     /**
      * param to be used to query number of spans occupied by each item
@@ -65,7 +66,7 @@ public abstract class HFAdapter<T> extends EasyAdapter<T> {
     public void addData(Collection<? extends T> loadMore) {
         addData(getDataCount(), loadMore);
     }
-    
+
     public void addData(@IntRange(from = 0) int position, Collection<? extends T> loadMore) {
         if (loadMore != null && loadMore.size() > 0) {
             byte oldFlag = HEFViewFlag();
