@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.xcheng.view.adapter.EasyAdapter;
 import com.xcheng.view.adapter.EasyHolder;
-import com.xcheng.view.adapter.HFAdapter;
 import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.controller.SmartRefreshFragment;
 import com.xcheng.view.util.LocalDisplay;
@@ -85,8 +84,8 @@ public class RefreshSmtFragment extends SmartRefreshFragment<String> {
 
     @NonNull
     @Override
-    public HFAdapter<String> createAdapter() {
-        return new HFAdapter<String>(getContext(), R.layout.ev_item_text) {
+    public EasyAdapter<String> createAdapter() {
+        return new EasyAdapter<String>(getContext(), R.layout.ev_item_text) {
             @Override
             public void convert(EasyHolder holder, String s, int position) {
                 // Log.e("print", "adapterPosition:" + holder.getAdapterPosition());
