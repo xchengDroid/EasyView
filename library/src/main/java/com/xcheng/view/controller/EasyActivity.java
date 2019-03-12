@@ -20,6 +20,26 @@ import com.xcheng.view.util.KeyboardHelper;
  * @author xincheng
  */
 public abstract class EasyActivity extends ActionBarSupportActivity implements IEasyView {
+//    public int clearTop() {
+//        return Intent.FLAG_ACTIVITY_CLEAR_TOP// 注意本行的FLAG设置
+//                | Intent.FLAG_ACTIVITY_NO_ANIMATION;//设置NO_ANIMATION在set之后才有效
+//    }
+//
+//    // 多个Activity的值传递。ActivityA到达ActivityB再到达ActivityC，
+//    // 但ActivityB为过渡页可以finish了，此时ActivityC将值透传至ActivityA。
+//    public int forwardResult() {
+//        return Intent.FLAG_ACTIVITY_FORWARD_RESULT;
+//    }
+//
+//    public int clearTopWithState() {
+//        return Intent.FLAG_ACTIVITY_CLEAR_TOP// 注意本行的FLAG设置
+//                | Intent.FLAG_ACTIVITY_SINGLE_TOP;
+//    }
+//
+//    public int beRoot() {
+//        return Intent.FLAG_ACTIVITY_CLEAR_TASK
+//                | Intent.FLAG_ACTIVITY_NEW_TASK;
+//    }
 
     private Dialog mLoadingDialog;
     private Resources mResources;
