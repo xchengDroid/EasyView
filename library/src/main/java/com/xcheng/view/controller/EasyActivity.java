@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.CheckResult;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,9 +13,6 @@ import com.xcheng.view.EasyView;
 import com.xcheng.view.autosize.AutoSize;
 import com.xcheng.view.autosize.ResourcesWrapper;
 import com.xcheng.view.util.KeyboardHelper;
-import com.xcheng.view.util.Router;
-
-import java.io.Serializable;
 
 /**
  * 所有Activity的基类
@@ -92,37 +86,6 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
     protected Bundle getBundle() {
         return getIntent().getExtras();
     }
-
-    /**
-     * @param bundleKey 存入Bundle的 key，或者是存入Intent的key,从getIntent()对象中获取
-     * @param <T>
-     * @return
-     */
-    @CheckResult
-    protected <T extends Serializable> T getSerializable(String bundleKey) {
-        return getSerializable(getIntent(), bundleKey);
-    }
-
-    @CheckResult
-    protected <T extends Serializable> T getSerializable(@NonNull Intent intent, String bundleKey) {
-        return Router.getSerializable(intent, bundleKey);
-    }
-
-    /**
-     * @param bundleKey 存入Bundle的 key，或者是存入Intent的key,从getIntent()对象中获取
-     * @param <T>
-     * @return
-     */
-    @CheckResult
-    protected <T extends Parcelable> T getParcelable(String bundleKey) {
-        return getParcelable(getIntent(), bundleKey);
-    }
-
-    @CheckResult
-    protected <T extends Parcelable> T getParcelable(@NonNull Intent intent, String bundleKey) {
-        return Router.getParcelable(intent, bundleKey);
-    }
-
 
     public void showLoading() {
         if (mLoadingDialog == null) {

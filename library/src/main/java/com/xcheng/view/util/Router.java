@@ -25,6 +25,7 @@ import java.util.ArrayList;
  * 编写人： chengxin
  * 功能描述：路由器
  */
+@Deprecated
 public final class Router {
     /**
      * Callback after navigation.

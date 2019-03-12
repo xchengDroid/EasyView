@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DimenRes;
@@ -21,8 +20,6 @@ import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.xcheng.view.util.Router;
 
 /**
  * 简单的ViewHolder对象
@@ -252,11 +249,5 @@ public class EasyHolder extends RecyclerView.ViewHolder implements View.OnClickL
         View view = getView(viewId);
         view.setEnabled(enabled);
         return this;
-    }
-
-    public void toActivity(Class<?> cls, Bundle bundle) {
-        Router.build(cls)
-                .setBundle(bundle)
-                .navigation(getContext());
     }
 }
