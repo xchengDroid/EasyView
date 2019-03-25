@@ -3,9 +3,11 @@ package com.xcheng.view.controller;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -129,6 +131,17 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
             }
         }
         return mResources != null ? mResources : super.getResources();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        if (mResources != null) {
+            // The real (and thus managed) resources object was already updated
+            // by ResourcesManager, so pull the current metrics from there.
+            final DisplayMetrics newMetrics = super.getResources().getDisplayMetrics();
+            mResources.updateConfiguration(newConfig, newMetrics);
+        }
     }
 
     /**
