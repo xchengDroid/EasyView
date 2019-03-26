@@ -94,7 +94,12 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
                     break;
             }
         }
-        return super.dispatchTouchEvent(ev);
+        try {
+            //java.lang.IllegalArgumentException:pointerIndex out of range
+            return super.dispatchTouchEvent(ev);
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 
     protected boolean isHideKeyboardIfTouchOutSide() {
