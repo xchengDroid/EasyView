@@ -82,7 +82,7 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (isHideKeyboardIfTouchOutSide()) {
+        if (isHideKeyboardOnTouchOutSide()) {
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     View view = getCurrentFocus();
@@ -102,7 +102,7 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
         }
     }
 
-    protected boolean isHideKeyboardIfTouchOutSide() {
+    protected boolean isHideKeyboardOnTouchOutSide() {
         return false;
     }
 
