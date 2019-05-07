@@ -21,9 +21,6 @@ import java.util.List;
 
 public class HFActivity extends EasyActivity {
 
-    public static final String EXTRAS_ENDLESS_MODE = "EXTRAS_ENDLESS_MODE";
-//./gradlew clean build bintrayUpload -PbintrayUser=xcheng -PbintrayKey=4f8465004b752b103ea2e374ad6cb73ec38d8601 -PdryRun=false
-
     @Override
     public int getLayoutId() {
         return R.layout.ac_hfadapter;
@@ -35,7 +32,7 @@ public class HFActivity extends EasyActivity {
     @Override
     public void initView(@Nullable Bundle savedInstanceState) {
         super.initView(savedInstanceState);
-        mRecyclerView = (RecyclerView) findViewById(R.id.ev_id_recyclerView);
+        mRecyclerView =  findViewById(R.id.ev_id_recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         EasyAdapter<String> adapter = getEasyAdapter();
         adapter.setOnItemClickListener(new EasyAdapter.OnItemClickListener() {
