@@ -27,6 +27,7 @@ public interface IEasyView extends View.OnClickListener, ILoadingView {
      *
      * @param savedInstanceState 销毁保存参数
      */
+    @SuppressWarnings("JavadocReference")
     void initView(Bundle savedInstanceState);
 
     /**
