@@ -1,22 +1,21 @@
-package com.xcheng.view.controller;
+package com.xcheng.view.controller.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
-
-import com.xcheng.view.EasyView;
 
 
 /**
  * 基础的Dialog
  * Created by chengxin on 2016/11/7.
  */
-public abstract class EasyDialog extends Dialog implements IEasyView {
+public abstract class EasyDialog extends Dialog implements View.OnClickListener {
 
     public EasyDialog(@NonNull Context context) {
         super(context);
@@ -34,56 +33,24 @@ public abstract class EasyDialog extends Dialog implements IEasyView {
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        initData();
-        initView(savedInstanceState);
-        setListener();
-        initLocation();
-    }
-
-    @Override
-    public void dismiss() {
-        super.dismiss();
+        initDialog(savedInstanceState);
     }
 
     /**
-     * 在dialog设置View之后执行才有效
+     * 获取布局Layout的id
      */
-    protected void initLocation() {
+    @LayoutRes
+    protected abstract int getLayoutId();
 
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void initView(Bundle savedInstanceState) {
-
-    }
-
-    @Override
-    public void setListener() {
+    /**
+     * 初始化dialog
+     */
+    protected void initDialog(@Nullable Bundle savedInstanceState) {
 
     }
 
     @Override
     public void onClick(View v) {
 
-    }
-
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showMessage(CharSequence text) {
-        EasyView.info(text);
     }
 }

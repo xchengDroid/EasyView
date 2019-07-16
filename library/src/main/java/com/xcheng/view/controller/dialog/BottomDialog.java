@@ -1,12 +1,13 @@
 package com.xcheng.view.controller.dialog;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
+
 import com.xcheng.view.R;
-import com.xcheng.view.controller.EasyDialog;
 import com.xcheng.view.util.LocalDisplay;
 
 public abstract class BottomDialog extends EasyDialog {
@@ -19,9 +20,10 @@ public abstract class BottomDialog extends EasyDialog {
         super(context, themeResId);
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Override
-    protected void initLocation() {
-        super.initLocation();
+    protected void initDialog(@Nullable Bundle savedInstanceState) {
+        super.initDialog(savedInstanceState);
         getWindow().setGravity(Gravity.BOTTOM);
         getWindow().setLayout(LocalDisplay.WIDTH_PIXEL, WindowManager.LayoutParams.WRAP_CONTENT);
 //        WindowManager m = getWindow().getWindowManager();
@@ -29,10 +31,5 @@ public abstract class BottomDialog extends EasyDialog {
 //        WindowManager.LayoutParams p = getWindow().getAttributes();
 //        p.width = d.getWidth();
 //        getWindow().setAttributes(p);
-    }
-
-    @Override
-    public void onClick(View v) {
-        dismiss();
     }
 }

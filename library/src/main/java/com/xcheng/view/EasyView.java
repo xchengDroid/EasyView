@@ -1,17 +1,19 @@
 package com.xcheng.view;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
-import android.util.Log;
+import androidx.core.util.Preconditions;
 
 import com.xcheng.view.autosize.AutoSize;
 import com.xcheng.view.controller.dialog.LoadingDialog;
 import com.xcheng.view.util.LocalDisplay;
-import com.xcheng.view.util.Preconditions;
 
 /**
  * Easy工具类，引用全局Context ,提供子线程刷新UI方法等
@@ -56,6 +58,7 @@ public class EasyView {
 
     private static Context appContext;
 
+    @SuppressLint("RestrictedApi")
     public static void init(Context context) {
         Preconditions.checkNotNull(context, "context==null");
         appContext = context.getApplicationContext();

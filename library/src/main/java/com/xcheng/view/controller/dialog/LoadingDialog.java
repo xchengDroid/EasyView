@@ -1,10 +1,10 @@
 package com.xcheng.view.controller.dialog;
 
 import android.content.Context;
+
 import androidx.annotation.LayoutRes;
 
 import com.xcheng.view.R;
-import com.xcheng.view.controller.EasyDialog;
 
 public class LoadingDialog extends EasyDialog {
     private LoadingDialog(Context context, int defStyle) {
@@ -27,7 +27,7 @@ public class LoadingDialog extends EasyDialog {
     }
 
     @Override
-    public int getLayoutId() {
+    protected int getLayoutId() {
         return R.layout.ev_dialog_loading;
     }
 }

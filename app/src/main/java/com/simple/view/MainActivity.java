@@ -21,7 +21,6 @@ import com.xcheng.view.EasyView;
 import com.xcheng.view.autosize.AutoSize;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
 import com.xcheng.view.util.Router;
-import com.xcheng.view.util.SwitcherDialog;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -73,25 +72,6 @@ public class MainActivity extends ListActivity {
                 break;
             case 1:
                 Router.build(CheckViewActivity.class).navigation(this);
-                break;
-            case 2:
-                SwitcherDialog switcherDialog = new SwitcherDialog(this);
-                switcherDialog.addModule("医院", "1", new String[]{"1", "2", "3"});
-                switcherDialog.addModule("家庭", "4", new String[]{"3", "4", "5"});
-
-                switcherDialog.setOnSwitcherListener(new SwitcherDialog.OnSwitcherListener() {
-                    @Override
-                    public void onSwitcher(boolean hasChanged, Map<String, String> curEnvironments) {
-                        for (Map.Entry<String, String> entry : curEnvironments.entrySet()) {
-                            String key = entry.getKey();
-                            String value = entry.getValue();
-                            Log.e("print", key + "=" + value);
-                        }
-                        Log.e("print", "hasChanged:" + hasChanged);
-
-                    }
-                });
-                switcherDialog.show();
                 break;
             case 3:
                 break;

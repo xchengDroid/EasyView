@@ -1,17 +1,18 @@
 package com.xcheng.view.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.annotation.IntRange;
-import androidx.annotation.LayoutRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.xcheng.view.util.Preconditions;
+import androidx.annotation.IntRange;
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Preconditions;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -110,6 +111,7 @@ public abstract class EasyAdapter<T> extends RecyclerView.Adapter<EasyHolder> im
      * 如果需要覆盖此方法，请重写{@link #getDelegateView(ViewGroup, int)},
      * holder 在onCreateViewHolder 和 onBindViewHolder时 holder.itemView no parent
      */
+    @SuppressLint("RestrictedApi")
     @NonNull
     @Override
     public EasyHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

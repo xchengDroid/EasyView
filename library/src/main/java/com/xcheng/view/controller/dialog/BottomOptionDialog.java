@@ -1,19 +1,22 @@
 package com.xcheng.view.controller.dialog;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
 import androidx.annotation.ColorInt;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.annotation.Size;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Preconditions;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyAdapter;
@@ -21,7 +24,6 @@ import com.xcheng.view.adapter.EasyHolder;
 import com.xcheng.view.adapter.SpaceDecoration;
 import com.xcheng.view.divider.DividerTextView;
 import com.xcheng.view.util.LocalDisplay;
-import com.xcheng.view.util.Preconditions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,9 +42,10 @@ public class BottomOptionDialog extends BottomDialog {
         return mBuilder.layoutId;
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
-    public void initView(Bundle savedInstanceState) {
-        super.initView(savedInstanceState);
+    protected void initDialog(Bundle savedInstanceState) {
+        super.initDialog(savedInstanceState);
         TextView topTipTextView = findViewById(R.id.ev_id_optionDialog_topTip);
         if (mBuilder.tipText != null) {
             //如果tipText有内容而此时没有对应的TextView 则需要抛出异常
@@ -66,7 +69,7 @@ public class BottomOptionDialog extends BottomDialog {
             }
         }
 
-        TextView bottomTextView = (TextView) findViewById(R.id.ev_id_optionDialog_bottom);
+        TextView bottomTextView = findViewById(R.id.ev_id_optionDialog_bottom);
         if (mBuilder.bottomText != null) {
             Preconditions.checkState(bottomTextView != null, "layout res must have a TextView with id named ev_id_optionDialog_bottom");
             bottomTextView.setTextSize(mBuilder.textSize);
@@ -206,6 +209,7 @@ public class BottomOptionDialog extends BottomDialog {
             return this;
         }
 
+        @SuppressLint("RestrictedApi")
         public BottomOptionDialog create() {
             Preconditions.checkState(optionTexts != null, "optionTexts has not been init");
             return new BottomOptionDialog(this);
