@@ -4,13 +4,16 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.xcheng.view.EasyView;
 
@@ -27,6 +30,20 @@ public abstract class EasyFragment extends Fragment implements IEasyView {
      */
     private View mRootView;
     private Dialog mLoadingDialog;
+    public final MutableLiveData<Boolean> mLoadingLiveData = new MutableLiveData<>();
+
+    {
+        mLoadingLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    showLoading();
+                } else {
+                    hideLoading();
+                }
+            }
+        });
+    }
 
     @Nullable
     @Override

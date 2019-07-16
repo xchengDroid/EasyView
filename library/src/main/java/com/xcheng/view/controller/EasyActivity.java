@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.xcheng.view.EasyView;
 import com.xcheng.view.autosize.AutoSize;
@@ -23,29 +25,24 @@ import com.xcheng.view.util.KeyboardUtil;
  * @author xincheng
  */
 public abstract class EasyActivity extends ActionBarSupportActivity implements IEasyView {
-//    public int clearTop() {
-//        return Intent.FLAG_ACTIVITY_CLEAR_TOP// 注意本行的FLAG设置
-//                | Intent.FLAG_ACTIVITY_NO_ANIMATION;//设置NO_ANIMATION在set之后才有效
-//    }
-//
-//    // 多个Activity的值传递。ActivityA到达ActivityB再到达ActivityC，
-//    // 但ActivityB为过渡页可以finish了，此时ActivityC将值透传至ActivityA。
-//    public int forwardResult() {
-//        return Intent.FLAG_ACTIVITY_FORWARD_RESULT;
-//    }
-//
-//    public int clearTopWithState() {
-//        return Intent.FLAG_ACTIVITY_CLEAR_TOP// 注意本行的FLAG设置
-//                | Intent.FLAG_ACTIVITY_SINGLE_TOP;
-//    }
-//
-//    public int beRoot() {
-//        return Intent.FLAG_ACTIVITY_CLEAR_TASK
-//                | Intent.FLAG_ACTIVITY_NEW_TASK;
-//    }
 
     private Dialog mLoadingDialog;
     private Resources mResources;
+    //for MVVM
+    public final MutableLiveData<Boolean> mLoadingLiveData = new MutableLiveData<>();
+
+    {
+        mLoadingLiveData.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if (aBoolean) {
+                    showLoading();
+                } else {
+                    hideLoading();
+                }
+            }
+        });
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
