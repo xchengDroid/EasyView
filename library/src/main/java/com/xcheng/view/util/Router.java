@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
+import android.util.SparseArray;
+
 import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,8 +17,6 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.ActivityOptionsCompat;
 import androidx.fragment.app.Fragment;
-import android.util.Log;
-import android.util.SparseArray;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -25,7 +26,6 @@ import java.util.ArrayList;
  * 编写人： chengxin
  * 功能描述：路由器
  */
-@Deprecated// use ARouter
 public final class Router {
     /**
      * Callback after navigation.

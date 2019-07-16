@@ -135,7 +135,7 @@ public class MainActivity extends ListActivity {
 
                 break;
             case 8:
-                Router.build(HFActivity.class).navigation(this);
+
                 break;/**/
         }
     }

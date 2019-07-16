@@ -36,9 +36,6 @@
             android:name=".TabSmartActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".HFActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".CheckViewActivity"
             android:label="CheckView 演示"
             android:screenOrientation="portrait" />
