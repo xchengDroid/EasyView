@@ -10,7 +10,7 @@ import android.widget.EditText;
 /**
  * 输入法相关的工具类
  */
-public final class KeyboardHelper {
+public final class KeyboardUtil {
 
     /**
      * 显示输入法

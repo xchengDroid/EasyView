@@ -15,7 +15,7 @@ import androidx.annotation.DrawableRes;
  * 编写人： chengxin
  * 功能描述：view帮助类
  */
-public class ViewHelper {
+public class ViewUtil {
 
     @SuppressWarnings("deprecation")
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)

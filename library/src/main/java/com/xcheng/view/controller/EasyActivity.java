@@ -6,15 +6,16 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import androidx.annotation.Nullable;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.xcheng.view.EasyView;
 import com.xcheng.view.autosize.AutoSize;
 import com.xcheng.view.autosize.ResourcesWrapper;
-import com.xcheng.view.util.KeyboardHelper;
+import com.xcheng.view.util.KeyboardUtil;
 
 /**
  * 所有Activity的基类
@@ -86,8 +87,8 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
             switch (ev.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     View view = getCurrentFocus();
-                    if (KeyboardHelper.isHideInput(view, ev)) {
-                        KeyboardHelper.hide(view);
+                    if (KeyboardUtil.isHideInput(view, ev)) {
+                        KeyboardUtil.hide(view);
                     }
                     break;
                 default:

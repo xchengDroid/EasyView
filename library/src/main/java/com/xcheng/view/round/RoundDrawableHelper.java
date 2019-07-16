@@ -6,15 +6,16 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
-import androidx.annotation.ColorInt;
 import android.util.AttributeSet;
 import android.util.StateSet;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.ColorInt;
+
 import com.xcheng.view.R;
 import com.xcheng.view.util.ColorUtil;
-import com.xcheng.view.util.ViewHelper;
+import com.xcheng.view.util.ViewUtil;
 
 /**
  * 使按钮能方便地指定圆角、边框颜色、边框粗细、背景色
@@ -116,7 +117,7 @@ public class RoundDrawableHelper {
         } else {
             drawable = createDrawable(mFillColor, mBorderColor);
         }
-        ViewHelper.setBackgroundKeepingPadding(mView, drawable);
+        ViewUtil.setBackgroundKeepingPadding(mView, drawable);
     }
 
     /**
