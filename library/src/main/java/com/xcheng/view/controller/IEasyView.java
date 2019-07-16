@@ -1,8 +1,9 @@
 package com.xcheng.view.controller;
 
 import android.os.Bundle;
-import androidx.annotation.LayoutRes;
 import android.view.View;
+
+import androidx.annotation.LayoutRes;
 
 /**
  * @author xincheng
@@ -22,12 +23,12 @@ public interface IEasyView extends View.OnClickListener, ILoadingView {
     /**
      * savedInstanceState If the activity is being re-initialized after
      * previously being shut down then this Bundle contains the data it most
-     * recently supplied in {@link android.app.Activity#onSaveInstanceState(Bundle)}.  <b><i>Note: Otherwise it is null.</i></b>
+     * recently supplied in android.app.Activity#onSaveInstanceState(Bundle).
+     * <b><i>Note: Otherwise it is null.</i></b>
      * 初始化View控件
      *
      * @param savedInstanceState 销毁保存参数
      */
-    @SuppressWarnings("JavadocReference")
     void initView(Bundle savedInstanceState);
 
     /**

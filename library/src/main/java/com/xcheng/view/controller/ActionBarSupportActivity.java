@@ -1,10 +1,11 @@
 package com.xcheng.view.controller;
 
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.annotation.LayoutRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.view.View;
-import android.widget.TextView;
 
 import com.xcheng.view.R;
 
