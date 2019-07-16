@@ -1,4 +1,4 @@
-package com.xcheng.view.callback;
+package com.xcheng.view.controller;
 
 import android.app.Activity;
 import android.app.Application.ActivityLifecycleCallbacks;

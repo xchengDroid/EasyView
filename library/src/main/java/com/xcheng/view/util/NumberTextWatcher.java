@@ -1,11 +1,12 @@
-package com.xcheng.view.callback;
+package com.xcheng.view.util;
 
 import android.text.Editable;
+import android.text.TextWatcher;
 
 /**
  * Created by ddq on 2016/11/7.
  */
-public class NumberTextWatcher extends SimpleTextWatcher {
+public class NumberTextWatcher implements TextWatcher {
     private int integer;//整数部分位数
     private int decimal;//小数部分位数
 
@@ -20,6 +21,16 @@ public class NumberTextWatcher extends SimpleTextWatcher {
 
     public NumberTextWatcher() {
         this(9, 3);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
     }
 
     @Override
