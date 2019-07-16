@@ -1,6 +1,7 @@
 package com.xcheng.view.controller;
 
 import android.os.Bundle;
+
 import androidx.annotation.CallSuper;
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
@@ -142,8 +143,7 @@ public abstract class SmartRefreshFragment<T> extends EasyFragment implements IP
     @Override
     public void complete(boolean isRefresh, boolean success, boolean noMoreData) {
         if (isRefresh) {
-            mSmartRefreshLayout.finishRefresh(0, success);
-            mSmartRefreshLayout.setNoMoreData(noMoreData);
+            mSmartRefreshLayout.finishRefresh(0, success, noMoreData);
         } else {
             mSmartRefreshLayout.finishLoadMore(0, success, noMoreData);
         }

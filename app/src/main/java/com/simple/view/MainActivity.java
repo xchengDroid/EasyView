@@ -140,11 +140,6 @@ public class MainActivity extends ListActivity {
         }
     }
 
-    private void startMessageActivity() {
-        Router.build(MessageActivity.class).navigation(this);
-
-    }
-
     private void startTabActivity() {
         Router.build(TabSmartActivity.class).navigation(this);
     }
