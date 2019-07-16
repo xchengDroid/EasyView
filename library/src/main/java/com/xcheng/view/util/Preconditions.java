@@ -1,14 +1,14 @@
 package com.xcheng.view.util;
 
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import java.util.Collection;
 import java.util.Locale;
 
 /**
- * copy from{@link android.support.v4.util.Preconditions}
+ * copy from{@link androidx.core.util.Preconditions}
  **/
 public class Preconditions {
     public static void checkArgument(boolean expression) {

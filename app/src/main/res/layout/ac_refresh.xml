@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar style="@style/ev_ToolbarStyle" />
+    <androidx.appcompat.widget.Toolbar style="@style/ev_ToolbarStyle" />
 
     <fragment
         android:id="@+id/refresh"

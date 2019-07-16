@@ -4,10 +4,11 @@ import android.annotation.TargetApi;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.DrawableRes;
 import android.view.TouchDelegate;
 import android.view.View;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 
 /**
  * 创建时间：2018/7/23

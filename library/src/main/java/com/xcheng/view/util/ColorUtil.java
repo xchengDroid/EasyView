@@ -1,7 +1,7 @@
 package com.xcheng.view.util;
 
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 /**
  * 颜色转换工具类

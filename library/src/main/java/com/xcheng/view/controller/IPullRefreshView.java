@@ -1,6 +1,6 @@
 package com.xcheng.view.controller;
 
-import android.support.annotation.UiThread;
+import androidx.annotation.UiThread;
 
 import java.util.List;
 

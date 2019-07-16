@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         app:srlFinishDuration="300" />
     <!--可自行嵌套Layout 添加empty header footer -->
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@id/ev_id_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

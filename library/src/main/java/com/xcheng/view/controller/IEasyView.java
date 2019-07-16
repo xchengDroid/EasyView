@@ -1,7 +1,7 @@
 package com.xcheng.view.controller;
 
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 import android.view.View;
 
 /**

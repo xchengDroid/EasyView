@@ -1,7 +1,7 @@
 package com.simple.view;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.xcheng.view.adapter.TabInfo;
 import com.xcheng.view.controller.EasyPagerActivity;

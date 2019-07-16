@@ -72,7 +72,7 @@
         android:text="IN适配" />
 
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:background="@color/ev_green"
@@ -96,7 +96,7 @@
             android:text="B"
             app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintRight_toRightOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.xcheng.view.widget.ProgressView

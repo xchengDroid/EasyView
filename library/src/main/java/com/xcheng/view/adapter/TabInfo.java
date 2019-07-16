@@ -1,7 +1,7 @@
 package com.xcheng.view.adapter;
 
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
+import androidx.annotation.DrawableRes;
 
 public final class TabInfo {
     public final CharSequence title;

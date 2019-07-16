@@ -1,7 +1,7 @@
 package com.xcheng.view.controller;
 
 import android.os.Bundle;
-import android.support.v4.view.ViewPager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.xcheng.view.R;
 import com.xcheng.view.adapter.EasyFragmentAdapter;

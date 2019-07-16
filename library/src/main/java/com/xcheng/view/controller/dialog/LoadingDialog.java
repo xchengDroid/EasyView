@@ -1,7 +1,7 @@
 package com.xcheng.view.controller.dialog;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
+import androidx.annotation.LayoutRes;
 
 import com.xcheng.view.R;
 import com.xcheng.view.controller.EasyDialog;
