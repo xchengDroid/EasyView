@@ -21,18 +21,15 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 
 public abstract class SmartTabIndicationInterpolator {
-    static final SmartTabIndicationInterpolator SMART = new SmartIndicationInterpolator();
-    static final SmartTabIndicationInterpolator LINEAR = new LinearIndicationInterpolator();
-
     static final int ID_SMART = 0;
     static final int ID_LINEAR = 1;
 
     public static SmartTabIndicationInterpolator of(int id) {
         switch (id) {
             case ID_SMART:
-                return SMART;
+                return SmartIndicationInterpolator.DEFAULT;
             case ID_LINEAR:
-                return LINEAR;
+                return LinearIndicationInterpolator.DEFAULT;
             default:
                 throw new IllegalArgumentException("Unknown id: " + id);
         }
@@ -47,6 +44,7 @@ public abstract class SmartTabIndicationInterpolator {
     }
 
     public static class SmartIndicationInterpolator extends SmartTabIndicationInterpolator {
+        static final SmartTabIndicationInterpolator DEFAULT = new SmartIndicationInterpolator();
 
         private static final float DEFAULT_INDICATOR_INTERPOLATION_FACTOR = 3.0f;
 
@@ -80,6 +78,7 @@ public abstract class SmartTabIndicationInterpolator {
     }
 
     public static class LinearIndicationInterpolator extends SmartTabIndicationInterpolator {
+        static final SmartTabIndicationInterpolator DEFAULT = new LinearIndicationInterpolator();
 
         @Override
         public float getLeftEdge(float offset) {
