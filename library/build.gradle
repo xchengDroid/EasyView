@@ -27,14 +27,14 @@ android {
 //./gradlew clean build bintrayUpload -PbintrayUser=xcheng -PbintrayKey=4f8465004b752b103ea2e374ad6cb73ec38d8601 -PdryRun=false
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
-    //由于依赖其资源无法设置为compileOnly
+    //com.novoda.bintray-release 打包aar上传时，由于依赖其资源无法设置为compileOnly
     implementation 'androidx.appcompat:appcompat:1.1.0'
     //可以设置compileOnly
     compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
     //api 'com.wang.avi:library:2.1.3'
     // api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-14'
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
-    //不添加@aar 会因为compileOnly 导致其依的support的classpath无法找到，基于运行时
+    //不添加依赖，只需要@aar，会因为compileOnly 导致其依赖的support的classpath无法找到，基于运行时
     api 'com.github.GrenderG:Toasty:1.4.2@aar'
     //SmartRefreshLayout Space
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -45,7 +45,7 @@ publish {
     userOrg = 'xcheng'//bintray.com用户名
     groupId = 'com.xcheng'//jcenter上的路径
     artifactId = 'easyview'//项目名称
-    publishVersion = '2.5.9'//版本号
+    publishVersion = '2.5.912'//版本号
     desc = '一个View组件库'//描述，不重要
     website = 'https://github.com/xchengDroid/EasyView'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
