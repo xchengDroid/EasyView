@@ -22,6 +22,7 @@ import com.xcheng.view.autosize.AutoSize;
 import com.xcheng.view.controller.dialog.BottomOptionDialog;
 import com.xcheng.view.util.Router;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,7 +48,6 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EasyView.init(this);
         String[] items = getResources().getStringArray(R.array.sample_list);
 
         ArrayAdapter<String> adapter =
@@ -116,11 +116,36 @@ public class MainActivity extends ListActivity {
                 break;
             case 8:
 
-                break;/**/
+                break;
         }
     }
 
     private void startTabActivity() {
         Router.build(TabSmartActivity.class).navigation(this);
+    }
+
+    public void testAndroidR() {
+        try {
+            Class c = Class.forName("android.R$styleable");
+            int[] value = (int[]) c.getField("ProgressBar").get(null);
+
+            Log.e("print", "value" + Arrays.toString(value));
+            Log.e("print", "maxHeight:" + android.R.attr.maxHeight);
+
+            Class c2 = Class.forName("com.android.internal.R$styleable");
+            int[] value2 = (int[]) c.getField("ProgressBar").get(null);
+            Object value3 = Class.forName("com.android.internal.R$attr").getField("maxHeight").get(null);
+
+            Log.e("print", "value2" + Arrays.toString(value2));
+            Log.e("print", "maxHeight2:" + value3);
+
+        } catch (ClassNotFoundException e) {
+            Log.e("print", "", e);
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 }
