@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".CheckViewActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,9 +34,9 @@
         <activity
             android:name=".TabSmartActivity"
             android:screenOrientation="portrait" />
-        <!--        <activity-->
-        <!--            android:name=".CheckViewActivity"-->
-        <!--            android:label="CheckView 演示" />-->
+        <activity
+            android:name=".CheckViewActivity"
+            android:label="CheckView 演示" />
     </application>
 
 </manifest>

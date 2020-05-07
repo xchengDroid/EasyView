@@ -26,6 +26,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import es.dmoral.toasty.Toasty;
+
 public class MainActivity extends ListActivity {
     static {
         //设置全局的Header构建器o
@@ -60,7 +62,7 @@ public class MainActivity extends ListActivity {
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
-
+        Toasty.info(this, "点击操作").show();
 
         switch (position) {
             case 0:
