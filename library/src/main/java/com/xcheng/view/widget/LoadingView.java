@@ -6,16 +6,18 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import androidx.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
+
+import androidx.annotation.NonNull;
 
 import com.xcheng.view.R;
 import com.xcheng.view.util.LocalDisplay;
 
 /**
  * 用于显示 Loading 的 {@link View}，支持颜色和大小的设置。
+ * https://github.com/Tencent/QMUI_Android/blob/b6993d99de35ce20de48e67332856cfec5ff3cb0/qmui/src/main/java/com/qmuiteam/qmui/widget/QMUILoadingView.java
  *
  * @author cginechen
  * @date 2016-09-21
