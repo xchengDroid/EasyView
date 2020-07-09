@@ -1,6 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
-
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.xchengDroid'//必加，com.github.<用户名>(也就是你GtiHub上的地址)
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
@@ -24,28 +24,46 @@ android {
         }
     }
 }
-//./gradlew clean build bintrayUpload -PbintrayUser=xcheng -PbintrayKey=4f8465004b752b103ea2e374ad6cb73ec38d8601 -PdryRun=false
+
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     //com.novoda.bintray-release 打包aar上传时，由于依赖其资源无法设置为compileOnly
-    implementation 'androidx.appcompat:appcompat:1.1.0'
+    compileOnly 'androidx.appcompat:appcompat:1.1.0'
     //可以设置compileOnly
     compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
     //api 'com.wang.avi:library:2.1.3'
     // api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-14'
-    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.2'
-    //不添加依赖，只需要@aar，会因为compileOnly 导致其依赖的support的classpath无法找到，基于运行时
+    api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.3'
+    //不添加依赖，只需要@aar，因为appcompat设置compileOnly 导致其依赖的support的classpath无法找到，基于运行时
     api 'com.github.GrenderG:Toasty:1.4.2@aar'
-    //SmartRefreshLayout Space
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }
-//添加
-publish {
-    repoName = 'xcDroid'
-    userOrg = 'xcheng'//bintray.com用户名
-    groupId = 'com.xcheng'//jcenter上的路径
-    artifactId = 'easyview'//项目名称
-    publishVersion = '2.5.912'//版本号
-    desc = '一个View组件库'//描述，不重要
-    website = 'https://github.com/xchengDroid/EasyView'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+
+//---------------------------------------------下面的必加，加上下面的作用是在上传后会带上注释，不然会发现没有注释
+// 指定编码
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// 打包源码
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    failOnError false
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+// 制作文档(Javadoc)
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
