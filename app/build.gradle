@@ -38,5 +38,7 @@ dependencies {
     //implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'com.github.zcweng:switch-button:0.0.3@aar'
     // compileOnly 'com.github.Jay-Goo:RangeSeekBar:v3.0.0'
+    // SmartRefreshLayout需要
+    implementation 'androidx.legacy:legacy-support-core-ui:1.0.0'
 
 }

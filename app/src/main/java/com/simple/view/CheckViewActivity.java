@@ -58,6 +58,5 @@ public class CheckViewActivity extends EasyActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        mLoadingLiveData.postValue(true);
     }
 }
