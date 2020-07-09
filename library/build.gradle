@@ -37,7 +37,11 @@ dependencies {
     //必须添加 implementation 'androidx.legacy:legacy-support-core-ui:1.0.0'
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.3'
     //不添加依赖，只需要@aar，因为appcompat设置compileOnly 导致其依赖的support的classpath无法找到，基于运行时
-    api 'com.github.GrenderG:Toasty:1.4.2@aar'
+    //api 'com.github.GrenderG:Toasty:1.4.2@aar'
+    //下面这样剔除support也可以解决classPath问题,主要是应为因为上面compileOnly导致的
+    api("com.github.GrenderG:Toasty:1.4.2", {
+        exclude group: 'androidx.appcompat', module: 'appcompat'
+    })
 }
 
 //---------------------------------------------下面的必加，加上下面的作用是在上传后会带上注释，不然会发现没有注释
