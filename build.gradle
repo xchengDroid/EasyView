@@ -10,6 +10,7 @@ buildscript {
         //https://issuetracker.google.com/issues/37115549
         //移动到jitPack详解
         //https://www.jianshu.com/p/154ddd631927
+        //https://blog.csdn.net/zhangfengwu2014/article/details/98478469
         // or no service of type org.gradle.internal.Factory<org.gradle.logging.LoggingManagerInternal>
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
         // NOTE: Do not place your application dependencies here; they belong
