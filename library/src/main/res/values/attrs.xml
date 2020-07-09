@@ -214,6 +214,22 @@
         <attr name="ev_radiusBottomLeft" />
         <attr name="ev_radiusBottomRight" />
     </declare-styleable>
+    <declare-styleable name="RoundEditText">
+        <attr name="ev_fillColor" />
+        <attr name="ev_fillColorPressed" />
+        <attr name="ev_fillColorDisable" />
+        <attr name="ev_borderColor" />
+        <attr name="ev_borderColorPressed" />
+        <attr name="ev_borderColorDisable" />
+        <attr name="ev_borderWidth" />
+        <attr name="ev_isRadiusAdjustBounds" />
+        <attr name="ev_hasState" />
+        <attr name="ev_radius" />
+        <attr name="ev_radiusTopLeft" />
+        <attr name="ev_radiusTopRight" />
+        <attr name="ev_radiusBottomLeft" />
+        <attr name="ev_radiusBottomRight" />
+    </declare-styleable>
     <declare-styleable name="RoundFrameLayout">
         <attr name="ev_fillColor" />
         <attr name="ev_fillColorPressed" />
