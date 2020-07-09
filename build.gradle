@@ -8,6 +8,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
         //https://issuetracker.google.com/issues/37115549
+        //移动到jitPack详解
         //https://www.jianshu.com/p/154ddd631927
         // or no service of type org.gradle.internal.Factory<org.gradle.logging.LoggingManagerInternal>
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
