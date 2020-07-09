@@ -11,8 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import androidx.annotation.Nullable;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.xcheng.view.EasyView;
 import com.xcheng.view.autosize.AutoSize;
@@ -28,21 +26,6 @@ public abstract class EasyActivity extends ActionBarSupportActivity implements I
 
     private Dialog mLoadingDialog;
     private Resources mResources;
-    //for MVVM
-    public final MutableLiveData<Boolean> mLoadingLiveData = new MutableLiveData<>();
-
-    {
-        mLoadingLiveData.observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                if (aBoolean) {
-                    showLoading();
-                } else {
-                    hideLoading();
-                }
-            }
-        });
-    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
