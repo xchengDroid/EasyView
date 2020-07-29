@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'com.android.tools.build:gradle:3.5.4'
         //我的jitPack地址
         //https://www.jitpack.io/#xchengDroid/EasyView
         //https://issuetracker.google.com/issues/37115549
