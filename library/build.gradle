@@ -5,11 +5,6 @@ android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
     resourcePrefix "ev_"
-    android {
-        lintOptions {
-            abortOnError false
-        }
-    }
     defaultConfig {
         minSdkVersion 14
         targetSdkVersion 28
@@ -22,6 +17,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    lintOptions {
+        abortOnError false
     }
 }
 
